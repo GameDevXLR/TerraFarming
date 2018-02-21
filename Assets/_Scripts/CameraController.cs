@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour {
 
     private void Start()
     {
-        //offset = transform.transform.position - focus.transform.position;
+        offset = transform.transform.position - focus.transform.position;
     }
 
     private void Update()
