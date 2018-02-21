@@ -34,6 +34,7 @@ public class BehaviourController : MonoBehaviour {
         //transform.Translate(x, 0, z);
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
         //transform.rotation = Quaternion.LookRotation(movement);
+        
         rb.AddForce(movement * speed);
         if(movement != Vector3.zero)
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15F);

@@ -17,7 +17,15 @@ public class MachineEssenceLifeController : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
+        {
+            Debug.Log("player detect on " + name);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
         {
             Debug.Log("player detect on " + name);
         }
