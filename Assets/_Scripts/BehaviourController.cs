@@ -12,19 +12,19 @@ public class BehaviourController : MonoBehaviour {
         float moveVertical = 0;
         float moveHorizontal = 0;
         //var x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
-        if (Input.GetKey(InputManager.instance.forwardkey))
+        if (Input.GetKey(CustomInputManager.instance.forwardkey))
         {
             moveVertical = speed * Time.deltaTime;
         }
-        if (Input.GetKey(InputManager.instance.backwardKey))
+        if (Input.GetKey(CustomInputManager.instance.backwardKey))
         {
             moveVertical = -speed * Time.deltaTime;
         }
-        if (Input.GetKey(InputManager.instance.leftKey))
+        if (Input.GetKey(CustomInputManager.instance.leftKey))
         {
             moveHorizontal = speed * Time.deltaTime;
         }
-        if (Input.GetKey(InputManager.instance.rightKey))
+        if (Input.GetKey(CustomInputManager.instance.rightKey))
         {
             moveHorizontal = - speed * Time.deltaTime;
         }

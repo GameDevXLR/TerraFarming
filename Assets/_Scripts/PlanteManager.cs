@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlanteController : MonoBehaviour {
+public class PlanteManager : MonoBehaviour {
 
-    public PlanteController instance;
+    public PlanteManager instance;
 
     public Dictionary<string, GameObject> planteDict;
 }
