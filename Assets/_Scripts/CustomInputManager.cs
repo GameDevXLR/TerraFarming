@@ -8,8 +8,13 @@ public class CustomInputManager : MonoBehaviour {
     public KeyCode backwardKey = KeyCode.S;
     public KeyCode rightKey = KeyCode.Q;
     public KeyCode leftKey = KeyCode.D;
+	public KeyCode actionKey = KeyCode.Space;
 
     public static CustomInputManager instance;
+	public GameObject actionButtonVisual;
+	public AudioSource actionBtnAudioS;
+	public AudioClip showActionBtnSnd;
+	public AudioClip hideActionBtnSnd;
 
     private void Awake()
     {
@@ -18,4 +23,18 @@ public class CustomInputManager : MonoBehaviour {
             instance = this;
         }
     }
+
+	public void ShowHideActionButtonVisual(bool show)
+	{
+		actionButtonVisual.SetActive (show);
+		if (show) 
+		{
+			actionBtnAudioS.PlayOneShot (hideActionBtnSnd);
+		} 
+//		else 
+//		{
+//			actionBtnAudioS.PlayOneShot (hideActionBtnSnd);
+//
+//		}
+	}
 }
