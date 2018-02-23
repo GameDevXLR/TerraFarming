@@ -52,7 +52,7 @@ public class OreGatheringGame : MonoBehaviour
 
 		if (playerController) //nécessaire dans ce cas précis...
 		{
-			CustomInputManager.instance.ShowHideActionButtonVisual (true);
+			CustomInputManager.instance.ShowHideActionButtonVisual (false);
 
 			endOreGamePanel.SetActive (false);
 			OreCanvasObj.SetActive (false);
@@ -70,25 +70,28 @@ public class OreGatheringGame : MonoBehaviour
 			}
 			if (gameIsFinished) 
 			{
+				CustomInputManager.instance.ShowHideActionButtonVisual (false);
+
 				this.enabled = false;
 			}
 		
 		}
 	}
 
-	void FixedUpdate()
-	{
-		if (!isPlaying || !gameInProgress) 
-		{
-			return;
-		}
-		if (isHeadingRight) {
-			detectionCursor.AddForce (leftBorder.right * Time.fixedDeltaTime* scrollSpeed, ForceMode2D.Impulse);
-		} else {
-			detectionCursor.AddForce (-leftBorder.right * Time.fixedDeltaTime* scrollSpeed, ForceMode2D.Impulse);
-
-		}
-	}
+//	void FixedUpdate()
+//	{
+//		if (!isPlaying || !gameInProgress) 
+//		{
+//			return;
+//		}
+//		if (isHeadingRight) {
+//			detectionCursor.AddForce (leftBorder.right * Time.fixedDeltaTime* scrollSpeed, ForceMode2D.Impulse);
+//			Debug.Log (detectionCursor.velocity);
+//		} else {
+//			detectionCursor.AddForce (-leftBorder.right * Time.fixedDeltaTime* scrollSpeed, ForceMode2D.Impulse);
+//
+//		}
+//	}
 
 	void Initialize()
 	{
@@ -115,6 +118,7 @@ public class OreGatheringGame : MonoBehaviour
 	public void BeginGameSession()
 	{
 		isPlaying = true;
+		detectionCursor.velocity = new Vector2 (scrollSpeed, 0);
 		endOreGamePanel.SetActive (false);
 		playerAnimator.SetBool ("IsMining", true);
 		gameInProgress = true;
@@ -122,11 +126,16 @@ public class OreGatheringGame : MonoBehaviour
 	}
 	public void EndGameSession()
 	{
+
+		detectionCursor.velocity = Vector2.zero;
+
 		isPlaying = false;
 		bonusArea.isActive = false;
 		gameIsFinished = true;
 		endOreGamePanel.SetActive (true);
 		playerAnimator.SetBool ("IsMining", false);
+		ResourcesManager.instance.ChangeRawOre (currentScore);
+		CustomInputManager.instance.ShowHideActionButtonVisual (true);
 
 		if (currentScore == 0) 
 		{
@@ -136,14 +145,14 @@ public class OreGatheringGame : MonoBehaviour
 		}
 		effectsAudioS.PlayOneShot (victorySnd);
 
-		if (currentScore > 5) 
+		if (currentScore > 7) 
 		{
 			endGameTxt.text = "AMAZING!";
 			return;
 		}
-		if (currentScore > 3) 
+		if (currentScore > 5) 
 		{
-			endGameTxt.text = "AMAZING!";
+			endGameTxt.text = "Great work!";
 			return;
 		}
 		if (currentScore >= 1) 
@@ -158,9 +167,10 @@ public class OreGatheringGame : MonoBehaviour
 
 	public void ChangeCursorDirection()
 	{
-		isHeadingRight = !isHeadingRight;
-		detectionCursor.velocity = Vector2.zero;
+
 		ActualizeScore ();
+		isHeadingRight = !isHeadingRight;
+		detectionCursor.velocity = -detectionCursor.velocity;
 		bonusArea.areaImg.CrossFadeAlpha (1, 1f, true);
 
 	}
@@ -170,7 +180,11 @@ public class OreGatheringGame : MonoBehaviour
 		actualRound++;
 		recquiredScore ++;
 		playerScoreTxt.text = currentScore.ToString();
-		scrollSpeed *= 2;
+		if (actualRound == 3 ||actualRound == 5||actualRound == 7 ||actualRound == 9||actualRound == 11) {
+			effectsAudioS.PlayOneShot (victorySnd);
+
+			detectionCursor.velocity  *= 1.5f;
+		}
 		if (currentScore < recquiredScore) 
 		{
 			EndGameSession ();

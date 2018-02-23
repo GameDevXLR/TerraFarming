@@ -6,6 +6,9 @@ public class OreVein : MonoBehaviour
 {
 	public cakeslice.Outline outliner;
 	public int gamesAvailable = 2;
+
+	public OreVein nextVeinToActivate;
+
 	void Start()
 	{
 		outliner.enabled = false;
@@ -38,6 +41,13 @@ public class OreVein : MonoBehaviour
 				if (gamesAvailable > 0) {
 					InGameManager.instance.OreGame.enabled = true;
 					gamesAvailable--;
+					if (gamesAvailable == 0) 
+					{
+						StopListeningForAction ();
+						nextVeinToActivate.gamesAvailable += Random.Range(1,4);
+//						nextVeinToActivate.enabled = true;
+						this.enabled = false;
+					}
 				}
 			}
 		}
