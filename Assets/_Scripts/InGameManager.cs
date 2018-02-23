@@ -6,6 +6,7 @@ public class InGameManager : MonoBehaviour {
 
 	public OreGatheringGame OreGame;
 	public static InGameManager instance;
+    public UnityStandardAssets.Characters.ThirdPerson.ThirdPersonUserControl playerController;
 
 	void Awake()
 	{
@@ -17,14 +18,5 @@ public class InGameManager : MonoBehaviour {
 		}
 		
 	}
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    
 }
