@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class OreGatheringGame : MonoBehaviour 
 {
@@ -14,7 +15,7 @@ public class OreGatheringGame : MonoBehaviour
 	public AudioClip victorySnd;
 	public AudioClip defeatSnd;
 
-	public BehaviourController playerController;
+	public  ThirdPersonUserControl playerController;
 	public int currentScore;
 	public int scorePointCount;
 	int recquiredScore;
