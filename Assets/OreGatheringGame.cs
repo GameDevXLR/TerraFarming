@@ -39,6 +39,7 @@ public class OreGatheringGame : MonoBehaviour
 	{
 		detectionCursorStartPos = detectionCursor.transform.localPosition;
 		initialScrollSpeed = scrollSpeed;
+		OreCanvasObj.SetActive (false);
 	}
 
 	void OnEnable()
@@ -136,6 +137,7 @@ public class OreGatheringGame : MonoBehaviour
 		playerAnimator.SetBool ("IsMining", false);
 		ResourcesManager.instance.ChangeRawOre (currentScore);
 		CustomInputManager.instance.ShowHideActionButtonVisual (true);
+		InGameManager.instance.OreGame.playerController.transform.GetChild (0).gameObject.SetActive (false);
 
 		if (currentScore == 0) 
 		{

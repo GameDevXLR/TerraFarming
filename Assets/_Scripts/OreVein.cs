@@ -8,7 +8,7 @@ public class OreVein : MonoBehaviour
 	public int gamesAvailable = 2;
 
 	public OreVein nextVeinToActivate;
-
+	public GameObject isActiveParticules;
 	void Start()
 	{
 		outliner.enabled = false;
@@ -40,11 +40,17 @@ public class OreVein : MonoBehaviour
 			if (Input.GetKeyDown (CustomInputManager.instance.actionKey)) {
 				if (gamesAvailable > 0) {
 					InGameManager.instance.OreGame.enabled = true;
+					InGameManager.instance.OreGame.playerController.transform.LookAt (new Vector3(this.transform.position.x,0f,this.transform.position.z));
+					//active le laser pour voir:
+					InGameManager.instance.OreGame.playerController.transform.GetChild (0).gameObject.SetActive (true);
 					gamesAvailable--;
 					if (gamesAvailable == 0) 
 					{
+						isActiveParticules.SetActive (false);
 						StopListeningForAction ();
 						nextVeinToActivate.gamesAvailable += Random.Range(1,4);
+						nextVeinToActivate.isActiveParticules.SetActive (true);
+
 //						nextVeinToActivate.enabled = true;
 						this.enabled = false;
 					}
@@ -67,6 +73,7 @@ public class OreVein : MonoBehaviour
 			//arreter les effets visuels
 			CustomInputManager.instance.ShowHideActionButtonVisual (false);
 			outliner.enabled = false;
+
 
 	}
 }
