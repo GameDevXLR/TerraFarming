@@ -16,6 +16,7 @@ public class OreGatheringGame : MonoBehaviour
 	public AudioClip defeatSnd;
 
 	public  ThirdPersonUserControl playerController;
+	public Animator playerAnimator;
 	public int currentScore;
 	public int scorePointCount;
 	int recquiredScore;
@@ -42,7 +43,8 @@ public class OreGatheringGame : MonoBehaviour
 
 	void OnEnable()
 	{
-		Invoke("Initialize",0.1f );
+//		Invoke("Initialize",0.5f );
+		Initialize();
 	}
 
 	void OnDisable()
@@ -54,7 +56,7 @@ public class OreGatheringGame : MonoBehaviour
 
 			endOreGamePanel.SetActive (false);
 			OreCanvasObj.SetActive (false);
-			playerController.enabled = true;
+			playerController.isActive= true;
 		}
 	}
 
@@ -76,7 +78,7 @@ public class OreGatheringGame : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		if (!isPlaying) 
+		if (!isPlaying || !gameInProgress) 
 		{
 			return;
 		}
@@ -100,8 +102,8 @@ public class OreGatheringGame : MonoBehaviour
 		playerScoreTxt.text = currentScore.ToString ();
 		actualRound = 0;
 		scrollSpeed = initialScrollSpeed;
-		playerController.enabled = false; 
-		playerController.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+		playerController.isActive = false; 
+//		playerController.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 		gameIsFinished = false;
 		gameInProgress = false;
 		detectionCursor.transform.localPosition = detectionCursorStartPos;
@@ -114,7 +116,7 @@ public class OreGatheringGame : MonoBehaviour
 	{
 		isPlaying = true;
 		endOreGamePanel.SetActive (false);
-
+		playerAnimator.SetBool ("IsMining", true);
 		gameInProgress = true;
 		bonusArea.isActive = true;
 	}
@@ -124,6 +126,7 @@ public class OreGatheringGame : MonoBehaviour
 		bonusArea.isActive = false;
 		gameIsFinished = true;
 		endOreGamePanel.SetActive (true);
+		playerAnimator.SetBool ("IsMining", false);
 
 		if (currentScore == 0) 
 		{

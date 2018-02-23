@@ -34,7 +34,7 @@ public class OreVein : MonoBehaviour
 	{
 		if(other.tag == "Player" && !InGameManager.instance.OreGame.enabled)
 		{
-			if (Input.GetKeyUp (CustomInputManager.instance.actionKey)) {
+			if (Input.GetKeyDown (CustomInputManager.instance.actionKey)) {
 				if (gamesAvailable > 0) {
 					InGameManager.instance.OreGame.enabled = true;
 					gamesAvailable--;
