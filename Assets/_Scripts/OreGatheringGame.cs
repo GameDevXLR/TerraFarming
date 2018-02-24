@@ -178,7 +178,7 @@ public class OreGatheringGame : MonoBehaviour
 		}
 		playerScoreTxt.text = totalSessionScore.ToString();
 		if (actualRound == 1 ||actualRound == 3||actualRound == 6 ||actualRound == 8||actualRound == 10) {
-			effectsAudioS.PlayOneShot (victorySnd);
+//			effectsAudioS.PlayOneShot (victorySnd);
 			chanceOfActivatingArea += 10;
 			if (chanceOfActivatingArea > 100) 
 			{
