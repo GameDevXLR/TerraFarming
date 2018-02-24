@@ -5,8 +5,12 @@ using UnityEngine.UI;
 
 public class PlantationSpot : MonoBehaviour {
 
+	public AudioClip planterSnd;
+	public AudioClip growUpSnd;
+	public AudioSource plantAudioS;
+
 	public cakeslice.Outline outliner;
-	public AudioSource audioS;
+
 	public GameObject debrisObj;
 	public GameObject lopinNoSeedObj;
 	public GameObject lopinSeedObj;
@@ -60,7 +64,6 @@ public class PlantationSpot : MonoBehaviour {
 	void Start()
 	{
 		outliner.enabled = false;
-		audioS = GetComponent<AudioSource> ();
 
 	}
 
@@ -93,6 +96,7 @@ public class PlantationSpot : MonoBehaviour {
 				SelectPlantType (currentPlantTypeIndex);
 				InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
 				Debug.Log ("Graine plantée");
+				plantAudioS.PlayOneShot (planterSnd);
 				HidePlantTypeMenu();
 			}
 			//faire défiler les graines:
@@ -220,7 +224,8 @@ public class PlantationSpot : MonoBehaviour {
 			ResourcesManager.instance.ChangeRawOre (Random.Range (1, 6));
 			debrisObj.SetActive (false);
 			lopinNoSeedObj.SetActive (true);
-			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
+			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Plant", layer: -1, fixedTime: 2);
+			plantAudioS.PlayOneShot (planterSnd);
 			Debug.Log ("clean terrain");
 			break;
 		case PlantState.lopin:
@@ -232,6 +237,7 @@ public class PlantationSpot : MonoBehaviour {
 			lopinSeedObj.SetActive (false);
 			babyVisual.SetActive (true);
 			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
+			plantAudioS.PlayOneShot (growUpSnd);
 			Debug.Log ("Baby plante");
 			break;
 		case PlantState.baby:
@@ -239,6 +245,7 @@ public class PlantationSpot : MonoBehaviour {
 			babyVisual.SetActive (false);
 			teenageVisual.SetActive (true);
 			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
+			plantAudioS.PlayOneShot (growUpSnd);
 			Debug.Log ("Teenage plante");
 			break;
 		case PlantState.teenage:
@@ -246,6 +253,7 @@ public class PlantationSpot : MonoBehaviour {
 			teenageVisual.SetActive (false);
 			grownupVisual.SetActive (true);
 			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
+			plantAudioS.PlayOneShot (growUpSnd);
 			Debug.Log ("Grownup plante");
 			break;
 		case PlantState.grownup:
