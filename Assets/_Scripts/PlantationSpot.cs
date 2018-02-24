@@ -10,7 +10,6 @@ public class PlantationSpot : MonoBehaviour {
 	public AudioSource plantAudioS;
 
 	public cakeslice.Outline outliner;
-
 	public GameObject debrisObj;
 	public GameObject lopinNoSeedObj;
 	public GameObject lopinSeedObj;
@@ -26,13 +25,10 @@ public class PlantationSpot : MonoBehaviour {
 
 	public PlantType plantType;
 	public PlantState actualPlantState;
+
 	GameObject babyVisual;
 	GameObject teenageVisual;
 	GameObject grownupVisual;
-
-	float timeToGrow;
-	float growthStartTime;
-	bool isReadyToEvolve;
 
 	public GameObject plantTypeCanvas;
 	bool isPlantTypeMenuOpened;
@@ -42,6 +38,15 @@ public class PlantationSpot : MonoBehaviour {
 	public Sprite flowerSelectorIcon;
 	public Sprite bushSelectorIcon;
 	public Sprite treeSelectorIcon;
+
+	public GameObject needWaterParticules;
+
+	public PlantGrowthCycleManager plantGrowth;
+
+	public float timeToGrow;
+	float growthStartTime;
+	bool isGrowing;
+
 
 	public enum PlantType
 	{
@@ -69,6 +74,16 @@ public class PlantationSpot : MonoBehaviour {
 
 	void Update()
 	{
+		if (isGrowing) 
+		{
+			if (Time.time > growthStartTime + timeToGrow) 
+			{
+				//faire evoluer la plante
+				ChangePlantState();
+				growthStartTime = Time.time;
+			}
+		}
+
 		if (isPlantTypeMenuOpened) 
 		{
 			if (Input.GetKeyDown (CustomInputManager.instance.actionKey)) 
@@ -76,17 +91,20 @@ public class PlantationSpot : MonoBehaviour {
 				switch (currentPlantTypeIndex) 
 				{
 				case 0:
-					if (ResourcesManager.instance.bushSeed <= 0) {
+					if (ResourcesManager.instance.bushSeed <= 0) 
+					{
 						return;
 					}
 					break;
 				case 1:
-					if (ResourcesManager.instance.flowerSeed <= 0) {
+					if (ResourcesManager.instance.flowerSeed <= 0) 
+					{
 						return;
 					}
 					break;
 				case 2:
-					if (ResourcesManager.instance.treeSeed <= 0) {
+					if (ResourcesManager.instance.treeSeed <= 0) 
+					{
 						return;
 					}
 					break;
@@ -160,13 +178,24 @@ public class PlantationSpot : MonoBehaviour {
 	{
 		if (Input.GetKeyDown (CustomInputManager.instance.actionKey) && other.tag == "Player" &&!isPlantTypeMenuOpened) 
 		{
-			ChangePlantState ();
+			//si t'es pas encore une plante, fait ton taff normalement...
+			if (plantType == PlantType.none) {
+				ChangePlantState ();
+			} 
+			else 
+			{
+				if (!isGrowing) 
+				{
+					WaterThePlant ();
+				}
+			}
+
 		}
 	}
 	
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.tag == "Player") 
+		if (other.tag == "Player" && !isGrowing) 
 		{
 			ListenForAction ();
 			
@@ -226,7 +255,7 @@ public class PlantationSpot : MonoBehaviour {
 			lopinNoSeedObj.SetActive (true);
 			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Plant", layer: -1, fixedTime: 2);
 			plantAudioS.PlayOneShot (planterSnd);
-			Debug.Log ("clean terrain");
+  			Debug.Log ("clean terrain");
 			break;
 		case PlantState.lopin:
 			Invoke("ShowPlantTypeMenu",0.1f);
@@ -236,7 +265,7 @@ public class PlantationSpot : MonoBehaviour {
 			actualPlantState = PlantState.baby;
 			lopinSeedObj.SetActive (false);
 			babyVisual.SetActive (true);
-			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
+//			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
 			plantAudioS.PlayOneShot (growUpSnd);
 			Debug.Log ("Baby plante");
 			break;
@@ -244,7 +273,7 @@ public class PlantationSpot : MonoBehaviour {
 			actualPlantState = PlantState.teenage;
 			babyVisual.SetActive (false);
 			teenageVisual.SetActive (true);
-			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
+//			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
 			plantAudioS.PlayOneShot (growUpSnd);
 			Debug.Log ("Teenage plante");
 			break;
@@ -252,7 +281,7 @@ public class PlantationSpot : MonoBehaviour {
 			actualPlantState = PlantState.grownup;
 			teenageVisual.SetActive (false);
 			grownupVisual.SetActive (true);
-			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
+//			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
 			plantAudioS.PlayOneShot (growUpSnd);
 			Debug.Log ("Grownup plante");
 			break;
@@ -274,7 +303,9 @@ public class PlantationSpot : MonoBehaviour {
 		{
 			//t'es un bush
 		case 0:
-			ResourcesManager.instance.ChangeBushSeed(-1);
+			ResourcesManager.instance.ChangeBushSeed (-1);
+			timeToGrow = 120f;
+
 			babyVisual = bush1Obj;
 			teenageVisual = bush2Obj;
 			grownupVisual = bush3Obj;
@@ -284,6 +315,7 @@ public class PlantationSpot : MonoBehaviour {
 			//t'es une fleur
 		case 1:
 			ResourcesManager.instance.ChangeFlowerSeed(-1);
+			timeToGrow = 60f;
 
 			babyVisual = flower1Obj;
 			teenageVisual = flower2Obj;
@@ -295,6 +327,7 @@ public class PlantationSpot : MonoBehaviour {
 			//t'es un arbre
 		case 2:
 			ResourcesManager.instance.ChangeTreeSeed(-1);
+			timeToGrow = 300f;
 
 			babyVisual = tree1Obj;
 			teenageVisual = tree2Obj;
@@ -310,6 +343,24 @@ public class PlantationSpot : MonoBehaviour {
 		actualPlantState = PlantState.seed;
 		lopinNoSeedObj.SetActive (false);
 		lopinSeedObj.SetActive (true);
+		growthStartTime = Time.time;
+		RecquireWater ();
 	}
+	public void RecquireWater()
+	{
+		isGrowing = false;
+		needWaterParticules.SetActive (true);
+	}
+	public void WaterThePlant()
+	{
+		isGrowing = true;
+		needWaterParticules.SetActive (false);
+		plantGrowth.StartCoroutine (plantGrowth.StartGrowing ());
 
+		//jouer ici les sons et anim lié au fait d'arroser:
+		InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Plant", layer: -1, fixedTime: 2);
+		plantAudioS.PlayOneShot (growUpSnd);
+
+
+	}
 }
