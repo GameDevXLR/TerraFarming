@@ -211,37 +211,47 @@ public class PlantationSpot : MonoBehaviour {
 
 	//faire pousser/choisir la plante etc...
 	public void ChangePlantState()
-	{
+	{	
 		switch (actualPlantState) {
 		case PlantState.debris:
 			actualPlantState = PlantState.lopin;
 			ResourcesManager.instance.ChangeRawOre (Random.Range (1, 6));
 			debrisObj.SetActive (false);
 			lopinNoSeedObj.SetActive (true);
+			InGameManager.instance.playerController.GetComponent<Animator> ().Play("Plant");
+			Debug.Log ("clean terrain");
 			break;
 		case PlantState.lopin:
 			Invoke("ShowPlantTypeMenu",0.1f);
+			InGameManager.instance.playerController.GetComponent<Animator> ().Play("Plant");
+			Debug.Log ("Graine plantée");
 			break;
 		case PlantState.seed:
 			actualPlantState = PlantState.baby;
 			lopinSeedObj.SetActive (false);
 			babyVisual.SetActive (true);
+			InGameManager.instance.playerController.GetComponent<Animator> ().Play("Plant");
+			Debug.Log ("Baby plante");
 			break;
 		case PlantState.baby:
 			actualPlantState = PlantState.teenage;
 			babyVisual.SetActive (false);
 			teenageVisual.SetActive (true);
+			InGameManager.instance.playerController.GetComponent<Animator> ().Play("Plant");
+			Debug.Log ("Teenage plante");
 			break;
 		case PlantState.teenage:
 			actualPlantState = PlantState.grownup;
 			teenageVisual.SetActive (false);
 			grownupVisual.SetActive (true);
+			InGameManager.instance.playerController.GetComponent<Animator> ().Play("Plant");
+			Debug.Log ("Grownup plante");
 			break;
 		case PlantState.grownup:
 			break;
 		default:
-			break;
-		}
+			
+			break;		}
 	}
 
 	// choisir la graine
