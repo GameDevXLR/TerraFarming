@@ -91,6 +91,8 @@ public class PlantationSpot : MonoBehaviour {
 					break;
 				}
 				SelectPlantType (currentPlantTypeIndex);
+				InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
+				Debug.Log ("Graine plantée");
 				HidePlantTypeMenu();
 			}
 			//faire défiler les graines:
@@ -218,33 +220,32 @@ public class PlantationSpot : MonoBehaviour {
 			ResourcesManager.instance.ChangeRawOre (Random.Range (1, 6));
 			debrisObj.SetActive (false);
 			lopinNoSeedObj.SetActive (true);
-			InGameManager.instance.playerController.GetComponent<Animator> ().Play("Plant");
+			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
 			Debug.Log ("clean terrain");
 			break;
 		case PlantState.lopin:
 			Invoke("ShowPlantTypeMenu",0.1f);
-			InGameManager.instance.playerController.GetComponent<Animator> ().Play("Plant");
-			Debug.Log ("Graine plantée");
+//			l'animation est à la sortie de menu graine line94
 			break;
 		case PlantState.seed:
 			actualPlantState = PlantState.baby;
 			lopinSeedObj.SetActive (false);
 			babyVisual.SetActive (true);
-			InGameManager.instance.playerController.GetComponent<Animator> ().Play("Plant");
+			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
 			Debug.Log ("Baby plante");
 			break;
 		case PlantState.baby:
 			actualPlantState = PlantState.teenage;
 			babyVisual.SetActive (false);
 			teenageVisual.SetActive (true);
-			InGameManager.instance.playerController.GetComponent<Animator> ().Play("Plant");
+			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
 			Debug.Log ("Teenage plante");
 			break;
 		case PlantState.teenage:
 			actualPlantState = PlantState.grownup;
 			teenageVisual.SetActive (false);
 			grownupVisual.SetActive (true);
-			InGameManager.instance.playerController.GetComponent<Animator> ().Play("Plant");
+			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
 			Debug.Log ("Grownup plante");
 			break;
 		case PlantState.grownup:
