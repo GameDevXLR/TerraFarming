@@ -126,7 +126,7 @@ public class OreGatheringGame : MonoBehaviour
 		gameIsFinished = true;
 		endOreGamePanel.SetActive (true);
 		playerAnimator.SetBool ("IsMining", false);
-		ResourcesManager.instance.ChangeRawOre (currentScore);
+		ResourcesManager.instance.ChangeRawOre (totalSessionScore);
 		CustomInputManager.instance.ShowHideActionButtonVisual (true);
 		InGameManager.instance.OreGame.playerController.transform.GetChild (0).gameObject.SetActive (false);
 
