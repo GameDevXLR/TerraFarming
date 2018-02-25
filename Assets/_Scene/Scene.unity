@@ -183,6 +183,37 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9bc9e95bd71533c47aa17e5d04f3b0a8, type: 2}
   m_IsPrefabParent: 0
+--- !u!84 &33138896
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 727
+  m_Height: 409
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &70544703
 GameObject:
   m_ObjectHideFlags: 0
@@ -1727,6 +1758,11 @@ Transform:
   m_Father: {fileID: 1945858577}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &358435134 stripped
+ParticleSystem:
+  m_PrefabParentObject: {fileID: 198944582225495490, guid: 76ed61fc17985e34db33d95ffa657832,
+    type: 2}
+  m_PrefabInternal: {fileID: 1145307326}
 --- !u!198 &366989797 stripped
 ParticleSystem:
   m_PrefabParentObject: {fileID: 198746187651334860, guid: 76ed61fc17985e34db33d95ffa657832,
@@ -2856,6 +2892,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1978105363690890, guid: 3d8d5482dd934da45bb9e56177170ca8, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1829434036517990, guid: 3d8d5482dd934da45bb9e56177170ca8, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3d8d5482dd934da45bb9e56177170ca8, type: 2}
   m_IsPrefabParent: 0
@@ -3554,6 +3598,8 @@ MonoBehaviour:
   playerController: {fileID: 958737209}
   cleanParticle: {fileID: 1185356990}
   waterParticle: {fileID: 366989797}
+  miningChargeParticle: {fileID: 358435134}
+  miningHitParticle: {fileID: 953052821}
 --- !u!114 &597454179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3620,13 +3666,14 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 597454175}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49ae83905da5ecf4d886e5dc5527a734, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   oreToEssenceUI: {fileID: 495961990}
   timeBonus: 2.5
+  luckPercent: 0.2
   jaugeList:
   - {fileID: 495961993}
   - {fileID: 495961994}
@@ -3638,6 +3685,37 @@ MonoBehaviour:
   - {fileID: 495962000}
   - {fileID: 495962001}
   - {fileID: 495962002}
+--- !u!84 &614655424
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 727
+  m_Height: 409
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &631285565
 GameObject:
   m_ObjectHideFlags: 0
@@ -4411,37 +4489,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 782334866}
   m_Mesh: {fileID: 4300002, guid: c1a5db3a75d4b7b4e9c23f36707e1ee5, type: 3}
---- !u!84 &782602752
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 912
-  m_Height: 410
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1001 &803709930
 Prefab:
   m_ObjectHideFlags: 0
@@ -5172,37 +5219,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1c7a9710682e5d40a02f15d4f1e1552, type: 2}
   m_IsPrefabParent: 0
---- !u!84 &946681892
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 912
-  m_Height: 410
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
+--- !u!198 &953052821 stripped
+ParticleSystem:
+  m_PrefabParentObject: {fileID: 198044604142505754, guid: 76ed61fc17985e34db33d95ffa657832,
+    type: 2}
+  m_PrefabInternal: {fileID: 1145307326}
 --- !u!1 &958737207 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1409990224273386, guid: 76ed61fc17985e34db33d95ffa657832,
@@ -8712,7 +8733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: 0
+  color: 1
   eraseRenderer: 0
   originalLayer: 0
   originalMaterials: []
@@ -9675,7 +9696,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 0
   m_RenderingPath: 1
-  m_TargetTexture: {fileID: 946681892}
+  m_TargetTexture: {fileID: 614655424}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -10686,8 +10707,8 @@ MonoBehaviour:
   sourceCamera: {fileID: 2010303542}
   outlineCamera: {fileID: 1833690391}
   outlineShaderMaterial: {fileID: 0}
-  renderTexture: {fileID: 946681892}
-  extraRenderTexture: {fileID: 782602752}
+  renderTexture: {fileID: 614655424}
+  extraRenderTexture: {fileID: 33138896}
 --- !u!114 &2010303545
 MonoBehaviour:
   m_ObjectHideFlags: 0

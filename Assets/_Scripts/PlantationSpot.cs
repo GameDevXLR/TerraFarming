@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class PlantationSpot : MonoBehaviour {
 
+	//sert a la sauvegarde! Doit etre configurer et être different de tout autre ID pour pas que ca plane xD nul...
+	public int persistentID;
+
 	public AudioClip planterSnd;
 	public AudioClip growUpSnd;
 	public AudioSource plantAudioS;
@@ -43,8 +46,10 @@ public class PlantationSpot : MonoBehaviour {
 
 	public PlantGrowthCycleManager plantGrowth;
 
+
 	public float timeToGrow;
 	float growthStartTime;
+	float timeSpentGrowing;
 	bool isGrowing;
 
 
@@ -347,11 +352,13 @@ public class PlantationSpot : MonoBehaviour {
 	}
 	public void RecquireWater()
 	{
+		timeSpentGrowing = Time.time - growthStartTime;
 		isGrowing = false;
 		needWaterParticules.SetActive (true);
 	}
 	public void WaterThePlant()
 	{
+		growthStartTime = Time.time - timeSpentGrowing;
 		isGrowing = true;
 		needWaterParticules.SetActive (false);
 		plantGrowth.StartCoroutine (plantGrowth.StartGrowing ());

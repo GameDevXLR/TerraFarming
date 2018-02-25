@@ -52,11 +52,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
 			if (!isActive) 
 			{
+				m_Character.Move(Vector3.zero, false, m_Jump);
 				return;
 			}
+			float h = CrossPlatformInputManager.GetAxis("Horizontal");
+			float v = CrossPlatformInputManager.GetAxis("Vertical");
             // read inputs
-            float h = CrossPlatformInputManager.GetAxis("Horizontal");
-            float v = CrossPlatformInputManager.GetAxis("Vertical");
             bool crouch = Input.GetKey(KeyCode.C);
 
             // calculate move direction to pass to character

@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour {
 
+	bool hasPressedEnter;
+	public GameObject mainMenuPanel;
+	public GameObject pressEnterObj;
+
 	public void QuitGame()
 	{
 //		GetComponent<AudioSource> ().PlayOneShot (clic1Snd);
@@ -14,7 +18,7 @@ public class MainMenuManager : MonoBehaviour {
 
 	public void StartNewGame()
 	{
-		SceneManager.LoadScene (1);
+		SceneManager.LoadScene (1,LoadSceneMode.Single);
 	}
 
 	public void ContinueGame()
@@ -22,4 +26,22 @@ public class MainMenuManager : MonoBehaviour {
 		SceneManager.LoadScene (1);
 		//and co...
 	}
+
+	public void Update ()
+	{
+		if (!hasPressedEnter) 
+		{
+			if (Input.GetKeyDown (KeyCode.Space) || Input.GetKeyDown (KeyCode.Return)) 
+			{
+				ShowMainMenu ();
+			}
+		}
+	}
+	public void ShowMainMenu()
+	{
+		hasPressedEnter = true;
+		mainMenuPanel.SetActive (true);
+		pressEnterObj.SetActive (false);
+	}
+
 }
