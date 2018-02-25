@@ -6,7 +6,7 @@ using cakeslice;
 public class MachineEssenceLifeController : MonoBehaviour {
 
     public cakeslice.Outline outliner;
-    public bool menuIsOpen = false;
+    public bool hasEnoughtOre = false;
     public OreToEssenceUI interfaceMachine;
     public OreToEssenceGame game;
     public int nbrOreForEssence;
@@ -23,21 +23,18 @@ public class MachineEssenceLifeController : MonoBehaviour {
         {
             ListenForAction();
         }
+        hasEnoughtOre = ResourcesManager.instance.rawOre >= nbrOreForEssence;
     }
 
     private void OnTriggerStay(Collider other)
     {
         if(other.tag == "Player" && Input.GetKeyDown(CustomInputManager.instance.actionKey) )
         {
-            if (!interfaceMachine.isActive)
+            if (!interfaceMachine.isActive )
             {
-                interfaceMachine.activate(ResourcesManager.instance.rawOre, nbrOreForEssence, SimuleSynthtizeEssence());
-                game.enabled = true;
-            }
-            else
-            {
-                //SynthetizeEssence();
-                //interfaceMachine.unactivate();
+                interfaceMachine.activate(ResourcesManager.instance.rawOre, nbrOreForEssence, SimuleSynthetizeEssence());
+                if(hasEnoughtOre)
+                    game.activate(nbrOreForEssence);
             }
         }
     }
@@ -60,16 +57,13 @@ public class MachineEssenceLifeController : MonoBehaviour {
     }
     void StopListeningForAction()
     {
-
         //arreter les effets visuels
         CustomInputManager.instance.ShowHideActionButtonVisual(false);
         outliner.enabled = false;
         interfaceMachine.unactivate();
-
-
     }
 
-    public int SimuleSynthtizeEssence()
+    public int SimuleSynthetizeEssence()
     {
         return ResourcesManager.instance.rawOre / nbrOreForEssence;
     }
