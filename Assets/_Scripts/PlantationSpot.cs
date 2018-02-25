@@ -113,7 +113,6 @@ public class PlantationSpot : MonoBehaviour {
 				}
 				SelectPlantType (currentPlantTypeIndex);
 				InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
-				Debug.Log ("Graine plantée");
 				plantAudioS.PlayOneShot (planterSnd);
 				InGameManager.instance.cleanParticle.GetComponent<ParticleSystem> ().Play ();
 				HidePlantTypeMenu();
@@ -259,7 +258,6 @@ public class PlantationSpot : MonoBehaviour {
 			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Cleaning", layer: -1, fixedTime: 1);
 			plantAudioS.PlayOneShot (planterSnd);
 			InGameManager.instance.cleanParticle.GetComponent<ParticleSystem> ().Play ();
-  			Debug.Log ("clean terrain");
 			break;
 		case PlantState.lopin:
 			Invoke("ShowPlantTypeMenu",0.1f);
@@ -271,7 +269,6 @@ public class PlantationSpot : MonoBehaviour {
 			babyVisual.SetActive (true);
 //			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
 //			plantAudioS.PlayOneShot (growUpSnd);
-			Debug.Log ("Baby plante");
 			break;
 		case PlantState.baby:
 			actualPlantState = PlantState.teenage;
@@ -279,7 +276,6 @@ public class PlantationSpot : MonoBehaviour {
 			teenageVisual.SetActive (true);
 //			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
 //			plantAudioS.PlayOneShot (growUpSnd);
-			Debug.Log ("Teenage plante");
 			break;
 		case PlantState.teenage:
 			actualPlantState = PlantState.grownup;
@@ -287,7 +283,6 @@ public class PlantationSpot : MonoBehaviour {
 			grownupVisual.SetActive (true);
 //			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
 //			plantAudioS.PlayOneShot (growUpSnd);
-			Debug.Log ("Grownup plante");
 			break;
 		case PlantState.grownup:
 			break;
