@@ -137,7 +137,7 @@ public class OreGatheringGame : MonoBehaviour
 			return;
 		}
 		effectsAudioS.PlayOneShot (victorySnd);
-
+		InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Victory", layer: -1, fixedTime: 2);
 		if (totalSessionScore > 25) 
 		{
 			endGameTxt.text = "AMAZING!";

@@ -253,7 +253,7 @@ public class PlantationSpot : MonoBehaviour {
 			ResourcesManager.instance.ChangeRawOre (Random.Range (1, 6));
 			debrisObj.SetActive (false);
 			lopinNoSeedObj.SetActive (true);
-			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Plant", layer: -1, fixedTime: 2);
+			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Cleaning", layer: -1, fixedTime: 1);
 			plantAudioS.PlayOneShot (planterSnd);
   			Debug.Log ("clean terrain");
 			break;
@@ -266,7 +266,7 @@ public class PlantationSpot : MonoBehaviour {
 			lopinSeedObj.SetActive (false);
 			babyVisual.SetActive (true);
 //			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
-			plantAudioS.PlayOneShot (growUpSnd);
+//			plantAudioS.PlayOneShot (growUpSnd);
 			Debug.Log ("Baby plante");
 			break;
 		case PlantState.baby:
@@ -274,7 +274,7 @@ public class PlantationSpot : MonoBehaviour {
 			babyVisual.SetActive (false);
 			teenageVisual.SetActive (true);
 //			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
-			plantAudioS.PlayOneShot (growUpSnd);
+//			plantAudioS.PlayOneShot (growUpSnd);
 			Debug.Log ("Teenage plante");
 			break;
 		case PlantState.teenage:
@@ -282,7 +282,7 @@ public class PlantationSpot : MonoBehaviour {
 			teenageVisual.SetActive (false);
 			grownupVisual.SetActive (true);
 //			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
-			plantAudioS.PlayOneShot (growUpSnd);
+//			plantAudioS.PlayOneShot (growUpSnd);
 			Debug.Log ("Grownup plante");
 			break;
 		case PlantState.grownup:
@@ -358,7 +358,7 @@ public class PlantationSpot : MonoBehaviour {
 		plantGrowth.StartCoroutine (plantGrowth.StartGrowing ());
 
 		//jouer ici les sons et anim lié au fait d'arroser:
-		InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Plant", layer: -1, fixedTime: 2);
+		InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Water", layer: -1, fixedTime: 2);
 		plantAudioS.PlayOneShot (growUpSnd);
 
 
