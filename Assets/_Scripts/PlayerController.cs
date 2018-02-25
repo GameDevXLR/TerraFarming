@@ -5,8 +5,21 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour 
 {
 
-    public int minerais;
-    public int lifeEssence;
-    public Dictionary<string, int> graines;
+    public static PlayerController instance;
+    public UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter thirdPersonCharact;
+    public UnityStandardAssets.Characters.ThirdPerson.ThirdPersonUserControl thirdPersonUserControl;
+    
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
 }

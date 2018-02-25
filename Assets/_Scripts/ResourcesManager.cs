@@ -14,6 +14,8 @@ public class ResourcesManager : MonoBehaviour {
 	public int bushSeed;
 	public int treeSeed;
 
+    public int nbrOreForEssence = 10;
+
 	public Text rawOreDisplay;
 	public Text essenceDisplay;
 	public Text flowerSeedDisplay;
@@ -58,4 +60,15 @@ public class ResourcesManager : MonoBehaviour {
 		treeSeed += qty;
 		treeSeedDisplay.text = treeSeed.ToString ();
 	}
+
+    public int SimuleSynthtizeEssence()
+    {
+        return rawOre / nbrOreForEssence;
+    }
+
+    public void SynthetizeEssence()
+    {
+        ChangeEssence( rawOre / nbrOreForEssence);
+        rawOre = rawOre % nbrOreForEssence;
+    }
 }

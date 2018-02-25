@@ -5,21 +5,35 @@ using cakeslice;
 
 public class MachineEssenceLifeController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-        //GetComponent<OutlineEffect>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public cakeslice.Outline outliner;
+    public bool menuIsOpen = false;
+    public OreToEssenceUI interfaceMachine;
+
+    private void Start()
+    {
+        interfaceMachine.unacticate();
+
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("player detect on " + name);
+            ListenForAction();
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.tag == "Player" && Input.GetKeyDown(CustomInputManager.instance.actionKey) )
+        {
+            if(!interfaceMachine.isActive)
+                interfaceMachine.activate();
+            else
+            {
+                ResourcesManager.instance.SynthetizeEssence();
+                interfaceMachine.unacticate();
+            }
         }
     }
 
@@ -27,7 +41,25 @@ public class MachineEssenceLifeController : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("player detect on " + name);
+            StopListeningForAction();
         }
+    }
+
+    void ListenForAction()
+    {
+        //faire les changements d'apparence de la caillasse;
+        CustomInputManager.instance.ShowHideActionButtonVisual(true);
+        outliner.enabled = true;
+        
+    }
+    void StopListeningForAction()
+    {
+
+        //arreter les effets visuels
+        CustomInputManager.instance.ShowHideActionButtonVisual(false);
+        outliner.enabled = false;
+        interfaceMachine.unacticate();
+
+
     }
 }
