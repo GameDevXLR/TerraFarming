@@ -18,6 +18,8 @@ public class OreGameDetectionArea : MonoBehaviour
 		if(Input.GetKeyDown(CustomInputManager.instance.actionKey))
 			{
 			GiveAPoint ();
+			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("MiningHit", layer: -1, fixedTime: 2);
+
 			}
 	}
 
@@ -49,5 +51,8 @@ public class OreGameDetectionArea : MonoBehaviour
 
 		InGameManager.instance.OreGame.totalSessionScore++;
 		InGameManager.instance.OreGame.playerScoreTxt.text = InGameManager.instance.OreGame.totalSessionScore.ToString ();
+
+
+		InGameManager.instance.playerController.GetComponent<Animator> ().SetFloat ("Mining", 0.5f);
 	}
 }
