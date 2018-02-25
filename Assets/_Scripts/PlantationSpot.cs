@@ -115,6 +115,7 @@ public class PlantationSpot : MonoBehaviour {
 				InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
 				Debug.Log ("Graine plantée");
 				plantAudioS.PlayOneShot (planterSnd);
+				InGameManager.instance.cleanParticle.GetComponent<ParticleSystem> ().Play ();
 				HidePlantTypeMenu();
 			}
 			//faire défiler les graines:
@@ -207,6 +208,8 @@ public class PlantationSpot : MonoBehaviour {
 		if (other.tag == "Player") 
 		{
 			StopListeningForAction ();
+			InGameManager.instance.cleanParticle.GetComponent<ParticleSystem> ().Stop ();
+			InGameManager.instance.waterParticle.GetComponent<ParticleSystem> ().Stop ();
 			
 		}
 		
@@ -255,6 +258,7 @@ public class PlantationSpot : MonoBehaviour {
 			lopinNoSeedObj.SetActive (true);
 			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Cleaning", layer: -1, fixedTime: 1);
 			plantAudioS.PlayOneShot (planterSnd);
+			InGameManager.instance.cleanParticle.GetComponent<ParticleSystem> ().Play ();
   			Debug.Log ("clean terrain");
 			break;
 		case PlantState.lopin:
@@ -360,6 +364,7 @@ public class PlantationSpot : MonoBehaviour {
 		//jouer ici les sons et anim lié au fait d'arroser:
 		InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Water", layer: -1, fixedTime: 2);
 		plantAudioS.PlayOneShot (growUpSnd);
+		InGameManager.instance.waterParticle.GetComponent<ParticleSystem> ().Play ();
 
 
 	}

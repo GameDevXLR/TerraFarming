@@ -8,6 +8,9 @@ public class InGameManager : MonoBehaviour {
 	public OreGatheringGame OreGame;
 	public static InGameManager instance;
 	public ThirdPersonUserControl playerController;
+	public ParticleSystem cleanParticle;
+	public ParticleSystem waterParticle;
+
 	void Awake()
 	{
 		if (instance == null) {
