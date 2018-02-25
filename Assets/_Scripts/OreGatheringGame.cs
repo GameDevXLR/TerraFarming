@@ -20,6 +20,7 @@ public class OreGatheringGame : MonoBehaviour
 	public int currentScore;
 	public int scorePointCount;
 	int recquiredScore;
+	public int totalSessionScore;
 	int actualRound;
 
 	public float scrollSpeed;
@@ -28,6 +29,9 @@ public class OreGatheringGame : MonoBehaviour
 	public Transform rightBorder;
 	public Rigidbody2D detectionCursor;
 	public OreGameDetectionArea bonusArea;
+
+	public GameObject[] bonusAreasObj;
+	public int chanceOfActivatingArea=50;
 
 	bool gameInProgress;
 	bool gameIsFinished;
@@ -79,20 +83,6 @@ public class OreGatheringGame : MonoBehaviour
 		}
 	}
 
-//	void FixedUpdate()
-//	{
-//		if (!isPlaying || !gameInProgress) 
-//		{
-//			return;
-//		}
-//		if (isHeadingRight) {
-//			detectionCursor.AddForce (leftBorder.right * Time.fixedDeltaTime* scrollSpeed, ForceMode2D.Impulse);
-//			Debug.Log (detectionCursor.velocity);
-//		} else {
-//			detectionCursor.AddForce (-leftBorder.right * Time.fixedDeltaTime* scrollSpeed, ForceMode2D.Impulse);
-//
-//		}
-//	}
 
 	void Initialize()
 	{
@@ -103,7 +93,8 @@ public class OreGatheringGame : MonoBehaviour
 		endGameTxt.text = "Press key to begin";
 		currentScore = 0;
 		recquiredScore = 0;
-		playerScoreTxt.text = currentScore.ToString ();
+		totalSessionScore = 0;
+		playerScoreTxt.text = totalSessionScore.ToString ();
 		actualRound = 0;
 		scrollSpeed = initialScrollSpeed;
 		playerController.isActive = false; 
@@ -123,7 +114,7 @@ public class OreGatheringGame : MonoBehaviour
 		endOreGamePanel.SetActive (false);
 		playerAnimator.SetBool ("IsMining", true);
 		gameInProgress = true;
-		bonusArea.isActive = true;
+		ChangeBonusAreas ();
 	}
 	public void EndGameSession()
 	{
@@ -135,11 +126,11 @@ public class OreGatheringGame : MonoBehaviour
 		gameIsFinished = true;
 		endOreGamePanel.SetActive (true);
 		playerAnimator.SetBool ("IsMining", false);
-		ResourcesManager.instance.ChangeRawOre (currentScore);
+		ResourcesManager.instance.ChangeRawOre (totalSessionScore);
 		CustomInputManager.instance.ShowHideActionButtonVisual (true);
 		InGameManager.instance.OreGame.playerController.transform.GetChild (0).gameObject.SetActive (false);
 
-		if (currentScore == 0) 
+		if (totalSessionScore == 0) 
 		{
 			endGameTxt.text = "Better try again...";
 			effectsAudioS.PlayOneShot (defeatSnd);
@@ -147,17 +138,17 @@ public class OreGatheringGame : MonoBehaviour
 		}
 		effectsAudioS.PlayOneShot (victorySnd);
 
-		if (currentScore > 7) 
+		if (totalSessionScore > 25) 
 		{
 			endGameTxt.text = "AMAZING!";
 			return;
 		}
-		if (currentScore > 5) 
+		if (totalSessionScore > 10) 
 		{
 			endGameTxt.text = "Great work!";
 			return;
 		}
-		if (currentScore >= 1) 
+		if (totalSessionScore >= 1) 
 		{
 			endGameTxt.text = "Well done.";
 			return;
@@ -180,11 +171,19 @@ public class OreGatheringGame : MonoBehaviour
 	void ActualizeScore()
 	{
 		actualRound++;
-		recquiredScore ++;
-		playerScoreTxt.text = currentScore.ToString();
-		if (actualRound == 3 ||actualRound == 5||actualRound == 7 ||actualRound == 9||actualRound == 11) {
-			effectsAudioS.PlayOneShot (victorySnd);
-
+		if (recquiredScore > 1) 
+		{
+			//droit a une erreure!
+			recquiredScore--;
+		}
+		playerScoreTxt.text = totalSessionScore.ToString();
+		if (actualRound == 1 ||actualRound == 3||actualRound == 6 ||actualRound == 8||actualRound == 10) {
+//			effectsAudioS.PlayOneShot (victorySnd);
+			chanceOfActivatingArea += 10;
+			if (chanceOfActivatingArea > 100) 
+			{
+				chanceOfActivatingArea = 100;
+			}
 			detectionCursor.velocity  *= 1.5f;
 		}
 		if (currentScore < recquiredScore) 
@@ -192,7 +191,34 @@ public class OreGatheringGame : MonoBehaviour
 			EndGameSession ();
 			return;
 		}
-		bonusArea.isActive = true;
-		bonusArea.transform.localPosition = new Vector2(Random.Range(-360f,360f),0);
+		currentScore = 0;
+		recquiredScore = 0;
+		ChangeBonusAreas ();
+		//		bonusArea.transform.localPosition = new Vector2(Random.Range(-360f,360f),0);
+	}
+
+	void ChangeBonusAreas()
+	{
+
+		foreach (GameObject obj in bonusAreasObj) 
+		{
+			obj.GetComponent<OreGameDetectionArea> ().isActive = false;
+			obj.GetComponent<Image> ().enabled = false;
+
+			if (Random.Range (0, 101) < chanceOfActivatingArea) 
+			{
+				obj.GetComponent<Image> ().enabled = true;
+				obj.GetComponent<OreGameDetectionArea> ().isActive = true;
+				recquiredScore++;
+			}
+			
+		}
+		if (recquiredScore == 0) 
+		{
+			Debug.Log ("c'est pas de bol!");
+			recquiredScore++;
+			bonusAreasObj [0].GetComponent<OreGameDetectionArea> ().isActive = true;
+			bonusAreasObj [0].GetComponent<Image> ().enabled = true;
+		}
 	}
 }

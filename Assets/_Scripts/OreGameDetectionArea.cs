@@ -23,10 +23,18 @@ public class OreGameDetectionArea : MonoBehaviour
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
+		if (!isActive) 
+		{
+			return;
+		}
 		CustomInputManager.instance.ShowHideActionButtonVisual (true);
 	}
 	void OnTriggerExit2D(Collider2D other)
 	{
+		if (!isActive) 
+		{
+			return;
+		}
 		CustomInputManager.instance.ShowHideActionButtonVisual (false);
 
 	}
@@ -38,6 +46,8 @@ public class OreGameDetectionArea : MonoBehaviour
 		areaImg.CrossFadeAlpha (0, 1f, true);
 		CustomInputManager.instance.ShowHideActionButtonVisual (false);
 		InGameManager.instance.OreGame.currentScore++;
-		InGameManager.instance.OreGame.playerScoreTxt.text = InGameManager.instance.OreGame.currentScore.ToString ();
+
+		InGameManager.instance.OreGame.totalSessionScore++;
+		InGameManager.instance.OreGame.playerScoreTxt.text = InGameManager.instance.OreGame.totalSessionScore.ToString ();
 	}
 }

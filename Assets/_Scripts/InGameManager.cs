@@ -7,7 +7,7 @@ public class InGameManager : MonoBehaviour {
 	public OreGatheringGame OreGame;
 	public static InGameManager instance;
     public UnityStandardAssets.Characters.ThirdPerson.ThirdPersonUserControl playerController;
-
+    
 	void Awake()
 	{
 		if (instance == null) {
