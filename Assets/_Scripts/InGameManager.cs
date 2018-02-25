@@ -10,6 +10,8 @@ public class InGameManager : MonoBehaviour {
 	public ThirdPersonUserControl playerController;
 	public ParticleSystem cleanParticle;
 	public ParticleSystem waterParticle;
+	public ParticleSystem miningChargeParticle;
+	public ParticleSystem miningHitParticle;
 
 	void Awake()
 	{

@@ -115,6 +115,8 @@ public class OreGatheringGame : MonoBehaviour
 		playerAnimator.SetBool ("IsMining", true);
 		gameInProgress = true;
 		ChangeBonusAreas ();
+		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().gameObject.SetActive (true);
+		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().Play ();
 	}
 	public void EndGameSession()
 	{
@@ -129,6 +131,7 @@ public class OreGatheringGame : MonoBehaviour
 		ResourcesManager.instance.ChangeRawOre (totalSessionScore);
 		CustomInputManager.instance.ShowHideActionButtonVisual (true);
 		InGameManager.instance.OreGame.playerController.transform.GetChild (0).gameObject.SetActive (false);
+		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().gameObject.SetActive(false);
 
 		if (totalSessionScore == 0) 
 		{
