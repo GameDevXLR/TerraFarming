@@ -215,7 +215,6 @@ public class OreGatheringGame : MonoBehaviour
 		}
 		if (recquiredScore == 0) 
 		{
-			Debug.Log ("c'est pas de bol!");
 			recquiredScore++;
 			bonusAreasObj [0].GetComponent<OreGameDetectionArea> ().isActive = true;
 			bonusAreasObj [0].GetComponent<Image> ().enabled = true;

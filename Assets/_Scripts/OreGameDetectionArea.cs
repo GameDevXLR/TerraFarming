@@ -53,6 +53,6 @@ public class OreGameDetectionArea : MonoBehaviour
 		InGameManager.instance.OreGame.playerScoreTxt.text = InGameManager.instance.OreGame.totalSessionScore.ToString ();
 
 
-		InGameManager.instance.playerController.GetComponent<Animator> ().SetFloat ("Mining", 0.5f);
+//		InGameManager.instance.playerController.GetComponent<Animator> ().SetFloat ("Mining", 0.5f);
 	}
 }
