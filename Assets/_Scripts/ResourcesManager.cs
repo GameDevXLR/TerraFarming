@@ -29,6 +29,12 @@ public class ResourcesManager : MonoBehaviour {
 		}
 	}
 
+    public void setRawOre(int qty)
+    {
+        rawOre = qty;
+        rawOreDisplay.text = rawOre.ToString();
+    }
+
 	public void ChangeRawOre(int qty)
 	{
 		rawOre += qty;
