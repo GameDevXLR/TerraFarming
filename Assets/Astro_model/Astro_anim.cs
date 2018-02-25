@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Astro_anim : MonoBehaviour {
 
-    public Animator anim;
+    Animator anim;
     public float Speed;
     public float TurnSpeed;
     public int forceConst = 20;
@@ -20,7 +20,7 @@ public class Astro_anim : MonoBehaviour {
     // Use this for initialization
     void Start () {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
-//        anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         selfRigidbody = GetComponent<Rigidbody>();
     }
 
