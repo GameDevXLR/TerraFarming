@@ -115,6 +115,7 @@ public class PlantationSpot : MonoBehaviour {
 				InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
 				Debug.Log ("Graine plantée");
 				plantAudioS.PlayOneShot (planterSnd);
+				InGameManager.instance.cleanParticle.GetComponent<ParticleSystem> ().Play ();
 				HidePlantTypeMenu();
 			}
 			//faire défiler les graines:
@@ -207,6 +208,8 @@ public class PlantationSpot : MonoBehaviour {
 		if (other.tag == "Player") 
 		{
 			StopListeningForAction ();
+			InGameManager.instance.cleanParticle.GetComponent<ParticleSystem> ().Stop ();
+			InGameManager.instance.waterParticle.GetComponent<ParticleSystem> ().Stop ();
 			
 		}
 		
