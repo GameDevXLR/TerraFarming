@@ -10,6 +10,7 @@ public class MachineEssenceLifeController : MonoBehaviour {
     public OreToEssenceUI interfaceMachine;
     public OreToEssenceGame game;
     public int nbrOreForEssence;
+	public AudioClip miniGameFail;
 
     private void Start()
     {
@@ -33,8 +34,11 @@ public class MachineEssenceLifeController : MonoBehaviour {
             if (!interfaceMachine.isActive )
             {
                 interfaceMachine.activate(ResourcesManager.instance.rawOre, nbrOreForEssence, SimuleSynthetizeEssence());
-                if(hasEnoughtOre)
-                    game.activate(nbrOreForEssence);
+				if (hasEnoughtOre) {
+					game.activate (nbrOreForEssence);
+				} else {
+					GetComponent<AudioSource> ().PlayOneShot (miniGameFail);
+				}
             }
         }
     }
