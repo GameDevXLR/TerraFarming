@@ -270,7 +270,7 @@ public class PlantationSpot : MonoBehaviour {
 			break;
 		case PlantState.seed:
 			actualPlantState = PlantState.baby;
-			lopinSeedObj.SetActive (false);
+//			lopinSeedObj.SetActive (false);
 			babyVisual.SetActive (true);
 //			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
 //			plantAudioS.PlayOneShot (growUpSnd);
