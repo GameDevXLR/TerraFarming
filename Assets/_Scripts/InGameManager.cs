@@ -13,6 +13,8 @@ public class InGameManager : MonoBehaviour {
 	public ParticleSystem miningChargeParticle;
 	public ParticleSystem miningHitParticle;
 
+	public Animator machineAnimator;
+
 	void Awake()
 	{
 		if (instance == null) {

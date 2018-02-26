@@ -13,6 +13,8 @@ public class OreToEssenceGame : MonoBehaviour {
     public float timeBonus;
     public float luckPercent;
     public List<Image> jaugeList;
+	public AudioClip miniGameSuccess;
+	public ParticleSystem BurstPtc;
 
     #endregion
 
@@ -43,6 +45,8 @@ public class OreToEssenceGame : MonoBehaviour {
 
         oreToEssenceUI.setChrono(0);
         oreToEssenceUI.setTimeBonus(timeBonus);
+		InGameManager.instance.machineAnimator.GetComponent<Animator> ().SetBool ("GameEnabled", true);
+		BurstPtc.GetComponent<ParticleSystem> ().Emit(0);
     }
 
     // Update is called once per frame
@@ -52,8 +56,10 @@ public class OreToEssenceGame : MonoBehaviour {
         {
             if (count < jaugeList.Count)
             {
-                jaugeList[count++].enabled = true;
-                oreToEssenceUI.setScore(count);
+                jaugeList[count].enabled = true;
+				jaugeList [count].gameObject.GetComponent<AudioSource> ().Play ();
+				BurstPtc.GetComponent<ParticleSystem> ().Emit(10);
+                oreToEssenceUI.setScore(++count);
             }
             else if (count == jaugeList.Count)
             {
@@ -61,6 +67,7 @@ public class OreToEssenceGame : MonoBehaviour {
                 resetJauge();
                 count = 0;
                 time = Time.time;
+
             }
 
             if(count == jaugeList.Count)
@@ -68,6 +75,7 @@ public class OreToEssenceGame : MonoBehaviour {
                 if (Time.time - time <= timeBonus && Random.value <= luckPercent)
                 {
                     bonus++;
+					GetComponent<AudioSource> ().PlayOneShot (miniGameSuccess);
                 }
                 harvest++;
 
@@ -95,6 +103,9 @@ public class OreToEssenceGame : MonoBehaviour {
     {
         ResourcesManager.instance.ChangeEssence(harvest + bonus);
         ResourcesManager.instance.ChangeRawOre(-harvest * oreNeed);
+		InGameManager.instance.machineAnimator.GetComponent<Animator> ().SetBool ("GameEnabled", false);
+
+
     }
 
     #endregion
