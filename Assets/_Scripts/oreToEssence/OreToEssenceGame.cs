@@ -45,7 +45,7 @@ public class OreToEssenceGame : MonoBehaviour {
 
         oreToEssenceUI.setChrono(0);
         oreToEssenceUI.setTimeBonus(timeBonus);
-		InGameManager.instance.machineAnimator.GetComponent<Animator> ().SetBool ("GameEnabled", true);
+		GetComponent<Animator> ().SetBool ("GameEnabled", true);
 		BurstPtc.GetComponent<ParticleSystem> ().Emit(0);
     }
 
@@ -103,7 +103,7 @@ public class OreToEssenceGame : MonoBehaviour {
     {
         ResourcesManager.instance.ChangeEssence(harvest + bonus);
         ResourcesManager.instance.ChangeRawOre(-harvest * oreNeed);
-		InGameManager.instance.machineAnimator.GetComponent<Animator> ().SetBool ("GameEnabled", false);
+		GetComponent<Animator> ().SetBool ("GameEnabled", false);
 
 
     }
