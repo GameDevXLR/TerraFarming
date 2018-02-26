@@ -18,6 +18,7 @@ public class OreToEssenceUI : MonoBehaviour {
 
 	public void activate (int rawOre, int oreNeed, int essenceGot) {
         textDisplay.oreDisplay.text = rawOre.ToString();
+        textDisplay.oreNeddDisplay.text = oreNeed.ToString();
         textDisplay.EssenceGot.text = essenceGot.ToString();
         canvas.gameObject.SetActive(true);
         isActive = true;
