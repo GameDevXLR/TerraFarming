@@ -9,6 +9,11 @@ public class MainMenuManager : MonoBehaviour {
 	public GameObject mainMenuPanel;
 	public GameObject pressEnterObj;
 
+	public AudioSource audioS;
+	public AudioClip mouseOverSnd;
+	public AudioClip startGameSnd;
+
+
 	public void QuitGame()
 	{
 //		GetComponent<AudioSource> ().PlayOneShot (clic1Snd);
@@ -18,11 +23,14 @@ public class MainMenuManager : MonoBehaviour {
 
 	public void StartNewGame()
 	{
+		audioS.PlayOneShot (startGameSnd);
 		SceneManager.LoadScene (1,LoadSceneMode.Single);
 	}
 
 	public void ContinueGame()
 	{
+		audioS.PlayOneShot (startGameSnd);
+
 		SceneManager.LoadScene (1);
 		//and co...
 	}
@@ -42,6 +50,12 @@ public class MainMenuManager : MonoBehaviour {
 		hasPressedEnter = true;
 		mainMenuPanel.SetActive (true);
 		pressEnterObj.SetActive (false);
+	}
+
+	public void PlayerMouseOverSnd()
+	{
+		audioS.PlayOneShot (mouseOverSnd);
+
 	}
 
 }

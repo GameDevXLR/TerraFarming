@@ -11,11 +11,11 @@ public class OreGameDetectionArea : MonoBehaviour
 
 	void OnTriggerStay2D(Collider2D other)
 	{
-		if (!isActive) 
+		if (!isActive || InGameManager.instance.OreGame.hasClic) 
 		{
 			return;
 		}
-		if(Input.GetKeyDown(CustomInputManager.instance.actionKey))
+		if(Input.GetKey(CustomInputManager.instance.actionKey))
 			{
 			GiveAPoint ();
 			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("MiningHit", layer: -1, fixedTime: 2);
@@ -23,32 +23,33 @@ public class OreGameDetectionArea : MonoBehaviour
 			}
 	}
 
-	void OnTriggerEnter2D(Collider2D other)
-	{
-		if (!isActive) 
-		{
-			return;
-		}
-		CustomInputManager.instance.ShowHideActionButtonVisual (true);
-	}
-	void OnTriggerExit2D(Collider2D other)
-	{
-		if (!isActive) 
-		{
-			return;
-		}
-		CustomInputManager.instance.ShowHideActionButtonVisual (false);
-
-	}
+//	void OnTriggerEnter2D(Collider2D other)
+//	{
+//		if (!isActive) 
+//		{
+//			return;
+//		}
+//		CustomInputManager.instance.ShowHideActionButtonVisual (true);
+//	}
+//	void OnTriggerExit2D(Collider2D other)
+//	{
+//		if (!isActive) 
+//		{
+//			return;
+//		}
+//		CustomInputManager.instance.ShowHideActionButtonVisual (false);
+//
+//	}
 
 	void GiveAPoint()
 	{
+		
 		isActive = false;
 		oreAudioS.PlayOneShot (pointPlusSnd);
 		areaImg.CrossFadeAlpha (0, 1f, true);
 		CustomInputManager.instance.ShowHideActionButtonVisual (false);
 		InGameManager.instance.OreGame.currentScore++;
-
+		InGameManager.instance.OreGame.PlayerPressedKey ();
 		InGameManager.instance.OreGame.totalSessionScore++;
 		InGameManager.instance.OreGame.playerScoreTxt.text = InGameManager.instance.OreGame.totalSessionScore.ToString ();
 

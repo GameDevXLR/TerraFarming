@@ -28,8 +28,8 @@ public class OreGatheringGame : MonoBehaviour
 	public Transform leftBorder;
 	public Transform rightBorder;
 	public Rigidbody2D detectionCursor;
-	public OreGameDetectionArea bonusArea;
 
+	public OreGameDetectionArea mainBonusArea;
 	public GameObject[] bonusAreasObj;
 	public int chanceOfActivatingArea=50;
 
@@ -39,6 +39,12 @@ public class OreGatheringGame : MonoBehaviour
 	public bool isHeadingRight = true;
 
 	Vector2 detectionCursorStartPos;
+
+	public bool hasClic;
+	bool hasReleasedActionKey;
+	float lastClicTime;
+	public float timeBetweenClic;
+
 	void Awake()
 	{
 		detectionCursorStartPos = detectionCursor.transform.localPosition;
@@ -67,6 +73,23 @@ public class OreGatheringGame : MonoBehaviour
 
 	void Update()
 	{
+		
+		if (!hasReleasedActionKey && Input.GetKeyUp (CustomInputManager.instance.actionKey)) 
+		{
+			hasReleasedActionKey = true;
+			lastClicTime = Time.time;
+			
+		}
+		if (hasClic) 
+		{
+			if (hasReleasedActionKey) 
+			{
+				if (Time.time > lastClicTime + timeBetweenClic) 
+				{
+					hasClic = false;
+				}
+			}
+		}
 		if(Input.GetKeyDown (CustomInputManager.instance.actionKey))
 		{
 			if (!gameInProgress) 
@@ -109,6 +132,8 @@ public class OreGatheringGame : MonoBehaviour
 	
 	public void BeginGameSession()
 	{
+		hasClic = false;
+		hasReleasedActionKey = true;
 		isPlaying = true;
 		detectionCursor.velocity = new Vector2 (scrollSpeed, 0);
 		endOreGamePanel.SetActive (false);
@@ -118,13 +143,13 @@ public class OreGatheringGame : MonoBehaviour
 		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().gameObject.SetActive (true);
 		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().Play ();
 	}
+
 	public void EndGameSession()
 	{
 
 		detectionCursor.velocity = Vector2.zero;
 
 		isPlaying = false;
-		bonusArea.isActive = false;
 		gameIsFinished = true;
 		endOreGamePanel.SetActive (true);
 		playerAnimator.SetBool ("IsMining", false);
@@ -161,24 +186,33 @@ public class OreGatheringGame : MonoBehaviour
 
 	}
 
+	public void PlayerPressedKey()
+	{
+		hasClic = true;
+		hasReleasedActionKey = false;
+	}
+
 	public void ChangeCursorDirection()
 	{
 
 		ActualizeScore ();
 		isHeadingRight = !isHeadingRight;
 		detectionCursor.velocity = -detectionCursor.velocity;
-		bonusArea.areaImg.CrossFadeAlpha (1, 1f, true);
+//		bonusArea.areaImg.CrossFadeAlpha (1, 1f, true);
 
 	}
 
 	void ActualizeScore()
 	{
 		actualRound++;
-		if (recquiredScore > 1) 
-		{
-			//droit a une erreure!
-			recquiredScore--;
-		}
+
+		//droit a l'erreur retiré pour le moment:
+//		if (recquiredScore > 1) 
+//		{
+//			//droit a une erreure!
+//			recquiredScore--;
+//		}
+
 		playerScoreTxt.text = totalSessionScore.ToString();
 		if (actualRound == 1 ||actualRound == 3||actualRound == 6 ||actualRound == 8||actualRound == 10) {
 //			effectsAudioS.PlayOneShot (victorySnd);
@@ -211,6 +245,8 @@ public class OreGatheringGame : MonoBehaviour
 			if (Random.Range (0, 101) < chanceOfActivatingArea) 
 			{
 				obj.GetComponent<Image> ().enabled = true;
+				obj.GetComponent<Image> ().CrossFadeAlpha (1, .1f, true);
+
 				obj.GetComponent<OreGameDetectionArea> ().isActive = true;
 				recquiredScore++;
 			}
@@ -219,8 +255,10 @@ public class OreGatheringGame : MonoBehaviour
 		if (recquiredScore == 0) 
 		{
 			recquiredScore++;
-			bonusAreasObj [0].GetComponent<OreGameDetectionArea> ().isActive = true;
-			bonusAreasObj [0].GetComponent<Image> ().enabled = true;
+			mainBonusArea.GetComponent<OreGameDetectionArea> ().isActive = true;
+			mainBonusArea.GetComponent<Image> ().enabled = true;
+			mainBonusArea.GetComponent<Image> ().CrossFadeAlpha (1, .1f, true);
+
 		}
 	}
 }
