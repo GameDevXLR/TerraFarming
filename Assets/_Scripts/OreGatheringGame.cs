@@ -32,6 +32,7 @@ public class OreGatheringGame : MonoBehaviour
 	public OreGameDetectionArea mainBonusArea;
 	public GameObject[] bonusAreasObj;
 	public int chanceOfActivatingArea=50;
+	private int defaultChanceOfActivating;
 
 	bool gameInProgress;
 	bool gameIsFinished;
@@ -45,11 +46,14 @@ public class OreGatheringGame : MonoBehaviour
 	float lastClicTime;
 	public float timeBetweenClic;
 
+	bool firstRound;
+
 	void Awake()
 	{
 		detectionCursorStartPos = detectionCursor.transform.localPosition;
 		initialScrollSpeed = scrollSpeed;
 		OreCanvasObj.SetActive (false);
+		defaultChanceOfActivating = chanceOfActivatingArea;
 	}
 
 	void OnEnable()
@@ -109,7 +113,9 @@ public class OreGatheringGame : MonoBehaviour
 
 	void Initialize()
 	{
+		firstRound = true;
 		CustomInputManager.instance.ShowHideActionButtonVisual (false);
+		chanceOfActivatingArea = defaultChanceOfActivating;
 		isHeadingRight = true;
 		OreCanvasObj.SetActive (true);
 		endOreGamePanel.SetActive (true);
@@ -135,7 +141,7 @@ public class OreGatheringGame : MonoBehaviour
 		hasClic = false;
 		hasReleasedActionKey = true;
 		isPlaying = true;
-		detectionCursor.velocity = new Vector2 (scrollSpeed, 0);
+		detectionCursor.velocity = new Vector2 (scrollSpeed * Screen.width/100, 0);
 		endOreGamePanel.SetActive (false);
 		playerAnimator.SetBool ("IsMining", true);
 		gameInProgress = true;
@@ -166,7 +172,7 @@ public class OreGatheringGame : MonoBehaviour
 		}
 		effectsAudioS.PlayOneShot (victorySnd);
 		InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Victory", layer: -1, fixedTime: 2);
-		if (totalSessionScore > 25) 
+		if (totalSessionScore > 20) 
 		{
 			endGameTxt.text = "AMAZING!";
 			return;
@@ -236,6 +242,11 @@ public class OreGatheringGame : MonoBehaviour
 
 	void ChangeBonusAreas()
 	{
+		
+		if (firstRound) 
+		{
+			chanceOfActivatingArea = 100;
+		}
 
 		foreach (GameObject obj in bonusAreasObj) 
 		{
@@ -251,6 +262,11 @@ public class OreGatheringGame : MonoBehaviour
 				recquiredScore++;
 			}
 			
+		}
+		if (firstRound) 
+		{
+			chanceOfActivatingArea = defaultChanceOfActivating;
+			firstRound = false;
 		}
 		if (recquiredScore == 0) 
 		{
