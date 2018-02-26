@@ -12,6 +12,7 @@ public class OreGatheringGame : MonoBehaviour
 	public GameObject endOreGamePanel;
 
 	public AudioSource effectsAudioS;
+	public AudioSource MiningAudioS;
 	public AudioClip victorySnd;
 	public AudioClip defeatSnd;
 
@@ -138,20 +139,22 @@ public class OreGatheringGame : MonoBehaviour
 		detectionCursor.velocity = new Vector2 (scrollSpeed, 0);
 		endOreGamePanel.SetActive (false);
 		playerAnimator.SetBool ("IsMining", true);
+		MiningAudioS.GetComponent<AudioSource> ().Play ();
 		gameInProgress = true;
 		ChangeBonusAreas ();
 		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().gameObject.SetActive (true);
 		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().Play ();
+
 	}
 
 	public void EndGameSession()
 	{
 
 		detectionCursor.velocity = Vector2.zero;
-
 		isPlaying = false;
 		gameIsFinished = true;
 		endOreGamePanel.SetActive (true);
+		MiningAudioS.GetComponent<AudioSource> ().Stop ();
 		playerAnimator.SetBool ("IsMining", false);
 		ResourcesManager.instance.ChangeRawOre (totalSessionScore);
 		CustomInputManager.instance.ShowHideActionButtonVisual (true);
