@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using cakeslice;
 
-public class MachineEssenceLifeController : MonoBehaviour {
+public class MachineAlchimieController : MonoBehaviour {
 
-    public cakeslice.Outline outliner;
-    public bool hasEnoughtOre = false;
+    public List<Outline> outlinerList;
     public OreToEssenceUI interfaceMachine;
-    public OreToEssenceGame game;
-    public int nbrOreForEssence;
-	public AudioClip miniGameFail;
+    public AlchimieGame game;
 
     private void Start()
     {
         interfaceMachine.unactivate();
-        outliner.enabled = false;
+        setActivationOutline(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,7 +21,6 @@ public class MachineEssenceLifeController : MonoBehaviour {
         {
             ListenForAction();
         }
-        hasEnoughtOre = ResourcesManager.instance.rawOre >= nbrOreForEssence;
     }
 
     private void OnTriggerStay(Collider other)
@@ -33,12 +29,13 @@ public class MachineEssenceLifeController : MonoBehaviour {
         {
             if (!interfaceMachine.isActive )
             {
-                interfaceMachine.activate(ResourcesManager.instance.rawOre, nbrOreForEssence, SimuleSynthetizeEssence());
-				if (hasEnoughtOre) {
-					game.activate (nbrOreForEssence);
-				} else {
-					GetComponent<AudioSource> ().PlayOneShot (miniGameFail);
-				}
+                game.activate();
+    //            interfaceMachine.activate(ResourcesManager.instance.rawOre, nbrOreForEssence, SimuleSynthetizeEssence());
+    //if (hasEnoughtOre) {
+    //	game.activate (nbrOreForEssence);
+    //} else {
+    //	GetComponent<AudioSource> ().PlayOneShot (miniGameFail);
+    //}
             }
         }
     }
@@ -56,27 +53,24 @@ public class MachineEssenceLifeController : MonoBehaviour {
     {
         //faire les changements d'apparence de la caillasse;
         CustomInputManager.instance.ShowHideActionButtonVisual(true);
-        outliner.enabled = true;
-        
+        setActivationOutline(true);
     }
     void StopListeningForAction()
     {
         //arreter les effets visuels
         CustomInputManager.instance.ShowHideActionButtonVisual(false);
-        outliner.enabled = false;
+        setActivationOutline(false);
         interfaceMachine.unactivate();
     }
 
-    public int SimuleSynthetizeEssence()
-    {
-        return ResourcesManager.instance.rawOre / nbrOreForEssence;
-    }
 
-    public void SynthetizeEssence()
+    void setActivationOutline(bool isActivate)
     {
-        int rawOre = ResourcesManager.instance.rawOre;
-        ResourcesManager.instance.ChangeEssence(rawOre / nbrOreForEssence);
-        ResourcesManager.instance.setRawOre(rawOre % nbrOreForEssence);
+        foreach (Outline outliner in outlinerList)
+        {
+            outliner.enabled = isActivate;
+        }
     }
+    
 
 }

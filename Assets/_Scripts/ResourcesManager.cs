@@ -8,7 +8,8 @@ public class ResourcesManager : MonoBehaviour {
 
 	public static ResourcesManager instance;
 
-	public int rawOre;
+
+    public int rawOre;
 	public int essence;
 	public int flowerSeed;
 	public int bushSeed;
@@ -64,4 +65,64 @@ public class ResourcesManager : MonoBehaviour {
 		treeSeed += qty;
 		treeSeedDisplay.text = treeSeed.ToString ();
 	}
+
+    public int GetSeedQuantity(seedEnum seed)
+    {
+        switch (seed)
+        {
+            case seedEnum.bush:
+                return bushSeed;
+            case seedEnum.tree:
+                return treeSeed;
+            case seedEnum.flower:
+                return flowerSeed;
+            default:
+                return 0;
+        }
+    }
+
+
+    public int GetRessourceQuantity(ressourceEnum ress)
+    {
+        switch (ress)
+        {
+            case ressourceEnum.bush:
+                return bushSeed;
+            case ressourceEnum.tree:
+                return treeSeed;
+            case ressourceEnum.flower:
+                return flowerSeed;
+            case ressourceEnum.ore:
+                return rawOre;
+            case ressourceEnum.essence:
+                return essence;
+            default:
+                return 0;
+        }
+    }
+
+
+    public void setRessourceQuantity(ressourceEnum ress, int qty)
+    {
+        switch (ress)
+        {
+            case ressourceEnum.bush:
+                ChangeBushSeed(qty);
+                break;
+            case ressourceEnum.tree:
+                ChangeTreeSeed(qty);
+                break;
+            case ressourceEnum.flower:
+                ChangeFlowerSeed(qty);
+                break;
+            case ressourceEnum.ore:
+                ChangeRawOre(qty);
+                break;
+            case ressourceEnum.essence:
+                ChangeEssence(qty);
+                break;
+            default:
+                break;
+        }
+    }
 }
