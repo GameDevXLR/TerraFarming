@@ -13,14 +13,16 @@ public class OreGameDetectionArea : MonoBehaviour
 	{
 		if (!isActive || InGameManager.instance.OreGame.hasClic) 
 		{
+			InGameManager.instance.playerController.GetComponent<Animator> ().SetBool("MiningHit", false);
 			return;
 		}
 		if(Input.GetKey(CustomInputManager.instance.actionKey))
 			{
 			GiveAPoint ();
-			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("MiningHit", layer: -1, fixedTime: 2);
+			InGameManager.instance.playerController.GetComponent<Animator> ().SetBool("MiningHit", true);
 			InGameManager.instance.miningHitParticle.GetComponent <ParticleSystem> ().Play ();
 			}
+
 	}
 
 //	void OnTriggerEnter2D(Collider2D other)
