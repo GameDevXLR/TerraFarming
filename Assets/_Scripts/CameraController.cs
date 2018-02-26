@@ -32,11 +32,11 @@ public class CameraController : MonoBehaviour
         
         if (Input.GetAxis("Mouse ScrollWheel") > 0) // forward
         {
-            distance += stepZoom;
+            distance -= stepZoom;
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0) // back
         {
-            distance -= stepZoom;
+            distance += stepZoom;
         }
 
         distance = Mathf.Clamp(distance, minDistance, maxDistance);
