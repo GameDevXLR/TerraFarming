@@ -9,6 +9,7 @@ public class PersistencyManager : MonoBehaviour {
 	{
 		DontDestroyOnLoad (gameObject);
 		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
 	}
 	
 
