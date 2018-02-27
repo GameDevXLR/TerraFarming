@@ -8,7 +8,6 @@ public class ControllerRefocus : MonoBehaviour
 	{
 		if (EventSystem.current.currentSelectedGameObject == null)
 		{
-			Debug.Log("Reselecting first input");
 			EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
 //			EventSystem.current.currentSelectedGameObject.GetComponent<Button>().navigation.
 		}
