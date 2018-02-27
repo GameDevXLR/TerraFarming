@@ -175,6 +175,7 @@ public class OreGatheringGame : MonoBehaviour
 		}
 		effectsAudioS.PlayOneShot (victorySnd);
 		InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Victory", layer: -1, fixedTime: 2);
+		InGameManager.instance.InterfaceAnimator.GetComponent<Animator> ().Play("ScaleOreIco");
 		if (totalSessionScore > 20) 
 		{
 			endGameTxt.text = "AMAZING!";

@@ -7,7 +7,10 @@ public class InGameManager : MonoBehaviour {
 
 	public OreGatheringGame OreGame;
 	public static InGameManager instance;
+
 	public ThirdPersonUserControl playerController;
+	public Animator InterfaceAnimator;
+
 	public ParticleSystem cleanParticle;
 	public ParticleSystem waterParticle;
 	public ParticleSystem miningChargeParticle;
