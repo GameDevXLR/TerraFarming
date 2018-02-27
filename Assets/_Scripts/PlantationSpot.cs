@@ -315,7 +315,7 @@ public class PlantationSpot : MonoBehaviour {
 		case 0:
 			ResourcesManager.instance.ChangeBushSeed (-1);
 			timeToGrow = 120f;
-			growthAnimator.SetFloat("growthspeed",0.083f);
+			growthAnimator.SetFloat("growthspeed",8.3f);
 			babyVisual = bush1Obj;
 			teenageVisual = bush2Obj;
 			grownupVisual = bush3Obj;
@@ -326,7 +326,7 @@ public class PlantationSpot : MonoBehaviour {
 		case 1:
 			ResourcesManager.instance.ChangeFlowerSeed(-1);
 			timeToGrow = 60f;
-			growthAnimator.SetFloat("growthspeed",0.16f);
+			growthAnimator.SetFloat("growthspeed",16f);
 
 			babyVisual = flower1Obj;
 			teenageVisual = flower2Obj;
@@ -339,7 +339,7 @@ public class PlantationSpot : MonoBehaviour {
 		case 2:
 			ResourcesManager.instance.ChangeTreeSeed(-1);
 			timeToGrow = 300f;
-			growthAnimator.SetFloat("growthspeed",0.033f);
+			growthAnimator.SetFloat("growthspeed",3.3f);
 
 			babyVisual = tree1Obj;
 			teenageVisual = tree2Obj;
