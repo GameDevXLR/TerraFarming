@@ -51,7 +51,7 @@ public class PlantationSpot : MonoBehaviour {
 	float growthStartTime;
 	float timeSpentGrowing;
 	bool isGrowing;
-
+	public Animator growthAnimator;
 
 	public enum PlantType
 	{
@@ -272,6 +272,8 @@ public class PlantationSpot : MonoBehaviour {
 			actualPlantState = PlantState.baby;
 //			lopinSeedObj.SetActive (false);
 			babyVisual.SetActive (true);
+			growthAnimator.SetBool ("baby", true);
+
 //			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
 //			plantAudioS.PlayOneShot (growUpSnd);
 			break;
@@ -279,6 +281,8 @@ public class PlantationSpot : MonoBehaviour {
 			actualPlantState = PlantState.teenage;
 			babyVisual.SetActive (false);
 			teenageVisual.SetActive (true);
+			growthAnimator.SetBool ("teenage", true);
+
 //			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
 //			plantAudioS.PlayOneShot (growUpSnd);
 			break;
@@ -286,6 +290,8 @@ public class PlantationSpot : MonoBehaviour {
 			actualPlantState = PlantState.grownup;
 			teenageVisual.SetActive (false);
 			grownupVisual.SetActive (true);
+			growthAnimator.SetBool ("grownup", true);
+
 //			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
 //			plantAudioS.PlayOneShot (growUpSnd);
 			break;
@@ -309,7 +315,7 @@ public class PlantationSpot : MonoBehaviour {
 		case 0:
 			ResourcesManager.instance.ChangeBushSeed (-1);
 			timeToGrow = 120f;
-
+			growthAnimator.SetFloat("growthspeed",0.083f);
 			babyVisual = bush1Obj;
 			teenageVisual = bush2Obj;
 			grownupVisual = bush3Obj;
@@ -320,6 +326,7 @@ public class PlantationSpot : MonoBehaviour {
 		case 1:
 			ResourcesManager.instance.ChangeFlowerSeed(-1);
 			timeToGrow = 60f;
+			growthAnimator.SetFloat("growthspeed",0.16f);
 
 			babyVisual = flower1Obj;
 			teenageVisual = flower2Obj;
@@ -332,6 +339,7 @@ public class PlantationSpot : MonoBehaviour {
 		case 2:
 			ResourcesManager.instance.ChangeTreeSeed(-1);
 			timeToGrow = 300f;
+			growthAnimator.SetFloat("growthspeed",0.033f);
 
 			babyVisual = tree1Obj;
 			teenageVisual = tree2Obj;
@@ -344,6 +352,7 @@ public class PlantationSpot : MonoBehaviour {
 			Debug.Log ("t'es une plante inconnu mec!");
 			break;
 		}
+
 		actualPlantState = PlantState.seed;
 		lopinNoSeedObj.SetActive (false);
 		lopinSeedObj.SetActive (true);

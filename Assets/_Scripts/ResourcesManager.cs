@@ -34,37 +34,48 @@ public class ResourcesManager : MonoBehaviour {
     {
         rawOre = qty;
         rawOreDisplay.text = rawOre.ToString();
+        launchAnimation("isOre", qty);
     }
 
 	public void ChangeRawOre(int qty)
 	{
 		rawOre += qty;
 		rawOreDisplay.text = rawOre.ToString ();
-	}
+        launchAnimation("isOre", qty);
+		InGameManager.instance.InterfaceAnimator.GetComponent<Animator> ().Play("ScaleOreIco");
+    }
 
 	public void ChangeEssence(int qty)
 	{
 		essence += qty;
 		essenceDisplay.text = essence.ToString ();
-	}
+        launchAnimation("isEssence", qty);
+		InGameManager.instance.InterfaceAnimator.GetComponent<Animator> ().Play("ScaleEssenceIco");
+    }
 
 	public void ChangeFlowerSeed(int qty)
 	{
 		flowerSeed += qty;
 		flowerSeedDisplay.text = flowerSeed.ToString ();
+        launchAnimation("isFlower", qty);
+		InGameManager.instance.InterfaceAnimator.GetComponent<Animator> ().Play("ScaleFlowerIco");
 
-	}
+    }
 	public void ChangeBushSeed(int qty)
 	{
 		bushSeed += qty;
 		bushSeedDisplay.text = bushSeed.ToString ();
+        launchAnimation("isBush", qty);
+		InGameManager.instance.InterfaceAnimator.GetComponent<Animator> ().Play("ScaleBushIco");
 
-	}
+    }
 	public void ChangeTreeSeed(int qty)
 	{
 		treeSeed += qty;
 		treeSeedDisplay.text = treeSeed.ToString ();
-	}
+        launchAnimation("isTree", qty);
+		InGameManager.instance.InterfaceAnimator.GetComponent<Animator> ().Play("ScaleTreeIco");
+    }
 
     public int GetSeedQuantity(seedEnum seed)
     {
@@ -124,5 +135,13 @@ public class ResourcesManager : MonoBehaviour {
             default:
                 break;
         }
+    }
+
+
+    public void launchAnimation(string anim, int qty)
+    {
+//        InGameManager.instance.InterfaceAnimator.GetComponent<Animator>().SetBool(anim, true);
+//        InGameManager.instance.InterfaceAnimator.GetComponent<Animator>().SetBool(anim, false);
+        Debug.Log("coucou");        
     }
 }
