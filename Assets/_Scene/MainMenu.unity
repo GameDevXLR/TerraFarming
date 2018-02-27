@@ -924,6 +924,11 @@ Prefab:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1436499172}
+    - target: {fileID: 114866983043116306, guid: d64b8945d067bb44eb923603e2806e97,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d64b8945d067bb44eb923603e2806e97, type: 2}
   m_IsPrefabParent: 0
@@ -1323,6 +1328,7 @@ GameObject:
   - component: {fileID: 1055408706}
   - component: {fileID: 1055408705}
   - component: {fileID: 1055408707}
+  - component: {fileID: 1055408708}
   m_Layer: 0
   m_Name: PersistantObj
   m_TagString: Untagged
@@ -1436,6 +1442,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1055408708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1055408704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3df080d6b7b6bb459eac54b53dca7a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1139507170
 Prefab:
   m_ObjectHideFlags: 0

@@ -259,7 +259,7 @@ public class PlantationSpot : MonoBehaviour {
 			actualPlantState = PlantState.lopin;
 			ResourcesManager.instance.ChangeRawOre (Random.Range (1, 6));
 			debrisObj.SetActive (false);
-			lopinNoSeedObj.SetActive (true);
+//			lopinNoSeedObj.SetActive (true);
 			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Cleaning", layer: -1, fixedTime: 1);
 			plantAudioS.PlayOneShot (planterSnd);
 			InGameManager.instance.cleanParticle.GetComponent<ParticleSystem> ().Play ();
@@ -354,7 +354,7 @@ public class PlantationSpot : MonoBehaviour {
 		}
 
 		actualPlantState = PlantState.seed;
-		lopinNoSeedObj.SetActive (false);
+//		lopinNoSeedObj.SetActive (false);
 		lopinSeedObj.SetActive (true);
 		growthStartTime = Time.time;
 		RecquireWater ();
