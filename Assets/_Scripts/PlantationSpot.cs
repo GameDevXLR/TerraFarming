@@ -123,15 +123,16 @@ public class PlantationSpot : MonoBehaviour {
 				HidePlantTypeMenu();
 			}
 			//faire défiler les graines:
-			if (Input.GetKeyDown (CustomInputManager.instance.leftKey)) 
+			if (Input.GetKeyDown (CustomInputManager.instance.leftKey )|| Input.GetKeyDown (KeyCode.LeftArrow)) 
 			{
+				
 				if (currentPlantTypeIndex==0) 
 				{
 					currentPlantTypeIndex = 3;
 				}
 					ChangePlantTypeIndex (true);
 			}
-			if (Input.GetKeyDown (CustomInputManager.instance.rightKey)) 
+			if (Input.GetKeyDown (CustomInputManager.instance.rightKey)|| Input.GetKeyDown (KeyCode.RightArrow)) 
 			{if (currentPlantTypeIndex == 2) 
 				{
 					currentPlantTypeIndex = -1;
