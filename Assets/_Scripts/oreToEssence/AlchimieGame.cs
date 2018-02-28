@@ -63,7 +63,7 @@ public class AlchimieGame : MonoBehaviour {
         interfaceMachine.setTimeBonus(timeBonus);
         launchAnimation("GameEnabled", true);
 
-        particleEffect(0);
+        particleEffect(10);
     }
 
     // Update is called once per frame
@@ -75,6 +75,8 @@ public class AlchimieGame : MonoBehaviour {
             {
                 jaugeList[count].enabled = true;
 				jaugeList [count].gameObject.GetComponent<AudioSource> ().Play ();
+				animator.Play ("MachineSeedSpace");
+
                 particleEffect(10);
                 interfaceMachine.setScore(++count);
             }

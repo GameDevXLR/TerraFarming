@@ -12,9 +12,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Vector3 m_CamForward;             // The current forward direction of the camera
         private Vector3 m_Move;
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
-
-
+		public WindZone wind;
+		float windTimer;
         public bool isQwerty;
+		float h;
+		float v;
 
 		public bool isActive = true;
         
@@ -45,6 +47,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			{
 				return;
 			}
+
+
             if (!m_Jump)
             {
 //                m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
@@ -61,9 +65,19 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				return;
 			}
 
-            float h;
-            float v;
+			if (!wind.gameObject.activeSelf && h >0.15f || v >0.15f && !wind.gameObject.activeSelf ||!wind.gameObject.activeSelf && h <-0.15f || v <-0.15f && !wind.gameObject.activeSelf) 
+			{
 
+				wind.gameObject.SetActive (true);
+				windTimer = Time.time;
+			}
+			else if(wind.gameObject.activeSelf)
+			{
+				if (Time.time > windTimer + .5f) 
+				{
+					wind.gameObject.SetActive (false);
+				}
+			}
             if (isQwerty)
             {
                 h = CrossPlatformInputManager.GetAxis("HorizontalQwerty");
