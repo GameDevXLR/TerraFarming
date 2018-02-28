@@ -7,14 +7,29 @@ public class MainMenuManager : MonoBehaviour {
 
 	bool hasPressedEnter;
 	public GameObject mainMenuPanel;
-	public GameObject pressEnterObj;
+    public GameObject keyboardChoicePanel;
+    public GameObject pressEnterObj;
 
 	public AudioSource audioS;
 	public AudioClip mouseOverSnd;
 	public AudioClip startGameSnd;
 
 
-	public void QuitGame()
+
+    private void Awake()
+    {
+        if (!PlayerPrefs.HasKey("Keyboard"))
+        {
+            keyboardChoicePanel.SetActive(true);
+        }
+        else
+        {
+
+            keyboardChoicePanel.SetActive(false);
+        }
+    }
+
+    public void QuitGame()
 	{
 //		GetComponent<AudioSource> ().PlayOneShot (clic1Snd);
 
@@ -43,6 +58,7 @@ public class MainMenuManager : MonoBehaviour {
 			{
 				ShowMainMenu ();
 			}
+            
 		}
 	}
 	public void ShowMainMenu()
@@ -50,6 +66,7 @@ public class MainMenuManager : MonoBehaviour {
 		hasPressedEnter = true;
 		mainMenuPanel.SetActive (true);
 		pressEnterObj.SetActive (false);
+        keyboardChoicePanel.SetActive(false);
 	}
 
 	public void PlayerMouseOverSnd()
@@ -57,5 +74,21 @@ public class MainMenuManager : MonoBehaviour {
 		audioS.PlayOneShot (mouseOverSnd);
 
 	}
+
+    public void showOption()
+    {
+        keyboardChoicePanel.SetActive(true);
+        mainMenuPanel.SetActive(false);
+        Invoke("activatePressEnter", 0.1f);
+        pressEnterObj.SetActive(true);
+    }
+
+    public void activatePressEnter()
+    {
+        hasPressedEnter = false;
+    }
+
+
+    
 
 }
