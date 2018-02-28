@@ -37,7 +37,10 @@ public class InGameManager : MonoBehaviour {
 		{
 			Destroy (gameObject);
 		}
-        LoadGame();
+        if (PlayerPrefs.GetString("Game") == "continue")
+        {
+            Invoke("LoadGame", 0.1f);
+        }
         InvokeRepeating("SaveGame", 30.0f, 30f);
 
     }

@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class MainMenuManager : MonoBehaviour {
 
@@ -9,6 +11,8 @@ public class MainMenuManager : MonoBehaviour {
 	public GameObject mainMenuPanel;
     public GameObject keyboardChoicePanel;
     public GameObject pressEnterObj;
+
+    public Button continueButton;
 
 	public AudioSource audioS;
 	public AudioClip mouseOverSnd;
@@ -24,8 +28,12 @@ public class MainMenuManager : MonoBehaviour {
         }
         else
         {
-
             keyboardChoicePanel.SetActive(false);
+        }
+
+        if(File.Exists(Application.persistentDataPath + "/gamesave.save"))
+        {
+            continueButton.interactable = true;
         }
     }
 
@@ -36,18 +44,22 @@ public class MainMenuManager : MonoBehaviour {
 		Application.Quit ();
 	}
 
-	public void StartNewGame()
-	{
-		audioS.PlayOneShot (startGameSnd);
-		SceneManager.LoadScene (1,LoadSceneMode.Single);
-	}
+    public void StartNewGame()
+    {
+        PlayerPrefs.SetString("Game", "new");
+        audioS.PlayOneShot(startGameSnd);
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
+    }
 
-	public void ContinueGame()
-	{
-		audioS.PlayOneShot (startGameSnd);
 
-		SceneManager.LoadScene (1);
-		//and co...
+
+    public void ContinueGame()
+	{
+        PlayerPrefs.SetString("Game", "continue");
+        audioS.PlayOneShot (startGameSnd);
+
+		SceneManager.LoadScene (1, LoadSceneMode.Single);
+		
 	}
 
 	public void Update ()

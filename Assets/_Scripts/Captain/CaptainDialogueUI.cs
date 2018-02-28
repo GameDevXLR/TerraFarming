@@ -36,6 +36,10 @@ public class CaptainDialogueUI : MonoBehaviour {
             step = 0;
             PlayerPrefs.SetInt("stepGame", 0);
         }
+        if(PlayerPrefs.GetString("Game") == "new")
+        {
+            step = 0;
+        }
         if (step < maxStep)
         {
             captain.unactivate();
