@@ -21,6 +21,11 @@ public class CustomInputManager : MonoBehaviour {
         if(instance == null)
         {
             instance = this;
+            if(PlayerPrefs.GetString("Keyboard") != "azerty")
+            {
+                forwardkey = KeyCode.W;
+                rightKey = KeyCode.A;
+            }
         }
     }
 

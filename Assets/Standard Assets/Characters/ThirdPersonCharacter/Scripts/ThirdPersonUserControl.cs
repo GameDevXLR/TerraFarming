@@ -20,6 +20,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         
         private void Start()
         {
+
+            isQwerty = PlayerPrefs.GetString("Keyboard") != "azerty";
             // get the transform of the main camera
             if (Camera.main != null)
             {
