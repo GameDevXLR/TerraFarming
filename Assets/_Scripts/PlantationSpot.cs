@@ -317,6 +317,7 @@ public class PlantationSpot : MonoBehaviour {
                 debrisObj.SetActive(false);
                 break;
             case PlantState.seed:
+                debrisObj.SetActive(false);
                 babyVisual.SetActive(false);
                 teenageVisual.SetActive(false);
                 grownupVisual.SetActive(false);
@@ -325,6 +326,7 @@ public class PlantationSpot : MonoBehaviour {
                 growthAnimator.SetBool("grownup", false);
                 break;
             case PlantState.baby:
+                debrisObj.SetActive(false);
                 babyVisual.SetActive(true);
                 teenageVisual.SetActive(false);
                 grownupVisual.SetActive(false);
@@ -333,6 +335,7 @@ public class PlantationSpot : MonoBehaviour {
                 growthAnimator.SetBool("grownup", false);
                 break;
             case PlantState.teenage:
+                debrisObj.SetActive(false);
                 babyVisual.SetActive(false);
                 teenageVisual.SetActive(true);
                 grownupVisual.SetActive(false);
@@ -341,6 +344,7 @@ public class PlantationSpot : MonoBehaviour {
                 growthAnimator.SetBool("grownup", false);
                 break;
             case PlantState.grownup:
+                debrisObj.SetActive(false);
                 babyVisual.SetActive(false);
                 teenageVisual.SetActive(false);
                 grownupVisual.SetActive(true);
