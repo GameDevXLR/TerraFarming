@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityStandardAssets.Characters.ThirdPerson;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 public class InGameManager : MonoBehaviour {
 
@@ -34,8 +36,10 @@ public class InGameManager : MonoBehaviour {
 		{
 			Destroy (gameObject);
 		}
-		
-	}
+        LoadGame();
+        InvokeRepeating("SaveGame", 30.0f, 30f);
+
+    }
 
 	void Update()
 	{
@@ -73,5 +77,60 @@ public class InGameManager : MonoBehaviour {
 		Application.Quit();
 	}
 
+    private Save CreateSaveGameObject()
+    {
+        Save save = new Save();
 
+        save.ore = ResourcesManager.instance.rawOre;
+        save.essence = ResourcesManager.instance.essence;
+        save.bushSeed = ResourcesManager.instance.bushSeed;
+        save.treeSeed = ResourcesManager.instance.treeSeed;
+        save.flowerSeed = ResourcesManager.instance.flowerSeed;
+
+        save.plantList = PlantationManager.instance.savePlantation();
+
+        return save;
+    }
+
+    public void SaveGame()
+    {
+        // 1
+        Save save = CreateSaveGameObject();
+
+        // 2
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
+        bf.Serialize(file, save);
+        file.Close();
+        
+    }
+
+    public void LoadGame()
+    {
+        // 1
+        if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
+        {
+
+            // 2
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/gamesave.save", FileMode.Open);
+            Save save = (Save)bf.Deserialize(file);
+            file.Close();
+
+            // 3
+
+            ResourcesManager.instance.setRawOre(save.ore);
+            ResourcesManager.instance.setEssence(save.essence);
+            ResourcesManager.instance.setBushSeed(save.bushSeed);
+            ResourcesManager.instance.setTreeSeed(save.treeSeed);
+            ResourcesManager.instance.setFlowerSeed(save.flowerSeed);
+
+            PlantationManager.instance.loadPlantation(save.plantList);
+            
+        }
+        else
+        {
+            Debug.Log("No game saved!");
+        }
+    }
 }

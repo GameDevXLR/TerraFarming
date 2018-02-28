@@ -251,115 +251,223 @@ public class PlantationSpot : MonoBehaviour {
 
 	}
 
-	//faire pousser/choisir la plante etc...
-	public void ChangePlantState()
-	{	
-		switch (actualPlantState) {
-		case PlantState.debris:
-			actualPlantState = PlantState.lopin;
-			ResourcesManager.instance.ChangeRawOre (Random.Range (1, 6));
-			debrisObj.SetActive (false);
-//			lopinNoSeedObj.SetActive (true);
-			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Cleaning", layer: -1, fixedTime: 1);
-			plantAudioS.PlayOneShot (planterSnd);
-			InGameManager.instance.cleanParticle.GetComponent<ParticleSystem> ().Play ();
-			break;
-		case PlantState.lopin:
-			Invoke("ShowPlantTypeMenu",0.1f);
-//			l'animation est à la sortie de menu graine line94
-			break;
-		case PlantState.seed:
-			actualPlantState = PlantState.baby;
-//			lopinSeedObj.SetActive (false);
-			babyVisual.SetActive (true);
-			growthAnimator.SetBool ("baby", true);
+    //faire pousser/choisir la plante etc...
+    public void ChangePlantState()
+    {
+        switch (actualPlantState)
+        {
+            case PlantState.debris:
+                actualPlantState = PlantState.lopin;
+                ResourcesManager.instance.ChangeRawOre(Random.Range(1, 6));
+                debrisObj.SetActive(false);
+                //			lopinNoSeedObj.SetActive (true);
+                InGameManager.instance.playerController.GetComponent<Animator>().PlayInFixedTime("Cleaning", layer: -1, fixedTime: 1);
+                plantAudioS.PlayOneShot(planterSnd);
+                InGameManager.instance.cleanParticle.GetComponent<ParticleSystem>().Play();
+                break;
+            case PlantState.lopin:
+                Invoke("ShowPlantTypeMenu", 0.1f);
+                //			l'animation est à la sortie de menu graine line94
+                break;
+            case PlantState.seed:
+                actualPlantState = PlantState.baby;
+                //			lopinSeedObj.SetActive (false);
+                babyVisual.SetActive(true);
+                growthAnimator.SetBool("baby", true);
 
-//			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
-//			plantAudioS.PlayOneShot (growUpSnd);
-			break;
-		case PlantState.baby:
-			actualPlantState = PlantState.teenage;
-			babyVisual.SetActive (false);
-			teenageVisual.SetActive (true);
-			growthAnimator.SetBool ("teenage", true);
+                //			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
+                //			plantAudioS.PlayOneShot (growUpSnd);
+                break;
+            case PlantState.baby:
+                actualPlantState = PlantState.teenage;
+                babyVisual.SetActive(false);
+                teenageVisual.SetActive(true);
+                growthAnimator.SetBool("teenage", true);
 
-//			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
-//			plantAudioS.PlayOneShot (growUpSnd);
-			break;
-		case PlantState.teenage:
-			actualPlantState = PlantState.grownup;
-			teenageVisual.SetActive (false);
-			grownupVisual.SetActive (true);
-			growthAnimator.SetBool ("grownup", true);
+                //			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
+                //			plantAudioS.PlayOneShot (growUpSnd);
+                break;
+            case PlantState.teenage:
+                actualPlantState = PlantState.grownup;
+                teenageVisual.SetActive(false);
+                grownupVisual.SetActive(true);
+                growthAnimator.SetBool("grownup", true);
 
-//			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
-//			plantAudioS.PlayOneShot (growUpSnd);
-			break;
-		case PlantState.grownup:
-			break;
-		default:
-			
-			break;		}
-	}
+                //			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
+                //			plantAudioS.PlayOneShot (growUpSnd);
+                break;
+            case PlantState.grownup:
+                break;
+            default:
 
-	// choisir la graine
-	/// <summary>
-	/// Selects the type of the plant.
-	/// </summary>
-	/// <param name="index">Index.</param>
-	public void SelectPlantType(int index)
-	{
-		switch (index) 
-		{
-			//t'es un bush
-		case 0:
-			ResourcesManager.instance.ChangeBushSeed (-1);
-			timeToGrow = 120f;
-			growthAnimator.SetFloat("growthspeed",8.3f);
-			babyVisual = bush1Obj;
-			teenageVisual = bush2Obj;
-			grownupVisual = bush3Obj;
-			plantType = PlantType.bush;
-			break;
+                break;
+        }
+    }
 
-			//t'es une fleur
-		case 1:
-			ResourcesManager.instance.ChangeFlowerSeed(-1);
-			timeToGrow = 60f;
-			growthAnimator.SetFloat("growthspeed",16f);
+    //faire pousser/choisir la plante etc...
+    public void loadPlantState(PlantState state)
+    {
+        actualPlantState = state;
+        switch (actualPlantState)
+        {
+            case PlantState.debris:
+                break;
+            case PlantState.lopin:
+                debrisObj.SetActive(false);
+                break;
+            case PlantState.seed:
+                babyVisual.SetActive(false);
+                teenageVisual.SetActive(false);
+                grownupVisual.SetActive(false);
+                growthAnimator.SetBool("teenage", false);
+                growthAnimator.SetBool("baby", false);
+                growthAnimator.SetBool("grownup", false);
+                break;
+            case PlantState.baby:
+                babyVisual.SetActive(true);
+                teenageVisual.SetActive(false);
+                grownupVisual.SetActive(false);
+                growthAnimator.SetBool("teenage", false);
+                growthAnimator.SetBool("baby", true);
+                growthAnimator.SetBool("grownup", false);
+                break;
+            case PlantState.teenage:
+                babyVisual.SetActive(false);
+                teenageVisual.SetActive(true);
+                grownupVisual.SetActive(false);
+                growthAnimator.SetBool("teenage", true);
+                growthAnimator.SetBool("baby", false);
+                growthAnimator.SetBool("grownup", false);
+                break;
+            case PlantState.grownup:
+                babyVisual.SetActive(false);
+                teenageVisual.SetActive(false);
+                grownupVisual.SetActive(true);
+                growthAnimator.SetBool("baby", false);
+                growthAnimator.SetBool("grownup", true);
+                growthAnimator.SetBool("teenage", false);
 
-			babyVisual = flower1Obj;
-			teenageVisual = flower2Obj;
-			grownupVisual = flower3Obj;
-			plantType = PlantType.flower;
+                break;
+            default:
 
-			break;
+                break;
+        }
+    }
 
-			//t'es un arbre
-		case 2:
-			ResourcesManager.instance.ChangeTreeSeed(-1);
-			timeToGrow = 300f;
-			growthAnimator.SetFloat("growthspeed",3.3f);
+    // choisir la graine
+    /// <summary>
+    /// Selects the type of the plant.
+    /// </summary>
+    /// <param name="index">Index.</param>
+    public void SelectPlantType(int index)
+    {
+        switch (index)
+        {
+            //t'es un bush
+            case 0:
+                ResourcesManager.instance.ChangeBushSeed(-1);
+                timeToGrow = 120f;
+                growthAnimator.SetFloat("growthspeed", 8.3f);
+                babyVisual = bush1Obj;
+                teenageVisual = bush2Obj;
+                grownupVisual = bush3Obj;
+                plantType = PlantType.bush;
+                break;
 
-			babyVisual = tree1Obj;
-			teenageVisual = tree2Obj;
-			grownupVisual = tree3Obj;
-			plantType = PlantType.tree;
+            //t'es une fleur
+            case 1:
+                ResourcesManager.instance.ChangeFlowerSeed(-1);
+                timeToGrow = 60f;
+                growthAnimator.SetFloat("growthspeed", 16f);
 
-			break;
+                babyVisual = flower1Obj;
+                teenageVisual = flower2Obj;
+                grownupVisual = flower3Obj;
+                plantType = PlantType.flower;
 
-		default:
-			Debug.Log ("t'es une plante inconnu mec!");
-			break;
-		}
+                break;
 
-		actualPlantState = PlantState.seed;
-//		lopinNoSeedObj.SetActive (false);
-		lopinSeedObj.SetActive (true);
-		growthStartTime = Time.time;
-		RecquireWater ();
-	}
-	public void RecquireWater()
+            //t'es un arbre
+            case 2:
+                ResourcesManager.instance.ChangeTreeSeed(-1);
+                timeToGrow = 300f;
+                growthAnimator.SetFloat("growthspeed", 3.3f);
+
+                babyVisual = tree1Obj;
+                teenageVisual = tree2Obj;
+                grownupVisual = tree3Obj;
+                plantType = PlantType.tree;
+
+                break;
+
+            default:
+                Debug.Log("t'es une plante inconnu mec!");
+                break;
+        }
+
+        actualPlantState = PlantState.seed;
+        //		lopinNoSeedObj.SetActive (false);
+        lopinSeedObj.SetActive(true);
+        growthStartTime = Time.time;
+        RecquireWater();
+
+
+
+    }// choisir la graine
+     /// <summary>
+     /// Selects the type of the plant.
+     /// </summary>
+     /// <param name="index">Index.</param>
+    public void SelectPlantType(PlantType index)
+    {
+        switch (index)
+        {
+            //t'es un bush
+            case PlantType.bush:
+                timeToGrow = 120f;
+                growthAnimator.SetFloat("growthspeed", 8.3f);
+                babyVisual = bush1Obj;
+                teenageVisual = bush2Obj;
+                grownupVisual = bush3Obj;
+                plantType = PlantType.bush;
+                break;
+
+            //t'es une fleur
+            case PlantType.flower:
+                timeToGrow = 60f;
+                growthAnimator.SetFloat("growthspeed", 16f);
+
+                babyVisual = flower1Obj;
+                teenageVisual = flower2Obj;
+                grownupVisual = flower3Obj;
+                plantType = PlantType.flower;
+
+                break;
+
+            //t'es un arbre
+            case PlantType.tree:
+                timeToGrow = 300f;
+                growthAnimator.SetFloat("growthspeed", 3.3f);
+
+                babyVisual = tree1Obj;
+                teenageVisual = tree2Obj;
+                grownupVisual = tree3Obj;
+                plantType = PlantType.tree;
+
+                break;
+
+            default:
+                Debug.Log("t'es une plante inconnu mec!");
+                break;
+        }
+
+        actualPlantState = PlantState.seed;
+        //		lopinNoSeedObj.SetActive (false);
+        lopinSeedObj.SetActive(true);
+        growthStartTime = Time.time;
+        RecquireWater();
+    }
+    public void RecquireWater()
 	{
 		timeSpentGrowing = Time.time - growthStartTime;
 		isGrowing = false;

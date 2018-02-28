@@ -30,12 +30,6 @@ public class MachineAlchimieController : MonoBehaviour {
             if (!interfaceMachine.isActive )
             {
                 game.activate();
-    //            interfaceMachine.activate(ResourcesManager.instance.rawOre, nbrOreForEssence, SimuleSynthetizeEssence());
-    //if (hasEnoughtOre) {
-    //	game.activate (nbrOreForEssence);
-    //} else {
-    //	GetComponent<AudioSource> ().PlayOneShot (miniGameFail);
-    //}
             }
         }
     }
