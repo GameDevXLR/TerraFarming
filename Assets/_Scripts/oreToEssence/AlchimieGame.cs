@@ -9,6 +9,7 @@ public class AlchimieGame : MonoBehaviour {
     #region editor variables
 
     public OreToEssenceUI interfaceMachine;
+	public MachineUIManager machineUI;
 
     public float timeBonus;
     public float luckPercent;
@@ -38,6 +39,9 @@ public class AlchimieGame : MonoBehaviour {
     protected bool lucky;
     protected int ressourceDispo;
 
+	bool wonBonus;
+	int previousBonusCount;
+
     #endregion
 
 
@@ -52,6 +56,7 @@ public class AlchimieGame : MonoBehaviour {
 
     private void OnEnable()
     {
+		machineUI.InitializeTheUI ();
         time = Time.time;
         count = 0;
         bonus = 0;
@@ -73,51 +78,93 @@ public class AlchimieGame : MonoBehaviour {
         {
             if (count < jaugeList.Count)
             {
+				machineUI.BlinkActionBarArrows ();
                 jaugeList[count].enabled = true;
 				jaugeList [count].gameObject.GetComponent<AudioSource> ().Play ();
 				animator.Play ("MachineSeedSpace");
 
                 particleEffect(10);
                 interfaceMachine.setScore(++count);
-            }
+			}
             else if (count == jaugeList.Count)
             {
-                
-                resetJauge();
-                count = 0;
-                time = Time.time;
-
-            }
-
-            if(count == jaugeList.Count)
-            {
-                if (Time.time - time <= timeBonus && Random.value <= luckPercent)
-                {
-                    bonus++;
+				if (Time.time - time <= timeBonus && Random.value <= luckPercent)
+				{
+					bonus++;
 					playASOund(miniGameSuccess);
-                }
-                harvest++;
+				}
+				harvest++;
 
-                if ((harvest * ressourceNeed) + ressourceNeed <= ressourceDispo)
-                {
-                    interfaceMachine.synthetisationSucessFull(harvest + bonus, bonus);
-                }
-                else
-                {
-                    interfaceMachine.endSynthetisation(harvest + bonus, bonus);
-                    enabled = false;
-                }
-            }
+				if (bonus>previousBonusCount) 
+				{
+					previousBonusCount = bonus;
+					wonBonus = true;
+				}
+				machineUI.ShowRewardImg (wonBonus);
+				wonBonus = false;
+				count++;
+				
+
+			}
+			else if(count == jaugeList.Count+1)
+			{
+				resetJauge();
+				count = 0;
+				time = Time.time;
+				machineUI.bigTimerZone.enabled = true;
+				machineUI.mediumTimerZone.enabled = true;
+				machineUI.smallTimerZone.enabled = true;
+				machineUI.timerIcon.enabled = true;
+				if ((harvest * ressourceNeed) + ressourceNeed <= ressourceDispo)
+				{
+					interfaceMachine.synthetisationSucessFull(harvest + bonus, bonus);
+				}
+				else
+				{
+					interfaceMachine.endSynthetisation(harvest + bonus, bonus);
+					enabled = false;
+				}
+
+			}
+//
+//            if(count == jaugeList.Count)
+//            {
+//            }
         }
 
-        if(count < jaugeList.Count)
-            interfaceMachine.setChrono(Time.time - time);
+		if (count < jaugeList.Count)
+			
+		if (Time.time - time > 1.5f) 
+		{
+			if (machineUI.bigTimerZone.enabled) 
+			{
+				machineUI.bigTimerZone.enabled = false;
+			}
+			if (Time.time - time > 2f) 
+			{
+				if (machineUI.mediumTimerZone.enabled) 
+				{
+					machineUI.mediumTimerZone.enabled = false;
+				}
+				if (Time.time - time > 2.5f) 
+				{
+					if (machineUI.smallTimerZone.enabled) 
+					{
+						machineUI.smallTimerZone.enabled = false;
+						machineUI.timerIcon.enabled = false;
+					}
+				}
+			}
+		}
+        interfaceMachine.setChrono(Time.time - time);
 	}
 
     private void OnDisable()
     {
         harvestRessouce();
 		launchAnimation("GameEnabled", false);
+
+		machineUI.ShowHideActionArrows ();
     }
 
     #endregion
@@ -189,6 +236,8 @@ public class AlchimieGame : MonoBehaviour {
             ResourcesManager.instance.setRessourceQuantity(outputRessource, harvest + bonus);
             ResourcesManager.instance.setRessourceQuantity(inputRessource, -harvest * ressourceNeed);
         }
+		resetJauge();
+
     }
 
     public int SimuleSynthetize()
