@@ -8,6 +8,10 @@ public class MachineAlchimieController : MonoBehaviour {
     public List<Outline> outlinerList;
     public OreToEssenceUI interfaceMachine;
     public AlchimieGame game;
+	public ressourceEnum machineResource;
+	public int minimumResourcesRecquired;
+	public GameObject neededResourcesCanvas;
+	public bool isListening;
 
     private void Start()
     {
@@ -19,7 +23,27 @@ public class MachineAlchimieController : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
-            ListenForAction();
+			neededResourcesCanvas.SetActive (true);
+			switch (machineResource) 
+			{
+
+			case ressourceEnum.ore:
+				if (ResourcesManager.instance.rawOre >= minimumResourcesRecquired) 
+				{
+					ListenForAction ();
+				}
+				break;
+			case ressourceEnum.essence:
+				if (ResourcesManager.instance.essence >= minimumResourcesRecquired) 
+				{
+					ListenForAction ();
+				}
+				break;
+
+			default:
+				Debug.Log ("planage sur les resources ici");
+				break;
+			}
         }
     }
 
@@ -27,7 +51,7 @@ public class MachineAlchimieController : MonoBehaviour {
     {
         if(other.tag == "Player" && Input.GetKeyDown(CustomInputManager.instance.actionKey) )
         {
-            if (!interfaceMachine.isActive )
+			if (!interfaceMachine.isActive && isListening )
             {
                 game.activate();
             }
@@ -38,6 +62,8 @@ public class MachineAlchimieController : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
+			neededResourcesCanvas.SetActive (false);
+
             StopListeningForAction();
             game.enabled = false;
         }
@@ -48,6 +74,7 @@ public class MachineAlchimieController : MonoBehaviour {
         //faire les changements d'apparence de la caillasse;
         CustomInputManager.instance.ShowHideActionButtonVisual(true);
         setActivationOutline(true);
+		isListening = true;
     }
     void StopListeningForAction()
     {
@@ -55,6 +82,7 @@ public class MachineAlchimieController : MonoBehaviour {
         CustomInputManager.instance.ShowHideActionButtonVisual(false);
         setActivationOutline(false);
         interfaceMachine.unactivate();
+		isListening = false;
     }
 
 
