@@ -41,6 +41,7 @@ public class PlantationSpot : MonoBehaviour {
 	public Sprite flowerSelectorIcon;
 	public Sprite bushSelectorIcon;
 	public Sprite treeSelectorIcon;
+	public Sprite leaveMenuIcon;
 
 	public GameObject needWaterParticules;
 
@@ -95,24 +96,26 @@ public class PlantationSpot : MonoBehaviour {
 			{
 				switch (currentPlantTypeIndex) 
 				{
-				case 0:
+				case 1:
 					if (ResourcesManager.instance.bushSeed <= 0) 
 					{
 						return;
 					}
 					break;
-				case 1:
+				case 0:
 					if (ResourcesManager.instance.flowerSeed <= 0) 
 					{
 						return;
 					}
 					break;
 				case 2:
-					if (ResourcesManager.instance.treeSeed <= 0) 
-					{
+					if (ResourcesManager.instance.treeSeed <= 0) {
 						return;
 					}
 					break;
+				case 3:
+					HidePlantTypeMenu ();
+					return;
 				default:
 					break;
 				}
@@ -128,12 +131,12 @@ public class PlantationSpot : MonoBehaviour {
 				
 				if (currentPlantTypeIndex==0) 
 				{
-					currentPlantTypeIndex = 3;
+					currentPlantTypeIndex = 4;
 				}
 					ChangePlantTypeIndex (true);
 			}
 			if (Input.GetKeyDown (CustomInputManager.instance.rightKey)|| Input.GetKeyDown (KeyCode.RightArrow)) 
-			{if (currentPlantTypeIndex == 2) 
+			{if (currentPlantTypeIndex == 3) 
 				{
 					currentPlantTypeIndex = -1;
 
@@ -163,16 +166,20 @@ public class PlantationSpot : MonoBehaviour {
 
 	public void ActualizePlantTypeUI()
 	{
+		Debug.Log (currentPlantTypeIndex);
 		switch (currentPlantTypeIndex) 
 		{
-		case 0:
+		case 1:
 			plantTypeSelectorImg.sprite = bushSelectorIcon;
 			break;
-		case 1:
+		case 0:
 			plantTypeSelectorImg.sprite = flowerSelectorIcon;
 			break;
 		case 2:
 			plantTypeSelectorImg.sprite = treeSelectorIcon;
+			break;
+		case 3:
+			plantTypeSelectorImg.sprite = leaveMenuIcon;
 			break;
 		default:
 			Debug.Log ("planage sur l'icone la!");
@@ -241,6 +248,7 @@ public class PlantationSpot : MonoBehaviour {
 	{
 		plantTypeCanvas.SetActive (true);
 		isPlantTypeMenuOpened = true;
+		InGameManager.instance.isPlanting = true;
 		InGameManager.instance.playerController.isActive = false;
 	}
 
@@ -248,6 +256,8 @@ public class PlantationSpot : MonoBehaviour {
 	{
 		plantTypeCanvas.SetActive (false);
 		isPlantTypeMenuOpened = false;
+		InGameManager.instance.isPlanting = false;
+
 		InGameManager.instance.playerController.isActive = true;
 
 	}
@@ -298,6 +308,8 @@ public class PlantationSpot : MonoBehaviour {
                 //			plantAudioS.PlayOneShot (growUpSnd);
                 break;
             case PlantState.grownup:
+			growthAnimator.SetFloat("growthspeed", 100f);
+
                 break;
             default:
 

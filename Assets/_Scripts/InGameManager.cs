@@ -28,6 +28,7 @@ public class InGameManager : MonoBehaviour {
 	public GameObject quitCanvas;
 	public Button resumeBtn;
 	public Button quitBtn;
+	public bool isPlanting;
 
 	void Awake()
 	{
@@ -54,7 +55,7 @@ public class InGameManager : MonoBehaviour {
 				HideQuitGameMenu ();
 				return;
 			}
-			if (!machineCanvas.activeSelf && !miningCanvas.activeSelf) 
+			if (!machineCanvas.activeSelf && !miningCanvas.activeSelf && !isPlanting) 
 			{
 				ShowQuitGameMenu ();
 			}
