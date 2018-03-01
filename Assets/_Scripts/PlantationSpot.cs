@@ -35,7 +35,7 @@ public class PlantationSpot : MonoBehaviour {
 
 	public GameObject plantTypeCanvas;
 	bool isPlantTypeMenuOpened;
-	public int currentPlantTypeIndex;
+	public int currentPlantTypeIndex = 1;
 
 	public Image plantTypeSelectorImg;
 	public Sprite flowerSelectorIcon;
@@ -46,6 +46,10 @@ public class PlantationSpot : MonoBehaviour {
 	public GameObject needWaterParticules;
 
 	public PlantGrowthCycleManager plantGrowth;
+
+	public bool giveEssence;
+	public int nbrOfGivenEssence;
+	public AudioClip recolteSnd;
 
 
 	public float timeToGrow;
@@ -197,6 +201,16 @@ public class PlantationSpot : MonoBehaviour {
 			} 
 			else 
 			{
+				if (giveEssence) 
+				{
+					InGameManager.instance.playerController.GetComponent<Animator>().PlayInFixedTime("Cleaning", layer: -1, fixedTime: 1);
+					giveEssence = false;
+					plantAudioS.PlayOneShot(growUpSnd);
+					InGameManager.instance.cleanParticle.GetComponent<ParticleSystem> ().Play ();
+
+					ResourcesManager.instance.ChangeEssence (nbrOfGivenEssence);
+					return;
+				}
 				if (!isGrowing) 
 				{
 					WaterThePlant ();
@@ -208,7 +222,7 @@ public class PlantationSpot : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.tag == "Player" && !isGrowing) 
+		if (other.tag == "Player" && !isGrowing ||other.tag == "Player" && giveEssence ) 
 		{
 			ListenForAction ();
 			
@@ -303,13 +317,15 @@ public class PlantationSpot : MonoBehaviour {
                 teenageVisual.SetActive(false);
                 grownupVisual.SetActive(true);
                 growthAnimator.SetBool("grownup", true);
+				growthAnimator.SetFloat ("growthspeed", 100f);
 
                 //			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
                 //			plantAudioS.PlayOneShot (growUpSnd);
                 break;
-            case PlantState.grownup:
-			growthAnimator.SetFloat("growthspeed", 100f);
-
+		case PlantState.grownup:
+			if (plantType != PlantType.flower) {
+				giveEssence = true;
+			}
                 break;
             default:
 
@@ -381,9 +397,10 @@ public class PlantationSpot : MonoBehaviour {
         switch (index)
         {
             //t'es un bush
-            case 0:
-                ResourcesManager.instance.ChangeBushSeed(-1);
-                timeToGrow = 120f;
+		case 1:
+			ResourcesManager.instance.ChangeBushSeed (-1);
+			timeToGrow = 120f;
+			nbrOfGivenEssence = 1;
                 growthAnimator.SetFloat("growthspeed", 8.3f);
                 babyVisual = bush1Obj;
                 teenageVisual = bush2Obj;
@@ -392,7 +409,7 @@ public class PlantationSpot : MonoBehaviour {
                 break;
 
             //t'es une fleur
-            case 1:
+            case 0:
                 ResourcesManager.instance.ChangeFlowerSeed(-1);
                 timeToGrow = 60f;
                 growthAnimator.SetFloat("growthspeed", 16f);
@@ -408,6 +425,8 @@ public class PlantationSpot : MonoBehaviour {
             case 2:
                 ResourcesManager.instance.ChangeTreeSeed(-1);
                 timeToGrow = 300f;
+			nbrOfGivenEssence = 3;
+
                 growthAnimator.SetFloat("growthspeed", 3.3f);
 
                 babyVisual = tree1Obj;
