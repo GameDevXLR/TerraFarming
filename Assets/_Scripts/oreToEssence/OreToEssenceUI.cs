@@ -53,7 +53,13 @@ public class OreToEssenceUI : MonoBehaviour {
 
     public void setChrono(float timer)
     {
-        textDisplay.chrono.text = timer.ToString("F2");
+		float tmpTime;
+		tmpTime = 2.5f - timer;
+		if (tmpTime < 0) 
+		{
+			tmpTime = 0;
+		}
+		textDisplay.chrono.text = tmpTime.ToString("F2");
     }
 
     public void setTimeBonus(float timer)
