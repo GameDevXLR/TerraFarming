@@ -92,7 +92,12 @@ public class AlchimieGame : MonoBehaviour {
 				{
 					bonus++;
 					playASOund(miniGameSuccess);
+                    harvestRessouce(true);
 				}
+                else
+                {
+                    harvestRessouce(false);
+                }
 				harvest++;
 
 				if (bonus>previousBonusCount) 
@@ -127,10 +132,6 @@ public class AlchimieGame : MonoBehaviour {
 
 			}
             
-//
-//            if(count == jaugeList.Count)
-//            {
-//            }
         }
 
 		if (count < jaugeList.Count)
@@ -166,7 +167,7 @@ public class AlchimieGame : MonoBehaviour {
 
     private void OnDisable()
     {
-        harvestRessouce();
+        //harvestRessouce();
 		launchAnimation("GameEnabled", false);
 
 		machineUI.ShowHideActionArrows ();
@@ -198,13 +199,13 @@ public class AlchimieGame : MonoBehaviour {
         if(ressourceDispo >= ressourceNeed)
         {
             enabled = true;
-            
+            interfaceMachine.activate(ressourceDispo, ressourceNeed, SimuleSynthetize());
+
         }
         else
         {
             playASOund(miniGameFail);
         }
-        interfaceMachine.activate(ressourceDispo, ressourceNeed, SimuleSynthetize());
         return enabled;
     }
 
@@ -238,12 +239,27 @@ public class AlchimieGame : MonoBehaviour {
 
     public virtual void harvestRessouce()
     {
-        if(harvest > 0)
+        if (harvest > 0)
         {
             ResourcesManager.instance.setRessourceQuantity(outputRessource, harvest + bonus);
             ResourcesManager.instance.setRessourceQuantity(inputRessource, -harvest * ressourceNeed);
         }
-		resetJauge();
+        resetJauge();
+
+    }
+    public virtual void harvestRessouce(bool bonus)
+    {
+        if (bonus)
+        {
+            ResourcesManager.instance.setRessourceQuantity(outputRessource, 2);
+        }
+        else
+        {
+            ResourcesManager.instance.setRessourceQuantity(outputRessource, 1);
+        }
+
+        ResourcesManager.instance.setRessourceQuantity(inputRessource, -ressourceNeed);
+        resetJauge();
 
     }
 
