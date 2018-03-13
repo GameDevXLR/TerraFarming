@@ -162,7 +162,7 @@ public class OreGatheringGame : MonoBehaviour
 		endOreGamePanel.SetActive (true);
 		MiningAudioS.GetComponent<AudioSource> ().Stop ();
 		playerAnimator.SetBool ("IsMining", false);
-		ResourcesManager.instance.ChangeRawOre (totalSessionScore);
+		//ResourcesManager.instance.ChangeRawOre (totalSessionScore);
 		CustomInputManager.instance.ShowHideActionButtonVisual (true);
 		InGameManager.instance.OreGame.playerController.transform.GetChild (0).gameObject.SetActive (false);
 		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().gameObject.SetActive(false);

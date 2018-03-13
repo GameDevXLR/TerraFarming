@@ -53,7 +53,9 @@ public class OreGameDetectionArea : MonoBehaviour
 		InGameManager.instance.OreGame.currentScore++;
 		InGameManager.instance.OreGame.PlayerPressedKey ();
 		InGameManager.instance.OreGame.totalSessionScore++;
-		InGameManager.instance.OreGame.playerScoreTxt.text = InGameManager.instance.OreGame.totalSessionScore.ToString ();
+
+        ResourcesManager.instance.ChangeRawOre(1);
+        InGameManager.instance.OreGame.playerScoreTxt.text = InGameManager.instance.OreGame.totalSessionScore.ToString ();
 
 	}
 }
