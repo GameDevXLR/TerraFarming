@@ -126,6 +126,7 @@ public class AlchimieGame : MonoBehaviour {
 				}
 
 			}
+            
 //
 //            if(count == jaugeList.Count)
 //            {
@@ -157,7 +158,11 @@ public class AlchimieGame : MonoBehaviour {
 			}
 		}
         interfaceMachine.setChrono(Time.time - time);
-	}
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            enabled = false;
+        }
+    }
 
     private void OnDisable()
     {
@@ -165,6 +170,8 @@ public class AlchimieGame : MonoBehaviour {
 		launchAnimation("GameEnabled", false);
 
 		machineUI.ShowHideActionArrows ();
+
+        interfaceMachine.unactivate();
     }
 
     #endregion
