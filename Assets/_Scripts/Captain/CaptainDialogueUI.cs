@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using cakeslice;
 
 
 public class CaptainDialogueUI : MonoBehaviour {
@@ -17,6 +18,9 @@ public class CaptainDialogueUI : MonoBehaviour {
     public Text dialogueText;
 
     public CaptainDialogue captain;
+
+    public cakeslice.Outline essenceOutline;
+    public List<cakeslice.Outline> seedOutlineList;
 
     int step;
     int maxStep = 4;
@@ -76,10 +80,14 @@ public class CaptainDialogueUI : MonoBehaviour {
             case 0:
                 return step1;
             case 1:
+                essenceOutline.enabled = true;
                 return step2;
             case 2:
+                essenceOutline.enabled = false;
+                outlineActivate(true);
                 return step3;
             case 3:
+                outlineActivate(false);
                 return step4;
             default:
                 return " ";
@@ -169,5 +177,13 @@ public class CaptainDialogueUI : MonoBehaviour {
         if (step >= dialogueNoTriggerList.Count)
             step = 0;
         dialogueText.text = dialogueNoTriggerList[step];
+    }
+
+    public void outlineActivate(bool activate)
+    {
+        foreach(cakeslice.Outline outline in seedOutlineList)
+        {
+            outline.enabled = activate;
+        }
     }
 }
