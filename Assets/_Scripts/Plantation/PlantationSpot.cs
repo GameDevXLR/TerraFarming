@@ -58,6 +58,8 @@ public class PlantationSpot : MonoBehaviour {
 	bool isGrowing;
 	public Animator growthAnimator;
 
+    public WaterIconManager waterIcon;
+
 	public enum PlantType
 	{
 		none,
@@ -508,6 +510,7 @@ public class PlantationSpot : MonoBehaviour {
 		timeSpentGrowing = Time.time - growthStartTime;
 		isGrowing = false;
 		needWaterParticules.SetActive (true);
+        waterIcon.activate(plantType, actualPlantState);
 	}
 	public void WaterThePlant()
 	{
@@ -520,7 +523,8 @@ public class PlantationSpot : MonoBehaviour {
 		InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Water", layer: -1, fixedTime: 2);
 		plantAudioS.PlayOneShot (growUpSnd);
 		InGameManager.instance.waterParticle.GetComponent<ParticleSystem> ().Play ();
+        waterIcon.gameObject.SetActive(false);
 
 
-	}
+    }
 }

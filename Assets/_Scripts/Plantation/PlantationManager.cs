@@ -33,13 +33,14 @@ public class PlantationManager : MonoBehaviour {
     {
         foreach(PlanteSave save in planteSave)
         {
-            if(save.plantType != PlantationSpot.PlantType.none)
+            
+            plantationList[save.index].loadPlantState(save.plantState);
+            if (save.plantType != PlantationSpot.PlantType.none)
             {
 
                 plantationList[save.index].SelectPlantType(save.plantType);
                 plantationList[save.index].RecquireWater();
             }
-            plantationList[save.index].loadPlantState(save.plantState);
 
         }
     }
