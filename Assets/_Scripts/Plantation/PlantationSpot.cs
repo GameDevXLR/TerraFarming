@@ -172,7 +172,6 @@ public class PlantationSpot : MonoBehaviour {
 
 	public void ActualizePlantTypeUI()
 	{
-		Debug.Log (currentPlantTypeIndex);
 		switch (currentPlantTypeIndex) 
 		{
 		case 1:
@@ -262,10 +261,13 @@ public class PlantationSpot : MonoBehaviour {
 
 	public void ShowPlantTypeMenu()
 	{
-		plantTypeCanvas.SetActive (true);
-		isPlantTypeMenuOpened = true;
-		InGameManager.instance.isPlanting = true;
-		InGameManager.instance.playerController.isActive = false;
+        if (ResourcesManager.instance.haveSeed())
+        {
+            plantTypeCanvas.SetActive(true);
+            isPlantTypeMenuOpened = true;
+            InGameManager.instance.isPlanting = true;
+            InGameManager.instance.playerController.isActive = false;
+        }
 	}
 
 	public void HidePlantTypeMenu()

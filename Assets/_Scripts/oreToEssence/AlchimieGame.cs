@@ -204,6 +204,7 @@ public class AlchimieGame : MonoBehaviour {
         }
         else
         {
+            enabled = false;
             playASOund(miniGameFail);
         }
         return enabled;
@@ -211,7 +212,7 @@ public class AlchimieGame : MonoBehaviour {
 
     public void playASOund(AudioClip sound)
     {
-        sourceSound.PlayOneShot(miniGameSuccess);
+        sourceSound.PlayOneShot(sound);
     }
 
     protected void particleEffect(int emission)

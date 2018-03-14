@@ -173,6 +173,11 @@ public class ResourcesManager : MonoBehaviour {
         }
     }
 
+    public bool haveSeed()
+    {
+        return flowerSeed > 0 | bushSeed > 0 | treeSeed > 0;
+    }
+
 
     public void launchAnimation(string anim, int qty)
     {

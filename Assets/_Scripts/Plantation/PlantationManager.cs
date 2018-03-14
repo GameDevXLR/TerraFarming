@@ -22,7 +22,11 @@ public class PlantationManager : MonoBehaviour {
         List<PlanteSave> planteSave = new List<PlanteSave>();
         for (int i = 0; i < plantationList.Count; i++)
         {
-            PlanteSave save = new PlanteSave { index = i, plantType = plantationList[i].plantType, plantState = plantationList[i].actualPlantState };
+            PlanteSave save = new PlanteSave {
+                index = i,
+                plantType = plantationList[i].plantType,
+                plantState = plantationList[i].actualPlantState
+            };
             planteSave.Add(save);
         }
         return planteSave;
@@ -34,13 +38,15 @@ public class PlantationManager : MonoBehaviour {
         foreach(PlanteSave save in planteSave)
         {
             
-            plantationList[save.index].loadPlantState(save.plantState);
+            
             if (save.plantType != PlantationSpot.PlantType.none)
             {
 
                 plantationList[save.index].SelectPlantType(save.plantType);
                 plantationList[save.index].RecquireWater();
             }
+
+            plantationList[save.index].loadPlantState(save.plantState);
 
         }
     }
