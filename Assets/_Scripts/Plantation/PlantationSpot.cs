@@ -7,7 +7,7 @@ public class PlantationSpot : MonoBehaviour {
 
 	//sert a la sauvegarde! Doit etre configurer et être different de tout autre ID pour pas que ca plane xD nul...
 	public int persistentID;
-
+	public PlantObject plantSO;
 	public AudioClip planterSnd;
 	public AudioClip growUpSnd;
 	public AudioSource plantAudioS;
@@ -26,8 +26,8 @@ public class PlantationSpot : MonoBehaviour {
 	public GameObject tree2Obj;
 	public GameObject tree3Obj;
 
-	public PlantType plantType;
-	public PlantState actualPlantState;
+	public PlantTypeEnum plantType;
+	public PlantStateEnum actualPlantState;
 
 	GameObject babyVisual;
 	GameObject teenageVisual;
@@ -60,23 +60,8 @@ public class PlantationSpot : MonoBehaviour {
 
     public WaterIconManager waterIcon;
 
-	public enum PlantType
-	{
-		none,
-		flower,
-		bush,
-		tree
-	}
 
-	public enum PlantState
-	{
-		debris,
-		lopin,
-		seed,
-		baby,
-		teenage,
-		grownup
-	}
+
 
 	void Start()
 	{
@@ -197,7 +182,7 @@ public class PlantationSpot : MonoBehaviour {
 		if (Input.GetKeyDown (CustomInputManager.instance.actionKey) && other.tag == "Player" &&!isPlantTypeMenuOpened) 
 		{
 			//si t'es pas encore une plante, fait ton taff normalement...
-			if (plantType == PlantType.none) {
+			if (plantType == PlantTypeEnum.none) {
 				ChangePlantState ();
 			} 
 			else 
@@ -285,8 +270,8 @@ public class PlantationSpot : MonoBehaviour {
     {
         switch (actualPlantState)
         {
-            case PlantState.debris:
-                actualPlantState = PlantState.lopin;
+            case PlantStateEnum.debris:
+                actualPlantState = PlantStateEnum.lopin;
                 ResourcesManager.instance.ChangeRawOre(Random.Range(1, 6));
                 debrisObj.SetActive(false);
                 //			lopinNoSeedObj.SetActive (true);
@@ -294,12 +279,12 @@ public class PlantationSpot : MonoBehaviour {
                 plantAudioS.PlayOneShot(planterSnd);
                 InGameManager.instance.cleanParticle.GetComponent<ParticleSystem>().Play();
                 break;
-            case PlantState.lopin:
+            case PlantStateEnum.lopin:
                 Invoke("ShowPlantTypeMenu", 0.1f);
                 //			l'animation est à la sortie de menu graine line94
                 break;
-            case PlantState.seed:
-                actualPlantState = PlantState.baby;
+            case PlantStateEnum.seed:
+                actualPlantState = PlantStateEnum.baby;
                 //			lopinSeedObj.SetActive (false);
                 babyVisual.SetActive(true);
                 growthAnimator.SetBool("baby", true);
@@ -307,8 +292,8 @@ public class PlantationSpot : MonoBehaviour {
                 //			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
                 //			plantAudioS.PlayOneShot (growUpSnd);
                 break;
-            case PlantState.baby:
-                actualPlantState = PlantState.teenage;
+            case PlantStateEnum.baby:
+                actualPlantState = PlantStateEnum.teenage;
                 babyVisual.SetActive(false);
                 teenageVisual.SetActive(true);
                 growthAnimator.SetBool("teenage", true);
@@ -316,8 +301,8 @@ public class PlantationSpot : MonoBehaviour {
                 //			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
                 //			plantAudioS.PlayOneShot (growUpSnd);
                 break;
-            case PlantState.teenage:
-                actualPlantState = PlantState.grownup;
+            case PlantStateEnum.teenage:
+                actualPlantState = PlantStateEnum.grownup;
                 teenageVisual.SetActive(false);
                 grownupVisual.SetActive(true);
                 growthAnimator.SetBool("grownup", true);
@@ -326,8 +311,8 @@ public class PlantationSpot : MonoBehaviour {
                 //			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
                 //			plantAudioS.PlayOneShot (growUpSnd);
                 break;
-		case PlantState.grownup:
-			if (plantType != PlantType.flower) {
+		case PlantStateEnum.grownup:
+			if (plantType != PlantTypeEnum.flower) {
 				giveEssence = true;
 			}
                 break;
@@ -338,17 +323,17 @@ public class PlantationSpot : MonoBehaviour {
     }
 
     //faire pousser/choisir la plante etc...
-    public void loadPlantState(PlantState state)
+    public void loadPlantState(PlantStateEnum state)
     {
         actualPlantState = state;
         switch (actualPlantState)
         {
-            case PlantState.debris:
+            case PlantStateEnum.debris:
                 break;
-            case PlantState.lopin:
+            case PlantStateEnum.lopin:
                 debrisObj.SetActive(false);
                 break;
-            case PlantState.seed:
+            case PlantStateEnum.seed:
                 debrisObj.SetActive(false);
                 babyVisual.SetActive(false);
                 teenageVisual.SetActive(false);
@@ -357,7 +342,7 @@ public class PlantationSpot : MonoBehaviour {
                 growthAnimator.SetBool("baby", false);
                 growthAnimator.SetBool("grownup", false);
                 break;
-            case PlantState.baby:
+            case PlantStateEnum.baby:
                 debrisObj.SetActive(false);
                 babyVisual.SetActive(true);
                 teenageVisual.SetActive(false);
@@ -366,7 +351,7 @@ public class PlantationSpot : MonoBehaviour {
                 growthAnimator.SetBool("baby", true);
                 growthAnimator.SetBool("grownup", false);
                 break;
-            case PlantState.teenage:
+            case PlantStateEnum.teenage:
                 debrisObj.SetActive(false);
                 babyVisual.SetActive(false);
                 teenageVisual.SetActive(true);
@@ -375,7 +360,7 @@ public class PlantationSpot : MonoBehaviour {
                 growthAnimator.SetBool("baby", false);
                 growthAnimator.SetBool("grownup", false);
                 break;
-            case PlantState.grownup:
+            case PlantStateEnum.grownup:
                 debrisObj.SetActive(false);
                 babyVisual.SetActive(false);
                 teenageVisual.SetActive(false);
@@ -409,7 +394,7 @@ public class PlantationSpot : MonoBehaviour {
                 babyVisual = bush1Obj;
                 teenageVisual = bush2Obj;
                 grownupVisual = bush3Obj;
-                plantType = PlantType.bush;
+			plantType = PlantTypeEnum.bush;
                 break;
 
             //t'es une fleur
@@ -421,7 +406,7 @@ public class PlantationSpot : MonoBehaviour {
                 babyVisual = flower1Obj;
                 teenageVisual = flower2Obj;
                 grownupVisual = flower3Obj;
-                plantType = PlantType.flower;
+			plantType = PlantTypeEnum.flower;
 
                 break;
 
@@ -436,7 +421,7 @@ public class PlantationSpot : MonoBehaviour {
                 babyVisual = tree1Obj;
                 teenageVisual = tree2Obj;
                 grownupVisual = tree3Obj;
-                plantType = PlantType.tree;
+			plantType = PlantTypeEnum.tree;
 
                 break;
 
@@ -445,7 +430,7 @@ public class PlantationSpot : MonoBehaviour {
                 break;
         }
 
-        actualPlantState = PlantState.seed;
+        actualPlantState = PlantStateEnum.seed;
         //		lopinNoSeedObj.SetActive (false);
         lopinSeedObj.SetActive(true);
         growthStartTime = Time.time;
@@ -458,41 +443,41 @@ public class PlantationSpot : MonoBehaviour {
      /// Selects the type of the plant.
      /// </summary>
      /// <param name="index">Index.</param>
-    public void SelectPlantType(PlantType index)
+	public void SelectPlantType(PlantTypeEnum index)
     {
         switch (index)
         {
             //t'es un bush
-            case PlantType.bush:
+		case PlantTypeEnum.bush:
                 timeToGrow = 120f;
                 growthAnimator.SetFloat("growthspeed", 8.3f);
                 babyVisual = bush1Obj;
                 teenageVisual = bush2Obj;
                 grownupVisual = bush3Obj;
-                plantType = PlantType.bush;
+			plantType = PlantTypeEnum.bush;
                 break;
 
             //t'es une fleur
-            case PlantType.flower:
+		case PlantTypeEnum.flower:
                 timeToGrow = 60f;
                 growthAnimator.SetFloat("growthspeed", 16f);
 
                 babyVisual = flower1Obj;
                 teenageVisual = flower2Obj;
                 grownupVisual = flower3Obj;
-                plantType = PlantType.flower;
+			plantType = PlantTypeEnum.flower;
 
                 break;
 
             //t'es un arbre
-            case PlantType.tree:
+		case PlantTypeEnum.tree:
                 timeToGrow = 300f;
                 growthAnimator.SetFloat("growthspeed", 3.3f);
 
                 babyVisual = tree1Obj;
                 teenageVisual = tree2Obj;
                 grownupVisual = tree3Obj;
-                plantType = PlantType.tree;
+			plantType = PlantTypeEnum.tree;
 
                 break;
 
@@ -501,7 +486,7 @@ public class PlantationSpot : MonoBehaviour {
                 break;
         }
 
-        actualPlantState = PlantState.seed;
+        actualPlantState = PlantStateEnum.seed;
         //		lopinNoSeedObj.SetActive (false);
         lopinSeedObj.SetActive(true);
         growthStartTime = Time.time;

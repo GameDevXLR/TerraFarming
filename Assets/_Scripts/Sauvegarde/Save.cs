@@ -7,8 +7,8 @@ using UnityEngine;
 public struct PlanteSave
 {
     public int index;
-    public PlantationSpot.PlantType plantType;
-    public PlantationSpot.PlantState plantState;
+	public PlantTypeEnum plantType;
+    public PlantStateEnum plantState;
 }
 
 [System.Serializable]

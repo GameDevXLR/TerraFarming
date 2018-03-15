@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class WaterIconManager : MonoBehaviour {
 
-    public void activate(PlantationSpot.PlantType type, PlantationSpot.PlantState state)
+	public void activate(PlantTypeEnum type, PlantStateEnum state)
     {
-        if(type == PlantationSpot.PlantType.bush && (state == PlantationSpot.PlantState.teenage || state == PlantationSpot.PlantState.grownup))
+		if(type == PlantTypeEnum.bush && (state == PlantStateEnum.teenage || state == PlantStateEnum.grownup))
         {
             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 0.80f);
         }
-        else if(type == PlantationSpot.PlantType.tree)
+		else if(type == PlantTypeEnum.tree)
         {
-            if(state == PlantationSpot.PlantState.baby || state == PlantationSpot.PlantState.teenage)
+            if(state == PlantStateEnum.baby || state == PlantStateEnum.teenage)
             {
                 transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 1.1f);
             }
-            else if (state == PlantationSpot.PlantState.grownup)
+            else if (state == PlantStateEnum.grownup)
             {
                 transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 5.2f);
             }

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f279b64462f61d48907325994d99642, type: 3}
+  m_Name: treePlain
+  m_EditorClassIdentifier: 
+  plantName: NoName
+  babyModel: {fileID: 100000, guid: fde83404c0c9cf846ae5dd43f145ba9b, type: 3}
+  teenageModel: {fileID: 100000, guid: 7138f62b9e603324f84f9859c6063abb, type: 3}
+  grownupModel: {fileID: 100000, guid: 89df52a96630007428b28b6f5ec608a1, type: 3}
+  scale: 100

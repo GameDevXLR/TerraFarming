@@ -149,7 +149,7 @@ public class CaptainDialogueUI : MonoBehaviour {
 
     private void step4Action()
     {
-        if(!compareSeed(seedEnum.bush, previousSeedBush) || !compareSeed(seedEnum.flower, previousSeedFlower) || !compareSeed(seedEnum.tree, previousSeedTree))
+        if(!compareSeed(PlantTypeEnum.bush, previousSeedBush) || !compareSeed(PlantTypeEnum.flower, previousSeedFlower) || !compareSeed(PlantTypeEnum.tree, previousSeedTree))
         {
             step++;
             dialogueText.text = getStep(step);
@@ -160,12 +160,12 @@ public class CaptainDialogueUI : MonoBehaviour {
 
     private void saveSeed()
     {
-        previousSeedBush = ResourcesManager.instance.GetSeedQuantity(seedEnum.bush);
-        previousSeedFlower = ResourcesManager.instance.GetSeedQuantity(seedEnum.flower);
-        previousSeedTree = ResourcesManager.instance.GetSeedQuantity(seedEnum.tree);
+        previousSeedBush = ResourcesManager.instance.GetSeedQuantity(PlantTypeEnum.bush);
+        previousSeedFlower = ResourcesManager.instance.GetSeedQuantity(PlantTypeEnum.flower);
+        previousSeedTree = ResourcesManager.instance.GetSeedQuantity(PlantTypeEnum.tree);
     }
 
-    private bool compareSeed(seedEnum seed, int seedPrevious)
+    private bool compareSeed(PlantTypeEnum seed, int seedPrevious)
     {
         return ResourcesManager.instance.GetSeedQuantity(seed) >= seedPrevious;
     }

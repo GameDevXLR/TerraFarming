@@ -113,15 +113,15 @@ public class ResourcesManager : MonoBehaviour {
         InGameManager.instance.InterfaceAnimator.GetComponent<Animator>().Play("ScaleTreeIco");
     }
 
-    public int GetSeedQuantity(seedEnum seed)
+    public int GetSeedQuantity(PlantTypeEnum seed)
     {
         switch (seed)
         {
-            case seedEnum.bush:
+            case PlantTypeEnum.bush:
                 return bushSeed;
-            case seedEnum.tree:
+            case PlantTypeEnum.tree:
                 return treeSeed;
-            case seedEnum.flower:
+            case PlantTypeEnum.flower:
                 return flowerSeed;
             default:
                 return 0;

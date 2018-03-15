@@ -39,7 +39,7 @@ public class PlantationManager : MonoBehaviour {
         {
             
             
-            if (save.plantType != PlantationSpot.PlantType.none)
+			if (save.plantType != PlantTypeEnum.none)
             {
 
                 plantationList[save.index].SelectPlantType(save.plantType);
