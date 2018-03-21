@@ -28,6 +28,7 @@ public enum PlantStateEnum
 }
 public enum BiomeEnum
 {
+	none,
 	plain,
 	crater,
 	cave
