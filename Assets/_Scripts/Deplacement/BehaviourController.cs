@@ -6,6 +6,7 @@ public class BehaviourController : MonoBehaviour {
 
     public float speed = 1;
     public Rigidbody rb;
+    public ForceMode forceMode;
 
     void FixedUpdate()
     {
@@ -35,7 +36,7 @@ public class BehaviourController : MonoBehaviour {
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
         //transform.rotation = Quaternion.LookRotation(movement);
         
-        rb.AddForce(movement * speed);
+        rb.AddForce(movement * speed, forceMode);
         if(movement != Vector3.zero)
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15F);
         //rigidbody.rotation = Quaternion.Euler(0.0f, 0.0f, rigidbody.velocity.x * -tilt);
