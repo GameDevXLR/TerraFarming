@@ -8,6 +8,7 @@ public class PlantationSpot : MonoBehaviour {
 	//sert a la sauvegarde! Doit etre configurer et être different de tout autre ID pour pas que ca plane xD nul...
 	public int persistentID;
 	public PlantObject plantSO;
+
 	public AudioClip planterSnd;
 	public AudioClip growUpSnd;
 	public AudioSource plantAudioS;
@@ -67,6 +68,13 @@ public class PlantationSpot : MonoBehaviour {
 	{
 		outliner.enabled = false;
 
+//		//juste pour voir si les SO marchent bien... : oui.
+//		if (plantSO) {
+//			GameObject GO = Instantiate (plantSO.babyModel);
+//			GO.transform.localScale = new Vector3 (plantSO.scale, plantSO.scale, plantSO.scale);
+//			GO.transform.parent = transform;
+//			GO.transform.localPosition = Vector3.zero;
+//		}
 	}
 
 	void Update()

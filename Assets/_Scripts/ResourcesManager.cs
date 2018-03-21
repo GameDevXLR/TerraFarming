@@ -65,6 +65,7 @@ public class ResourcesManager : MonoBehaviour {
     public void ChangeFlowerSeed(int qty)
     {
         flowerSeed += qty;
+		PlantCollection.instance.airFlowerSeeds += qty;
         flowerSeedDisplay.text = flowerSeed.ToString();
         launchAnimation("isFlower", qty);
         InGameManager.instance.InterfaceAnimator.GetComponent<Animator>().Play("ScaleFlowerIco");
@@ -73,6 +74,8 @@ public class ResourcesManager : MonoBehaviour {
     public void setFlowerSeed(int qty)
     {
         flowerSeed = qty;
+		PlantCollection.instance.airFlowerSeeds = qty;
+
         flowerSeedDisplay.text = flowerSeed.ToString();
         launchAnimation("isFlower", qty);
         InGameManager.instance.InterfaceAnimator.GetComponent<Animator>().Play("ScaleFlowerIco");
@@ -83,6 +86,8 @@ public class ResourcesManager : MonoBehaviour {
     public void ChangeBushSeed(int qty)
     {
         bushSeed += qty;
+		PlantCollection.instance.airBushSeeds += qty;
+
         bushSeedDisplay.text = bushSeed.ToString();
         launchAnimation("isBush", qty);
         InGameManager.instance.InterfaceAnimator.GetComponent<Animator>().Play("ScaleBushIco");
@@ -91,6 +96,8 @@ public class ResourcesManager : MonoBehaviour {
     public void setBushSeed(int qty)
     {
         bushSeed = qty;
+		PlantCollection.instance.airBushSeeds = qty;
+
         bushSeedDisplay.text = bushSeed.ToString();
         launchAnimation("isBush", qty);
         InGameManager.instance.InterfaceAnimator.GetComponent<Animator>().Play("ScaleBushIco");
@@ -101,6 +108,8 @@ public class ResourcesManager : MonoBehaviour {
     public void ChangeTreeSeed(int qty)
     {
         treeSeed += qty;
+		PlantCollection.instance.airTreeSeeds += qty;
+
         treeSeedDisplay.text = treeSeed.ToString();
         launchAnimation("isTree", qty);
         InGameManager.instance.InterfaceAnimator.GetComponent<Animator>().Play("ScaleTreeIco");
@@ -108,6 +117,8 @@ public class ResourcesManager : MonoBehaviour {
     public void setTreeSeed(int qty)
     {
         treeSeed = qty;
+		PlantCollection.instance.airTreeSeeds = qty;
+
         treeSeedDisplay.text = treeSeed.ToString();
         launchAnimation("isTree", qty);
         InGameManager.instance.InterfaceAnimator.GetComponent<Animator>().Play("ScaleTreeIco");

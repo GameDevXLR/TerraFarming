@@ -8,6 +8,15 @@ public class Genome : MonoBehaviour
 	//liste toutes les propriétés d'une plante et est attaché a un objet "plante" tout au long de sa vie.
 	//cela doit inclure: les biomes/le type de plante (fleur buisson arbre) / les statistiques personnalisable associé / les propriétés de l'objet.
 
+	#region Mes parents
+
+	public PlantObject daddy;
+	public PlantObject mummy;
+
+	public PlantObject me;
+
+	#endregion
+
 	#region Biomes
 
 	//de quel type est la plante? hérité
