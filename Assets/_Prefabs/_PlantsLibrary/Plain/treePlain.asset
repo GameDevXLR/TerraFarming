@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f279b64462f61d48907325994d99642, type: 3}
   m_Name: treePlain
   m_EditorClassIdentifier: 
-  plantName: NoName
+  plantName: jedusor
   plantType: 3
   biome1: 1
   biome2: 0
@@ -21,6 +21,6 @@ MonoBehaviour:
   grownupModel: {fileID: 100000, guid: 89df52a96630007428b28b6f5ec608a1, type: 3}
   plantIcon: {fileID: 21300000, guid: 8ce3991effa793544a456e73d60e8df0, type: 3}
   scale: 100
-  desiredGrowthTime: 0
-  maxGrowthTime: 0
-  minGrowthTime: 0
+  desiredGrowthTime: 300
+  maxGrowthTime: 600
+  minGrowthTime: 100

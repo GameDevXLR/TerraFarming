@@ -42,22 +42,6 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 	GameObject teenageVisual;
 	GameObject grownupVisual;
 
-	//Le canvas du menu de plantation de graine : changer ca, faire des menu pour les 3 possibilités.
-	//référencer ca en fonction du biome du coup!
-	//ne pas foutre un canvas par spot, c'est psycho.
-	public GameObject plantTypeCanvas;
-	//le menu est-il ouvert?
-	bool isPlantTypeMenuOpened;
-	//on est sur quelle icone de graine dans le menu la ? 
-	public int currentPlantTypeIndex = 1;
-
-	//gestion des visuels du menu.
-	//voir pour modifié ca, pour que le sprite soit pris sur le SO.
-	public Image plantTypeSelectorImg;
-
-	//icone pour quitter le menu de selec de graine:
-	public Sprite leaveMenuIcon;
-
 	//effet de particule en enfant qui s'active quand jneed de l'eau mec.
 	public GameObject needWaterParticules;
 
@@ -80,21 +64,10 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 
 	public Animator growthAnimator;
 
-
-
-
-
 	void Start()
 	{
 		outliner.enabled = false;
 
-		//		//juste pour voir si les SO marchent bien... : oui.
-		//		if (plantSO) {
-		//			GameObject GO = Instantiate (plantSO.babyModel);
-		//			GO.transform.localScale = new Vector3 (plantSO.scale, plantSO.scale, plantSO.scale);
-		//			GO.transform.parent = transform;
-		//			GO.transform.localPosition = Vector3.zero;
-		//		}
 	}
 
 	void Update()
@@ -108,134 +81,11 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 				growthStartTime = Time.time;
 			}
 		}
-
-		if (isPlantTypeMenuOpened) 
-		{
-			if (Input.GetKeyDown (CustomInputManager.instance.actionKey)) 
-			{
-				switch (spotBiome) 
-				{
-				case BiomeEnum.plain:
-
-					switch (currentPlantTypeIndex) {
-					case 1:
-						if (PlantCollection.instance.airBushSeeds <= 0) {
-							return;
-						}
-						break;
-					case 0:
-						if (PlantCollection.instance.airFlowerSeeds <= 0) {
-							return;
-						}
-						break;
-					case 2:
-						if (PlantCollection.instance.airTreeSeeds <= 0) {
-							return;
-						}
-						break;
-					case 3:
-						HidePlantTypeMenu ();
-						return;
-					default:
-						break;
-					}
-					break;
-
-				default:
-					Debug.Log ("wrong biome on this spot");
-					break;
-				}
-				SelectPlantType (currentPlantTypeIndex);
-				InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
-				plantAudioS.PlayOneShot (planterSnd);
-				InGameManager.instance.cleanParticle.GetComponent<ParticleSystem> ().Play ();
-				HidePlantTypeMenu();
-			}
-			//faire défiler les graines:
-			if (Input.GetKeyDown (CustomInputManager.instance.leftKey )|| Input.GetKeyDown (KeyCode.LeftArrow)) 
-			{
-
-				if (currentPlantTypeIndex==0) 
-				{
-					currentPlantTypeIndex = 4;
-				}
-				ChangePlantTypeIndex (true);
-			}
-			if (Input.GetKeyDown (CustomInputManager.instance.rightKey)|| Input.GetKeyDown (KeyCode.RightArrow)) 
-			{if (currentPlantTypeIndex == 3) 
-				{
-					currentPlantTypeIndex = -1;
-
-				}
-				ChangePlantTypeIndex (false);
-			}
-
-			//annuler
-			if (Input.GetKeyDown (KeyCode.Escape)) 
-			{
-				HidePlantTypeMenu();
-			}
-		}
-	}
-
-	public void ChangePlantTypeIndex(bool scrollLeft)
-	{
-		if (scrollLeft) 
-		{
-			currentPlantTypeIndex--;
-		} else 
-		{
-			currentPlantTypeIndex++;
-		}
-		ActualizePlantTypeUI ();
-	}
-
-	public void ActualizePlantTypeUI()
-	{
-		switch (spotBiome) 
-		{
-		case BiomeEnum.plain:
-			switch (currentPlantTypeIndex) 
-			{
-			case 0:
-				plantTypeSelectorImg.sprite = PlantCollection.instance.airFlower.plantIcon;
-				break;
-			case 1:
-				plantTypeSelectorImg.sprite = PlantCollection.instance.airBush.plantIcon;
-				break;
-			case 2:
-				plantTypeSelectorImg.sprite = PlantCollection.instance.airTree.plantIcon;
-				break;
-			case 3:
-				plantTypeSelectorImg.sprite = leaveMenuIcon;
-				break;
-//			case 4:
-//				plantTypeSelectorImg.sprite = PlantCollection.instance.airTree.plantIcon;
-//				break;
-//			case 5:
-//				plantTypeSelectorImg.sprite = PlantCollection.instance.airTree.plantIcon;
-//				break;
-//			case 6:
-//				plantTypeSelectorImg.sprite = PlantCollection.instance.airTree.plantIcon;
-//				break;
-//			case 7:
-//				plantTypeSelectorImg.sprite = PlantCollection.instance.airTree.plantIcon;
-//				break;
-			default:
-				Debug.Log ("planage sur l'icone la!");
-				break;
-			}
-			break;
-		default:
-			Debug.Log ("wrong biome on this spot");
-			break;
-		}
-
 	}
 
 	public void OnTriggerStay(Collider other)
 	{
-		if (Input.GetKeyDown (CustomInputManager.instance.actionKey) && other.tag == "Player" &&!isPlantTypeMenuOpened) 
+		if (Input.GetKeyDown (CustomInputManager.instance.actionKey) && other.tag == "Player" &&!PlantationManager.instance.isSeedMenuOpen) 
 		{
 			//si t'es pas encore une plante, fait ton taff normalement...
 			if (plantType == PlantTypeEnum.none) 
@@ -305,21 +155,13 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 	{
 		if (ResourcesManager.instance.haveSeed())
 		{
-			plantTypeCanvas.SetActive(true);
-			isPlantTypeMenuOpened = true;
-			InGameManager.instance.isPlanting = true;
-			InGameManager.instance.playerController.isActive = false;
+			PlantationManager.instance.ShowPlantTypeMenu (this);
 		}
 	}
 
 	public void HidePlantTypeMenu()
 	{
-		plantTypeCanvas.SetActive (false);
-		isPlantTypeMenuOpened = false;
-		InGameManager.instance.isPlanting = false;
-
-		InGameManager.instance.playerController.isActive = true;
-
+		PlantationManager.instance.HidePlantTypeMenu ();
 	}
 
 	//faire pousser/choisir la plante etc...
@@ -450,7 +292,8 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 				ResourcesManager.instance.ChangeFlowerSeed (-1);
 				plantSO = PlantCollection.instance.airFlower;
 
-				timeToGrow = 60f;
+				timeToGrow = plantSO.desiredGrowthTime;
+				//faut mettre un calcul pertinent pour le temps d'animation juste la : 
 				growthAnimator.SetFloat ("growthspeed", 16f);
 				plantType = PlantTypeEnum.flower;
 				
@@ -461,7 +304,7 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 				ResourcesManager.instance.ChangeBushSeed (-1);
 				plantSO = PlantCollection.instance.airBush;
 
-				timeToGrow = 120f;
+				timeToGrow = plantSO.desiredGrowthTime;
 				nbrOfGivenEssence = 1;
 				growthAnimator.SetFloat ("growthspeed", 8.3f);
 				plantType = PlantTypeEnum.bush;
@@ -473,7 +316,95 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 				ResourcesManager.instance.ChangeTreeSeed (-1);
 				plantSO = PlantCollection.instance.airTree;
 
-				timeToGrow = 300f;
+				timeToGrow = plantSO.desiredGrowthTime;
+				nbrOfGivenEssence = 3;
+				growthAnimator.SetFloat ("growthspeed", 3.3f);
+				plantType = PlantTypeEnum.tree;
+
+				break;
+
+			default:
+				Debug.Log ("t'es une plante inconnu mec!");
+				break;
+			}
+			break;
+		case BiomeEnum.crater:
+			switch (index) 
+			{
+			//t'es une fleur
+			case 0:
+				ResourcesManager.instance.ChangeFlowerSeed (-1);
+				plantSO = PlantCollection.instance.craterFlower;
+
+				timeToGrow = plantSO.desiredGrowthTime;
+				//faut mettre un calcul pertinent pour le temps d'animation juste la : 
+				growthAnimator.SetFloat ("growthspeed", 16f);
+				plantType = PlantTypeEnum.flower;
+
+				break;
+
+				//t'es un bush
+			case 1:
+				ResourcesManager.instance.ChangeBushSeed (-1);
+				plantSO = PlantCollection.instance.craterBush;
+
+				timeToGrow = plantSO.desiredGrowthTime;
+				nbrOfGivenEssence = 1;
+				growthAnimator.SetFloat ("growthspeed", 8.3f);
+				plantType = PlantTypeEnum.bush;
+				break;
+
+
+				//t'es un arbre
+			case 2:
+				ResourcesManager.instance.ChangeTreeSeed (-1);
+				plantSO = PlantCollection.instance.craterTree;
+
+				timeToGrow = plantSO.desiredGrowthTime;
+				nbrOfGivenEssence = 3;
+				growthAnimator.SetFloat ("growthspeed", 3.3f);
+				plantType = PlantTypeEnum.tree;
+
+				break;
+
+			default:
+				Debug.Log ("t'es une plante inconnu mec!");
+				break;
+			}
+			break;
+		case BiomeEnum.cave:
+			switch (index) 
+			{
+			//t'es une fleur
+			case 0:
+				ResourcesManager.instance.ChangeFlowerSeed (-1);
+				plantSO = PlantCollection.instance.caveFlower;
+
+				timeToGrow = plantSO.desiredGrowthTime;
+				//faut mettre un calcul pertinent pour le temps d'animation juste la : 
+				growthAnimator.SetFloat ("growthspeed", 16f);
+				plantType = PlantTypeEnum.flower;
+
+				break;
+
+				//t'es un bush
+			case 1:
+				ResourcesManager.instance.ChangeBushSeed (-1);
+				plantSO = PlantCollection.instance.caveBush;
+
+				timeToGrow = plantSO.desiredGrowthTime;
+				nbrOfGivenEssence = 1;
+				growthAnimator.SetFloat ("growthspeed", 8.3f);
+				plantType = PlantTypeEnum.bush;
+				break;
+
+
+				//t'es un arbre
+			case 2:
+				ResourcesManager.instance.ChangeTreeSeed (-1);
+				plantSO = PlantCollection.instance.caveTree;
+
+				timeToGrow = plantSO.desiredGrowthTime;
 				nbrOfGivenEssence = 3;
 				growthAnimator.SetFloat ("growthspeed", 3.3f);
 				plantType = PlantTypeEnum.tree;
@@ -491,14 +422,35 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 		}
 
 		actualPlantState = PlantStateEnum.seed;
-		babyVisual = plantSO.babyModel;
-		teenageVisual = plantSO.teenageModel;
-		grownupVisual = plantSO.grownupModel;
+		SpawnThenHidePlants ();
 		lopinSeedObj.SetActive(true);
 		growthStartTime = Time.time;
 		RecquireWater();
+	}
 
+	void SpawnThenHidePlants()
+	{
+		GameObject GObaby = Instantiate (plantSO.babyModel);
+		GObaby.transform.localScale = new Vector3 (plantSO.scale, plantSO.scale, plantSO.scale);
+		GObaby.transform.parent = transform;
+		GObaby.transform.localPosition = Vector3.zero;
+		babyVisual = GObaby;
 
+		GameObject GOteen = Instantiate (plantSO.teenageModel);
+		GOteen.transform.localScale = new Vector3 (plantSO.scale, plantSO.scale, plantSO.scale);
+		GOteen.transform.parent = transform;
+		GOteen.transform.localPosition = Vector3.zero;
+		teenageVisual = GOteen;
+
+		GameObject GOgrown = Instantiate (plantSO.grownupModel);
+		GOgrown.transform.localScale = new Vector3 (plantSO.scale, plantSO.scale, plantSO.scale);
+		GOgrown.transform.parent = transform;
+		GOgrown.transform.localPosition = Vector3.zero;
+		grownupVisual = GOgrown;
+
+		babyVisual.SetActive (false);
+		teenageVisual.SetActive (false);
+		grownupVisual.SetActive (false);
 
 	}
 	// choisir la graine
@@ -512,7 +464,7 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 		{
 		//t'es un bush
 		case PlantTypeEnum.bush:
-			timeToGrow = 120f;
+			timeToGrow = plantSO.desiredGrowthTime;
 			growthAnimator.SetFloat("growthspeed", 8.3f);
 //			babyVisual = bush1Obj;
 //			teenageVisual = bush2Obj;
@@ -522,7 +474,7 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 
 			//t'es une fleur
 		case PlantTypeEnum.flower:
-			timeToGrow = 60f;
+			timeToGrow = plantSO.desiredGrowthTime;
 			growthAnimator.SetFloat("growthspeed", 16f);
 
 //			babyVisual = flower1Obj;
@@ -534,7 +486,7 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 
 			//t'es un arbre
 		case PlantTypeEnum.tree:
-			timeToGrow = 300f;
+			timeToGrow = plantSO.desiredGrowthTime;
 			growthAnimator.SetFloat("growthspeed", 3.3f);
 
 //			babyVisual = tree1Obj;

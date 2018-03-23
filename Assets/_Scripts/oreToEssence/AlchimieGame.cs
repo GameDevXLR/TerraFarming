@@ -22,7 +22,7 @@ public class AlchimieGame : MonoBehaviour {
 
     public ressourceEnum inputRessource;
     public ressourceEnum outputRessource;
-
+	public BiomeEnum outputBiome;
 
     public int ressourceNeed;
 
@@ -242,7 +242,7 @@ public class AlchimieGame : MonoBehaviour {
     {
         if (harvest > 0)
         {
-            ResourcesManager.instance.setRessourceQuantity(outputRessource, harvest + bonus);
+			ResourcesManager.instance.setRessourceQuantity(outputRessource, harvest + bonus,outputBiome);
             ResourcesManager.instance.setRessourceQuantity(inputRessource, -harvest * ressourceNeed);
         }
         resetJauge();
@@ -252,11 +252,11 @@ public class AlchimieGame : MonoBehaviour {
     {
         if (bonus)
         {
-            ResourcesManager.instance.setRessourceQuantity(outputRessource, 2);
+			ResourcesManager.instance.setRessourceQuantity(outputRessource, 2,outputBiome);
         }
         else
         {
-            ResourcesManager.instance.setRessourceQuantity(outputRessource, 1);
+			ResourcesManager.instance.setRessourceQuantity(outputRessource, 1,outputBiome);
         }
 
         ResourcesManager.instance.setRessourceQuantity(inputRessource, -ressourceNeed);

@@ -65,7 +65,6 @@ public class ResourcesManager : MonoBehaviour {
     public void ChangeFlowerSeed(int qty)
     {
         flowerSeed += qty;
-		PlantCollection.instance.airFlowerSeeds += qty;
         flowerSeedDisplay.text = flowerSeed.ToString();
         launchAnimation("isFlower", qty);
         InGameManager.instance.InterfaceAnimator.GetComponent<Animator>().Play("ScaleFlowerIco");
@@ -74,8 +73,6 @@ public class ResourcesManager : MonoBehaviour {
     public void setFlowerSeed(int qty)
     {
         flowerSeed = qty;
-		PlantCollection.instance.airFlowerSeeds = qty;
-
         flowerSeedDisplay.text = flowerSeed.ToString();
         launchAnimation("isFlower", qty);
         InGameManager.instance.InterfaceAnimator.GetComponent<Animator>().Play("ScaleFlowerIco");
@@ -86,8 +83,6 @@ public class ResourcesManager : MonoBehaviour {
     public void ChangeBushSeed(int qty)
     {
         bushSeed += qty;
-		PlantCollection.instance.airBushSeeds += qty;
-
         bushSeedDisplay.text = bushSeed.ToString();
         launchAnimation("isBush", qty);
         InGameManager.instance.InterfaceAnimator.GetComponent<Animator>().Play("ScaleBushIco");
@@ -96,8 +91,6 @@ public class ResourcesManager : MonoBehaviour {
     public void setBushSeed(int qty)
     {
         bushSeed = qty;
-		PlantCollection.instance.airBushSeeds = qty;
-
         bushSeedDisplay.text = bushSeed.ToString();
         launchAnimation("isBush", qty);
         InGameManager.instance.InterfaceAnimator.GetComponent<Animator>().Play("ScaleBushIco");
@@ -108,8 +101,6 @@ public class ResourcesManager : MonoBehaviour {
     public void ChangeTreeSeed(int qty)
     {
         treeSeed += qty;
-		PlantCollection.instance.airTreeSeeds += qty;
-
         treeSeedDisplay.text = treeSeed.ToString();
         launchAnimation("isTree", qty);
         InGameManager.instance.InterfaceAnimator.GetComponent<Animator>().Play("ScaleTreeIco");
@@ -117,8 +108,6 @@ public class ResourcesManager : MonoBehaviour {
     public void setTreeSeed(int qty)
     {
         treeSeed = qty;
-		PlantCollection.instance.airTreeSeeds = qty;
-
         treeSeedDisplay.text = treeSeed.ToString();
         launchAnimation("isTree", qty);
         InGameManager.instance.InterfaceAnimator.GetComponent<Animator>().Play("ScaleTreeIco");
@@ -183,7 +172,72 @@ public class ResourcesManager : MonoBehaviour {
                 break;
         }
     }
-
+	//prend en compte le biome de la machine ^^
+	public void setRessourceQuantity(ressourceEnum ress, int qty, BiomeEnum biome)
+	{
+		switch (ress)
+		{
+		case ressourceEnum.bush:
+			switch (biome) 
+			{
+			case BiomeEnum.plain:
+				PlantCollection.instance.airBushSeeds += qty;
+				break;
+			case BiomeEnum.crater:
+				PlantCollection.instance.craterBushSeeds += qty;
+				break;
+			case BiomeEnum.cave:
+				PlantCollection.instance.caveBushSeeds += qty;
+				break;
+			default:
+				break;
+			}
+			ChangeBushSeed(qty);
+			break;
+		case ressourceEnum.tree:
+			switch (biome) 
+			{
+			case BiomeEnum.plain:
+				PlantCollection.instance.airTreeSeeds += qty;
+				break;
+			case BiomeEnum.crater:
+				PlantCollection.instance.craterTreeSeeds += qty;
+				break;
+			case BiomeEnum.cave:
+				PlantCollection.instance.caveTreeSeeds += qty;
+				break;
+			default:
+				break;
+			}
+			ChangeTreeSeed(qty);
+			break;
+		case ressourceEnum.flower:
+			switch (biome) 
+			{
+			case BiomeEnum.plain:
+				PlantCollection.instance.airFlowerSeeds += qty;
+				break;
+			case BiomeEnum.crater:
+				PlantCollection.instance.craterFlowerSeeds += qty;
+				break;
+			case BiomeEnum.cave:
+				PlantCollection.instance.caveFlowerSeeds += qty;
+				break;
+			default:
+				break;
+			}
+			ChangeFlowerSeed(qty);
+			break;
+		case ressourceEnum.ore:
+			ChangeRawOre(qty);
+			break;
+		case ressourceEnum.essence:
+			ChangeEssence(qty);
+			break;
+		default:
+			break;
+		}
+	}
     public bool haveSeed()
     {
         return flowerSeed > 0 | bushSeed > 0 | treeSeed > 0;

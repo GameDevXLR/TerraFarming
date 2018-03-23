@@ -11,31 +11,37 @@ public class PlantCollection : MonoBehaviour
 
 	[Header("Plaines: air")]
 	public PlantObject airFlower;
-	[HideInInspector]public int airFlowerSeeds;
+	public int airFlowerSeeds;
 
 	public PlantObject airBush;
-	[HideInInspector]public int airBushSeeds;
+	public int airBushSeeds;
 
 	public PlantObject airTree;
-	[HideInInspector]public int airTreeSeeds;
+	public int airTreeSeeds;
 
 	[Header("Grottes: lumière")]
 	public PlantObject caveFlower;
-	[HideInInspector]public int caveFlowerSeeds;
+	public int caveFlowerSeeds;
 
 	public PlantObject caveBush;
-	[HideInInspector]public int caveBushSeeds;
+	public int caveBushSeeds;
 
 	public PlantObject caveTree;
-	[HideInInspector]public int caveTreeSeeds;
+	public int caveTreeSeeds;
 
 
-	//NOTE: faut continuer a complèter en dessous la...Mais bon pour test pour le moment ca ira xD
 
 	[Header("Cratères: eau")]
 	public PlantObject craterFlower;
+	public int craterFlowerSeeds;
+
 	public PlantObject craterBush;
+	public int craterBushSeeds;
+
 	public PlantObject craterTree;
+	public int craterTreeSeeds;
+
+	//NOTE: faut continuer a complèter en dessous la...Mais bon pour test pour le moment ca ira xD
 	[Header("air+lumière")]
 	public PlantObject airCaveFlower;
 	public PlantObject airCaveBush;
