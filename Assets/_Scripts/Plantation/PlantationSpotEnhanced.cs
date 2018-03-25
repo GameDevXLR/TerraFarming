@@ -204,7 +204,8 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 					//ca fait un petit
 					GameObject go = GameObject.Instantiate (PlantCollection.instance.genericSeed);
 					go.transform.position = transform.position + new Vector3 (0, 3, 0);
-					//la dessous c'est provisoire : ca prend pas en compte l'hybridation et le point de spawn est vachement random :/
+					go.GetComponent<DroppedSeed> ().daddy = plantSO;
+					go.GetComponent<DroppedSeed> ().mummy = neighboursSpot [i].plantSO;
 					switch (plantType) 
 					{
 					case PlantTypeEnum.flower:
@@ -219,7 +220,7 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 					default:
 						break;
 					}
-					go.GetComponent<DroppedSeed> ().biome1 = spotBiome;
+//					go.GetComponent<DroppedSeed> ().biome1 = spotBiome;
 				}
 			
 			}
