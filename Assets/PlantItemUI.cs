@@ -99,7 +99,17 @@ public class PlantItemUI : MonoBehaviour
 		} else {
 			isNotAvailable.enabled = false;
 			PlantCollection.instance.notAvailableUIObjects.Remove (gameObject);
-
+			if (PlantCollection.instance.collectionOpen) {
+				if (PlantCollection.instance.plainUIVisible && PlantCollection.instance.plainUIObjects.Contains (gameObject)) {
+					gameObject.SetActive (true);
+				}
+				if (PlantCollection.instance.craterUIVisible && PlantCollection.instance.craterUIObjects.Contains (gameObject)) {
+					gameObject.SetActive (true);
+				}
+				if (PlantCollection.instance.caveUIVisible && PlantCollection.instance.caveUIObjects.Contains (gameObject)) {
+					gameObject.SetActive (true);
+				}
+			}
 		}
 	}
 }

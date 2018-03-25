@@ -120,7 +120,8 @@ public class DroppedSeed : MonoBehaviour
 			Destroy (gameObject);
 
 		} else {
-			ResourcesManager.instance.setRessourceQuantity (plantType, 1, biome1, biome2, biome3);
+			Debug.Log ("je n'ai pas de type de graine précis a donné!!! a corriger. Pas fini tout ca!");
+//			ResourcesManager.instance.setRessourceQuantity (plantType, 1, biome1, biome2, biome3);
 			Destroy (gameObject);
 		}
 	}
