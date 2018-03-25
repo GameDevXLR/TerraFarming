@@ -8,6 +8,7 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 	//refonte du plantation spot pour qu'il se réfère plus aux scriptable object et pour différencier "plantation spot" et "plantes"...
 	//C'était pas bien clair tout ca :/
 	//voir aussi pour un nouveau systeme de menu des graines hein.
+	#region les variables
 
 	//sert a la sauvegarde! Doit etre configurer et être different de tout autre ID pour pas que ca plane xD nul...
 	public int persistentID;
@@ -62,12 +63,42 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 	float timeSpentGrowing;
 	bool isGrowing;
 
+	//Le génome de la plante.
+	public Genome genome;
+
+	//est ce que je suis pret a avoir un bébé XD
+	public bool canMakeSeed;
+
+	//est ce que ce spot est dans le rayon d'action du joueur ? Dépend de si il a des plantes adultes a proximité mettre false quand il faudra
+	public bool canBeUsed = true;
+
+	//la croissance a t-elle était accéléré dans cette phase de croissance?
+	public bool growthBoosted;
+
 	public Animator growthAnimator;
+
+	[Header("Gestion du voisinnage")]
+	//un array des voisins peuplé par un spherecast. Limite le nombre max de détections, ne fait pas de "garbage".
+	Collider[] hits = new Collider[10];
+
+	//une liste de nos voisins(gameobjects).
+	public List<PlantationSpotEnhanced> neighboursSpot = new List<PlantationSpotEnhanced>();
+
+	//la portée de detection des voisins.
+	public float sphereRadius;
+
+	//les layers avec lesquelles le spherecast interagit.
+	public LayerMask sphereCastLayer;
+	#endregion
+
+	#region monoBehaviour Stuff
 
 	void Start()
 	{
 		outliner.enabled = false;
 
+		//fait un cast pour référencer tous les plantationSpot a proximité.
+		FindYourNeighbours ();
 	}
 
 	void Update()
@@ -79,16 +110,18 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 				//faire evoluer la plante
 				ChangePlantState();
 				growthStartTime = Time.time;
+				growthBoosted = false;
 			}
 		}
 	}
 
 	public void OnTriggerStay(Collider other)
 	{
+
 		if (Input.GetKeyDown (CustomInputManager.instance.actionKey) && other.tag == "Player" &&!PlantationManager.instance.isSeedMenuOpen) 
 		{
 			//si t'es pas encore une plante, fait ton taff normalement...
-			if (plantType == PlantTypeEnum.none) 
+			if (plantType == PlantTypeEnum.none ) 
 			{
 				ChangePlantState ();
 			} 
@@ -117,6 +150,11 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 	{
 		if (other.tag == "Player" && !isGrowing ||other.tag == "Player" && giveEssence ) 
 		{
+			//si t'as pas de débris et que t'es pas a portée ,arrete.
+			if (actualPlantState != PlantStateEnum.debris && !canBeUsed) 
+			{
+				return;
+			}
 			ListenForAction ();
 
 
@@ -133,37 +171,135 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 		}
 
 	}
+	#endregion
 
-	void ListenForAction()
+	#region gestion du voisinage
+
+	//permet de spherecast tous les plantations spots alentour.
+	public void FindYourNeighbours()
 	{
-
-		//faire les changements d'apparence
-		CustomInputManager.instance.ShowHideActionButtonVisual (true);
-		outliner.enabled = true;
-
-	}
-	void StopListeningForAction()
-	{
-
-		//arreter les effets visuels
-		CustomInputManager.instance.ShowHideActionButtonVisual (false);
-		outliner.enabled = false;
-
-	}
-
-	public void ShowPlantTypeMenu()
-	{
-		if (ResourcesManager.instance.haveSeed())
-		{
-			PlantationManager.instance.ShowPlantTypeMenu (this);
+		neighboursSpot.Clear ();
+		int j = Physics.OverlapSphereNonAlloc(transform.position,sphereRadius, hits, sphereCastLayer);
+		for (int i = 0; i < j; i++) {
+			if (hits [i].transform != transform) {
+				neighboursSpot.Add (hits [i].transform.gameObject.GetComponent<PlantationSpotEnhanced> ());
+			}
 		}
 	}
 
-	public void HidePlantTypeMenu()
+	//permet de trouver un arbre avec qui s'accoupler xD lol
+	public void FindLover()
 	{
-		PlantationManager.instance.HidePlantTypeMenu ();
+		for (int i = 0; i < neighboursSpot.Count; i++) 
+		{
+			//si le voisin contient une plante adulte
+			if (neighboursSpot [i].actualPlantState == PlantStateEnum.grownup) 
+			{
+				//et que cet adulte est du meme type que moi (fleur buisson arbre)
+				if (neighboursSpot [i].plantType == plantType && neighboursSpot [i].canMakeSeed) 
+				{
+					//alors on peut baiser
+					neighboursSpot [i].canMakeSeed = false;
+					canMakeSeed = false;
+					//ca fait un petit
+					GameObject go = GameObject.Instantiate (PlantCollection.instance.genericSeed);
+					go.transform.position = transform.position + new Vector3 (0, 3, 0);
+					//la dessous c'est provisoire : ca prend pas en compte l'hybridation et le point de spawn est vachement random :/
+					switch (plantType) 
+					{
+					case PlantTypeEnum.flower:
+						go.GetComponent<DroppedSeed> ().plantType = ressourceEnum.flower;
+						break;
+					case PlantTypeEnum.bush:
+						go.GetComponent<DroppedSeed> ().plantType = ressourceEnum.bush;
+						break;
+					case PlantTypeEnum.tree:
+						go.GetComponent<DroppedSeed> ().plantType = ressourceEnum.tree;
+						break;
+					default:
+						break;
+					}
+					go.GetComponent<DroppedSeed> ().biome1 = spotBiome;
+				}
+			
+			}
+		}
+	}
+	#endregion
+
+	#region capacités speciales des plantes
+
+	//rendre utilisable les spots a proximité : se produit quand on passe a l'age adulte
+	public void ActivateTheSurroundingSpots()
+	{
+		for (int i = 0; i < neighboursSpot.Count; i++) {
+			//si t'es adulte et qu'un de tes voisins est pas "utilisable par le joueur" et que t'as la propriété "dome" ben rend le utilisable ^^
+			if (!neighboursSpot [i].canBeUsed ) {
+				neighboursSpot [i].canBeUsed = true;
+			}
+		}
 	}
 
+	//arrose les plantes environnante (mais pas toi, et ne marche que si t'es arroser.
+	public void WaterTheSurroundingArea()
+	{
+		for (int i = 0; i < neighboursSpot.Count; i++) 
+		{
+			if (!neighboursSpot [i].isGrowing && neighboursSpot [i].actualPlantState != PlantStateEnum.debris || !neighboursSpot [i].isGrowing && neighboursSpot [i].actualPlantState != PlantStateEnum.lopin) 
+			{
+				neighboursSpot [i].AutoWaterThePlant ();
+			}
+		}
+	}
+
+
+	//accelere la croissance des plantes environnantes : ne peut arriver qu'une fois par cycle pour une valeur temporel fixe de 10sec...
+	public void BoostSurroundingGrowth ()
+	{
+		for (int i = 0; i < neighboursSpot.Count; i++) 
+		{
+			if (!neighboursSpot [i].growthBoosted) 
+			{
+				//on change le début de la phase de croissance xD ca accelere la croissance.
+				//peut arriver qu'une fois par cycle de croissance a une plante donnée.
+				neighboursSpot [i].growthStartTime -= 10;
+				neighboursSpot [i].growthBoosted = true;
+			}
+		}
+	}
+
+
+	public void RecquireWater()
+	{
+		timeSpentGrowing = Time.time - growthStartTime;
+		isGrowing = false;
+		needWaterParticules.SetActive (true);
+		waterIcon.activate(plantType, actualPlantState);
+	}
+
+	public void WaterThePlant()
+	{
+		growthStartTime = Time.time - timeSpentGrowing;
+		isGrowing = true;
+		needWaterParticules.SetActive (false);
+		plantGrowth.StartCoroutine (plantGrowth.StartGrowing ());
+
+		//jouer ici les sons et anim lié au fait d'arroser:
+		InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Water", layer: -1, fixedTime: 2);
+		plantAudioS.PlayOneShot (growUpSnd);
+		InGameManager.instance.waterParticle.GetComponent<ParticleSystem> ().Play ();
+		waterIcon.gameObject.SetActive(false);
+	}
+
+	public void AutoWaterThePlant()
+	{
+		growthStartTime = Time.time - timeSpentGrowing;
+		isGrowing = true;
+		needWaterParticules.SetActive (false);
+		plantGrowth.StartCoroutine (plantGrowth.StartGrowing ());
+		waterIcon.gameObject.SetActive(false);
+
+	}
 	//faire pousser/choisir la plante etc...
 	public void ChangePlantState()
 	{
@@ -179,6 +315,10 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 			InGameManager.instance.cleanParticle.GetComponent<ParticleSystem>().Play();
 			break;
 		case PlantStateEnum.lopin:
+			if (!canBeUsed) 
+			{
+				return;
+			}
 			Invoke("ShowPlantTypeMenu", 0.1f);
 			//			l'animation est à la sortie de menu graine line94
 			break;
@@ -202,17 +342,31 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 			break;
 		case PlantStateEnum.teenage:
 			actualPlantState = PlantStateEnum.grownup;
-			teenageVisual.SetActive(false);
-			grownupVisual.SetActive(true);
-			growthAnimator.SetBool("grownup", true);
+			teenageVisual.SetActive (false);
+			grownupVisual.SetActive (true);
+			growthAnimator.SetBool ("grownup", true);
 			growthAnimator.SetFloat ("growthspeed", 100f);
-
+			if (genome.isDome) {
+				ActivateTheSurroundingSpots ();
+			}
 			//			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("Plant", layer:-1, fixedTime:2);
 			//			plantAudioS.PlayOneShot (growUpSnd);
 			break;
 		case PlantStateEnum.grownup:
+			//si t'es pas une fleur tu donnes des essences.
 			if (plantType != PlantTypeEnum.flower) {
 				giveEssence = true;
+			}
+			if (!canMakeSeed) {
+				canMakeSeed = true;
+				FindLover ();
+			}
+			if (genome.isWateringAround) {
+				WaterTheSurroundingArea ();
+			}
+			if (genome.isGlowing) 
+			{
+				BoostSurroundingGrowth ();
 			}
 			break;
 		default:
@@ -221,59 +375,7 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 		}
 	}
 
-	//faire pousser/choisir la plante etc...
-	public void loadPlantState(PlantStateEnum state)
-	{
-		actualPlantState = state;
-		switch (actualPlantState)
-		{
-		case PlantStateEnum.debris:
-			break;
-		case PlantStateEnum.lopin:
-			debrisObj.SetActive(false);
-			break;
-		case PlantStateEnum.seed:
-			debrisObj.SetActive(false);
-			babyVisual.SetActive(false);
-			teenageVisual.SetActive(false);
-			grownupVisual.SetActive(false);
-			growthAnimator.SetBool("teenage", false);
-			growthAnimator.SetBool("baby", false);
-			growthAnimator.SetBool("grownup", false);
-			break;
-		case PlantStateEnum.baby:
-			debrisObj.SetActive(false);
-			babyVisual.SetActive(true);
-			teenageVisual.SetActive(false);
-			grownupVisual.SetActive(false);
-			growthAnimator.SetBool("teenage", false);
-			growthAnimator.SetBool("baby", true);
-			growthAnimator.SetBool("grownup", false);
-			break;
-		case PlantStateEnum.teenage:
-			debrisObj.SetActive(false);
-			babyVisual.SetActive(false);
-			teenageVisual.SetActive(true);
-			grownupVisual.SetActive(false);
-			growthAnimator.SetBool("teenage", true);
-			growthAnimator.SetBool("baby", false);
-			growthAnimator.SetBool("grownup", false);
-			break;
-		case PlantStateEnum.grownup:
-			debrisObj.SetActive(false);
-			babyVisual.SetActive(false);
-			teenageVisual.SetActive(false);
-			grownupVisual.SetActive(true);
-			growthAnimator.SetBool("baby", false);
-			growthAnimator.SetBool("grownup", true);
-			growthAnimator.SetBool("teenage", false);
 
-			break;
-		default:
-
-			break;
-		}
-	}
 
 	// choisir la graine
 	/// <summary>
@@ -296,10 +398,10 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 				//faut mettre un calcul pertinent pour le temps d'animation juste la : 
 				growthAnimator.SetFloat ("growthspeed", 16f);
 				plantType = PlantTypeEnum.flower;
-				
+
 				break;
 
-			//t'es un bush
+				//t'es un bush
 			case 1:
 				ResourcesManager.instance.ChangeBushSeed (-1);
 				plantSO = PlantCollection.instance.airBush;
@@ -311,7 +413,7 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 				break;
 
 
-			//t'es un arbre
+				//t'es un arbre
 			case 2:
 				ResourcesManager.instance.ChangeTreeSeed (-1);
 				plantSO = PlantCollection.instance.airTree;
@@ -422,6 +524,10 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 		}
 
 		actualPlantState = PlantStateEnum.seed;
+		Genome ge = gameObject.AddComponent<Genome> ();
+		genome = ge;
+		//fonctionne que si t'es un "pure race a un biome"...Faudra voir ce qu'on fait pour les hybrides. je pense ajouter un parametre ou 2.
+		genome.Initialize (plantType, spotBiome);
 		SpawnThenHidePlants ();
 		lopinSeedObj.SetActive(true);
 		growthStartTime = Time.time;
@@ -453,80 +559,153 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 		grownupVisual.SetActive (false);
 
 	}
+
+	#endregion
+
+	#region gestion des retours utilisateurs (interface)
+	void ListenForAction()
+	{
+
+		//faire les changements d'apparence
+		CustomInputManager.instance.ShowHideActionButtonVisual (true);
+		outliner.enabled = true;
+
+	}
+	void StopListeningForAction()
+	{
+
+		//arreter les effets visuels
+		CustomInputManager.instance.ShowHideActionButtonVisual (false);
+		outliner.enabled = false;
+
+	}
+
+	public void ShowPlantTypeMenu()
+	{
+		if (ResourcesManager.instance.haveSeed())
+		{
+			PlantationManager.instance.ShowPlantTypeMenu (this);
+		}
+	}
+
+	public void HidePlantTypeMenu()
+	{
+		PlantationManager.instance.HidePlantTypeMenu ();
+	}
+
+	#endregion
+
+	#region Gestion du load/save
+	//faire pousser/choisir la plante etc...
+	public void loadPlantState(PlantStateEnum state)
+	{
+		actualPlantState = state;
+		switch (actualPlantState)
+		{
+		case PlantStateEnum.debris:
+			break;
+		case PlantStateEnum.lopin:
+			debrisObj.SetActive(false);
+			break;
+		case PlantStateEnum.seed:
+			debrisObj.SetActive(false);
+			babyVisual.SetActive(false);
+			teenageVisual.SetActive(false);
+			grownupVisual.SetActive(false);
+			growthAnimator.SetBool("teenage", false);
+			growthAnimator.SetBool("baby", false);
+			growthAnimator.SetBool("grownup", false);
+			break;
+		case PlantStateEnum.baby:
+			debrisObj.SetActive(false);
+			babyVisual.SetActive(true);
+			teenageVisual.SetActive(false);
+			grownupVisual.SetActive(false);
+			growthAnimator.SetBool("teenage", false);
+			growthAnimator.SetBool("baby", true);
+			growthAnimator.SetBool("grownup", false);
+			break;
+		case PlantStateEnum.teenage:
+			debrisObj.SetActive(false);
+			babyVisual.SetActive(false);
+			teenageVisual.SetActive(true);
+			grownupVisual.SetActive(false);
+			growthAnimator.SetBool("teenage", true);
+			growthAnimator.SetBool("baby", false);
+			growthAnimator.SetBool("grownup", false);
+			break;
+		case PlantStateEnum.grownup:
+			debrisObj.SetActive(false);
+			babyVisual.SetActive(false);
+			teenageVisual.SetActive(false);
+			grownupVisual.SetActive(true);
+			growthAnimator.SetBool("baby", false);
+			growthAnimator.SetBool("grownup", true);
+			growthAnimator.SetBool("teenage", false);
+
+			break;
+		default:
+
+			break;
+		}
+	}
+	#endregion
+	#region des vieux trucs
+
 	// choisir la graine
 	/// <summary>
 	/// Selects the type of the plant.
 	/// </summary>
 	/// <param name="index">Index.</param>
-	public void SelectPlantType(PlantTypeEnum index)
-	{
-		switch (index)
-		{
-		//t'es un bush
-		case PlantTypeEnum.bush:
-			timeToGrow = plantSO.desiredGrowthTime;
-			growthAnimator.SetFloat("growthspeed", 8.3f);
-//			babyVisual = bush1Obj;
-//			teenageVisual = bush2Obj;
-//			grownupVisual = bush3Obj;
-			plantType = PlantTypeEnum.bush;
-			break;
+//	public void SelectPlantType(PlantTypeEnum index)
+//	{
+//		switch (index)
+//		{
+//		//t'es un bush
+//		case PlantTypeEnum.bush:
+//			timeToGrow = plantSO.desiredGrowthTime;
+//			growthAnimator.SetFloat("growthspeed", 8.3f);
+////			babyVisual = bush1Obj;
+////			teenageVisual = bush2Obj;
+////			grownupVisual = bush3Obj;
+//			plantType = PlantTypeEnum.bush;
+//			break;
+//
+//			//t'es une fleur
+//		case PlantTypeEnum.flower:
+//			timeToGrow = plantSO.desiredGrowthTime;
+//			growthAnimator.SetFloat("growthspeed", 16f);
+//
+////			babyVisual = flower1Obj;
+////			teenageVisual = flower2Obj;
+////			grownupVisual = flower3Obj;
+//			plantType = PlantTypeEnum.flower;
+//
+//			break;
+//
+//			//t'es un arbre
+//		case PlantTypeEnum.tree:
+//			timeToGrow = plantSO.desiredGrowthTime;
+//			growthAnimator.SetFloat("growthspeed", 3.3f);
+//
+////			babyVisual = tree1Obj;
+////			teenageVisual = tree2Obj;
+////			grownupVisual = tree3Obj;
+//			plantType = PlantTypeEnum.tree;
+//
+//			break;
+//
+//		default:
+//			Debug.Log("t'es une plante inconnu mec!");
+//			break;
+//		}
+//
+//		actualPlantState = PlantStateEnum.seed;
+//		//		lopinNoSeedObj.SetActive (false);
+//		lopinSeedObj.SetActive(true);
+//		growthStartTime = Time.time;
+//		RecquireWater();
+//	}
+	#endregion
 
-			//t'es une fleur
-		case PlantTypeEnum.flower:
-			timeToGrow = plantSO.desiredGrowthTime;
-			growthAnimator.SetFloat("growthspeed", 16f);
-
-//			babyVisual = flower1Obj;
-//			teenageVisual = flower2Obj;
-//			grownupVisual = flower3Obj;
-			plantType = PlantTypeEnum.flower;
-
-			break;
-
-			//t'es un arbre
-		case PlantTypeEnum.tree:
-			timeToGrow = plantSO.desiredGrowthTime;
-			growthAnimator.SetFloat("growthspeed", 3.3f);
-
-//			babyVisual = tree1Obj;
-//			teenageVisual = tree2Obj;
-//			grownupVisual = tree3Obj;
-			plantType = PlantTypeEnum.tree;
-
-			break;
-
-		default:
-			Debug.Log("t'es une plante inconnu mec!");
-			break;
-		}
-
-		actualPlantState = PlantStateEnum.seed;
-		//		lopinNoSeedObj.SetActive (false);
-		lopinSeedObj.SetActive(true);
-		growthStartTime = Time.time;
-		RecquireWater();
-	}
-	public void RecquireWater()
-	{
-		timeSpentGrowing = Time.time - growthStartTime;
-		isGrowing = false;
-		needWaterParticules.SetActive (true);
-		waterIcon.activate(plantType, actualPlantState);
-	}
-	public void WaterThePlant()
-	{
-		growthStartTime = Time.time - timeSpentGrowing;
-		isGrowing = true;
-		needWaterParticules.SetActive (false);
-		plantGrowth.StartCoroutine (plantGrowth.StartGrowing ());
-
-		//jouer ici les sons et anim lié au fait d'arroser:
-		InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Water", layer: -1, fixedTime: 2);
-		plantAudioS.PlayOneShot (growUpSnd);
-		InGameManager.instance.waterParticle.GetComponent<ParticleSystem> ().Play ();
-		waterIcon.gameObject.SetActive(false);
-
-
-	}
 }

@@ -238,6 +238,190 @@ public class ResourcesManager : MonoBehaviour {
 			break;
 		}
 	}
+
+	//prend en compte jusqu'a 3 biomes
+	public void setRessourceQuantity(ressourceEnum ress, int qty, BiomeEnum biome1, BiomeEnum biome2, BiomeEnum biome3)
+	{
+		switch (ress)
+		{
+		#region ressource = bush
+
+		case ressourceEnum.bush:
+			switch (biome1) 
+			{
+			case BiomeEnum.plain:
+				switch (biome2) 
+				{
+				case BiomeEnum.crater:
+					switch (biome3) 
+					{
+					case BiomeEnum.cave:
+						PlantCollection.instance.airCaveCraterBushAdd(qty);
+
+						break;
+					case BiomeEnum.none:
+						PlantCollection.instance.airCraterBushAdd(qty);
+
+						break;
+					default:
+					break;
+					}
+					break;
+				case BiomeEnum.cave:
+					PlantCollection.instance.airCaveBushAdd(qty);
+
+					break;
+				case BiomeEnum.none:
+					PlantCollection.instance.airBushAdd(qty);
+					break;
+				default:
+				break;
+				}
+				break;
+			case BiomeEnum.crater:
+				switch (biome2) 
+				{
+				case BiomeEnum.cave:
+					PlantCollection.instance.caveCraterBushAdd(qty);
+
+				break;
+				case BiomeEnum.none:
+					PlantCollection.instance.craterBushAdd(qty);
+					break;
+				}
+				break;
+			case BiomeEnum.cave:
+				PlantCollection.instance.caveBushAdd(qty);
+				break;
+			default:
+				break;
+			}
+			ChangeBushSeed(qty);
+			break;
+			#endregion
+
+			#region ressource = tree
+
+		case ressourceEnum.tree:
+			switch (biome1) 
+			{
+			case BiomeEnum.plain:
+				switch (biome2) 
+				{
+				case BiomeEnum.crater:
+					switch (biome3) 
+					{
+					case BiomeEnum.cave:
+						PlantCollection.instance.airCaveCraterTreeAdd(qty);
+
+						break;
+					case BiomeEnum.none:
+						PlantCollection.instance.airCraterTreeAdd(qty);
+
+						break;
+					default:
+						break;
+					}
+					break;
+				case BiomeEnum.cave:
+					PlantCollection.instance.airCaveTreeAdd(qty);
+
+					break;
+				case BiomeEnum.none:
+					PlantCollection.instance.airTreeAdd(qty);
+					break;
+				default:
+					break;
+				}
+				break;
+			case BiomeEnum.crater:
+				switch (biome2) 
+				{
+				case BiomeEnum.cave:
+					PlantCollection.instance.caveCraterTreeAdd(qty);
+
+					break;
+				case BiomeEnum.none:
+					PlantCollection.instance.craterTreeAdd(qty);
+					break;
+				}
+				break;
+			case BiomeEnum.cave:
+				PlantCollection.instance.caveTreeAdd(qty);
+				break;
+			default:
+				break;
+			}
+			ChangeTreeSeed(qty);
+			break;
+			#endregion
+
+			#region ressource = flower
+
+		case ressourceEnum.flower:
+			switch (biome1) 
+			{
+			case BiomeEnum.plain:
+				switch (biome2) 
+				{
+				case BiomeEnum.crater:
+					switch (biome3) 
+					{
+					case BiomeEnum.cave:
+						PlantCollection.instance.airCaveCraterFlowerAdd(qty);
+
+						break;
+					case BiomeEnum.none:
+						PlantCollection.instance.airCraterFlowerAdd(qty);
+
+						break;
+					default:
+						break;
+					}
+					break;
+				case BiomeEnum.cave:
+					PlantCollection.instance.airCaveFlowerAdd(qty);
+
+					break;
+				case BiomeEnum.none:
+					PlantCollection.instance.airFlowerAdd(qty);
+					break;
+				default:
+					break;
+				}
+				break;
+			case BiomeEnum.crater:
+				switch (biome2) 
+				{
+				case BiomeEnum.cave:
+					PlantCollection.instance.caveCraterFlowerAdd(qty);
+
+					break;
+				case BiomeEnum.none:
+					PlantCollection.instance.craterFlowerAdd(qty);
+					break;
+				}
+				break;
+			case BiomeEnum.cave:
+				PlantCollection.instance.caveFlowerAdd(qty);
+				break;
+			default:
+				break;
+			}
+			ChangeFlowerSeed(qty);
+			break;
+			#endregion
+
+		case ressourceEnum.ore:
+			ChangeRawOre(qty);
+			break;
+		case ressourceEnum.essence:
+			ChangeEssence(qty);
+			break;
+		default:
+			break;
+		}
+	}
     public bool haveSeed()
     {
         return flowerSeed > 0 | bushSeed > 0 | treeSeed > 0;

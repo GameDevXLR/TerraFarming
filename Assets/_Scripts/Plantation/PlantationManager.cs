@@ -266,6 +266,7 @@ public class PlantationManager : MonoBehaviour {
 			InGameManager.instance.isPlanting = true;
 			InGameManager.instance.playerController.isActive = false;
 			isSeedMenuOpen = true;
+			ActualizePlantTypeUI ();
 		}
 	}
 
