@@ -23,16 +23,22 @@ public class PlantCollection : MonoBehaviour
 	public GameObject genericSeed;
 	public GameObject plantObjectUI;
 	public RectTransform collectionContentUI;
+	public GameObject collectionObj;
+	bool collectionOpen = false;
 
 	[Header("Gérer automatiquement: liste des UI par biome.")]
 	//permet de gérer l'affichage des UI dans la collection:
 	public List<GameObject> plainUIObjects = new List<GameObject>();
 	public List<GameObject> craterUIObjects= new List<GameObject>();
 	public List<GameObject> caveUIObjects= new List<GameObject>();
-
+	public List<GameObject> flowerUIObjects = new List<GameObject> ();
+	public List<GameObject> bushUIObjects = new List<GameObject> ();
+	public List<GameObject> treeUIObjects = new List<GameObject> ();
+	public List<GameObject> notAvailableUIObjects = new List<GameObject>();
 	bool plainUIVisible = true;
 	bool craterUIVisible = true;
 	bool caveUIVisible = true;
+	bool notAvailableUIVisible = true;
 
 	[Header("Plaines: air")]
 	public PlantObject airFlower;
@@ -152,6 +158,16 @@ public class PlantCollection : MonoBehaviour
 	#endregion
 
 	#region Utilitaire de gestion de UI de la collection
+
+	public void ShowHideCollection()
+	{
+		collectionOpen = !collectionOpen;
+		collectionObj.SetActive( collectionOpen);
+		if (collectionOpen) {
+			ShowAllUI ();
+		}
+	}
+
 	//Gestion automatisé de la collection. Il suffit de compléter l'array contenant tous les PlantObjects.
 	public void PopulateCollection()
 	{
@@ -161,15 +177,36 @@ public class PlantCollection : MonoBehaviour
 			go.transform.SetParent(collectionContentUI);
 			go.transform.localScale = Vector3.one;
 			go.GetComponent<PlantItemUI> ().myPlant = PO;
+			go.GetComponent<PlantItemUI> ().isNotAvailable.enabled = true;
+
 			plantDictionary.Add (PO, go.GetComponent<PlantItemUI> ());
+			notAvailableUIObjects.Add (go);
 		}
 	}
+
+	public void ShowHideAvailable()
+	{
+		notAvailableUIVisible = !notAvailableUIVisible;
+
+		foreach (var item in notAvailableUIObjects) {
+			item.SetActive (notAvailableUIVisible);
+		}
+	}
+
 	public void ShowHidePlainUI()
 	{
 		plainUIVisible = !plainUIVisible;
 		foreach (var go in plainUIObjects) 
 		{
 			go.SetActive (plainUIVisible);
+
+			if (plainUIVisible && !notAvailableUIVisible) 
+			{
+				if (go.GetComponent<PlantItemUI> ().isNotAvailable.isActiveAndEnabled) 
+				{
+					go.SetActive (false);
+				}
+			}
 		}
 	}
 
@@ -179,6 +216,13 @@ public class PlantCollection : MonoBehaviour
 		foreach (var go in craterUIObjects) 
 		{
 			go.SetActive (craterUIVisible);
+			if (craterUIVisible && !notAvailableUIVisible) 
+			{
+				if (go.GetComponent<PlantItemUI> ().isNotAvailable.isActiveAndEnabled) 
+				{
+					go.SetActive (false);
+				}
+			}
 		}
 	}
 	public void ShowHideCaveUI()
@@ -187,6 +231,13 @@ public class PlantCollection : MonoBehaviour
 		foreach (var go in caveUIObjects) 
 		{
 			go.SetActive (caveUIVisible);
+			if (caveUIVisible && !notAvailableUIVisible) 
+			{
+				if (go.GetComponent<PlantItemUI> ().isNotAvailable.isActiveAndEnabled) 
+				{
+					go.SetActive (false);
+				}
+			}
 		}
 	}
 
@@ -196,6 +247,7 @@ public class PlantCollection : MonoBehaviour
 		plainUIVisible= false;
 		craterUIVisible= false;
 		caveUIVisible= false;
+		notAvailableUIVisible = true;
 		ShowHidePlainUI ();
 		ShowHideCraterUI ();
 		ShowHideCaveUI ();

@@ -117,7 +117,8 @@ public class DroppedSeed : MonoBehaviour
 		//si t'as un PO utilise le nouveau systeme, else l'ancien systeme.
 		if (me != null) {
 			ResourcesManager.instance.setRessourceQuantity (me, 1);
-			
+			Destroy (gameObject);
+
 		} else {
 			ResourcesManager.instance.setRessourceQuantity (plantType, 1, biome1, biome2, biome3);
 			Destroy (gameObject);

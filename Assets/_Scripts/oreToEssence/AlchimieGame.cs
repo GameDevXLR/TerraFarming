@@ -8,6 +8,9 @@ public class AlchimieGame : MonoBehaviour {
 
     #region editor variables
 
+	//A compléter : le type de graine donnée.
+	public PlantObject plantGiven;
+
     public OreToEssenceUI interfaceMachine;
 	public MachineUIManager machineUI;
 
@@ -242,7 +245,7 @@ public class AlchimieGame : MonoBehaviour {
     {
         if (harvest > 0)
         {
-			ResourcesManager.instance.setRessourceQuantity(outputRessource, harvest + bonus,outputBiome);
+			ResourcesManager.instance.setRessourceQuantity(plantGiven, harvest + bonus);
             ResourcesManager.instance.setRessourceQuantity(inputRessource, -harvest * ressourceNeed);
         }
         resetJauge();
@@ -252,11 +255,11 @@ public class AlchimieGame : MonoBehaviour {
     {
         if (bonus)
         {
-			ResourcesManager.instance.setRessourceQuantity(outputRessource, 2,outputBiome);
+			ResourcesManager.instance.setRessourceQuantity(plantGiven, 2);
         }
         else
         {
-			ResourcesManager.instance.setRessourceQuantity(outputRessource, 1,outputBiome);
+			ResourcesManager.instance.setRessourceQuantity(plantGiven, 1);
         }
 
         ResourcesManager.instance.setRessourceQuantity(inputRessource, -ressourceNeed);

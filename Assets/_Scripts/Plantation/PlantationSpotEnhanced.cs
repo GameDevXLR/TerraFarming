@@ -550,6 +550,9 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 		lopinSeedObj.SetActive(true);
 		growthStartTime = Time.time;
 		RecquireWater();
+		InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Plant", layer: -1, fixedTime: 2);
+		plantAudioS.PlayOneShot (planterSnd);
+		InGameManager.instance.cleanParticle.GetComponent<ParticleSystem> ().Play ();
 		//le systeme suivant est provisoire. Il faut revoir le génome pour faire quelque chose de plus pertinent.
 		//le genome ne servira de toute facon qu'une fois qu'on aura la péiniere (ou le labo)
 		Genome ge = gameObject.AddComponent<Genome> ();
@@ -562,6 +565,7 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 		growthAnimator.SetFloat ("growthspeed", 3.3f);
 		HidePlantTypeMenu ();
 	}
+
 	void SpawnThenHidePlants()
 	{
 		GameObject GObaby = Instantiate (plantSO.babyModel);
