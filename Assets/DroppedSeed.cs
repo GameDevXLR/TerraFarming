@@ -13,6 +13,7 @@ public class DroppedSeed : MonoBehaviour
 	public PlantObject daddy;
 	public PlantObject mummy;
 
+	public PlantObject me;
 	public Transform playerTransform;
 
 	public bool moveToPlayer;
@@ -47,7 +48,7 @@ public class DroppedSeed : MonoBehaviour
 		}
 	}
 
-	//détermine mes biomes / la graine que je serais une fois looté quoi ^^
+	//détermine mes biomes / la graine que je serais une fois looté quoi ^^ : pas top...Refonte en cours.
 	public void FigureOutMe()
 	{
 		if (daddy.biome1 == BiomeEnum.plain || mummy.biome1 == BiomeEnum.plain) 
@@ -113,7 +114,13 @@ public class DroppedSeed : MonoBehaviour
 
 	public void GiveRewardForLooting()
 	{
-		ResourcesManager.instance.setRessourceQuantity(plantType, 1, biome1,biome2,biome3);
-		Destroy (gameObject);
+		//si t'as un PO utilise le nouveau systeme, else l'ancien systeme.
+		if (me != null) {
+			ResourcesManager.instance.setRessourceQuantity (me, 1);
+			
+		} else {
+			ResourcesManager.instance.setRessourceQuantity (plantType, 1, biome1, biome2, biome3);
+			Destroy (gameObject);
+		}
 	}
 }

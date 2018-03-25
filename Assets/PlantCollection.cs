@@ -9,6 +9,15 @@ public class PlantCollection : MonoBehaviour
 	//Note:Faut faire un système de sauvegarde de cette collection!
 	public static PlantCollection instance;
 
+	//tentative de simplification:
+
+	//un dico contenant toutes les plantes objects de l'array de départ.
+	//il est peuplé et lié a un Text ou se trouvera toujours son nombre
+	//qu'on pourra réobtenir en faisant tryparse par exemple
+
+	//finalement je vais le lié a un itemUI plutot.
+	public Dictionary<PlantObject,PlantItemUI> plantDictionary = new Dictionary<PlantObject, PlantItemUI>();
+
 	[Header("A COMPLETER")]
 	public PlantObject[] allPlantObjects;
 	public GameObject genericSeed;
@@ -125,6 +134,7 @@ public class PlantCollection : MonoBehaviour
 
 	void Awake()
 	{
+		
 		if (instance == null) 
 		{
 			instance = this;
@@ -135,23 +145,25 @@ public class PlantCollection : MonoBehaviour
 		}
 	}
 
-//	void Start()
-//	{
-//		PopulateCollection ();
-//	}
+	void Start()
+	{
+		PopulateCollection ();
+	}
 	#endregion
 
 	#region Utilitaire de gestion de UI de la collection
-//	public void PopulateCollection()
-//	{
-//		foreach (var PO in allPlantObjects) 
-//		{
-//			GameObject go = Instantiate (plantObjectUI);
-//			go.transform.SetParent(collectionContentUI);
-//			go.transform.localScale = Vector3.one;
-//			go.GetComponent<PlantItemUI> ().myPlant = PO;
-//		}
-//	}
+	//Gestion automatisé de la collection. Il suffit de compléter l'array contenant tous les PlantObjects.
+	public void PopulateCollection()
+	{
+		foreach (var PO in allPlantObjects) 
+		{
+			GameObject go = Instantiate (plantObjectUI);
+			go.transform.SetParent(collectionContentUI);
+			go.transform.localScale = Vector3.one;
+			go.GetComponent<PlantItemUI> ().myPlant = PO;
+			plantDictionary.Add (PO, go.GetComponent<PlantItemUI> ());
+		}
+	}
 	public void ShowHidePlainUI()
 	{
 		plainUIVisible = !plainUIVisible;
@@ -192,6 +204,15 @@ public class PlantCollection : MonoBehaviour
 	#endregion
 
 	#region actualisation de chaque quantité de plante...
+
+	//nouveau systeme d'ajout de graines simplifié : remplace tout ce qu'il y a en dessous dans l'absolu.
+	public void AddSeed(PlantObject plantO, int changement)
+	{
+		PlantItemUI tmpItem; 
+		plantDictionary.TryGetValue (plantO, out tmpItem);
+		tmpItem.ActualizeSeedUI (changement);
+	}
+
 	#region AIR
 
 	public void airFlowerAdd(int i)

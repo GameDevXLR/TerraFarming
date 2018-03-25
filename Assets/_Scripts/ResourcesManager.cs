@@ -181,13 +181,13 @@ public class ResourcesManager : MonoBehaviour {
 			switch (biome) 
 			{
 			case BiomeEnum.plain:
-				PlantCollection.instance.airBushSeeds += qty;
+				PlantCollection.instance.airBushAdd (qty);
 				break;
 			case BiomeEnum.crater:
-				PlantCollection.instance.craterBushSeeds += qty;
+				PlantCollection.instance.craterBushAdd(qty);
 				break;
 			case BiomeEnum.cave:
-				PlantCollection.instance.caveBushSeeds += qty;
+				PlantCollection.instance.caveBushAdd(qty);
 				break;
 			default:
 				break;
@@ -198,13 +198,13 @@ public class ResourcesManager : MonoBehaviour {
 			switch (biome) 
 			{
 			case BiomeEnum.plain:
-				PlantCollection.instance.airTreeSeeds += qty;
+				PlantCollection.instance.airTreeAdd (qty);
 				break;
 			case BiomeEnum.crater:
-				PlantCollection.instance.craterTreeSeeds += qty;
+				PlantCollection.instance.craterTreeAdd(qty);
 				break;
 			case BiomeEnum.cave:
-				PlantCollection.instance.caveTreeSeeds += qty;
+				PlantCollection.instance.caveTreeAdd(qty);
 				break;
 			default:
 				break;
@@ -215,13 +215,13 @@ public class ResourcesManager : MonoBehaviour {
 			switch (biome) 
 			{
 			case BiomeEnum.plain:
-				PlantCollection.instance.airFlowerSeeds += qty;
+				PlantCollection.instance.airFlowerAdd (qty);
 				break;
 			case BiomeEnum.crater:
-				PlantCollection.instance.craterFlowerSeeds += qty;
+				PlantCollection.instance.craterFlowerAdd(qty);
 				break;
 			case BiomeEnum.cave:
-				PlantCollection.instance.caveFlowerSeeds += qty;
+				PlantCollection.instance.caveFlowerAdd(qty);
 				break;
 			default:
 				break;
@@ -421,6 +421,30 @@ public class ResourcesManager : MonoBehaviour {
 		default:
 			break;
 		}
+	}
+
+
+	//prend en compte un PlantObject et une quantité uniquement:
+	public void setRessourceQuantity(PlantObject PO, int qty)
+	{
+		switch (PO.plantType) 
+		{
+		case PlantTypeEnum.flower:
+			ChangeFlowerSeed(qty);
+
+			break;
+		case PlantTypeEnum.bush:
+			ChangeBushSeed(qty);
+
+			break;
+		case PlantTypeEnum.tree:
+			ChangeTreeSeed(qty);
+
+			break;
+		default:
+			break;
+		}
+		PlantCollection.instance.AddSeed (PO, qty);
 	}
     public bool haveSeed()
     {

@@ -527,6 +527,7 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 		actualPlantState = PlantStateEnum.seed;
 		Genome ge = gameObject.AddComponent<Genome> ();
 		genome = ge;
+
 		//fonctionne que si t'es un "pure race a un biome"...Faudra voir ce qu'on fait pour les hybrides. je pense ajouter un parametre ou 2.
 		genome.Initialize (plantType, spotBiome);
 		SpawnThenHidePlants ();
@@ -535,6 +536,32 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 		RecquireWater();
 	}
 
+	//nouveau systeme de plantage de graine basé sur un PlantObj.
+	//remplace la fonction au dessus.
+	//est appelé principalement pour le moment par la nouvelle interface de plantage de graines et ses boutons (en cours de création)
+	public void PlantSeedHere(PlantObject newPlant)
+	{
+		ResourcesManager.instance.setRessourceQuantity(newPlant,-1);
+		plantSO = newPlant;
+		plantType = plantSO.plantType;
+		timeToGrow = plantSO.desiredGrowthTime;
+		actualPlantState = PlantStateEnum.seed;
+		SpawnThenHidePlants ();
+		lopinSeedObj.SetActive(true);
+		growthStartTime = Time.time;
+		RecquireWater();
+		//le systeme suivant est provisoire. Il faut revoir le génome pour faire quelque chose de plus pertinent.
+		//le genome ne servira de toute facon qu'une fois qu'on aura la péiniere (ou le labo)
+		Genome ge = gameObject.AddComponent<Genome> ();
+		genome = ge;
+		//fonctionne que si t'es un "pure race a un biome"...Faudra voir ce qu'on fait pour les hybrides. je pense ajouter un parametre ou 2.
+		genome.Initialize (plantType, spotBiome);
+
+		//les propriétés ci dessous mérite un travail de réflexion pour être revue.
+		nbrOfGivenEssence = 3;
+		growthAnimator.SetFloat ("growthspeed", 3.3f);
+		HidePlantTypeMenu ();
+	}
 	void SpawnThenHidePlants()
 	{
 		GameObject GObaby = Instantiate (plantSO.babyModel);
