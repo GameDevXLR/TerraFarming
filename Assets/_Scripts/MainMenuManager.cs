@@ -66,7 +66,7 @@ public class MainMenuManager : MonoBehaviour {
 	{
 		if (!hasPressedEnter) 
 		{
-			if (Input.GetKeyDown (KeyCode.Space) || Input.GetKeyDown (KeyCode.Return)) 
+			if (Input.GetKeyDown (KeyCode.Space) || Input.GetKeyDown (KeyCode.Return) || Input.GetMouseButtonDown(0)) 
 			{
 				ShowMainMenu ();
 			}

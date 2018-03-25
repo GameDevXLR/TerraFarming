@@ -92,7 +92,8 @@ public class InGameManager : MonoBehaviour {
         save.treeSeed = ResourcesManager.instance.treeSeed;
         save.flowerSeed = ResourcesManager.instance.flowerSeed;
 
-        save.plantList = PlantationManager.instance.savePlantation();
+		//désactiver temporairement le temps de mettre ca au propre.
+//        save.plantList = PlantationManager.instance.savePlantation();
 
         return save;
     }
