@@ -206,20 +206,22 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 					go.transform.position = transform.position + new Vector3 (0, 3, 0);
 					go.GetComponent<DroppedSeed> ().daddy = plantSO;
 					go.GetComponent<DroppedSeed> ().mummy = neighboursSpot [i].plantSO;
-					switch (plantType) 
-					{
-					case PlantTypeEnum.flower:
-						go.GetComponent<DroppedSeed> ().plantType = ressourceEnum.flower;
-						break;
-					case PlantTypeEnum.bush:
-						go.GetComponent<DroppedSeed> ().plantType = ressourceEnum.bush;
-						break;
-					case PlantTypeEnum.tree:
-						go.GetComponent<DroppedSeed> ().plantType = ressourceEnum.tree;
-						break;
-					default:
-						break;
-					}
+					go.GetComponent<DroppedSeed> ().plantType = plantType;
+
+//					switch (plantType) 
+//					{
+//					case PlantTypeEnum.flower:
+//						go.GetComponent<DroppedSeed> ().plantType = ressourceEnum.flower;
+//						break;
+//					case PlantTypeEnum.bush:
+//						go.GetComponent<DroppedSeed> ().plantType = ressourceEnum.bush;
+//						break;
+//					case PlantTypeEnum.tree:
+//						go.GetComponent<DroppedSeed> ().plantType = ressourceEnum.tree;
+//						break;
+//					default:
+//						break;
+//					}
 //					go.GetComponent<DroppedSeed> ().biome1 = spotBiome;
 				}
 			

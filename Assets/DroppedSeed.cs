@@ -5,7 +5,7 @@ using UnityEngine;
 public class DroppedSeed : MonoBehaviour 
 {
 	//le type de "ressources" plante que tu vas ajouter.
-	public ressourceEnum plantType;
+	public PlantTypeEnum plantType;
 	//une graine n'a qu'un biome pour le moment : pas d'hybride encore.
 	public BiomeEnum biome1;
 	public BiomeEnum biome2;
@@ -21,9 +21,9 @@ public class DroppedSeed : MonoBehaviour
 	void Start()
 	{
 		//si t'es pas la de base sans parent xD
-		if (daddy) {
+//		if (daddy) {
 			FigureOutMe ();
-		}
+//		}
 	}
 	void FixedUpdate()
 	{
@@ -51,20 +51,25 @@ public class DroppedSeed : MonoBehaviour
 	//détermine mes biomes / la graine que je serais une fois looté quoi ^^ : pas top...Refonte en cours.
 	public void FigureOutMe()
 	{
-		if (daddy.biome1 == BiomeEnum.plain || mummy.biome1 == BiomeEnum.plain) 
-		{
+		if (daddy.biome1 == BiomeEnum.plain || mummy.biome1 == BiomeEnum.plain) {
 			biome1 = BiomeEnum.plain;
-			if (daddy.biome1 != mummy.biome1) 
-			{
-				if (Random.Range (0, 2) > 0) 
-				{
+			if (daddy.biome1 != mummy.biome1) {
+				if (Random.Range (0, 2) > 0) {
 					biome1 = mummy.biome1;
 				}
 			}
 		}
+		else if(daddy.biome1 == BiomeEnum.crater || mummy.biome1 == BiomeEnum.crater)
+		{
+			biome1 = BiomeEnum.crater;
+		}
+		else if(daddy.biome1 == BiomeEnum.cave || mummy.biome1 == BiomeEnum.cave)
+		{
+			biome1 = BiomeEnum.cave;
+		}
 
 		//si ton premier biome est pas "plaine" alors tu peux pas avoir de biome2 sauf dans un cas:
-		if (biome1 != BiomeEnum.plain) 
+		if (biome1 != BiomeEnum.plain ) 
 		{
 			if (biome1 == BiomeEnum.crater) 
 			{
@@ -77,11 +82,11 @@ public class DroppedSeed : MonoBehaviour
 						biome2 = BiomeEnum.cave;
 					}
 				}
-				//on peut return ya pu de possibilités pour toi la.
-				return;
+//				//on peut return ya pu de possibilités pour toi la.
+//				break;
 			}
 		}
-		if (daddy.biome1 == BiomeEnum.crater || daddy.biome2 == BiomeEnum.crater || mummy.biome1 == BiomeEnum.crater || mummy.biome2 == BiomeEnum.crater) 
+		if (biome1 != BiomeEnum.crater && biome1 != BiomeEnum.cave && daddy.biome1 == BiomeEnum.crater || daddy.biome2 == BiomeEnum.crater || mummy.biome1 == BiomeEnum.crater || mummy.biome2 == BiomeEnum.crater) 
 		{
 			//tu as une chance sur 2 que ton biome2 soit crater.
 			if (Random.Range (0, 2) > 0) 
@@ -89,19 +94,19 @@ public class DroppedSeed : MonoBehaviour
 				biome2 = BiomeEnum.crater;
 			}
 		}
-		if (biome2 != BiomeEnum.crater) {
+		if (biome2 == BiomeEnum.none) {
 			//si maman ou papa ont un gene "cave" alors...
 			if (daddy.biome1 == BiomeEnum.cave || daddy.biome2 == BiomeEnum.cave || daddy.biome3 == BiomeEnum.cave || mummy.biome1 == BiomeEnum.cave || mummy.biome2 == BiomeEnum.cave || mummy.biome3 == BiomeEnum.cave) {
 				//tu as une chance sur 2 que ton biome2 soit cave.
 				if (Random.Range (0, 2) > 0) {
 					biome2 = BiomeEnum.cave;
 				}
-				//on peut return ya pu de possibilités pour toi la.
-				return;
+//				//on peut return ya pu de possibilités pour toi la.
+//				break;
 			}
 		} else 
 		{
-			if (daddy.biome1 == BiomeEnum.cave || daddy.biome2 == BiomeEnum.cave || daddy.biome3 == BiomeEnum.cave || mummy.biome1 == BiomeEnum.cave || mummy.biome2 == BiomeEnum.cave || mummy.biome3 == BiomeEnum.cave) {
+			if (biome2 ==BiomeEnum.crater && daddy.biome1 == BiomeEnum.cave || daddy.biome2 == BiomeEnum.cave || daddy.biome3 == BiomeEnum.cave || mummy.biome1 == BiomeEnum.cave || mummy.biome2 == BiomeEnum.cave || mummy.biome3 == BiomeEnum.cave) {
 				//tu as une chance sur 2 que ton biome3 soit cave.
 				if (Random.Range (0, 2) > 0) {
 					biome3 = BiomeEnum.cave;
@@ -109,6 +114,26 @@ public class DroppedSeed : MonoBehaviour
 		}
 
 
+		}
+
+		for (int i = 0; i < PlantCollection.instance.allPlantObjects.Length; i++) 
+		{
+			if (PlantCollection.instance.allPlantObjects [i].plantType == plantType && PlantCollection.instance.allPlantObjects [i].biome1 == biome1 && PlantCollection.instance.allPlantObjects [i].biome2 == biome2 && PlantCollection.instance.allPlantObjects [i].biome3 == biome3) 
+			{
+				me = PlantCollection.instance.allPlantObjects [i];
+
+				return;
+			}
+		}
+		if (me == null) 
+		{
+			if (Random.Range (0, 2) > 0) 
+			{
+				me = daddy;
+			} else 
+			{
+				me = mummy;
+			}
 		}
 	}
 

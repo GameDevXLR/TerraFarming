@@ -89,6 +89,7 @@ public class PlantationManager : MonoBehaviour {
 					go.SetActive (true);
 
 				}
+				go.transform.localScale = Vector3.one;
 			}
 			break;
 		case BiomeEnum.crater:
@@ -124,6 +125,8 @@ public class PlantationManager : MonoBehaviour {
 					go.SetActive (true);
 
 				}
+				go.transform.localScale = Vector3.one;
+
 			}
 			break;
 		case BiomeEnum.cave:
@@ -158,6 +161,8 @@ public class PlantationManager : MonoBehaviour {
 					go.SetActive (true);
 
 				}
+				go.transform.localScale = Vector3.one;
+
 			}
 			break;
 		default:
@@ -189,6 +194,8 @@ public class PlantationManager : MonoBehaviour {
 		foreach (GameObject go in actualUIElements) 
 		{
 			go.transform.SetParent (PlantCollection.instance.collectionContentUI);
+			go.transform.localScale = Vector3.one;
+
 			go.SetActive (true);
 		}
 		if (isSeedMenuOpen) 
