@@ -151,6 +151,7 @@ public class ResourcesManager : MonoBehaviour {
 
     public void setRessourceQuantity(ressourceEnum ress, int qty)
     {
+		
         switch (ress)
         {
             case ressourceEnum.bush:

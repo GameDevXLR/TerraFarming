@@ -59,6 +59,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1607292276896914
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4307843384019172}
+  m_Layer: 0
+  m_Name: MusicGameAudioS
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1706919216831224
 GameObject:
   m_ObjectHideFlags: 1
@@ -101,10 +116,45 @@ GameObject:
   - component: {fileID: 4665936599316390}
   - component: {fileID: 114439361103141208}
   - component: {fileID: 114713450751480546}
+  - component: {fileID: 114702498138090510}
   - component: {fileID: 114490684618707150}
   - component: {fileID: 114087612648316210}
+  - component: {fileID: 114627608927712776}
+  - component: {fileID: 114567552480894772}
   m_Layer: 0
   m_Name: InGameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1834943469071858
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4287302184034340}
+  - component: {fileID: 82328306850153216}
+  m_Layer: 0
+  m_Name: AudioSkeys
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1879863144820842
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4752907718431548}
+  - component: {fileID: 82061349721930248}
+  m_Layer: 0
+  m_Name: AudioSBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,6 +173,19 @@ Transform:
   m_Father: {fileID: 4429358829374200}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4287302184034340
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1834943469071858}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4307843384019172}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4290544887384860
 Transform:
   m_ObjectHideFlags: 1
@@ -135,6 +198,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4429358829374200}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4307843384019172
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1607292276896914}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.30818486, y: -1.5524454, z: -2.5635815}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4752907718431548}
+  - {fileID: 4287302184034340}
+  m_Father: {fileID: 4665936599316390}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4429358829374200
 Transform:
@@ -177,6 +255,7 @@ Transform:
   m_Children:
   - {fileID: 4515089506470852}
   - {fileID: 4429358829374200}
+  - {fileID: 4307843384019172}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -193,6 +272,100 @@ Transform:
   m_Father: {fileID: 4429358829374200}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4752907718431548
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1879863144820842}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4307843384019172}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &82061349721930248
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1879863144820842}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243646513193933814, guid: 7b82724dccb674345bc8c180023bfb11,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!82 &82150504584764248
 AudioSource:
   m_ObjectHideFlags: 1
@@ -294,6 +467,87 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 0
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!82 &82328306850153216
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1834943469071858}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243210965432483364, guid: 7b82724dccb674345bc8c180023bfb11,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
@@ -609,35 +863,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bea06e669c4646341b5bb1743cad2572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OreCanvasObj: {fileID: 0}
-  playerScoreTxt: {fileID: 0}
-  endGameTxt: {fileID: 0}
-  endOreGamePanel: {fileID: 0}
-  effectsAudioS: {fileID: 82956108644555218}
-  MiningAudioS: {fileID: 82150504584764248}
-  victorySnd: {fileID: 8300000, guid: a495676d836dd1d42ab5075a6f53a54b, type: 3}
-  defeatSnd: {fileID: 8300000, guid: 40b4bd60a53164e44ac4616ecafaae2d, type: 3}
-  playerController: {fileID: 0}
-  playerAnimator: {fileID: 0}
-  currentScore: 0
-  scorePointCount: 0
-  totalSessionScore: 0
-  scrollSpeed: 10
-  leftBorder: {fileID: 0}
-  rightBorder: {fileID: 0}
-  detectionCursor: {fileID: 0}
-  mainBonusArea: {fileID: 0}
-  bonusAreasObj:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  chanceOfActivatingArea: 30
-  isPlaying: 0
-  isHeadingRight: 1
-  hasClic: 0
-  timeBetweenClic: 0.2
 --- !u!114 &114439361103141208
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -670,7 +895,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rawOre: 0
-  essence: 0
+  essence: 100
   flowerSeed: 0
   bushSeed: 0
   treeSeed: 0
@@ -679,6 +904,262 @@ MonoBehaviour:
   flowerSeedDisplay: {fileID: 0}
   bushSeedDisplay: {fileID: 0}
   treeSeedDisplay: {fileID: 0}
+--- !u!114 &114567552480894772
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1732902877841896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e416e3eef059ba4b9e821397921829d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allPlantObjects:
+  - {fileID: 11400000, guid: e04c2b246d2adbb4a8f26e8926bc73cf, type: 2}
+  - {fileID: 11400000, guid: e8dde68984963f74592ba4b2c02aecad, type: 2}
+  - {fileID: 11400000, guid: a73be403d1efdb24cb3c7ea1fe78e125, type: 2}
+  - {fileID: 11400000, guid: 511cc9d9e4bf3254dae73ee916ee7b5a, type: 2}
+  - {fileID: 11400000, guid: b3f7832cb7e438d4d9d9ec6fb8f69cab, type: 2}
+  - {fileID: 11400000, guid: c582748df02b1b64e80938de1d108562, type: 2}
+  - {fileID: 11400000, guid: 1ad49ffd6fd99b148b46cb61526c9e20, type: 2}
+  - {fileID: 11400000, guid: 1924daa7eeee63d489c15a87ed2bb539, type: 2}
+  - {fileID: 11400000, guid: aa867a1ac36d205408968c91e7f68be7, type: 2}
+  - {fileID: 11400000, guid: d85e1e745664d0a40a0d59eece3832ad, type: 2}
+  - {fileID: 11400000, guid: e0dd8b27b577b434eb3d9865e78a5720, type: 2}
+  - {fileID: 11400000, guid: b59cb295d897a6b4fb3145065381e68b, type: 2}
+  - {fileID: 11400000, guid: 7c413b6c5ef569243b6254ad6614bcbb, type: 2}
+  - {fileID: 11400000, guid: 4d7dbc5bca5af314db676a7909c1039b, type: 2}
+  - {fileID: 11400000, guid: 602c52e761bd09548be3a5a4c78fe240, type: 2}
+  - {fileID: 11400000, guid: 32752611f452ca34bb8c8c5a174373e9, type: 2}
+  - {fileID: 11400000, guid: 849879ccb43aad04997dbf1a94828d57, type: 2}
+  - {fileID: 11400000, guid: bb62fe1832cb75c43892be3e7f0ee426, type: 2}
+  - {fileID: 11400000, guid: 2b9f3040e576f7d438af2269ed07a3c0, type: 2}
+  - {fileID: 11400000, guid: ea0be9f2162a4454f9d75fcd95a2ce1f, type: 2}
+  - {fileID: 11400000, guid: 787d373fbe885984b9e7e05c5072e48a, type: 2}
+  genericSeed: {fileID: 1263873175595950, guid: b624e07e557b1584191b4788660d8545,
+    type: 2}
+  plantObjectUI: {fileID: 1371589028298532, guid: a4896d7ef15c96242936daea610b7d97,
+    type: 2}
+  collectionContentUI: {fileID: 0}
+  collectionObj: {fileID: 0}
+  plainUIObjects: []
+  craterUIObjects: []
+  caveUIObjects: []
+  flowerUIObjects: []
+  bushUIObjects: []
+  treeUIObjects: []
+  notAvailableUIObjects: []
+  plainUIVisible: 1
+  craterUIVisible: 1
+  caveUIVisible: 1
+  collectionOpen: 0
+  airFlower: {fileID: 11400000, guid: 1924daa7eeee63d489c15a87ed2bb539, type: 2}
+  airBush: {fileID: 11400000, guid: 1ad49ffd6fd99b148b46cb61526c9e20, type: 2}
+  airTree: {fileID: 11400000, guid: aa867a1ac36d205408968c91e7f68be7, type: 2}
+  caveFlower: {fileID: 11400000, guid: e8dde68984963f74592ba4b2c02aecad, type: 2}
+  caveBush: {fileID: 11400000, guid: e04c2b246d2adbb4a8f26e8926bc73cf, type: 2}
+  caveTree: {fileID: 11400000, guid: a73be403d1efdb24cb3c7ea1fe78e125, type: 2}
+  craterFlower: {fileID: 11400000, guid: b3f7832cb7e438d4d9d9ec6fb8f69cab, type: 2}
+  craterBush: {fileID: 11400000, guid: 511cc9d9e4bf3254dae73ee916ee7b5a, type: 2}
+  craterTree: {fileID: 11400000, guid: c582748df02b1b64e80938de1d108562, type: 2}
+  airCaveFlower: {fileID: 11400000, guid: 849879ccb43aad04997dbf1a94828d57, type: 2}
+  airCaveBush: {fileID: 11400000, guid: 32752611f452ca34bb8c8c5a174373e9, type: 2}
+  airCaveTree: {fileID: 11400000, guid: bb62fe1832cb75c43892be3e7f0ee426, type: 2}
+  airCraterFlower: {fileID: 11400000, guid: ea0be9f2162a4454f9d75fcd95a2ce1f, type: 2}
+  airCraterBush: {fileID: 11400000, guid: 2b9f3040e576f7d438af2269ed07a3c0, type: 2}
+  airCraterTree: {fileID: 11400000, guid: 787d373fbe885984b9e7e05c5072e48a, type: 2}
+  caveCraterFlower: {fileID: 11400000, guid: 4d7dbc5bca5af314db676a7909c1039b, type: 2}
+  caveCraterBush: {fileID: 11400000, guid: 7c413b6c5ef569243b6254ad6614bcbb, type: 2}
+  caveCraterTree: {fileID: 11400000, guid: 602c52e761bd09548be3a5a4c78fe240, type: 2}
+  airCaveCraterFlower: {fileID: 11400000, guid: e0dd8b27b577b434eb3d9865e78a5720,
+    type: 2}
+  airCaveCraterBush: {fileID: 11400000, guid: d85e1e745664d0a40a0d59eece3832ad, type: 2}
+  airCaveCraterTree: {fileID: 11400000, guid: b59cb295d897a6b4fb3145065381e68b, type: 2}
+--- !u!114 &114627608927712776
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1732902877841896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e34cabeeee587747aeafacd5e226fa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantationList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  plantSeedCanvas: {fileID: 0}
+  flowerSeedContent: {fileID: 0}
+  bushSeedContent: {fileID: 0}
+  treeSeedContent: {fileID: 0}
+  actualUIElements: []
+  notAvailablePlantsUI: []
+  plainSeedImg: {fileID: 0}
+  craterSeedImg: {fileID: 0}
+  caveSeedImg: {fileID: 0}
+  isSeedMenuOpen: 0
+  plantationSpot: {fileID: 0}
+--- !u!114 &114702498138090510
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1732902877841896}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eec7a43fc122d4498af4d5b234d45f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundMusic: {fileID: 8300000, guid: e2ef2e6e705d6da49963ea794e37f701, type: 3}
+  errorKey: {fileID: 8300000, guid: 40b4bd60a53164e44ac4616ecafaae2d, type: 3}
+  keys:
+  - {fileID: 8300000, guid: e43b425aa726cec42b31260980f0a1f0, type: 3}
+  - {fileID: 8300000, guid: e083f3c8f716e8f488dab169828a3fee, type: 3}
+  - {fileID: 8300000, guid: da893d601c0f6d04587c7ece11201dbe, type: 3}
+  - {fileID: 8300000, guid: 858a5d9c0ea92ac4e8c0fd9e13d451e5, type: 3}
+  - {fileID: 8300000, guid: 258d4f08421a05147b3c347fd26c090b, type: 3}
+  timeBetweenKeys: 0.4
+  keySpeed: 20
+  whiteKeyCode: 10
+  keyTrack: 0000000001000000020000000a000000010000000a000000000000000a000000030000000a0000000a0000000a0000000a0000000000000001000000020000000a000000040000000a000000030000000a000000000000000a000000010000000a0000000a0000000a0000000000000001000000020000000a000000010000000a000000000000000a000000030000000a0000000a0000000a0000000a000000010000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a000000
+  audioSBackground: {fileID: 82061349721930248}
+  audioSKeys: {fileID: 82328306850153216}
+  oreGameCanvas: {fileID: 0}
+  keyStartPosition: {fileID: 0}
+  keyPool:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  score: 0
+  scoreTxt: {fileID: 0}
+  scorePanel: {fileID: 0}
+  mistakesCountDisplay: {fileID: 0}
+  comboCountDisplay: {fileID: 0}
+  commentForPlayer: {fileID: 0}
+  allInputs: 7a000000730000007100000064000000
+  allSpritesForInput:
+  - {fileID: 21300000, guid: 12a1af959b207144b819bda45894fe20, type: 3}
+  - {fileID: 21300000, guid: 78a9c9d6891381a47aea9ea37782a7bf, type: 3}
+  - {fileID: 21300000, guid: 3de9661f83942e646a7cf1d58aa23878, type: 3}
+  - {fileID: 21300000, guid: b0a15c6a420f18a418d37c7011d929cd, type: 3}
 --- !u!114 &114713450751480546
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -690,7 +1171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28a7cf9aa8d10f24b896e525b1509d95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OreGame: {fileID: 114087612648316210}
+  OreGame: {fileID: 114702498138090510}
   playerController: {fileID: 0}
   InterfaceAnimator: {fileID: 0}
   cleanParticle: {fileID: 0}
@@ -704,3 +1185,4 @@ MonoBehaviour:
   quitCanvas: {fileID: 0}
   resumeBtn: {fileID: 0}
   quitBtn: {fileID: 0}
+  isPlanting: 0
