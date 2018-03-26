@@ -1390,6 +1390,37 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 212920303}
+--- !u!84 &214595624
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 333
+  m_Height: 187
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 1
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!4 &221885712
 Transform:
   m_ObjectHideFlags: 0
@@ -6602,37 +6633,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!84 &455917582
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 628
-  m_Height: 353
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 1
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &465230686
 GameObject:
   m_ObjectHideFlags: 0
@@ -8621,37 +8621,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4167208565373440, guid: 6dd412219421c07469cb86078ff55cf6,
     type: 2}
   m_PrefabInternal: {fileID: 1816038820}
---- !u!84 &588321478
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 628
-  m_Height: 353
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 1
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!95 &596973333 stripped
 Animator:
   m_PrefabParentObject: {fileID: 95462060875026576, guid: 4168b679eb27d1a4f927214d8fa56e19,
@@ -17395,6 +17364,37 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 495961989}
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!84 &1759199592
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 333
+  m_Height: 187
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 1
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1769944933
 GameObject:
   m_ObjectHideFlags: 0
@@ -17871,7 +17871,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 0
   m_RenderingPath: 1
-  m_TargetTexture: {fileID: 455917582}
+  m_TargetTexture: {fileID: 214595624}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -19545,8 +19545,8 @@ MonoBehaviour:
   sourceCamera: {fileID: 2010303542}
   outlineCamera: {fileID: 1833690391}
   outlineShaderMaterial: {fileID: 0}
-  renderTexture: {fileID: 455917582}
-  extraRenderTexture: {fileID: 588321478}
+  renderTexture: {fileID: 214595624}
+  extraRenderTexture: {fileID: 1759199592}
 --- !u!114 &2010303545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20170,10 +20170,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: da893d601c0f6d04587c7ece11201dbe, type: 3}
   - {fileID: 8300000, guid: 858a5d9c0ea92ac4e8c0fd9e13d451e5, type: 3}
   - {fileID: 8300000, guid: 258d4f08421a05147b3c347fd26c090b, type: 3}
-  timeBetweenKeys: 0.5
+  timeBetweenKeys: 0.2
   errorKeyCode: 0
   whiteKeyCode: 10
-  keyTrack: 0000000001000000020000000a000000010000000a000000000000000a000000030000000a0000000a0000000a0000000a00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  keyTrack: 0000000001000000020000000a000000010000000a000000000000000a000000030000000a0000000a0000000a0000000a0000000000000001000000020000000a000000040000000a000000030000000a000000000000000a000000010000000a0000000a0000000a0000000000000001000000020000000a000000010000000a000000000000000a000000030000000a0000000a0000000a0000000a000000010000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a000000
   audioSBackground: {fileID: 1131708352}
   audioSKeys: {fileID: 1458986741}
 --- !u!4 &2110547442

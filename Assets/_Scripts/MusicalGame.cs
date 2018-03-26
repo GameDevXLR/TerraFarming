@@ -26,6 +26,7 @@ public class MusicalGame : MonoBehaviour
 	int currentPos;
 	float musicLenght;
 	float startTime;
+	float lastKeyTime;
 	int tmpkey;
 
 
@@ -40,6 +41,20 @@ public class MusicalGame : MonoBehaviour
 	{
 		if (isPlaying) 
 		{
+			if (Time.time > lastKeyTime + timeBetweenKeys) 
+			{
+				tmpkey = keyTrack [currentPos];
+				if (tmpkey == whiteKeyCode) 
+				{
+					//					audioSKeys.PlayOneShot (white);
+
+				} else 
+				{
+					audioSKeys.PlayOneShot (keys[tmpkey]);
+				}
+				currentPos++;
+				lastKeyTime = Time.time;
+			}
 			if (Time.time > startTime + musicLenght) 
 			{
 				isPlaying = false;
@@ -72,5 +87,6 @@ public class MusicalGame : MonoBehaviour
 	{
 		audioSBackground.PlayOneShot (backgroundMusic);
 		startTime = Time.time;
+		lastKeyTime = Time.time;
 	}
 }
