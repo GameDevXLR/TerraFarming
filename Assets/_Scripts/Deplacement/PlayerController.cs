@@ -34,11 +34,11 @@ public class PlayerController : MonoBehaviour
             {
 
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDirection), 0.15F);
-                anim.SetBool("IsWalking", true);
+                anim.SetBool("iswalking", true);
             }
             else
             {
-                anim.SetBool("IsWalking", false);
+                anim.SetBool("iswalking", false);
             }
             //moveDirection.Normalize() ;
             moveDirection *= speed;
