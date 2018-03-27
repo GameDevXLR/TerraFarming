@@ -154,7 +154,7 @@ public class MusicalGame : MonoBehaviour
 	//lancer une partie:
 	void StartPlayingTheGame ()
 	{
-		InGameManager.instance.playerController.isActive = false;
+		InGameManager.instance.playerController.enabled = false;
 
 		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().gameObject.SetActive (true);
 		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().Play ();
@@ -209,7 +209,7 @@ public class MusicalGame : MonoBehaviour
 		ChangeMusicalGameScore(longestCombo);
 
 		scoreMenuOpen = true;
-		InGameManager.instance.playerController.isActive = true; 
+		InGameManager.instance.playerController.enabled = true; 
 		scorePanel.SetActive (true);
 		Debug.Log("Game is over. Your score: "+ score.ToString());
 		Invoke ("CloseTheGame", 3f);
