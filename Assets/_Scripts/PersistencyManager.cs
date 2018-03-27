@@ -8,8 +8,8 @@ public class PersistencyManager : MonoBehaviour {
 	void Start () 
 	{
 		DontDestroyOnLoad (gameObject);
-		Cursor.visible = false;
-		Cursor.lockState = CursorLockMode.Locked;
+//		Cursor.visible = false;
+//		Cursor.lockState = CursorLockMode.Locked;
 	}
 	
 

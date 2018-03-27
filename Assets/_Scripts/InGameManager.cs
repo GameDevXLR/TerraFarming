@@ -9,10 +9,10 @@ using System.IO;
 
 public class InGameManager : MonoBehaviour {
 
-	public OreGatheringGame OreGame;
+	public MusicalGame OreGame;
 	public static InGameManager instance;
 
-	public ThirdPersonUserControl playerController;
+	public PlayerController playerController;
 	public Animator InterfaceAnimator;
 
 	public ParticleSystem cleanParticle;
@@ -40,9 +40,9 @@ public class InGameManager : MonoBehaviour {
 		}
         if (PlayerPrefs.GetString("Game") == "continue")
         {
-            Invoke("LoadGame", 0.1f);
+            //Invoke("LoadGame", 0.1f);
         }
-        InvokeRepeating("SaveGame", 30.0f, 30f);
+        //InvokeRepeating("SaveGame", 30.0f, 30f);
 
     }
 
@@ -92,7 +92,8 @@ public class InGameManager : MonoBehaviour {
         save.treeSeed = ResourcesManager.instance.treeSeed;
         save.flowerSeed = ResourcesManager.instance.flowerSeed;
 
-        save.plantList = PlantationManager.instance.savePlantation();
+		//désactiver temporairement le temps de mettre ca au propre.
+//        save.plantList = PlantationManager.instance.savePlantation();
 
         return save;
     }
