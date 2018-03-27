@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class IdlePlayerState : StateMachineBehaviour
 {
-
-    
     protected Vector3 moveDirection = Vector3.zero;
 
     protected PlayerController controller;
@@ -22,7 +20,6 @@ public class IdlePlayerState : StateMachineBehaviour
         if (Cc.isGrounded)
         {
             moveDirection = calculateMoveDirection();
-            
         }
         
         moveDirection.y -= controller.gravity * Time.deltaTime;
