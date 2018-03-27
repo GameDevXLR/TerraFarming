@@ -31,7 +31,7 @@ public class MovingKeyForMusicalGame : MonoBehaviour {
 			else
 				//si tu te trompe de touche:
 			if (Input.GetKey (possibleKeys [0]) && possibleKeys [0] != expectedKey || Input.GetKey (possibleKeys [1]) && possibleKeys [1] != expectedKey || Input.GetKey (possibleKeys [2]) && possibleKeys [2] != expectedKey || Input.GetKey (possibleKeys [3]) && possibleKeys [3] != expectedKey) {
-				MusicalGame.instance.audioSKeys.PlayOneShot (MusicalGame.instance.errorKey);
+					MusicalGame.instance.audioSKeys.PlayOneShot (MusicalGame.instance.myMusicGame.errorKey);
 				isActive = false;
 			}
 
