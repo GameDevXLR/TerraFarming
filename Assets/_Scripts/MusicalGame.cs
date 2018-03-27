@@ -71,6 +71,7 @@ public class MusicalGame : MonoBehaviour
 	//private fields...
 	bool isPlaying;
 	bool scoreMenuOpen;
+	bool isAddingKeys;
 	int currentPos;
 	float musicLenght;
 	float startTime;
@@ -92,14 +93,9 @@ public class MusicalGame : MonoBehaviour
 		}
 	}
 
-	void Start () 
-	{
-		musicLenght = myMusicGame.backgroundMusic.length;
-	}
-
 	public void OnEnable()
 	{
-		oreGameCanvas.enabled = true;
+		StopAllCoroutines ();
 		StartPlayingTheGame ();
 	}
 	public void OnDisable()
@@ -116,39 +112,37 @@ public class MusicalGame : MonoBehaviour
 			if (Input.GetKeyDown (CustomInputManager.instance.actionKey) || Input.GetKeyDown (KeyCode.Escape)) 
 			{
 				CloseTheGame ();
+
 			}
 		}
 			
 		if (isPlaying) 
 		{
-			if (Time.time > lastKeyTime + myMusicGame.timeBetweenKeys) 
-			{
-				if (currentPos >= myMusicGame.keyTrack.Length) 
-				{
-					StopAddingKeysToPlay ();
-				} else 
-				{
-					tmpkey = myMusicGame.keyTrack [currentPos];
-					if (tmpkey == myMusicGame.whiteKeyCode) 
-					{
-						//					audioSKeys.PlayOneShot (white);
+			if (isAddingKeys) {
+				if (Time.time > lastKeyTime + myMusicGame.timeBetweenKeys) {
+					if (currentPos >= myMusicGame.keyTrack.Length) {
+						isAddingKeys = false;
+					} else {
+						tmpkey = myMusicGame.keyTrack [currentPos];
+						if (tmpkey == myMusicGame.whiteKeyCode) {
+							//					audioSKeys.PlayOneShot (white);
 
-					} else 
-					{
-						expectedSnd = myMusicGame.keys [tmpkey];
-						SelectTheNextKey ();
+						} else {
+							expectedSnd = myMusicGame.keys [tmpkey];
+							SelectTheNextKey ();
+						}
+						currentPos++;
+						lastKeyTime = Time.time;
 					}
-					currentPos++;
-					lastKeyTime = Time.time;
 				}
 			}
 			if (Time.time > startTime + musicLenght) 
 			{
-				isPlaying = false;
+				ShowScoreMenu();
 			}
 			if (Input.GetKeyDown (KeyCode.Escape)) 
 			{
-				StopAddingKeysToPlay ();
+				BrutalyStopTheGame ();
 			}
 		} 
 
@@ -161,6 +155,10 @@ public class MusicalGame : MonoBehaviour
 	//lancer une partie:
 	void StartPlayingTheGame ()
 	{
+		musicLenght = myMusicGame.backgroundMusic.length;
+
+		oreGameCanvas.enabled = true;
+
 		InGameManager.instance.playerController.enabled = false;
 		StartCoroutine(ChangeMainMusicVolume (false));
 
@@ -169,9 +167,11 @@ public class MusicalGame : MonoBehaviour
 		InGameManager.instance.playerController.GetComponent<Animator>().SetBool ("ismining", true);
 
 		isPlaying = true;
+		isAddingKeys = true;
 		audioSBackground.PlayOneShot (myMusicGame.backgroundMusic);
 		startTime = Time.time;
 		lastKeyTime = Time.time;
+		currentPos = 0;
 		currentCombo = 0;
 		longestCombo = 0;
 		numberOfMistakes = 0;
@@ -197,30 +197,28 @@ public class MusicalGame : MonoBehaviour
 
 	}
 
-	//quand on a fini de faire toutes les touches, ca s'arrete ^^
-	void StopAddingKeysToPlay()
+	//arreter le jeu en chien
+	void BrutalyStopTheGame()
 	{
-		isPlaying = false;
-		currentPos = 0;
-		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().gameObject.SetActive (false);
-		InGameManager.instance.playerController.GetComponent<Animator>().SetBool ("ismining", false);
-		InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Victory", layer: -1, fixedTime: 2);
-
-		//un peu aprés ca affiche le menu des scores.
-		Invoke ("ShowScoreMenu", 1f);
+		isAddingKeys = false;
+		musicLenght = 0;
 	}
 
 	//a optimiser tout ca.
 	void ShowScoreMenu()
 	{
+		isPlaying = false;
+		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().gameObject.SetActive (false);
+		InGameManager.instance.playerController.GetComponent<Animator>().SetBool ("ismining", false);
+		InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Victory", layer: -1, fixedTime: 2);
 		//on donne des points bonus pour le plus long combo?
 		ChangeMusicalGameScore(longestCombo);
 
 		scoreMenuOpen = true;
 		InGameManager.instance.playerController.enabled = true; 
 		scorePanel.SetActive (true);
-		Debug.Log("Game is over. Your score: "+ score.ToString());
-		Invoke ("CloseTheGame", 3f);
+//		Debug.Log("Game is over. Your score: "+ score.ToString());
+		Invoke ("CloseTheGame", 4f);
 		comboCountDisplay.text = longestCombo.ToString ();
 		mistakesCountDisplay.text = numberOfMistakes.ToString();
 		ResourcesManager.instance.ChangeRawOre(score);
@@ -246,25 +244,33 @@ public class MusicalGame : MonoBehaviour
 
 	void CloseTheGame()
 	{
+		CancelInvoke ();
 		scoreMenuOpen = false;
 		scorePanel.SetActive (false);
-		this.enabled = false;
 		//arreter la musique de fond aussi
 		audioSBackground.Stop ();
 		StartCoroutine(ChangeMainMusicVolume (true));
+		this.enabled = false;
 	}
 
 	//changement du score.
 	public void ChangeMusicalGameScore(int change)
 	{
+
 		//décompte des fautes et longueur du combo.
 		if (change < 0) {
-			InGameManager.instance.playerController.GetComponent<Animator> ().SetBool("mininghit", false);
-			numberOfMistakes++;
-			lastInputWasMistake = true;
-		} else {
-			InGameManager.instance.playerController.GetComponent<Animator> ().SetBool("mininghit", true);
+			if (isPlaying) {
+				InGameManager.instance.playerController.GetComponent<Animator> ().SetBool ("mininghit", false);
+				numberOfMistakes++;
+				lastInputWasMistake = true;
+				score += change;
 
+			}
+		} else {
+			if (isPlaying) 
+			{
+				
+				InGameManager.instance.playerController.GetComponent<Animator> ().SetBool ("mininghit", true);
 			if (currentCombo > 3) 
 			{
 				//faire ici des bonus de combo?
@@ -280,9 +286,11 @@ public class MusicalGame : MonoBehaviour
 				lastInputWasMistake = false;
 			}
 			currentCombo++;
+			}
+			score += change;
+
 		}
 
-		score += change;
 		if (score <= 0) 
 		{
 			score = 0;
@@ -305,6 +313,8 @@ public class MusicalGame : MonoBehaviour
 			}
 		} else 
 		{
+			Debug.Log ("reducing sound");
+
 			while (i > -40f) 
 			{
 				i -= 1;
