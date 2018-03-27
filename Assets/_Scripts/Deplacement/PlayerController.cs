@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 6f;
     public float jumpSpeed = 8f;
     public float gravity = 20f;
+    public bool isActive = true;
 
     private Vector3 moveDirection = Vector3.zero;
 

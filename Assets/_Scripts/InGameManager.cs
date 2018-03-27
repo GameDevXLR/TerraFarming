@@ -12,7 +12,7 @@ public class InGameManager : MonoBehaviour {
 	public MusicalGame OreGame;
 	public static InGameManager instance;
 
-	public ThirdPersonUserControl playerController;
+	public PlayerController playerController;
 	public Animator InterfaceAnimator;
 
 	public ParticleSystem cleanParticle;
