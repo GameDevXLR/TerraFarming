@@ -14,6 +14,12 @@ public class MovingKeyForMusicalGame : MonoBehaviour {
 	public float moveSpeed;
 	//ce jeu supporte 4 touches pas plus hein, sinon faut revoir un peu le code!
 	public KeyCode[] possibleKeys;
+	public AudioSource audioS;
+
+	void Start()
+	{
+		audioS = GetComponent<AudioSource> (); 
+	}
 
 	void OnTriggerStay2D(Collider2D other)
 	{
@@ -31,7 +37,7 @@ public class MovingKeyForMusicalGame : MonoBehaviour {
 			else
 				//si tu te trompe de touche:
 			if (Input.GetKey (possibleKeys [0]) && possibleKeys [0] != expectedKey || Input.GetKey (possibleKeys [1]) && possibleKeys [1] != expectedKey || Input.GetKey (possibleKeys [2]) && possibleKeys [2] != expectedKey || Input.GetKey (possibleKeys [3]) && possibleKeys [3] != expectedKey) {
-					MusicalGame.instance.audioSKeys.PlayOneShot (MusicalGame.instance.myMusicGame.errorKey);
+					audioS.PlayOneShot (MusicalGame.instance.myMusicGame.errorKey);
 				isActive = false;
 			}
 
@@ -82,11 +88,11 @@ public class MovingKeyForMusicalGame : MonoBehaviour {
 	{
 		isActive = false;
 		isMoving = false;
-
+		GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
 		MusicalGame.instance.keyPool.Add (gameObject);
 		transform.position = MusicalGame.instance.keyStartPosition.position;
 		hasScoreAPoint = false;
-		gameObject.SetActive (false);
+//		gameObject.SetActive (false);
 	}
 
 	void GiveAPoint()
@@ -94,7 +100,7 @@ public class MovingKeyForMusicalGame : MonoBehaviour {
 		isActive = false;
 
 		hasScoreAPoint = true;
-		MusicalGame.instance.audioSKeys.PlayOneShot (keySound);
+		audioS.PlayOneShot (keySound);
 		keyToPressImg.CrossFadeAlpha (0, 1f, true);
 //		CustomInputManager.instance.ShowHideActionButtonVisual (false);
 
@@ -103,5 +109,6 @@ public class MovingKeyForMusicalGame : MonoBehaviour {
 //		InGameManager.instance.OreGame.totalSessionScore++;
 //		InGameManager.instance.OreGame.playerScoreTxt.text = InGameManager.instance.OreGame.totalSessionScore.ToString ();
 	}
+
 
 }
