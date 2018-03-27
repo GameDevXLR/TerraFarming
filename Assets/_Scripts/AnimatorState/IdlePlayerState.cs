@@ -6,10 +6,10 @@ public class IdlePlayerState : StateMachineBehaviour
 {
 
     
-    Vector3 moveDirection = Vector3.zero;
+    protected Vector3 moveDirection = Vector3.zero;
 
-    PlayerController controller;
-    CharacterController Cc;
+    protected PlayerController controller;
+    protected CharacterController Cc;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
@@ -27,9 +27,7 @@ public class IdlePlayerState : StateMachineBehaviour
         
         moveDirection.y -= controller.gravity * Time.deltaTime;
 
-        if (moveDirection != Vector3.zero)
-            controller.anim.SetBool("iswalking", true);
-
+        switchAnime();
 
         Cc.Move(moveDirection * Time.deltaTime);
     }
@@ -46,5 +44,11 @@ public class IdlePlayerState : StateMachineBehaviour
         }
 
         return vectDirection;
+    }
+
+    public virtual void switchAnime()
+    {
+        if (moveDirection.x != 0 || moveDirection.z != 0)
+            controller.anim.SetBool("iswalking", true);
     }
 }
