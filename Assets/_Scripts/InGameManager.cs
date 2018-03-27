@@ -40,9 +40,9 @@ public class InGameManager : MonoBehaviour {
 		}
         if (PlayerPrefs.GetString("Game") == "continue")
         {
-            Invoke("LoadGame", 0.1f);
+            //Invoke("LoadGame", 0.1f);
         }
-        InvokeRepeating("SaveGame", 30.0f, 30f);
+        //InvokeRepeating("SaveGame", 30.0f, 30f);
 
     }
 

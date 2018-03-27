@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
     public float speed = 6f;
@@ -12,24 +14,32 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
 
     CharacterController Cc;
-    NavMeshAgent navMeshAgent;
+    Animator anim;
 
 
     private void Start()
     {
         Cc = GetComponent<CharacterController>();
-        navMeshAgent = this.GetComponent<NavMeshAgent>();
-        //navMeshAgent.updatePosition = false;
+        anim = GetComponent<Animator>();
+
     }
 
     private void Update()
     {
-
         if (Cc.isGrounded)
-    {       moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        {
+            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             if (moveDirection != Vector3.zero)
+            {
+
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDirection), 0.15F);
-            moveDirection.Normalize() ;
+                anim.SetBool("IsWalking", true);
+            }
+            else
+            {
+                anim.SetBool("IsWalking", false);
+            }
+            //moveDirection.Normalize() ;
             moveDirection *= speed;
 
             if (Input.GetButtonDown("Jump"))
