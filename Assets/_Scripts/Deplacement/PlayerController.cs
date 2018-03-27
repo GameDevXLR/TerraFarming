@@ -1,21 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
     public float speed = 6f;
     public float jumpSpeed = 8f;
     public float gravity = 20f;
+
     private Vector3 moveDirection = Vector3.zero;
 
     CharacterController Cc;
-
+    NavMeshAgent navMeshAgent;
 
 
     private void Start()
     {
         Cc = GetComponent<CharacterController>();
+        navMeshAgent = this.GetComponent<NavMeshAgent>();
+        //navMeshAgent.updatePosition = false;
     }
 
     private void Update()
@@ -23,7 +27,6 @@ public class PlayerController : MonoBehaviour
 
         if (Cc.isGrounded)
     {       moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            //transform.TransformVector(moveDirection);
             if (moveDirection != Vector3.zero)
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDirection), 0.15F);
             moveDirection.Normalize() ;
