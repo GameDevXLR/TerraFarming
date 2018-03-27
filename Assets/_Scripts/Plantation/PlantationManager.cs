@@ -9,21 +9,26 @@ public class PlantationManager : MonoBehaviour {
 	public static PlantationManager instance;
     
 	public List<PlantationSpot> plantationList;
-    
-	public GameObject plantSeedPlainCanvas;
-	public GameObject plantSeedCraterCanvas;
-	public GameObject plantSeedCaveCanvas;
-	public Image plainSelectedSeedImg;
-	public Image craterSelectedSeedImg;
-	public Image caveSelectedSeedImg;
+	[Header("gestion du menu de plantage de graine")]
+
+	//nouveau canvas remplacant tous les autres.
+	public Canvas plantSeedCanvas;
+
+	public Transform flowerSeedContent;
+	public Transform bushSeedContent;
+	public Transform treeSeedContent;
+
+	public List<GameObject> actualUIElements;
+	public List<GameObject> notAvailablePlantsUI;
+	bool notAvailableVisible;
+
+	public Image plainSeedImg;
+	public Image craterSeedImg;
+	public Image caveSeedImg;
 
 	public bool isSeedMenuOpen;
-	public int currentPlantTypeIndex;
 	//le plantation spot avec lequel on interagit actuellement
 	public PlantationSpotEnhanced plantationSpot;
-
-	//icone pour quitter le menu de selec de graine:
-	public Sprite leaveMenuIcon;
 
     private void Awake()
     {
@@ -36,120 +41,6 @@ public class PlantationManager : MonoBehaviour {
 	{
 		if (isSeedMenuOpen && plantationSpot) 
 		{
-			if (Input.GetKeyDown (CustomInputManager.instance.actionKey)) 
-			{
-				switch (plantationSpot.spotBiome) 
-				{
-				case BiomeEnum.plain:
-
-					switch (currentPlantTypeIndex) 
-					{
-					case 1:
-						if (PlantCollection.instance.airBushSeeds <= 0) {
-							return;
-						}
-						break;
-					case 0:
-						if (PlantCollection.instance.airFlowerSeeds <= 0) {
-							return;
-						}
-						break;
-					case 2:
-						if (PlantCollection.instance.airTreeSeeds <= 0) {
-							return;
-						}
-						break;
-					case 3:
-						HidePlantTypeMenu ();
-						return;
-					default:
-						break;
-					}
-					break;
-				case BiomeEnum.crater:
-
-					switch (currentPlantTypeIndex) 
-					{
-					case 1:
-						if (PlantCollection.instance.craterBushSeeds <= 0) {
-							return;
-						}
-						break;
-					case 0:
-						if (PlantCollection.instance.craterFlowerSeeds <= 0) {
-							return;
-						}
-						break;
-					case 2:
-						if (PlantCollection.instance.craterTreeSeeds <= 0) {
-							return;
-						}
-						break;
-					case 3:
-						HidePlantTypeMenu ();
-						return;
-					default:
-						break;
-					}
-					break;
-				case BiomeEnum.cave:
-
-					switch (currentPlantTypeIndex) 
-					{
-					case 1:
-						if (PlantCollection.instance.caveBushSeeds <= 0) {
-							return;
-						}
-						break;
-					case 0:
-						if (PlantCollection.instance.caveFlowerSeeds <= 0) {
-							return;
-						}
-						break;
-					case 2:
-						if (PlantCollection.instance.caveTreeSeeds <= 0) {
-							return;
-						}
-						break;
-					case 3:
-						HidePlantTypeMenu ();
-						return;
-					default:
-						break;
-					}
-					break;
-
-				default:
-					Debug.Log ("wrong biome on this spot");
-					break;
-				}
-				plantationSpot.SelectPlantType (currentPlantTypeIndex);
-				InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Plant", layer: -1, fixedTime: 2);
-				plantationSpot.plantAudioS.PlayOneShot (plantationSpot.planterSnd);
-				InGameManager.instance.cleanParticle.GetComponent<ParticleSystem> ().Play ();
-				HidePlantTypeMenu ();
-
-			}
-				//faire défiler les graines:
-				if (Input.GetKeyDown (CustomInputManager.instance.leftKey )|| Input.GetKeyDown (KeyCode.LeftArrow)) 
-				{
-
-					if (currentPlantTypeIndex==0) 
-					{
-						currentPlantTypeIndex = 4;
-					}
-					ChangePlantTypeIndex (true);
-				}
-				if (Input.GetKeyDown (CustomInputManager.instance.rightKey)|| Input.GetKeyDown (KeyCode.RightArrow)) 
-				{
-				if (currentPlantTypeIndex == 3) 
-					{
-						currentPlantTypeIndex = -1;
-
-					}
-					ChangePlantTypeIndex (false);
-				}
-
 				//annuler
 				if (Input.GetKeyDown (KeyCode.Escape)) 
 				{
@@ -159,129 +50,185 @@ public class PlantationManager : MonoBehaviour {
 	}
 	#region SeedsMenus
 
-	public void ChangePlantTypeIndex(bool scrollLeft)
+	public void ShowPlantTypeMenu(PlantationSpotEnhanced spot)
 	{
-		if (scrollLeft) 
-		{
-			currentPlantTypeIndex--;
-		} else 
-		{
-			currentPlantTypeIndex++;
-		}
-		ActualizePlantTypeUI ();
-	}
-
-	public void ActualizePlantTypeUI()
-	{
+		plantSeedCanvas.enabled = true;
+		plantationSpot = spot;
 		switch (plantationSpot.spotBiome) 
 		{
 		case BiomeEnum.plain:
-			switch (currentPlantTypeIndex) 
+			plainSeedImg.enabled = true;
+			craterSeedImg.enabled = false;
+			caveSeedImg.enabled = false;
+			foreach (GameObject go in PlantCollection.instance.plainUIObjects) 
 			{
-			case 0:
-				plainSelectedSeedImg.sprite = PlantCollection.instance.airFlower.plantIcon;
-				break;
-			case 1:
-				plainSelectedSeedImg.sprite = PlantCollection.instance.airBush.plantIcon;
-				break;
-			case 2:
-				plainSelectedSeedImg.sprite = PlantCollection.instance.airTree.plantIcon;
-				break;
-			case 3:
-				plainSelectedSeedImg.sprite = leaveMenuIcon;
-				break;
-			default:
-				Debug.Log ("planage sur l'icone la!");
-				break;
+//				go.transform.SetParent (plantSeedContent);
+				switch (go.GetComponent<PlantItemUI>().myPlant.plantType) 
+				{
+				case PlantTypeEnum.flower:
+					go.transform.SetParent (flowerSeedContent);
+					break;
+				case PlantTypeEnum.bush:
+					go.transform.SetParent (bushSeedContent);
+					break;
+				case PlantTypeEnum.tree:
+					go.transform.SetParent (treeSeedContent);
+					break;
+				default:
+					break;
+				}
+				actualUIElements.Add (go);
+				if (go.GetComponent<PlantItemUI> ().seeds == 0) 
+				{
+					go.SetActive (false);
+					go.GetComponent<PlantItemUI> ().isNotAvailable.enabled = true;
+					notAvailablePlantsUI.Add (go);
+				}
+				else 
+				{
+					go.SetActive (true);
+
+				}
+				go.transform.localScale = Vector3.one;
 			}
 			break;
 		case BiomeEnum.crater:
-			switch (currentPlantTypeIndex) 
+			plainSeedImg.enabled = false;
+			craterSeedImg.enabled = true;
+			caveSeedImg.enabled = false;
+			foreach (GameObject go in PlantCollection.instance.craterUIObjects) 
 			{
-			case 0:
-				craterSelectedSeedImg.sprite = PlantCollection.instance.craterFlower.plantIcon;
-				break;
-			case 1:
-				craterSelectedSeedImg.sprite = PlantCollection.instance.craterBush.plantIcon;
-				break;
-			case 2:
-				craterSelectedSeedImg.sprite = PlantCollection.instance.craterTree.plantIcon;
-				break;
-			case 3:
-				craterSelectedSeedImg.sprite = leaveMenuIcon;
-				break;
-			default:
-				Debug.Log ("planage sur l'icone la!");
-				break;
+				//				go.transform.SetParent (plantSeedContent);
+				switch (go.GetComponent<PlantItemUI>().myPlant.plantType) 
+				{
+				case PlantTypeEnum.flower:
+					go.transform.SetParent (flowerSeedContent);
+					break;
+				case PlantTypeEnum.bush:
+					go.transform.SetParent (bushSeedContent);
+					break;
+				case PlantTypeEnum.tree:
+					go.transform.SetParent (treeSeedContent);
+					break;
+				default:
+					break;
+				}
+				actualUIElements.Add (go);
+				if (go.GetComponent<PlantItemUI> ().seeds == 0) 
+				{
+					go.SetActive (false);
+					go.GetComponent<PlantItemUI> ().isNotAvailable.enabled = true;
+					notAvailablePlantsUI.Add (go);
+				}
+				else 
+				{
+					go.SetActive (true);
+
+				}
+				go.transform.localScale = Vector3.one;
+
 			}
 			break;
 		case BiomeEnum.cave:
-			switch (currentPlantTypeIndex) 
+			plainSeedImg.enabled = false;
+			craterSeedImg.enabled = false;
+			caveSeedImg.enabled = true;
+			foreach (GameObject go in PlantCollection.instance.caveUIObjects) 
 			{
-			case 0:
-				caveSelectedSeedImg.sprite = PlantCollection.instance.caveFlower.plantIcon;
-				break;
-			case 1:
-				caveSelectedSeedImg.sprite = PlantCollection.instance.caveBush.plantIcon;
-				break;
-			case 2:
-				caveSelectedSeedImg.sprite = PlantCollection.instance.caveTree.plantIcon;
-				break;
-			case 3:
-				caveSelectedSeedImg.sprite = leaveMenuIcon;
-				break;
-			default:
-				Debug.Log ("planage sur l'icone la!");
-				break;
+				//				go.transform.SetParent (plantSeedContent);
+				switch (go.GetComponent<PlantItemUI>().myPlant.plantType) 
+				{
+				case PlantTypeEnum.flower:
+					go.transform.SetParent (flowerSeedContent);
+					break;
+				case PlantTypeEnum.bush:
+					go.transform.SetParent (bushSeedContent);
+					break;
+				case PlantTypeEnum.tree:
+					go.transform.SetParent (treeSeedContent);
+					break;
+				default:
+					break;
+				}
+				actualUIElements.Add (go);
+				if (go.GetComponent<PlantItemUI> ().seeds == 0) {
+					go.SetActive (false);
+					go.GetComponent<PlantItemUI> ().isNotAvailable.enabled = true;
+					notAvailablePlantsUI.Add (go);
+				} 
+				else 
+				{
+					go.SetActive (true);
+
+				}
+				go.transform.localScale = Vector3.one;
+
 			}
 			break;
-
 		default:
-			Debug.Log ("wrong biome on this spot");
 			break;
 		}
 
+		InGameManager.instance.isPlanting = true;
+		InGameManager.instance.playerController.isActive = false;
+		isSeedMenuOpen = true;
+		ShowFlowerSeedContent ();
 	}
 
-
-	public void ShowPlantTypeMenu(PlantationSpotEnhanced spot)
+	public void ShowNotAvailableItems()
 	{
-		plantationSpot = spot;
-		if (!isSeedMenuOpen)
-		{
-			switch (spot.spotBiome) 
-			{
-			case BiomeEnum.plain:
-				plantSeedPlainCanvas.SetActive (true);
-				break;
-			case BiomeEnum.crater:
-				plantSeedCraterCanvas.SetActive (true);
-				break;
-			case BiomeEnum.cave:
-				plantSeedCaveCanvas.SetActive (true);
-				break;
-			default:
-				break;
-			}			
-			InGameManager.instance.isPlanting = true;
-			InGameManager.instance.playerController.isActive = false;
-			isSeedMenuOpen = true;
-			ActualizePlantTypeUI ();
+		notAvailableVisible = !notAvailableVisible;
+		foreach (var go in notAvailablePlantsUI) {
+			go.SetActive (notAvailableVisible);
 		}
 	}
-
+	public void ShowNotAvailableItems(bool show)
+	{
+		notAvailableVisible = show;
+		foreach (var go in notAvailablePlantsUI) {
+			go.SetActive (notAvailableVisible);
+		}
+	}
 	public void HidePlantTypeMenu()
 	{
+		foreach (GameObject go in actualUIElements) 
+		{
+			go.transform.SetParent (PlantCollection.instance.collectionContentUI);
+			go.transform.localScale = Vector3.one;
+
+			go.SetActive (true);
+		}
 		if (isSeedMenuOpen) 
 		{
 			plantationSpot = null;
-			plantSeedPlainCanvas.SetActive (false);
-			plantSeedCraterCanvas.SetActive (false);
-			plantSeedCaveCanvas.SetActive (false);
+			plantSeedCanvas.enabled = false;
 			InGameManager.instance.isPlanting = false;
 			InGameManager.instance.playerController.isActive = true;
 			isSeedMenuOpen = false;
 		}
+		actualUIElements.Clear();
+		notAvailablePlantsUI.Clear ();
+	}
+
+	public void ShowFlowerSeedContent()
+	{
+		flowerSeedContent.gameObject.SetActive (true);
+		bushSeedContent.gameObject.SetActive (false);
+		treeSeedContent.gameObject.SetActive (false);
+	}
+
+	public void ShowBushSeedContent()
+	{
+		flowerSeedContent.gameObject.SetActive (false);
+		bushSeedContent.gameObject.SetActive (true);
+		treeSeedContent.gameObject.SetActive (false);
+	}
+
+	public void ShowTreeSeedContent()
+	{
+		flowerSeedContent.gameObject.SetActive (false);
+		bushSeedContent.gameObject.SetActive (false);
+		treeSeedContent.gameObject.SetActive (true);
 	}
 	#endregion
 

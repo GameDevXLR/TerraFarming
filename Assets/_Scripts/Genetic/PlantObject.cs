@@ -14,9 +14,9 @@ public class PlantObject : ScriptableObject
 	public GameObject teenageModel;
 	public GameObject grownupModel;
 	[Tooltip("L'icone a afficher dans l'interface qui doit être associé a cette plante.")]public Sprite plantIcon;
-	[Tooltip("échelle du modèle pour que ca colle bien")]public float scale;
-	[Tooltip("temps de croissance désirée par phase(bébé/ado/adulte).")]public float desiredGrowthTime;
-	[Tooltip("temps max de croissance pour ce type de plante.")]public float maxGrowthTime;
+	[Tooltip("Echelle du modèle pour que ca colle bien")]public float scale;
+	[Tooltip("Temps de croissance désirée par phase(bébé/ado/adulte).")]public float desiredGrowthTime;
+	[Tooltip("Temps max de croissance pour ce type de plante.")]public float maxGrowthTime;
 	[Tooltip("Temps min de croissance!En dessous ce serait de l'abus!")]public float minGrowthTime;
 
 }

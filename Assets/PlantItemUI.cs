@@ -15,6 +15,8 @@ public class PlantItemUI : MonoBehaviour
 	public GameObject isCraterIcon;
 	public GameObject isCaveIcon;
 
+	public Image isNotAvailable;
+
 	[Header("A compléter lors du spawn")]
 	public PlantObject myPlant;
 
@@ -50,7 +52,22 @@ public class PlantItemUI : MonoBehaviour
 		{
 			isCaveIcon.SetActive (true);
 			PlantCollection.instance.caveUIObjects.Add (gameObject);
+		}
 
+		//Gestion des types
+		switch (myPlant.plantType) 
+		{
+		case PlantTypeEnum.flower:
+			PlantCollection.instance.flowerUIObjects.Add (gameObject);
+			break;
+		case PlantTypeEnum.bush:
+			PlantCollection.instance.bushUIObjects.Add (gameObject);
+			break;
+		case PlantTypeEnum.tree:
+			PlantCollection.instance.treeUIObjects.Add (gameObject);
+			break;
+		default:
+			break;
 		}
 	}
 
@@ -76,5 +93,23 @@ public class PlantItemUI : MonoBehaviour
 	{
 		seeds += i;
 		seedCount.text = seeds.ToString ();
+		if (seeds == 0) {
+			isNotAvailable.enabled = true;
+			PlantCollection.instance.notAvailableUIObjects.Add (gameObject);
+		} else {
+			isNotAvailable.enabled = false;
+			PlantCollection.instance.notAvailableUIObjects.Remove (gameObject);
+			if (PlantCollection.instance.collectionOpen) {
+				if (PlantCollection.instance.plainUIVisible && PlantCollection.instance.plainUIObjects.Contains (gameObject)) {
+					gameObject.SetActive (true);
+				}
+				if (PlantCollection.instance.craterUIVisible && PlantCollection.instance.craterUIObjects.Contains (gameObject)) {
+					gameObject.SetActive (true);
+				}
+				if (PlantCollection.instance.caveUIVisible && PlantCollection.instance.caveUIObjects.Contains (gameObject)) {
+					gameObject.SetActive (true);
+				}
+			}
+		}
 	}
 }

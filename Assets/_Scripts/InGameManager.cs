@@ -9,7 +9,7 @@ using System.IO;
 
 public class InGameManager : MonoBehaviour {
 
-	public OreGatheringGame OreGame;
+	public MusicalGame OreGame;
 	public static InGameManager instance;
 
 	public ThirdPersonUserControl playerController;

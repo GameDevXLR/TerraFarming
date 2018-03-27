@@ -40,9 +40,9 @@ public class OreVein : MonoBehaviour
 			if (Input.GetKeyDown (CustomInputManager.instance.actionKey)) {
 				if (gamesAvailable > 0) {
 					InGameManager.instance.OreGame.enabled = true;
-					InGameManager.instance.OreGame.playerController.transform.LookAt (new Vector3(this.transform.position.x,0f,this.transform.position.z));
+					InGameManager.instance.playerController.transform.LookAt (new Vector3(this.transform.position.x,0f,this.transform.position.z));
 					//active le laser pour voir:
-					InGameManager.instance.OreGame.playerController.transform.GetChild (0).gameObject.SetActive (true);
+					InGameManager.instance.playerController.transform.GetChild (0).gameObject.SetActive (true);
 					gamesAvailable--;
 					if (gamesAvailable == 0) 
 					{

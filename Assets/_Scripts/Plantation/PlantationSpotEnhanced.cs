@@ -206,20 +206,22 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 					go.transform.position = transform.position + new Vector3 (0, 3, 0);
 					go.GetComponent<DroppedSeed> ().daddy = plantSO;
 					go.GetComponent<DroppedSeed> ().mummy = neighboursSpot [i].plantSO;
-					switch (plantType) 
-					{
-					case PlantTypeEnum.flower:
-						go.GetComponent<DroppedSeed> ().plantType = ressourceEnum.flower;
-						break;
-					case PlantTypeEnum.bush:
-						go.GetComponent<DroppedSeed> ().plantType = ressourceEnum.bush;
-						break;
-					case PlantTypeEnum.tree:
-						go.GetComponent<DroppedSeed> ().plantType = ressourceEnum.tree;
-						break;
-					default:
-						break;
-					}
+					go.GetComponent<DroppedSeed> ().plantType = plantType;
+
+//					switch (plantType) 
+//					{
+//					case PlantTypeEnum.flower:
+//						go.GetComponent<DroppedSeed> ().plantType = ressourceEnum.flower;
+//						break;
+//					case PlantTypeEnum.bush:
+//						go.GetComponent<DroppedSeed> ().plantType = ressourceEnum.bush;
+//						break;
+//					case PlantTypeEnum.tree:
+//						go.GetComponent<DroppedSeed> ().plantType = ressourceEnum.tree;
+//						break;
+//					default:
+//						break;
+//					}
 //					go.GetComponent<DroppedSeed> ().biome1 = spotBiome;
 				}
 			
@@ -550,6 +552,9 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 		lopinSeedObj.SetActive(true);
 		growthStartTime = Time.time;
 		RecquireWater();
+		InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Plant", layer: -1, fixedTime: 2);
+		plantAudioS.PlayOneShot (planterSnd);
+		InGameManager.instance.cleanParticle.GetComponent<ParticleSystem> ().Play ();
 		//le systeme suivant est provisoire. Il faut revoir le génome pour faire quelque chose de plus pertinent.
 		//le genome ne servira de toute facon qu'une fois qu'on aura la péiniere (ou le labo)
 		Genome ge = gameObject.AddComponent<Genome> ();
@@ -562,6 +567,7 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 		growthAnimator.SetFloat ("growthspeed", 3.3f);
 		HidePlantTypeMenu ();
 	}
+
 	void SpawnThenHidePlants()
 	{
 		GameObject GObaby = Instantiate (plantSO.babyModel);
