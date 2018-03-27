@@ -158,7 +158,7 @@ public class MusicalGame : MonoBehaviour
 
 		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().gameObject.SetActive (true);
 		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().Play ();
-		InGameManager.instance.playerController.GetComponent<Animator>().SetBool ("IsMining", true);
+		InGameManager.instance.playerController.GetComponent<Animator>().SetBool ("ismining", true);
 
 		isPlaying = true;
 		audioSBackground.PlayOneShot (backgroundMusic);
@@ -195,7 +195,7 @@ public class MusicalGame : MonoBehaviour
 		isPlaying = false;
 		currentPos = 0;
 		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().gameObject.SetActive (false);
-		InGameManager.instance.playerController.GetComponent<Animator>().SetBool ("IsMining", false);
+		InGameManager.instance.playerController.GetComponent<Animator>().SetBool ("ismining", false);
 		InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Victory", layer: -1, fixedTime: 2);
 
 		//un peu aprés ca affiche le menu des scores.
@@ -248,11 +248,11 @@ public class MusicalGame : MonoBehaviour
 	{
 		//décompte des fautes et longueur du combo.
 		if (change < 0) {
-			InGameManager.instance.playerController.GetComponent<Animator> ().SetBool("MiningHit", false);
+			InGameManager.instance.playerController.GetComponent<Animator> ().SetBool("mininghit", false);
 			numberOfMistakes++;
 			lastInputWasMistake = true;
 		} else {
-			InGameManager.instance.playerController.GetComponent<Animator> ().SetBool("MiningHit", true);
+			InGameManager.instance.playerController.GetComponent<Animator> ().SetBool("mininghit", true);
 
 			if (currentCombo > 3) 
 			{
