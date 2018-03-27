@@ -191,7 +191,7 @@ public class MusicalGame : MonoBehaviour
 	void AddAKeyToPlay()
 	{
 		GameObject go = keyPool [0];
-		go.SetActive (true);
+//		go.SetActive (true);
 		go.GetComponent<MovingKeyForMusicalGame> ().MusicalKeyConstructor (expectedSprite, expectedInput, expectedSnd, myMusicGame.keySpeed);
 		keyPool.RemoveAt (0);
 
