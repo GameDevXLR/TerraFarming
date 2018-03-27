@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 moveDirection = Vector3.zero;
 
-    CharacterController Cc;
-    Animator anim;
+    public CharacterController Cc;
+    public Animator anim;
 
 
     private void Start()
@@ -27,36 +27,36 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Cc.isGrounded)
-        {
-            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            if (moveDirection != Vector3.zero)
-            {
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDirection), 0.15F);
-                anim.SetBool("iswalking", true);
-            }
-            else
-            {
-                anim.SetBool("iswalking", false);
-            }
-            //moveDirection.Normalize() ;
-            moveDirection *= speed;
+        //if (Cc.isGrounded)
+        //{
+        //    moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        //    if (moveDirection != Vector3.zero)
+        //    {
+        //        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDirection), 0.15F);
+        //        anim.SetBool("iswalking", true);
+        //    }
+        //    else
+        //    {
+        //        anim.SetBool("iswalking", false);
+        //    }
+        //    //moveDirection.Normalize() ;
+        //    moveDirection *= speed;
 
-            if (Input.GetButtonDown("Jump"))
-            {
-                moveDirection.y = jumpSpeed;
-            }
-        }
-        else if (!Cc.isGrounded)
-        {
+        //    if (Input.GetButtonDown("Jump"))
+        //    {
+        //        moveDirection.y = jumpSpeed;
+        //    }
+        //}
+        //else if (!Cc.isGrounded)
+        //{
 
-            transform.Rotate(Vector3.up * Input.GetAxis("Horizontal") * Time.deltaTime * speed * 10);
-        }
+        //    transform.Rotate(Vector3.up * Input.GetAxis("Horizontal") * Time.deltaTime * speed * 10);
+        //}
 
-        moveDirection.y -= gravity * Time.deltaTime;
+        //moveDirection.y -= gravity * Time.deltaTime;
 
 
-        Cc.Move(moveDirection * Time.deltaTime);
+        //Cc.Move(moveDirection * Time.deltaTime);
         
         
     }
@@ -64,6 +64,11 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         anim.SetBool("iswalking", false);
+    }
+
+    public void rotation(Vector3 direction)
+    {
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 0.15F);
     }
 
 
