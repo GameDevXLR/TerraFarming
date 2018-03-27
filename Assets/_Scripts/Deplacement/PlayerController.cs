@@ -11,8 +11,9 @@ public class PlayerController : MonoBehaviour
     public float jumpSpeed = 8f;
     public float gravity = 20f;
     public bool isActive = true;
+    public float speedRotate;
 
-    private Vector3 moveDirection = Vector3.zero;
+    public Vector3 moveDirection = Vector3.zero;
 
     public CharacterController Cc;
     public Animator anim;
@@ -27,6 +28,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if(moveDirection != Vector3.zero)
+        {
+            rotation(moveDirection);
+        }
         //if (Cc.isGrounded)
         //{
         //    moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -68,7 +73,8 @@ public class PlayerController : MonoBehaviour
 
     public void rotation(Vector3 direction)
     {
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 0.15F);
+        Vector3 rotation = new Vector3(direction.x, 0, direction.z);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rotation), speedRotate * Time.deltaTime);
     }
 
 

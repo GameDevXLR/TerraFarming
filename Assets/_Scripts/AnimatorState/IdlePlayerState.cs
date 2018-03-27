@@ -22,19 +22,13 @@ public class IdlePlayerState : StateMachineBehaviour
         if (Cc.isGrounded)
         {
             moveDirection = calculateMoveDirection();
-            if (moveDirection != Vector3.zero)
-            {
-                //controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, Quaternion.LookRotation(moveDirection), 0.15F);
-                controller.rotation(moveDirection);
-            }
+            
         }
-        else if (!Cc.isGrounded)
-        {
-
-            controller.transform.Rotate(Vector3.up * Input.GetAxis("Horizontal") * Time.deltaTime * controller.speed * 10);
-        }
-
+        
         moveDirection.y -= controller.gravity * Time.deltaTime;
+
+        if (moveDirection != Vector3.zero)
+            controller.anim.SetBool("iswalking", true);
 
 
         Cc.Move(moveDirection * Time.deltaTime);
@@ -43,10 +37,9 @@ public class IdlePlayerState : StateMachineBehaviour
     public Vector3 calculateMoveDirection()
     {
         Vector3 vectDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        
-        vectDirection.Normalize();
+        controller.moveDirection = vectDirection;
         vectDirection *= controller.speed;
-
+        
         if (Input.GetButtonDown("Jump"))
         {
             vectDirection.y = controller.jumpSpeed;
