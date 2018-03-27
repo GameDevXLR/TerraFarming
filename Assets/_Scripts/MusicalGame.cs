@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 public class MusicalGame : MonoBehaviour 
 {
 	//Il suffit d'activer le script pour lancer le jeu.
@@ -42,6 +43,7 @@ public class MusicalGame : MonoBehaviour
 	public AudioSource audioSKeys;
 
 	[Header ("Gestion du minijeu lui-meme.")]
+	public AudioMixer mainMusicMixer;
 	public Canvas oreGameCanvas;
 	public Transform keyStartPosition;
 	public List<GameObject> keyPool;
@@ -159,6 +161,7 @@ public class MusicalGame : MonoBehaviour
 	//lancer une partie:
 	void StartPlayingTheGame ()
 	{
+		StartCoroutine(ChangeMainMusicVolume (false));
 		InGameManager.instance.playerController.isActive = false;
 
 		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().gameObject.SetActive (true);
@@ -246,6 +249,9 @@ public class MusicalGame : MonoBehaviour
 		scoreMenuOpen = false;
 		scorePanel.SetActive (false);
 		this.enabled = false;
+		//arreter la musique de fond aussi
+		audioSBackground.Stop ();
+		StartCoroutine(ChangeMainMusicVolume (true));
 	}
 
 	//changement du score.
@@ -282,5 +288,29 @@ public class MusicalGame : MonoBehaviour
 			score = 0;
 		}
 		scoreTxt.text = score.ToString ();
+	}
+
+	IEnumerator ChangeMainMusicVolume(bool Activate)
+	{
+		float i;
+		mainMusicMixer.GetFloat ("MainMusic", out i);
+		if (Activate) 
+		{
+			Debug.Log ("boosting sound");
+			while (i < 0) 
+			{
+				i += 1;
+				mainMusicMixer.SetFloat ("MainMusic", i);
+				yield return new WaitForEndOfFrame ();
+			}
+		} else 
+		{
+			while (i > -40f) 
+			{
+				i -= 1;
+				mainMusicMixer.SetFloat ("MainMusic", i);
+				yield return new WaitForEndOfFrame ();
+			}
+		}
 	}
 }
