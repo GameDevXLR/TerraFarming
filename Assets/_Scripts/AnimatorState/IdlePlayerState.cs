@@ -31,7 +31,8 @@ public class IdlePlayerState : StateMachineBehaviour
 
     public Vector3 calculateMoveDirection()
     {
-        Vector3 vectDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        //Vector3 vectDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        Vector3 vectDirection = CustomInputManager.instance.getDirection();
         controller.moveDirection = vectDirection;
         vectDirection *= controller.speed;
         
