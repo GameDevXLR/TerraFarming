@@ -11,6 +11,8 @@ public class FlyingPlayerState : IdlePlayerState {
     {
         moveDirection = CalculateMoveDirection();
         Jump();
-        Gravity();
+        if(controller.transform.position.y >= -0.5)
+            Gravity();
+        moveDirection.y *= 2;
     }
 }
