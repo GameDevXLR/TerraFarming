@@ -9,6 +9,7 @@ public class CustomInputManager : MonoBehaviour {
     public KeyCode rightKey = KeyCode.Q;
     public KeyCode leftKey = KeyCode.D;
 	public KeyCode actionKey = KeyCode.Space;
+    public KeyCode jumpKey = KeyCode.J;
 
     public static CustomInputManager instance;
 	public GameObject actionButtonVisual;

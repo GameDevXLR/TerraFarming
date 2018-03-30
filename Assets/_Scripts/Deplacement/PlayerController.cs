@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(moveDirection != Vector3.zero)
+        if(moveDirection.x != 0 || moveDirection.z !=0)
         {
             rotation(moveDirection);
         }
@@ -44,7 +44,8 @@ public class PlayerController : MonoBehaviour
     public void rotation(Vector3 direction)
     {
         Vector3 rotation = new Vector3(direction.x, 0, direction.z);
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rotation), speedRotate * Time.deltaTime);
+        
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rotation.normalized), speedRotate * Time.deltaTime);
     }
 
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WalkingPlayerState : IdlePlayerState {
 
-    public override void switchAnime()
+    public override void SwitchAnime()
     {
         if (moveDirection.x == 0 && moveDirection.z == 0)
             controller.anim.SetBool("iswalking", false);

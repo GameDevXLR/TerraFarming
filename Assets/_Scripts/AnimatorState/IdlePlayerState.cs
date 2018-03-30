@@ -17,36 +17,64 @@ public class IdlePlayerState : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        if (Cc.isGrounded)
-        {
-            moveDirection = calculateMoveDirection();
-        }
-        
-        moveDirection.y -= controller.gravity * Time.deltaTime;
-
-        switchAnime();
 
         Cc.Move(moveDirection * Time.deltaTime);
-    }
-
-    public Vector3 calculateMoveDirection()
-    {
-        //Vector3 vectDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        Vector3 vectDirection = CustomInputManager.instance.getDirection();
-        controller.moveDirection = vectDirection;
-        vectDirection *= controller.speed;
-        
-        if (Input.GetButtonDown("Jump"))
+        if (Cc.isGrounded)
         {
-            vectDirection.y = controller.jumpSpeed;
+            ActionIsGrounded();
         }
-
-        return vectDirection;
+        else
+        {
+            ActionIsNotGrounded();
+        }
+        controller.moveDirection = moveDirection;
+        SwitchAnime();
+        
     }
 
-    public virtual void switchAnime()
+
+
+    public virtual void ActionIsGrounded()
+    {
+        moveDirection = CalculateMoveDirection();
+        Jump();
+    }
+
+    public virtual void ActionIsNotGrounded()
+    {
+        
+
+        if (controller.gameObject.transform.position.y <= -1)
+            controller.anim.SetBool("isflying", true);
+        else
+        {
+            Gravity();
+        }
+    }
+
+    public void Jump()
+    {
+        if (Input.GetKey(CustomInputManager.instance.jumpKey))
+        {
+            moveDirection.y = controller.jumpSpeed;
+        }
+    }
+
+    public Vector3 CalculateMoveDirection()
+    {
+        Vector3 vectDirection = CustomInputManager.instance.getDirection();
+
+        return  vectDirection * controller.speed;
+    }
+
+    public virtual void SwitchAnime()
     {
         if (moveDirection.x != 0 || moveDirection.z != 0)
             controller.anim.SetBool("iswalking", true);
+    }
+
+    public virtual void Gravity()
+    {
+        moveDirection.y -= controller.gravity * Time.deltaTime;
     }
 }
