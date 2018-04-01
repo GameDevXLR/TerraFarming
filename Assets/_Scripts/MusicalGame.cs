@@ -310,7 +310,6 @@ public class MusicalGame : MonoBehaviour
 		mainMusicMixer.GetFloat ("MainMusic", out i);
 		if (Activate) 
 		{
-			Debug.Log ("boosting sound");
 			while (i < 0) 
 			{
 				i += 1;
@@ -319,8 +318,6 @@ public class MusicalGame : MonoBehaviour
 			}
 		} else 
 		{
-			Debug.Log ("reducing sound");
-
 			while (i > -40f) 
 			{
 				i -= 1;

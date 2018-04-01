@@ -248,7 +248,7 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 	{
 		for (int i = 0; i < neighboursSpot.Count; i++) 
 		{
-			if (!neighboursSpot [i].isGrowing && neighboursSpot [i].actualPlantState != PlantStateEnum.debris || !neighboursSpot [i].isGrowing && neighboursSpot [i].actualPlantState != PlantStateEnum.lopin) 
+			if (!neighboursSpot [i].isGrowing && neighboursSpot [i].actualPlantState != PlantStateEnum.debris && neighboursSpot [i].actualPlantState != PlantStateEnum.lopin) 
 			{
 				neighboursSpot [i].AutoWaterThePlant ();
 			}
@@ -261,11 +261,11 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 	{
 		for (int i = 0; i < neighboursSpot.Count; i++) 
 		{
-			if (!neighboursSpot [i].growthBoosted) 
+			if (!neighboursSpot [i].growthBoosted && neighboursSpot [i].actualPlantState != PlantStateEnum.debris && neighboursSpot [i].actualPlantState != PlantStateEnum.lopin) 
 			{
 				//on change le début de la phase de croissance xD ca accelere la croissance.
 				//peut arriver qu'une fois par cycle de croissance a une plante donnée.
-				neighboursSpot [i].growthStartTime -= 10;
+				neighboursSpot [i].growthStartTime -= 25;
 				neighboursSpot [i].growthBoosted = true;
 			}
 		}
