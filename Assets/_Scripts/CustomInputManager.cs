@@ -9,6 +9,7 @@ public class CustomInputManager : MonoBehaviour {
     public KeyCode rightKey = KeyCode.Q;
     public KeyCode leftKey = KeyCode.D;
 	public KeyCode actionKey = KeyCode.Space;
+    public KeyCode jumpKey = KeyCode.J;
 
     public static CustomInputManager instance;
 	public GameObject actionButtonVisual;
@@ -37,10 +38,29 @@ public class CustomInputManager : MonoBehaviour {
 		{
 			actionBtnAudioS.PlayOneShot (hideActionBtnSnd);
 		} 
-//		else 
-//		{
-//			actionBtnAudioS.PlayOneShot (hideActionBtnSnd);
-//
-//		}
 	}
+
+    public Vector3 getDirection()
+    {
+        Vector3 direction = new Vector3();
+
+        if (Input.GetKey(forwardkey))
+        {
+            direction.z = 1;
+        }
+        if (Input.GetKey(backwardKey))
+        {
+            direction.z -= 1;
+        }
+        if (Input.GetKey(leftKey))
+        {
+            direction.x = 1;
+        }
+        if (Input.GetKey(rightKey))
+        {
+            direction.x -= 1;
+        }
+
+        return direction;
+    }
 }
