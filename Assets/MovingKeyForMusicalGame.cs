@@ -64,6 +64,7 @@ public class MovingKeyForMusicalGame : MonoBehaviour {
 		expectedKey = inputToPress;
 		keySound = soundOfKey;
 		moveSpeed = speed;
+		keyToPressImg.CrossFadeAlpha (1, 1f, true);
 
 		isActive = true;
 		isMoving = true;
@@ -101,7 +102,7 @@ public class MovingKeyForMusicalGame : MonoBehaviour {
 
 		hasScoreAPoint = true;
 		audioS.PlayOneShot (keySound);
-		keyToPressImg.CrossFadeAlpha (0, 1f, true);
+		keyToPressImg.CrossFadeAlpha (0, .1f, true);
 //		CustomInputManager.instance.ShowHideActionButtonVisual (false);
 
 //		InGameManager.instance.OreGame.currentScore++;

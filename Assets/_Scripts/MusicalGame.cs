@@ -55,7 +55,7 @@ public class MusicalGame : MonoBehaviour
 	public Text mistakesCountDisplay;
 	public Text comboCountDisplay;
 	public Text commentForPlayer;
-	bool lastInputWasMistake;
+//	bool lastInputWasMistake;
 	int numberOfMistakes;
 	int currentCombo;
 	int longestCombo;
@@ -175,7 +175,7 @@ public class MusicalGame : MonoBehaviour
 		currentCombo = 0;
 		longestCombo = 0;
 		numberOfMistakes = 0;
-		lastInputWasMistake = true;
+//		lastInputWasMistake = true;
 	}
 
 	//paramétrage de la prochaine touche a appuyer et ce qu'elle fera.
@@ -212,6 +212,10 @@ public class MusicalGame : MonoBehaviour
 		InGameManager.instance.playerController.GetComponent<Animator>().SetBool ("ismining", false);
 		InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Victory", layer: -1, fixedTime: 2);
 		//on donne des points bonus pour le plus long combo?
+		if (currentCombo > longestCombo) 
+		{
+			longestCombo = currentCombo;
+		}
 		ChangeMusicalGameScore(longestCombo);
 
 		scoreMenuOpen = true;
@@ -245,6 +249,8 @@ public class MusicalGame : MonoBehaviour
 	void CloseTheGame()
 	{
 		CancelInvoke ();
+		InGameManager.instance.playerController.GetComponent<Animator>().SetBool ("iswalking", true);
+
 		scoreMenuOpen = false;
 		scorePanel.SetActive (false);
 		//arreter la musique de fond aussi
@@ -262,7 +268,12 @@ public class MusicalGame : MonoBehaviour
 			if (isPlaying) {
 				InGameManager.instance.playerController.GetComponent<Animator> ().SetBool ("mininghit", false);
 				numberOfMistakes++;
-				lastInputWasMistake = true;
+//				lastInputWasMistake = true;
+				if (currentCombo > longestCombo) 
+				{
+					longestCombo = currentCombo;
+				}
+				currentCombo = 0;
 				score += change;
 
 			}
@@ -276,15 +287,10 @@ public class MusicalGame : MonoBehaviour
 				//faire ici des bonus de combo?
 			}
 			
-			if (lastInputWasMistake) 
-			{
-				if (currentCombo > longestCombo) 
-				{
-					longestCombo = currentCombo;
-				}
-				currentCombo = 0;
-				lastInputWasMistake = false;
-			}
+//			if (lastInputWasMistake) 
+//			{
+//				lastInputWasMistake = false;
+//			}
 			currentCombo++;
 			}
 			score += change;
