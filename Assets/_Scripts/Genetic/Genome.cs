@@ -8,6 +8,27 @@ public class Genome : MonoBehaviour
 	//liste toutes les propriétés d'une plante et est attaché a un objet "plante" tout au long de sa vie.
 	//cela doit inclure: les biomes/le type de plante (fleur buisson arbre) / les statistiques personnalisable associé / les propriétés de l'objet.
 	#region initialisation du genome
+
+	//nouvelle version de l'initialisation : 
+	public void Initialize(PlantObject PO, BiomeEnum spotBiome)
+	{
+		me = PO;
+		biomeIAmIn = spotBiome;
+
+		if (me.biome1 == BiomeEnum.plain || me.biome2 == BiomeEnum.plain|| me.biome3 == BiomeEnum.plain) 
+		{
+			isDome = true;
+		}
+		if (me.biome1 == BiomeEnum.crater || me.biome2 == BiomeEnum.crater|| me.biome3 == BiomeEnum.crater) 
+		{
+			isWateringAround = true;
+		}
+		if (me.biome1 == BiomeEnum.cave || me.biome2 == BiomeEnum.cave|| me.biome3 == BiomeEnum.cave) 
+		{
+			isGlowing = true;
+		}
+	}
+
 	//premiere version de la fonction, ne prend en compte que le sol ou il pop. C'est tout : pas ses vrais parents.
 	public void Initialize(PlantTypeEnum type, BiomeEnum biome)
 	{

@@ -44,7 +44,7 @@ public class MovingKeyForMusicalGame : MonoBehaviour {
 		}
 	}
 
-	void Update()
+	void FixedUpdate()
 	{
 		if (isMoving) 
 		{

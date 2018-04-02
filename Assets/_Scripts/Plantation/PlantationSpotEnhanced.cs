@@ -531,7 +531,7 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 		genome = ge;
 
 		//fonctionne que si t'es un "pure race a un biome"...Faudra voir ce qu'on fait pour les hybrides. je pense ajouter un parametre ou 2.
-		genome.Initialize (plantType, spotBiome);
+		genome.Initialize (plantSO,spotBiome);
 		SpawnThenHidePlants ();
 		lopinSeedObj.SetActive(true);
 		growthStartTime = Time.time;

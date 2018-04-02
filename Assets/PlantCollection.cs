@@ -182,6 +182,7 @@ public class PlantCollection : MonoBehaviour
 			plantDictionary.Add (PO, go.GetComponent<PlantItemUI> ());
 			notAvailableUIObjects.Add (go);
 		}
+//		ShowHideCollection ();
 	}
 
 	public void ShowHideUnavailable()
