@@ -357,7 +357,7 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 			break;
 		case PlantStateEnum.grownup:
 			//si t'es pas une fleur tu donnes des essences.
-			if (plantType != PlantTypeEnum.flower) {
+			if (plantType == PlantTypeEnum.tree) {
 				giveEssence = true;
 			}
 			if (!canMakeSeed) {
@@ -380,163 +380,163 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 
 
 
-	// choisir la graine
-	/// <summary>
-	/// Selects the type of the plant.
-	/// </summary>
-	/// <param name="index">Index.</param>
-	public void SelectPlantType(int index)
-	{
-		switch (spotBiome) 
-		{
-		case BiomeEnum.plain:
-			switch (index) 
-			{
-			//t'es une fleur
-			case 0:
-				ResourcesManager.instance.ChangeFlowerSeed (-1);
-				plantSO = PlantCollection.instance.airFlower;
-
-				timeToGrow = plantSO.desiredGrowthTime;
-				//faut mettre un calcul pertinent pour le temps d'animation juste la : 
-				growthAnimator.SetFloat ("growthspeed", 16f);
-				plantType = PlantTypeEnum.flower;
-
-				break;
-
-				//t'es un bush
-			case 1:
-				ResourcesManager.instance.ChangeBushSeed (-1);
-				plantSO = PlantCollection.instance.airBush;
-
-				timeToGrow = plantSO.desiredGrowthTime;
-				nbrOfGivenEssence = 1;
-				growthAnimator.SetFloat ("growthspeed", 8.3f);
-				plantType = PlantTypeEnum.bush;
-				break;
-
-
-				//t'es un arbre
-			case 2:
-				ResourcesManager.instance.ChangeTreeSeed (-1);
-				plantSO = PlantCollection.instance.airTree;
-
-				timeToGrow = plantSO.desiredGrowthTime;
-				nbrOfGivenEssence = 3;
-				growthAnimator.SetFloat ("growthspeed", 3.3f);
-				plantType = PlantTypeEnum.tree;
-
-				break;
-
-			default:
-				Debug.Log ("t'es une plante inconnu mec!");
-				break;
-			}
-			break;
-		case BiomeEnum.crater:
-			switch (index) 
-			{
-			//t'es une fleur
-			case 0:
-				ResourcesManager.instance.ChangeFlowerSeed (-1);
-				plantSO = PlantCollection.instance.craterFlower;
-
-				timeToGrow = plantSO.desiredGrowthTime;
-				//faut mettre un calcul pertinent pour le temps d'animation juste la : 
-				growthAnimator.SetFloat ("growthspeed", 16f);
-				plantType = PlantTypeEnum.flower;
-
-				break;
-
-				//t'es un bush
-			case 1:
-				ResourcesManager.instance.ChangeBushSeed (-1);
-				plantSO = PlantCollection.instance.craterBush;
-
-				timeToGrow = plantSO.desiredGrowthTime;
-				nbrOfGivenEssence = 1;
-				growthAnimator.SetFloat ("growthspeed", 8.3f);
-				plantType = PlantTypeEnum.bush;
-				break;
-
-
-				//t'es un arbre
-			case 2:
-				ResourcesManager.instance.ChangeTreeSeed (-1);
-				plantSO = PlantCollection.instance.craterTree;
-
-				timeToGrow = plantSO.desiredGrowthTime;
-				nbrOfGivenEssence = 3;
-				growthAnimator.SetFloat ("growthspeed", 3.3f);
-				plantType = PlantTypeEnum.tree;
-
-				break;
-
-			default:
-				Debug.Log ("t'es une plante inconnu mec!");
-				break;
-			}
-			break;
-		case BiomeEnum.cave:
-			switch (index) 
-			{
-			//t'es une fleur
-			case 0:
-				ResourcesManager.instance.ChangeFlowerSeed (-1);
-				plantSO = PlantCollection.instance.caveFlower;
-
-				timeToGrow = plantSO.desiredGrowthTime;
-				//faut mettre un calcul pertinent pour le temps d'animation juste la : 
-				growthAnimator.SetFloat ("growthspeed", 16f);
-				plantType = PlantTypeEnum.flower;
-
-				break;
-
-				//t'es un bush
-			case 1:
-				ResourcesManager.instance.ChangeBushSeed (-1);
-				plantSO = PlantCollection.instance.caveBush;
-
-				timeToGrow = plantSO.desiredGrowthTime;
-				nbrOfGivenEssence = 1;
-				growthAnimator.SetFloat ("growthspeed", 8.3f);
-				plantType = PlantTypeEnum.bush;
-				break;
-
-
-				//t'es un arbre
-			case 2:
-				ResourcesManager.instance.ChangeTreeSeed (-1);
-				plantSO = PlantCollection.instance.caveTree;
-
-				timeToGrow = plantSO.desiredGrowthTime;
-				nbrOfGivenEssence = 3;
-				growthAnimator.SetFloat ("growthspeed", 3.3f);
-				plantType = PlantTypeEnum.tree;
-
-				break;
-
-			default:
-				Debug.Log ("t'es une plante inconnu mec!");
-				break;
-			}
-			break;
-
-		default:
-			break;
-		}
-
-		actualPlantState = PlantStateEnum.seed;
-		Genome ge = gameObject.AddComponent<Genome> ();
-		genome = ge;
-
-		//fonctionne que si t'es un "pure race a un biome"...Faudra voir ce qu'on fait pour les hybrides. je pense ajouter un parametre ou 2.
-		genome.Initialize (plantSO,spotBiome);
-		SpawnThenHidePlants ();
-		lopinSeedObj.SetActive(true);
-		growthStartTime = Time.time;
-		RecquireWater();
-	}
+//	// choisir la graine OLD
+//	/// <summary>
+//	/// Selects the type of the plant.
+//	/// </summary>
+//	/// <param name="index">Index.</param>
+//	public void SelectPlantType(int index)
+//	{
+//		switch (spotBiome) 
+//		{
+//		case BiomeEnum.plain:
+//			switch (index) 
+//			{
+//			//t'es une fleur
+//			case 0:
+//				ResourcesManager.instance.ChangeFlowerSeed (-1);
+//				plantSO = PlantCollection.instance.airFlower;
+//
+//				timeToGrow = plantSO.desiredGrowthTime;
+//				//faut mettre un calcul pertinent pour le temps d'animation juste la : 
+//				growthAnimator.SetFloat ("growthspeed", 16f);
+//				plantType = PlantTypeEnum.flower;
+//
+//				break;
+//
+//				//t'es un bush
+//			case 1:
+//				ResourcesManager.instance.ChangeBushSeed (-1);
+//				plantSO = PlantCollection.instance.airBush;
+//
+//				timeToGrow = plantSO.desiredGrowthTime;
+//				nbrOfGivenEssence = 1;
+//				growthAnimator.SetFloat ("growthspeed", 8.3f);
+//				plantType = PlantTypeEnum.bush;
+//				break;
+//
+//
+//				//t'es un arbre
+//			case 2:
+//				ResourcesManager.instance.ChangeTreeSeed (-1);
+//				plantSO = PlantCollection.instance.airTree;
+//
+//				timeToGrow = plantSO.desiredGrowthTime;
+//				nbrOfGivenEssence = 3;
+//				growthAnimator.SetFloat ("growthspeed", 3.3f);
+//				plantType = PlantTypeEnum.tree;
+//
+//				break;
+//
+//			default:
+//				Debug.Log ("t'es une plante inconnu mec!");
+//				break;
+//			}
+//			break;
+//		case BiomeEnum.crater:
+//			switch (index) 
+//			{
+//			//t'es une fleur
+//			case 0:
+//				ResourcesManager.instance.ChangeFlowerSeed (-1);
+//				plantSO = PlantCollection.instance.craterFlower;
+//
+//				timeToGrow = plantSO.desiredGrowthTime;
+//				//faut mettre un calcul pertinent pour le temps d'animation juste la : 
+//				growthAnimator.SetFloat ("growthspeed", 16f);
+//				plantType = PlantTypeEnum.flower;
+//
+//				break;
+//
+//				//t'es un bush
+//			case 1:
+//				ResourcesManager.instance.ChangeBushSeed (-1);
+//				plantSO = PlantCollection.instance.craterBush;
+//
+//				timeToGrow = plantSO.desiredGrowthTime;
+//				nbrOfGivenEssence = 1;
+//				growthAnimator.SetFloat ("growthspeed", 8.3f);
+//				plantType = PlantTypeEnum.bush;
+//				break;
+//
+//
+//				//t'es un arbre
+//			case 2:
+//				ResourcesManager.instance.ChangeTreeSeed (-1);
+//				plantSO = PlantCollection.instance.craterTree;
+//
+//				timeToGrow = plantSO.desiredGrowthTime;
+//				nbrOfGivenEssence = 3;
+//				growthAnimator.SetFloat ("growthspeed", 3.3f);
+//				plantType = PlantTypeEnum.tree;
+//
+//				break;
+//
+//			default:
+//				Debug.Log ("t'es une plante inconnu mec!");
+//				break;
+//			}
+//			break;
+//		case BiomeEnum.cave:
+//			switch (index) 
+//			{
+//			//t'es une fleur
+//			case 0:
+//				ResourcesManager.instance.ChangeFlowerSeed (-1);
+//				plantSO = PlantCollection.instance.caveFlower;
+//
+//				timeToGrow = plantSO.desiredGrowthTime;
+//				//faut mettre un calcul pertinent pour le temps d'animation juste la : 
+//				growthAnimator.SetFloat ("growthspeed", 16f);
+//				plantType = PlantTypeEnum.flower;
+//
+//				break;
+//
+//				//t'es un bush
+//			case 1:
+//				ResourcesManager.instance.ChangeBushSeed (-1);
+//				plantSO = PlantCollection.instance.caveBush;
+//
+//				timeToGrow = plantSO.desiredGrowthTime;
+//				nbrOfGivenEssence = 1;
+//				growthAnimator.SetFloat ("growthspeed", 8.3f);
+//				plantType = PlantTypeEnum.bush;
+//				break;
+//
+//
+//				//t'es un arbre
+//			case 2:
+//				ResourcesManager.instance.ChangeTreeSeed (-1);
+//				plantSO = PlantCollection.instance.caveTree;
+//
+//				timeToGrow = plantSO.desiredGrowthTime;
+//				nbrOfGivenEssence = 3;
+//				growthAnimator.SetFloat ("growthspeed", 3.3f);
+//				plantType = PlantTypeEnum.tree;
+//
+//				break;
+//
+//			default:
+//				Debug.Log ("t'es une plante inconnu mec!");
+//				break;
+//			}
+//			break;
+//
+//		default:
+//			break;
+//		}
+//
+//		actualPlantState = PlantStateEnum.seed;
+//		Genome ge = gameObject.AddComponent<Genome> ();
+//		genome = ge;
+//
+//		//fonctionne que si t'es un "pure race a un biome"...Faudra voir ce qu'on fait pour les hybrides. je pense ajouter un parametre ou 2.
+//		genome.Initialize (plantSO,spotBiome);
+//		SpawnThenHidePlants ();
+//		lopinSeedObj.SetActive(true);
+//		growthStartTime = Time.time;
+//		RecquireWater();
+//	}
 
 	//nouveau systeme de plantage de graine basé sur un PlantObj.
 	//remplace la fonction au dessus.
@@ -556,11 +556,11 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 		plantAudioS.PlayOneShot (planterSnd);
 		InGameManager.instance.cleanParticle.GetComponent<ParticleSystem> ().Play ();
 		//le systeme suivant est provisoire. Il faut revoir le génome pour faire quelque chose de plus pertinent.
-		//le genome ne servira de toute facon qu'une fois qu'on aura la péiniere (ou le labo)
+		//le genome ne servira de toute facon qu'une fois qu'on aura la pépiniere (ou le labo)
 		Genome ge = gameObject.AddComponent<Genome> ();
 		genome = ge;
 		//fonctionne que si t'es un "pure race a un biome"...Faudra voir ce qu'on fait pour les hybrides. je pense ajouter un parametre ou 2.
-		genome.Initialize (plantType, spotBiome);
+		genome.Initialize (plantSO, spotBiome);
 
 		//les propriétés ci dessous mérite un travail de réflexion pour être revue.
 		nbrOfGivenEssence = 3;
@@ -686,60 +686,6 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 	#endregion
 	#region des vieux trucs
 
-	// choisir la graine
-	/// <summary>
-	/// Selects the type of the plant.
-	/// </summary>
-	/// <param name="index">Index.</param>
-//	public void SelectPlantType(PlantTypeEnum index)
-//	{
-//		switch (index)
-//		{
-//		//t'es un bush
-//		case PlantTypeEnum.bush:
-//			timeToGrow = plantSO.desiredGrowthTime;
-//			growthAnimator.SetFloat("growthspeed", 8.3f);
-////			babyVisual = bush1Obj;
-////			teenageVisual = bush2Obj;
-////			grownupVisual = bush3Obj;
-//			plantType = PlantTypeEnum.bush;
-//			break;
-//
-//			//t'es une fleur
-//		case PlantTypeEnum.flower:
-//			timeToGrow = plantSO.desiredGrowthTime;
-//			growthAnimator.SetFloat("growthspeed", 16f);
-//
-////			babyVisual = flower1Obj;
-////			teenageVisual = flower2Obj;
-////			grownupVisual = flower3Obj;
-//			plantType = PlantTypeEnum.flower;
-//
-//			break;
-//
-//			//t'es un arbre
-//		case PlantTypeEnum.tree:
-//			timeToGrow = plantSO.desiredGrowthTime;
-//			growthAnimator.SetFloat("growthspeed", 3.3f);
-//
-////			babyVisual = tree1Obj;
-////			teenageVisual = tree2Obj;
-////			grownupVisual = tree3Obj;
-//			plantType = PlantTypeEnum.tree;
-//
-//			break;
-//
-//		default:
-//			Debug.Log("t'es une plante inconnu mec!");
-//			break;
-//		}
-//
-//		actualPlantState = PlantStateEnum.seed;
-//		//		lopinNoSeedObj.SetActive (false);
-//		lopinSeedObj.SetActive(true);
-//		growthStartTime = Time.time;
-//		RecquireWater();
-//	}
 	#endregion
 
 }

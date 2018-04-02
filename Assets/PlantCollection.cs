@@ -164,7 +164,13 @@ public class PlantCollection : MonoBehaviour
 		collectionOpen = !collectionOpen;
 		collectionObj.SetActive( collectionOpen);
 		if (collectionOpen) {
-			ShowAllUI ();
+			if (PlantationManager.instance.isSeedMenuOpen) 
+			{
+				ShowHideCollection ();
+			} else 
+			{
+				ShowAllUI ();
+			}
 		}
 	}
 

@@ -52,6 +52,10 @@ public class PlantationManager : MonoBehaviour {
 
 	public void ShowPlantTypeMenu(PlantationSpotEnhanced spot)
 	{
+		if (PlantCollection.instance.collectionOpen) 
+		{
+			PlantCollection.instance.ShowHideCollection ();
+		}
 		plantSeedCanvas.enabled = true;
 		plantationSpot = spot;
 		switch (plantationSpot.spotBiome) 
