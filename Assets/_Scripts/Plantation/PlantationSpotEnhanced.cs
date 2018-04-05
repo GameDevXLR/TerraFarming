@@ -548,7 +548,6 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 		plantType = plantSO.plantType;
 		timeToGrow = plantSO.desiredGrowthTime;
 		actualPlantState = PlantStateEnum.seed;
-		SpawnThenHidePlants ();
 		lopinSeedObj.SetActive(true);
 		growthStartTime = Time.time;
 		RecquireWater();
@@ -559,8 +558,9 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 		//le genome ne servira de toute facon qu'une fois qu'on aura la pépiniere (ou le labo)
 		Genome ge = gameObject.AddComponent<Genome> ();
 		genome = ge;
-		//fonctionne que si t'es un "pure race a un biome"...Faudra voir ce qu'on fait pour les hybrides. je pense ajouter un parametre ou 2.
 		genome.Initialize (plantSO, spotBiome);
+		//faire ca plus tard depuis le génome.
+		SpawnThenHidePlants ();
 
 		//les propriétés ci dessous mérite un travail de réflexion pour être revue.
 		nbrOfGivenEssence = 3;
