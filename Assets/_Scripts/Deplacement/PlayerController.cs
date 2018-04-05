@@ -7,6 +7,8 @@ using UnityEngine.AI;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+
+#region variables editor
     public float speed = 6f;
     public float jumpSpeed = 8f;
     public float gravity = 20f;
@@ -17,6 +19,10 @@ public class PlayerController : MonoBehaviour
 
     public CharacterController Cc;
     public Animator anim;
+
+    public GameObject limiteFlying;
+
+#endregion
 
 
     private void Start()

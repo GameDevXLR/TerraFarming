@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class IdlePlayerState : StateMachineBehaviour
 {
+
+#region variables
     protected Vector3 moveDirection = Vector3.zero;
 
     protected PlayerController controller;
     protected CharacterController Cc;
+
+    #endregion
+
+#region Unity methods
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
@@ -18,7 +24,7 @@ public class IdlePlayerState : StateMachineBehaviour
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
 
-        Cc.Move(moveDirection * Time.deltaTime);
+        Cc.Move(moveDirection *  Time.deltaTime);
         if (Cc.isGrounded)
         {
             ActionIsGrounded();
@@ -27,12 +33,15 @@ public class IdlePlayerState : StateMachineBehaviour
         {
             ActionIsNotGrounded();
         }
+        
         controller.moveDirection = moveDirection;
         SwitchAnime();
         
     }
 
+    #endregion
 
+#region GroundFunction
 
     public virtual void ActionIsGrounded()
     {
@@ -52,6 +61,10 @@ public class IdlePlayerState : StateMachineBehaviour
         }
     }
 
+    #endregion
+
+#region direction methods
+
     public void Jump()
     {
         if (Input.GetKey(CustomInputManager.instance.jumpKey))
@@ -60,12 +73,36 @@ public class IdlePlayerState : StateMachineBehaviour
         }
     }
 
+
+    /// <summary>
+    /// Calcule le vecteur directionnel
+    /// </summary>
+    /// <returns></returns>
     public Vector3 CalculateMoveDirection()
     {
         Vector3 vectDirection = CustomInputManager.instance.getDirection();
 
-        return  vectDirection * controller.speed;
+        return  vectDirection.normalized * controller.speed ;
     }
+
+    /// <summary>
+    /// exerce la gravité sur le personnage
+    /// </summary>
+    public virtual void Gravity()
+    {
+        if(Cc.velocity.y >= 0)
+        {
+            moveDirection.y -= controller.gravity * Time.deltaTime;
+        }
+        else
+        {
+            moveDirection.y -= controller.gravity * 2 * Time.deltaTime;
+        }
+    }
+
+    #endregion
+
+#region animation
 
     public virtual void SwitchAnime()
     {
@@ -73,8 +110,6 @@ public class IdlePlayerState : StateMachineBehaviour
             controller.anim.SetBool("iswalking", true);
     }
 
-    public virtual void Gravity()
-    {
-        moveDirection.y -= controller.gravity * Time.deltaTime;
-    }
+#endregion
+
 }
