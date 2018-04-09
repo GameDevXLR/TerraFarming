@@ -79,7 +79,7 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 
 	[Header("Gestion du voisinnage")]
 	//un array des voisins peuplé par un spherecast. Limite le nombre max de détections, ne fait pas de "garbage".
-	Collider[] hits = new Collider[10];
+	Collider[] hits = new Collider[15];
 
 	//une liste de nos voisins(gameobjects).
 	public List<PlantationSpotEnhanced> neighboursSpot = new List<PlantationSpotEnhanced>();

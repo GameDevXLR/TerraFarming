@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -458,6 +458,37 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 495961989}
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!84 &95290556
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 625
+  m_Height: 352
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 1
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1001 &97886148
 Prefab:
   m_ObjectHideFlags: 0
@@ -877,7 +908,7 @@ GameObject:
   - component: {fileID: 115467798}
   - component: {fileID: 115467797}
   - component: {fileID: 115467796}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Spacioportmap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1419,7 +1450,7 @@ GameObject:
   - component: {fileID: 195545994}
   - component: {fileID: 195545993}
   - component: {fileID: 195545992}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Decosol01.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2825,12 +2856,12 @@ MonoBehaviour:
 ParticleSystem:
   m_PrefabParentObject: {fileID: 198944582225495490, guid: 76ed61fc17985e34db33d95ffa657832,
     type: 2}
-  m_PrefabInternal: {fileID: 1145307326}
+  m_PrefabInternal: {fileID: 453332378}
 --- !u!198 &366989797 stripped
 ParticleSystem:
   m_PrefabParentObject: {fileID: 198746187651334860, guid: 76ed61fc17985e34db33d95ffa657832,
     type: 2}
-  m_PrefabInternal: {fileID: 1145307326}
+  m_PrefabInternal: {fileID: 453332378}
 --- !u!1 &376388071
 GameObject:
   m_ObjectHideFlags: 0
@@ -3170,7 +3201,7 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 403515372}
---- !u!84 &406348803
+--- !u!84 &406871373
 RenderTexture:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -3181,8 +3212,8 @@ RenderTexture:
     Hash: 00000000000000000000000000000000
   m_ForcedFallbackFormat: 4
   m_DownscaleFallback: 0
-  m_Width: 1054
-  m_Height: 593
+  m_Width: 625
+  m_Height: 352
   m_AntiAliasing: 1
   m_DepthFormat: 1
   m_ColorFormat: 0
@@ -3194,7 +3225,7 @@ RenderTexture:
   m_TextureSettings:
     serializedVersion: 2
     m_FilterMode: 1
-    m_Aniso: 0
+    m_Aniso: 1
     m_MipBias: 0
     m_WrapU: 1
     m_WrapV: 1
@@ -3367,7 +3398,7 @@ GameObject:
   - component: {fileID: 422662631}
   - component: {fileID: 422662630}
   - component: {fileID: 422662629}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Rocher06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3458,7 +3489,7 @@ GameObject:
   - component: {fileID: 446359480}
   - component: {fileID: 446359479}
   - component: {fileID: 446359478}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: spacioport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3545,6 +3576,68 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 495961989}
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!1001 &453332378
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4149217858020306, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 2.4100003
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149217858020306, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149217858020306, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -7.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149217858020306, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149217858020306, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149217858020306, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149217858020306, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149217858020306, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155137565622132, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.2634822
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155137565622132, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0.6611024
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155137565622132, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0.27657494
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155137565622132, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.6457763
+      objectReference: {fileID: 0}
+    - target: {fileID: 1409990224273386, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
+      propertyPath: m_Name
+      value: Player (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &455107203
 GameObject:
   m_ObjectHideFlags: 0
@@ -7127,77 +7220,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 495961989}
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
---- !u!1001 &493295501
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1263499673}
-    m_Modifications:
-    - target: {fileID: 4625277925817624, guid: 7603f7dd7b6fff240a380ed52c2cec4d, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 52.89
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625277925817624, guid: 7603f7dd7b6fff240a380ed52c2cec4d, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 56.77
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625277925817624, guid: 7603f7dd7b6fff240a380ed52c2cec4d, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -53.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625277925817624, guid: 7603f7dd7b6fff240a380ed52c2cec4d, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625277925817624, guid: 7603f7dd7b6fff240a380ed52c2cec4d, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625277925817624, guid: 7603f7dd7b6fff240a380ed52c2cec4d, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625277925817624, guid: 7603f7dd7b6fff240a380ed52c2cec4d, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625277925817624, guid: 7603f7dd7b6fff240a380ed52c2cec4d, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625277925817624, guid: 7603f7dd7b6fff240a380ed52c2cec4d, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 21.932737
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625277925817624, guid: 7603f7dd7b6fff240a380ed52c2cec4d, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 146.61581
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 7603f7dd7b6fff240a380ed52c2cec4d, type: 2}
-  m_IsPrefabParent: 0
---- !u!1 &493295502 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1772975942989752, guid: 7603f7dd7b6fff240a380ed52c2cec4d,
-    type: 2}
-  m_PrefabInternal: {fileID: 493295501}
---- !u!4 &493295503 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4625277925817624, guid: 7603f7dd7b6fff240a380ed52c2cec4d,
-    type: 2}
-  m_PrefabInternal: {fileID: 493295501}
---- !u!114 &493295504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 493295502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86401a092847deb4fafa5673bcfbc327, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &495961989
 Prefab:
   m_ObjectHideFlags: 0
@@ -8721,7 +8743,7 @@ GameObject:
   - component: {fileID: 511346675}
   - component: {fileID: 511346674}
   - component: {fileID: 511346673}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Decosol01.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9054,7 +9076,7 @@ GameObject:
   - component: {fileID: 577004936}
   - component: {fileID: 577004935}
   - component: {fileID: 577004934}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Rocher05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9949,7 +9971,7 @@ GameObject:
   - component: {fileID: 662037796}
   - component: {fileID: 662037795}
   - component: {fileID: 662037794}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Plantation.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10394,7 +10416,7 @@ GameObject:
   - component: {fileID: 702048338}
   - component: {fileID: 702048337}
   - component: {fileID: 702048336}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Plantation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10645,7 +10667,7 @@ GameObject:
   - component: {fileID: 733791920}
   - component: {fileID: 733791919}
   - component: {fileID: 733791918}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: rocher04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11191,7 +11213,7 @@ GameObject:
   - component: {fileID: 832860447}
   - component: {fileID: 832860446}
   - component: {fileID: 832860445}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: DEco01.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11776,7 +11798,7 @@ GameObject:
   - component: {fileID: 899986583}
   - component: {fileID: 899986582}
   - component: {fileID: 899986581}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Minerai.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12220,17 +12242,17 @@ AudioSource:
 ParticleSystem:
   m_PrefabParentObject: {fileID: 198044604142505754, guid: 76ed61fc17985e34db33d95ffa657832,
     type: 2}
-  m_PrefabInternal: {fileID: 1145307326}
+  m_PrefabInternal: {fileID: 453332378}
 --- !u!1 &958737207 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1409990224273386, guid: 76ed61fc17985e34db33d95ffa657832,
     type: 2}
-  m_PrefabInternal: {fileID: 1145307326}
+  m_PrefabInternal: {fileID: 453332378}
 --- !u!114 &958737209 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114114146643220672, guid: 76ed61fc17985e34db33d95ffa657832,
     type: 2}
-  m_PrefabInternal: {fileID: 1145307326}
+  m_PrefabInternal: {fileID: 453332378}
   m_Script: {fileID: 11500000, guid: 3482dda284388834580474a3ee55c78c, type: 3}
 --- !u!1 &972483258
 GameObject:
@@ -12243,7 +12265,7 @@ GameObject:
   - component: {fileID: 972483262}
   - component: {fileID: 972483261}
   - component: {fileID: 972483260}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Ressource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13451,7 +13473,7 @@ GameObject:
   - component: {fileID: 1093169382}
   - component: {fileID: 1093169381}
   - component: {fileID: 1093169380}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Decosol01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13776,89 +13798,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1144844122}
---- !u!1001 &1145307326
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4149217858020306, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 2.4100003
-      objectReference: {fileID: 0}
-    - target: {fileID: 4149217858020306, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.17
-      objectReference: {fileID: 0}
-    - target: {fileID: 4149217858020306, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -7.79
-      objectReference: {fileID: 0}
-    - target: {fileID: 4149217858020306, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4149217858020306, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4149217858020306, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4149217858020306, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4149217858020306, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4155137565622132, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0.2634822
-      objectReference: {fileID: 0}
-    - target: {fileID: 4155137565622132, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0.6611024
-      objectReference: {fileID: 0}
-    - target: {fileID: 4155137565622132, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0.27657494
-      objectReference: {fileID: 0}
-    - target: {fileID: 4155137565622132, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.6457763
-      objectReference: {fileID: 0}
-    - target: {fileID: 4700352240649736, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0.53267515
-      objectReference: {fileID: 0}
-    - target: {fileID: 4700352240649736, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0.07034045
-      objectReference: {fileID: 0}
-    - target: {fileID: 4700352240649736, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0.83613265
-      objectReference: {fileID: 0}
-    - target: {fileID: 4700352240649736, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: -0.11041513
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409990224273386, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_Name
-      value: Player (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 114114146643220672, guid: 76ed61fc17985e34db33d95ffa657832,
-        type: 2}
-      propertyPath: limiteFlying
-      value: 
-      objectReference: {fileID: 493295502}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1150523025
 GameObject:
   m_ObjectHideFlags: 0
@@ -14238,7 +14177,7 @@ GameObject:
   - component: {fileID: 1165819222}
   - component: {fileID: 1165819221}
   - component: {fileID: 1165819220}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Rampe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14511,7 +14450,7 @@ Transform:
 ParticleSystem:
   m_PrefabParentObject: {fileID: 198984707191698028, guid: 76ed61fc17985e34db33d95ffa657832,
     type: 2}
-  m_PrefabInternal: {fileID: 1145307326}
+  m_PrefabInternal: {fileID: 453332378}
 --- !u!114 &1193912125 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114308461076077382, guid: 3d17a38436a99634f9750e95cf475b76,
@@ -14735,7 +14674,7 @@ GameObject:
   - component: {fileID: 1216634121}
   - component: {fileID: 1216634120}
   - component: {fileID: 1216634119}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Decosol01.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15013,7 +14952,6 @@ Transform:
   m_Children:
   - {fileID: 221885712}
   - {fileID: 942008823}
-  - {fileID: 493295503}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16308,7 +16246,7 @@ GameObject:
   - component: {fileID: 1502948669}
   - component: {fileID: 1502948668}
   - component: {fileID: 1502948667}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Decosol01.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16719,7 +16657,7 @@ GameObject:
   - component: {fileID: 1587346983}
   - component: {fileID: 1587346982}
   - component: {fileID: 1587346981}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: DEco01.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17475,7 +17413,7 @@ GameObject:
   - component: {fileID: 1637998278}
   - component: {fileID: 1637998277}
   - component: {fileID: 1637998276}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Decosol01.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18305,7 +18243,7 @@ GameObject:
   - component: {fileID: 1725309740}
   - component: {fileID: 1725309739}
   - component: {fileID: 1725309738}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Rocher03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18675,7 +18613,7 @@ GameObject:
   - component: {fileID: 1769944937}
   - component: {fileID: 1769944936}
   - component: {fileID: 1769944935}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: DEco01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18775,7 +18713,7 @@ GameObject:
   - component: {fileID: 1800594833}
   - component: {fileID: 1800594832}
   - component: {fileID: 1800594831}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: DEco01.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19077,7 +19015,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 0
   m_RenderingPath: 1
-  m_TargetTexture: {fileID: 406348803}
+  m_TargetTexture: {fileID: 95290556}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -19244,7 +19182,7 @@ GameObject:
   - component: {fileID: 1852723667}
   - component: {fileID: 1852723666}
   - component: {fileID: 1852723665}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Rampe.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19875,7 +19813,7 @@ GameObject:
   - component: {fileID: 1894321329}
   - component: {fileID: 1894321328}
   - component: {fileID: 1894321327}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Decosol02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20084,7 +20022,7 @@ GameObject:
   - component: {fileID: 1957874474}
   - component: {fileID: 1957874473}
   - component: {fileID: 1957874472}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Rocher01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20327,7 +20265,7 @@ GameObject:
   - component: {fileID: 1979435100}
   - component: {fileID: 1979435099}
   - component: {fileID: 1979435098}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Rocher02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21281,14 +21219,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2010303539}
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 2.14, y: 10.71, z: -15.39}
+  m_LocalRotation: {x: 0.35355338, y: -0.35355338, z: 0.1464466, w: 0.8535535}
+  m_LocalPosition: {x: 7.8, y: 8.5, z: -13.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1833690392}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: -45, z: 0}
 --- !u!114 &2010303544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21316,8 +21254,8 @@ MonoBehaviour:
   sourceCamera: {fileID: 2010303542}
   outlineCamera: {fileID: 1833690391}
   outlineShaderMaterial: {fileID: 0}
-  renderTexture: {fileID: 406348803}
-  extraRenderTexture: {fileID: 2119548094}
+  renderTexture: {fileID: 95290556}
+  extraRenderTexture: {fileID: 406871373}
 --- !u!114 &2010303545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21347,7 +21285,7 @@ MonoBehaviour:
   stepZoom: 0.1
   minDistance: 0.5
   maxDistance: 1.5
-  smooth: 2
+  smooth: 5
 --- !u!114 &2013576279 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114627608927712776, guid: f4a71c684d961904e93abd13f77ee5cb,
@@ -21641,9 +21579,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 221885712}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: MAP_terrafarming_version02
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21890,34 +21828,3 @@ MonoBehaviour:
   gamesAvailable: 1
   nextVeinToActivate: {fileID: 1039949678}
   isActiveParticules: {fileID: 409244277}
---- !u!84 &2119548094
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 1054
-  m_Height: 593
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 1
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
