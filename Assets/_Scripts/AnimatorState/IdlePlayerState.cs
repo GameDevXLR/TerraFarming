@@ -17,15 +17,17 @@ public class IdlePlayerState : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
+        
         controller = InGameManager.instance.playerController;
         Cc = controller.Cc;
+        moveDirection = controller.moveDirection;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
 
         Cc.Move(moveDirection *  Time.deltaTime);
-        if (Cc.isGrounded)
+        if (controller.isGrounded)
         {
             ActionIsGrounded();
         }
@@ -47,6 +49,7 @@ public class IdlePlayerState : StateMachineBehaviour
     {
         moveDirection = CalculateMoveDirection();
         Jump();
+        Gravity();
     }
 
     public virtual void ActionIsNotGrounded()
@@ -54,10 +57,16 @@ public class IdlePlayerState : StateMachineBehaviour
         
 
         if (controller.gameObject.transform.position.y <= -1)
-            controller.anim.SetBool("isflying", true);
+        {
+            SwitchAnimeFlying(true);
+        }
         else
         {
             Gravity();
+            if (Jump())
+            {
+                SwitchAnimeFlying(true);
+            }
         }
     }
 
@@ -65,13 +74,16 @@ public class IdlePlayerState : StateMachineBehaviour
 
 #region direction methods
 
-    public void Jump()
+    public bool Jump()
     {
-        if (Input.GetKey(CustomInputManager.instance.jumpKey))
+        if (Input.GetKeyDown(CustomInputManager.instance.jumpKey))
         {
             moveDirection.y = controller.jumpSpeed;
+            return true;
         }
+        return false;
     }
+    
 
 
     /// <summary>
@@ -108,6 +120,11 @@ public class IdlePlayerState : StateMachineBehaviour
     {
         if (moveDirection.x != 0 || moveDirection.z != 0)
             controller.anim.SetBool("iswalking", true);
+    }
+
+    public virtual void SwitchAnimeFlying(bool condition)
+    {
+        controller.anim.SetBool("isflying", condition);
     }
 
 #endregion

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class FlyingPlayerState : IdlePlayerState {
 
+    public int multSpeedFly;
+
+
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, animatorStateInfo, layerIndex);
@@ -16,14 +19,37 @@ public class FlyingPlayerState : IdlePlayerState {
     }
     public override void ActionIsNotGrounded()
     {
-        moveDirection = CalculateMoveDirection();
-        Jump();
 
-        if (controller.transform.position.y >= -0.5)
+
+
+        if (controller.InFlyingZone)
+        {
+            Jump();
+        }
+
+        else if (Fly() && Cc.velocity.y <=0)
+        {
+            moveDirection = CalculateMoveDirection();
+            moveDirection *= multSpeedFly;
+        }
+
+        else if(controller.transform.position.y >= -0.5)
+        {
+            moveDirection = CalculateMoveDirection();
+            moveDirection *= multSpeedFly;
+            moveDirection.y = controller.moveDirection.y;
             Gravity();
 
-        moveDirection.y *= 2;
+        }
+
+        
+
+        
+    }
 
 
+    public bool Fly()
+    {
+        return Input.GetKey(CustomInputManager.instance.jumpKey);
     }
 }

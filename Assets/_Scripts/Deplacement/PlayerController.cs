@@ -18,18 +18,24 @@ public class PlayerController : MonoBehaviour
     public Vector3 moveDirection = Vector3.zero;
 
     public CharacterController Cc;
+    public bool isGrounded = true;
     public Animator anim;
 
+    [Header("Fly")]
     public GameObject limiteFlying;
+    bool inFlyingZone = true;
 
-#endregion
+    
+
+    #endregion
+
 
 
     private void Start()
     {
         Cc = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
-
+        
     }
 
     private void Update()
@@ -38,8 +44,6 @@ public class PlayerController : MonoBehaviour
         {
             rotation(moveDirection);
         }
-        
-        
     }
 
     private void OnDisable()
@@ -52,6 +56,19 @@ public class PlayerController : MonoBehaviour
         Vector3 rotation = new Vector3(direction.x, 0, direction.z);
         
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rotation.normalized), speedRotate * Time.deltaTime);
+    }
+
+    public bool InFlyingZone
+    {
+        get
+        {
+            return inFlyingZone;
+        }
+
+        set
+        {
+            inFlyingZone = value;
+        }
     }
 
 
