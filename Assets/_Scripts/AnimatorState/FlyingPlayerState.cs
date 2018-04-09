@@ -43,7 +43,7 @@ public class FlyingPlayerState : IdlePlayerState {
             else
             {
                 if(Cc.velocity.y < 0)
-                moveDirection.y = 0;
+                    moveDirection.y = 0;
                 Jump();
             }
         }
