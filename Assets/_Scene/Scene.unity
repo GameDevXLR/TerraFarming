@@ -353,6 +353,22 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 495961989}
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!1 &55340383 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1772975942989752, guid: 7603f7dd7b6fff240a380ed52c2cec4d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1413938010}
+--- !u!114 &55340387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 55340383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86401a092847deb4fafa5673bcfbc327, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &87129204 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4709042691976096, guid: ae9b658703d05ac4e88d24ae0f64f261,
@@ -676,7 +692,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4100503687530044, guid: 735cd23a61c0015478ab7d0ae9532b30, type: 2}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 114884633897588772, guid: 735cd23a61c0015478ab7d0ae9532b30,
         type: 2}
@@ -877,7 +893,7 @@ GameObject:
   - component: {fileID: 115467798}
   - component: {fileID: 115467797}
   - component: {fileID: 115467796}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Spacioportmap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1419,7 +1435,7 @@ GameObject:
   - component: {fileID: 195545994}
   - component: {fileID: 195545993}
   - component: {fileID: 195545992}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Decosol01.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1997,7 +2013,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4100503687530044, guid: 735cd23a61c0015478ab7d0ae9532b30, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 114884633897588772, guid: 735cd23a61c0015478ab7d0ae9532b30,
         type: 2}
@@ -2340,7 +2356,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4167208565373440, guid: 6dd412219421c07469cb86078ff55cf6, type: 2}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 114006780872227166, guid: 6dd412219421c07469cb86078ff55cf6,
         type: 2}
@@ -2590,6 +2606,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!84 &316680124
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 1054
+  m_Height: 593
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 1
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &322009851 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1295167744277836, guid: 5d7d81550e2b5d740afa5ea06c5fb17b,
@@ -2625,6 +2672,7 @@ Transform:
   m_LocalPosition: {x: -17.538746, y: -51.240837, z: 65.17939}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1413938011}
   - {fileID: 1510880158}
   - {fileID: 1990362502}
   - {fileID: 1504678957}
@@ -3336,7 +3384,7 @@ GameObject:
   - component: {fileID: 422662631}
   - component: {fileID: 422662630}
   - component: {fileID: 422662629}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Rocher06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3416,6 +3464,37 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 422662627}
   m_Mesh: {fileID: 4300040, guid: 4d23b5dc2e71b014ba72a869f07023cb, type: 3}
+--- !u!84 &426181610
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 1054
+  m_Height: 593
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 1
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &446359476
 GameObject:
   m_ObjectHideFlags: 0
@@ -3427,7 +3506,7 @@ GameObject:
   - component: {fileID: 446359480}
   - component: {fileID: 446359479}
   - component: {fileID: 446359478}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: spacioport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3573,50 +3652,22 @@ Prefab:
       propertyPath: m_Name
       value: Player (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4006547606587274, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_RootOrder
-      value: 6
+    - target: {fileID: 114114146643220672, guid: 76ed61fc17985e34db33d95ffa657832,
+        type: 2}
+      propertyPath: limiteFlying
+      value: 
+      objectReference: {fileID: 55340383}
+    - target: {fileID: 4851271022953442, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.15216105
       objectReference: {fileID: 0}
-    - target: {fileID: 4657457902307666, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4752313370784070, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4047875528989344, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4097108201772368, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4789584551650578, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4234201184782030, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4192655247820782, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4987027299143510, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
-      propertyPath: m_RootOrder
-      value: 8
+    - target: {fileID: 4851271022953442, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.045
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 76ed61fc17985e34db33d95ffa657832, type: 2}
   m_IsPrefabParent: 0
---- !u!4 &453332379 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4149217858020306, guid: 76ed61fc17985e34db33d95ffa657832,
-    type: 2}
-  m_PrefabInternal: {fileID: 453332378}
 --- !u!1 &455107203
 GameObject:
   m_ObjectHideFlags: 0
@@ -7199,34 +7250,53 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 495961989}
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
---- !u!1 &480506870
+--- !u!1 &480506870 stripped
 GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 480506871}
-  m_Layer: 0
-  m_Name: GroundDetect
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &480506871
-Transform:
+  m_PrefabParentObject: {fileID: 1545310255313830, guid: 76ed61fc17985e34db33d95ffa657832,
+    type: 2}
+  m_PrefabInternal: {fileID: 453332378}
+--- !u!114 &480506872
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 480506870}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 453332379}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1835951e5c602f6499ef8263a3338215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfDetectObj: 0
+  layer:
+    serializedVersion: 2
+    m_Bits: 8192
+--- !u!65 &480506873
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 480506870}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &480506874
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 480506870}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &495961989
 Prefab:
   m_ObjectHideFlags: 0
@@ -8750,7 +8820,7 @@ GameObject:
   - component: {fileID: 511346675}
   - component: {fileID: 511346674}
   - component: {fileID: 511346673}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Decosol01.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9083,7 +9153,7 @@ GameObject:
   - component: {fileID: 577004936}
   - component: {fileID: 577004935}
   - component: {fileID: 577004934}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Rocher05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9415,7 +9485,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4466958857654918, guid: a8bb77c21cfbe16498b75b09e03c3b29, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114671715128194600, guid: a8bb77c21cfbe16498b75b09e03c3b29,
         type: 2}
@@ -9978,7 +10048,7 @@ GameObject:
   - component: {fileID: 662037796}
   - component: {fileID: 662037795}
   - component: {fileID: 662037794}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Plantation.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10094,7 +10164,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4820048601248546, guid: 4f72d3676d5cf1142881dab21cea1353, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 114110403190517250, guid: 4f72d3676d5cf1142881dab21cea1353,
         type: 2}
@@ -10423,7 +10493,7 @@ GameObject:
   - component: {fileID: 702048338}
   - component: {fileID: 702048337}
   - component: {fileID: 702048336}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Plantation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10674,7 +10744,7 @@ GameObject:
   - component: {fileID: 733791920}
   - component: {fileID: 733791919}
   - component: {fileID: 733791918}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: rocher04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11220,7 +11290,7 @@ GameObject:
   - component: {fileID: 832860447}
   - component: {fileID: 832860446}
   - component: {fileID: 832860445}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEco01.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11805,7 +11875,7 @@ GameObject:
   - component: {fileID: 899986583}
   - component: {fileID: 899986582}
   - component: {fileID: 899986581}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Minerai.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12272,7 +12342,7 @@ GameObject:
   - component: {fileID: 972483262}
   - component: {fileID: 972483261}
   - component: {fileID: 972483260}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Ressource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12576,7 +12646,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4820048601248546, guid: 4f72d3676d5cf1142881dab21cea1353, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 114110403190517250, guid: 4f72d3676d5cf1142881dab21cea1353,
         type: 2}
@@ -13480,7 +13550,7 @@ GameObject:
   - component: {fileID: 1093169382}
   - component: {fileID: 1093169381}
   - component: {fileID: 1093169380}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Decosol01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13969,7 +14039,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4820048601248546, guid: 4f72d3676d5cf1142881dab21cea1353, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 114110403190517250, guid: 4f72d3676d5cf1142881dab21cea1353,
         type: 2}
@@ -14184,7 +14254,7 @@ GameObject:
   - component: {fileID: 1165819222}
   - component: {fileID: 1165819221}
   - component: {fileID: 1165819220}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Rampe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14299,7 +14369,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4167208565373440, guid: 6dd412219421c07469cb86078ff55cf6, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 114006780872227166, guid: 6dd412219421c07469cb86078ff55cf6,
         type: 2}
@@ -14458,37 +14528,6 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 198984707191698028, guid: 76ed61fc17985e34db33d95ffa657832,
     type: 2}
   m_PrefabInternal: {fileID: 453332378}
---- !u!84 &1192217991
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 1054
-  m_Height: 593
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 1
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!114 &1193912125 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114308461076077382, guid: 3d17a38436a99634f9750e95cf475b76,
@@ -14550,7 +14589,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4100503687530044, guid: 735cd23a61c0015478ab7d0ae9532b30, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 114884633897588772, guid: 735cd23a61c0015478ab7d0ae9532b30,
         type: 2}
@@ -14712,7 +14751,7 @@ GameObject:
   - component: {fileID: 1216634121}
   - component: {fileID: 1216634120}
   - component: {fileID: 1216634119}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Decosol01.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15533,6 +15572,57 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9bc9e95bd71533c47aa17e5d04f3b0a8, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &1413938010
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 344510449}
+    m_Modifications:
+    - target: {fileID: 4625277925817624, guid: 7603f7dd7b6fff240a380ed52c2cec4d, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 25.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625277925817624, guid: 7603f7dd7b6fff240a380ed52c2cec4d, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 59.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625277925817624, guid: 7603f7dd7b6fff240a380ed52c2cec4d, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -51.67939
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625277925817624, guid: 7603f7dd7b6fff240a380ed52c2cec4d, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625277925817624, guid: 7603f7dd7b6fff240a380ed52c2cec4d, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625277925817624, guid: 7603f7dd7b6fff240a380ed52c2cec4d, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625277925817624, guid: 7603f7dd7b6fff240a380ed52c2cec4d, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625277925817624, guid: 7603f7dd7b6fff240a380ed52c2cec4d, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625277925817624, guid: 7603f7dd7b6fff240a380ed52c2cec4d, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 26.572115
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 7603f7dd7b6fff240a380ed52c2cec4d, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &1413938011 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4625277925817624, guid: 7603f7dd7b6fff240a380ed52c2cec4d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1413938010}
 --- !u!224 &1425236698 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224989171648772432, guid: 4168b679eb27d1a4f927214d8fa56e19,
@@ -16284,7 +16374,7 @@ GameObject:
   - component: {fileID: 1502948669}
   - component: {fileID: 1502948668}
   - component: {fileID: 1502948667}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Decosol01.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16376,7 +16466,7 @@ Transform:
   - {fileID: 923407145}
   - {fileID: 2058536230}
   m_Father: {fileID: 344510449}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1508379459 stripped
 Transform:
@@ -16427,7 +16517,7 @@ Transform:
   - {fileID: 699695178}
   - {fileID: 873181313}
   m_Father: {fileID: 344510449}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1523227115
 GameObject:
@@ -16695,7 +16785,7 @@ GameObject:
   - component: {fileID: 1587346983}
   - component: {fileID: 1587346982}
   - component: {fileID: 1587346981}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEco01.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17451,7 +17541,7 @@ GameObject:
   - component: {fileID: 1637998278}
   - component: {fileID: 1637998277}
   - component: {fileID: 1637998276}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Decosol01.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17730,7 +17820,7 @@ Transform:
   - {fileID: 822022078}
   - {fileID: 1272476068}
   m_Father: {fileID: 344510449}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1695867220 stripped
 Animator:
@@ -18281,7 +18371,7 @@ GameObject:
   - component: {fileID: 1725309740}
   - component: {fileID: 1725309739}
   - component: {fileID: 1725309738}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Rocher03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18651,7 +18741,7 @@ GameObject:
   - component: {fileID: 1769944937}
   - component: {fileID: 1769944936}
   - component: {fileID: 1769944935}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEco01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18751,7 +18841,7 @@ GameObject:
   - component: {fileID: 1800594833}
   - component: {fileID: 1800594832}
   - component: {fileID: 1800594831}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEco01.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18868,7 +18958,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4167208565373440, guid: 6dd412219421c07469cb86078ff55cf6, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 114006780872227166, guid: 6dd412219421c07469cb86078ff55cf6,
         type: 2}
@@ -19053,7 +19143,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 0
   m_RenderingPath: 1
-  m_TargetTexture: {fileID: 1192217991}
+  m_TargetTexture: {fileID: 426181610}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -19199,37 +19289,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1840087858}
---- !u!84 &1848609990
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 1054
-  m_Height: 593
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 1
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!4 &1850531202 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4709042691976096, guid: ae9b658703d05ac4e88d24ae0f64f261,
@@ -19251,7 +19310,7 @@ GameObject:
   - component: {fileID: 1852723667}
   - component: {fileID: 1852723666}
   - component: {fileID: 1852723665}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Rampe.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19630,7 +19689,7 @@ Transform:
   - {fileID: 641640030}
   - {fileID: 1292328123}
   m_Father: {fileID: 344510449}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1871731137
 MonoBehaviour:
@@ -19882,7 +19941,7 @@ GameObject:
   - component: {fileID: 1894321329}
   - component: {fileID: 1894321328}
   - component: {fileID: 1894321327}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Decosol02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20091,7 +20150,7 @@ GameObject:
   - component: {fileID: 1957874474}
   - component: {fileID: 1957874473}
   - component: {fileID: 1957874472}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Rocher01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20334,7 +20393,7 @@ GameObject:
   - component: {fileID: 1979435100}
   - component: {fileID: 1979435099}
   - component: {fileID: 1979435098}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Rocher02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20843,7 +20902,7 @@ Transform:
   - {fileID: 409244280}
   - {fileID: 455107204}
   m_Father: {fileID: 344510449}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1993526306
 GameObject:
@@ -21323,8 +21382,8 @@ MonoBehaviour:
   sourceCamera: {fileID: 2010303542}
   outlineCamera: {fileID: 1833690391}
   outlineShaderMaterial: {fileID: 0}
-  renderTexture: {fileID: 1192217991}
-  extraRenderTexture: {fileID: 1848609990}
+  renderTexture: {fileID: 426181610}
+  extraRenderTexture: {fileID: 316680124}
 --- !u!114 &2010303545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21648,7 +21707,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 221885712}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: MAP_terrafarming_version02
   m_TagString: Untagged
   m_Icon: {fileID: 0}

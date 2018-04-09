@@ -56,9 +56,10 @@ public class IdlePlayerState : StateMachineBehaviour
     {
         
 
-        if (controller.gameObject.transform.position.y <= -1)
+        if (!controller.inFlyingZone)
         {
             SwitchAnimeFlying(true);
+            moveDirection.y = 0;
         }
         else
         {
@@ -79,6 +80,7 @@ public class IdlePlayerState : StateMachineBehaviour
         if (Input.GetKeyDown(CustomInputManager.instance.jumpKey))
         {
             moveDirection.y = controller.jumpSpeed;
+            controller.isGrounded = false;
             return true;
         }
         return false;

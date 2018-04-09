@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1bb1c989ae3daa4f84d1da3aa6e6a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multSpeedFly: 0
+  multSpeedFly: 2
 --- !u!114 &114799199651244264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -367,12 +367,12 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 1.0077461
+  m_TransitionDuration: 1
   m_TransitionOffset: 0
   m_ExitTime: 0.0000000044024446
   m_HasExitTime: 0
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &1101868687456685060

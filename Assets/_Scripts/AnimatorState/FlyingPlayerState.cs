@@ -19,37 +19,46 @@ public class FlyingPlayerState : IdlePlayerState {
     }
     public override void ActionIsNotGrounded()
     {
-
-
+        moveDirection = CalculateMoveDirection();
+        moveDirection *= multSpeedFly;
+        moveDirection.y = controller.moveDirection.y;
 
         if (controller.InFlyingZone)
         {
-            Jump();
-        }
+            
 
-        else if (Fly() && Cc.velocity.y <=0)
+            if (!Jump() && Fly() && Cc.velocity.y <= 0)
+            {
+                moveDirection.y = 0;
+            }
+            else
+            {
+                Gravity();
+            }
+        }
+        else
         {
-            moveDirection = CalculateMoveDirection();
-            moveDirection *= multSpeedFly;
+            if(controller.gameObject.transform.position.y > 0)
+                Gravity();
+            else
+            {
+                if(Cc.velocity.y < 0)
+                moveDirection.y = 0;
+                Jump();
+            }
         }
-
-        else if(controller.transform.position.y >= -0.5)
-        {
-            moveDirection = CalculateMoveDirection();
-            moveDirection *= multSpeedFly;
-            moveDirection.y = controller.moveDirection.y;
-            Gravity();
-
-        }
-
-        
-
-        
     }
 
 
     public bool Fly()
     {
         return Input.GetKey(CustomInputManager.instance.jumpKey);
+    }
+
+    public override void SwitchAnime()
+    {
+        base.SwitchAnime();
+        if(moveDirection.x == 0)
+            controller.anim.SetBool("iswalking", false);
     }
 }

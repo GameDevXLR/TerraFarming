@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Fly")]
     public GameObject limiteFlying;
-    bool inFlyingZone = true;
+    public bool inFlyingZone = true;
 
     
 
