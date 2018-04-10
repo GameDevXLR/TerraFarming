@@ -12,8 +12,6 @@ public class DetectGround : MonoBehaviour {
     {
         if ((layer.value & 1 << other.gameObject.layer) != 0)
         {
-
-            Debug.Log(other.gameObject.name);
             if (numberOfDetectObj == 0)
                 InGameManager.instance.playerController.isGrounded = true;
             numberOfDetectObj++;

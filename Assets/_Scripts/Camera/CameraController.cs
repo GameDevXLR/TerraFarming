@@ -19,8 +19,10 @@ public class CameraController : MonoBehaviour
     #endregion
 
     #region other variables
-#endregion
+    #endregion
 
+    private float targetAngle = 0;
+    const float rotationAmount = 1.0f;
 
     private void Start()
     {
@@ -41,12 +43,54 @@ public class CameraController : MonoBehaviour
 
         distance = Mathf.Clamp(distance, minDistance, maxDistance);
 
-        transform.position = Vector3.Lerp(transform.position, focus.transform.position + offset * distance, smooth * Time.deltaTime );
-        if (Input.GetKeyDown(KeyCode.L))
+        //transform.position = Vector3.Lerp(transform.position, focus.transform.position + offset * distance, smooth * Time.deltaTime );
+        if (Input.GetKey(KeyCode.L))
         {
-            transform.LookAt(focus.transform.position);
-            transform.Translate(Vector3.right * Time.deltaTime);
-            offset = transform.transform.position - focus.transform.position;
+            //Vector3 lTargetDir = focus.transform.position - transform.position;
+            ////transform.LookAt(focus.transform.position);
+            //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(lTargetDir), Time.time * smooth);
+            //transform.Translate(Vector3.right * smooth *  Time.deltaTime);
+            //offset = transform.transform.position - focus.transform.position;
+            // Trigger functions if Rotate is requested
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                targetAngle -= 45.0f;
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                targetAngle += 45.0f;
+            }
+
+           
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            targetAngle -= 45.0f;
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            targetAngle += 45.0f;
+        }
+        if (targetAngle != 0)
+            {
+                Rotate();
+            }
+
+    }
+
+
+    protected void Rotate()
+    {
+
+        if (targetAngle > 0)
+        {
+            transform.RotateAround(focus.transform.position, Vector3.up, -rotationAmount);
+            targetAngle -= rotationAmount;
+        }
+        else if (targetAngle < 0)
+        {
+            transform.RotateAround(focus.transform.position, Vector3.up, rotationAmount);
+            targetAngle += rotationAmount;
         }
 
     }
