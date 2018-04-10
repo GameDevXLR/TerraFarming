@@ -50,6 +50,10 @@ public class IdlePlayerState : StateMachineBehaviour
         moveDirection = CalculateMoveDirection();
         Jump();
         Gravity();
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            controller.anim.PlayInFixedTime("Jump", layer: -1, fixedTime: 2);
+        }
     }
 
     public virtual void ActionIsNotGrounded()

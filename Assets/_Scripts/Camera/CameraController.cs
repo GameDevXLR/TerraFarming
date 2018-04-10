@@ -42,6 +42,12 @@ public class CameraController : MonoBehaviour
         distance = Mathf.Clamp(distance, minDistance, maxDistance);
 
         transform.position = Vector3.Lerp(transform.position, focus.transform.position + offset * distance, smooth * Time.deltaTime );
-        
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            transform.LookAt(focus.transform.position);
+            transform.Translate(Vector3.right * Time.deltaTime);
+            offset = transform.transform.position - focus.transform.position;
+        }
+
     }
 }
