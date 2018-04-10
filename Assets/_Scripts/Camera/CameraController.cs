@@ -44,25 +44,7 @@ public class CameraController : MonoBehaviour
         distance = Mathf.Clamp(distance, minDistance, maxDistance);
 
         //transform.position = Vector3.Lerp(transform.position, focus.transform.position + offset * distance, smooth * Time.deltaTime );
-        if (Input.GetKey(KeyCode.L))
-        {
-            //Vector3 lTargetDir = focus.transform.position - transform.position;
-            ////transform.LookAt(focus.transform.position);
-            //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(lTargetDir), Time.time * smooth);
-            //transform.Translate(Vector3.right * smooth *  Time.deltaTime);
-            //offset = transform.transform.position - focus.transform.position;
-            // Trigger functions if Rotate is requested
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                targetAngle -= 45.0f;
-            }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                targetAngle += 45.0f;
-            }
-
-           
-        }
+       
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             targetAngle -= 45.0f;
