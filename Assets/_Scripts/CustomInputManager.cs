@@ -46,20 +46,24 @@ public class CustomInputManager : MonoBehaviour {
 
         if (Input.GetKey(forwardkey))
         {
-            direction.z = 1;
+            //direction.z = 1;
+            direction += CameraController.instance.transform.forward;
         }
         if (Input.GetKey(backwardKey))
         {
-            direction.z -= 1;
+            direction -= CameraController.instance.transform.forward;
+
         }
         if (Input.GetKey(leftKey))
         {
-            direction.x = 1;
+            direction += CameraController.instance.transform.right;
         }
         if (Input.GetKey(rightKey))
         {
-            direction.x -= 1;
+            direction -= CameraController.instance.transform.right;
         }
+
+        direction.y = 0;
 
         return direction;
     }

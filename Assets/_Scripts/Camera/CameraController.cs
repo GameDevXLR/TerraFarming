@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraController : MonoBehaviour
 {
@@ -16,17 +17,42 @@ public class CameraController : MonoBehaviour
     public float maxDistance;
 
     public float smooth;
+
+    public Text verticalText;
+    public Text horizontalText;
+
+
     #endregion
 
     #region other variables
-    #endregion
+
+    public static CameraController instance;
 
     private float targetAngle = 0;
     const float rotationAmount = 1.0f;
+    private float v;
+    private float h;
+    private float z;
+
+    #endregion
+#region unity methods
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+            setVerticalUI(v);
+            setHorizontalUI(h);
+        }
+    }
 
     private void Start()
     {
-        offset = transform.transform.position - focus.transform.position;
+
+        offset = Quaternion.Euler(V, H, Z) * new Vector3(0, 0, 1);
+        transform.position = focus.transform.position - offset * distance;
+        transform.LookAt(focus.transform);
     }
 
     private void Update()
@@ -45,35 +71,114 @@ public class CameraController : MonoBehaviour
 
         //transform.position = Vector3.Lerp(transform.position, focus.transform.position + offset * distance, smooth * Time.deltaTime );
        
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
-            targetAngle -= 45.0f;
+            H -= rotationAmount;
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.RightArrow))
         {
-            targetAngle += 45.0f;
+            H += rotationAmount;
+        }
+
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            V -= rotationAmount;
+        }
+        else if (Input.GetKey(KeyCode.UpArrow))
+        {
+            V += rotationAmount;
         }
         if (targetAngle != 0)
-            {
-                Rotate();
-            }
-
+        {
+            Rotate();
+        }
+        offset = Quaternion.Euler(V, -H, Z) * new Vector3(0, 0, 1);
+        transform.position = Vector3.Lerp(transform.position, focus.transform.position - offset * distance, smooth * Time.deltaTime);
+        //transform.LookAt(focus.transform);
+        Vector3 lTargetDir = focus.transform.position - transform.position;
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(lTargetDir), Time.time * smooth);
     }
-
+#endregion
 
     protected void Rotate()
     {
 
         if (targetAngle > 0)
         {
-            transform.RotateAround(focus.transform.position, Vector3.up, -rotationAmount);
+            //transform.RotateAround(focus.transform.position, Vector3.up, -rotationAmount);
             targetAngle -= rotationAmount;
+            H -= rotationAmount;
+
         }
         else if (targetAngle < 0)
         {
-            transform.RotateAround(focus.transform.position, Vector3.up, rotationAmount);
+            //transform.RotateAround(focus.transform.position, Vector3.up, rotationAmount);
             targetAngle += rotationAmount;
+            H += rotationAmount;
+        }
+        //transform.LookAt(focus.transform);
+    }
+
+
+#region getter/setter
+    public float V
+    {
+        get
+        {
+            return v;
         }
 
+        set
+        {
+            v = Mathf.Clamp(value, 0, 90);
+            setVerticalUI(v);
+        }
     }
+
+    public float H
+    {
+        get
+        {
+            return h;
+        }
+
+        set
+        {
+            h = (value < 0) ? value + 360 : (value > 360) ? value - 360 : value;
+            setHorizontalUI(h);
+        }
+    }
+
+    public float Z
+    {
+        get
+        {
+            return z;
+        }
+
+        set
+        {
+            z = value;
+        }
+    }
+
+    #endregion
+
+    #region UI
+    public void setHorizontalUI(float value)
+    {
+        if (horizontalText != null)
+        {
+            horizontalText.text = value.ToString();
+        }
+    }
+    public void setVerticalUI(float value)
+    {
+        if (verticalText != null)
+        {
+            verticalText.text = value.ToString();
+        }
+    }
+    #endregion
+
 }
