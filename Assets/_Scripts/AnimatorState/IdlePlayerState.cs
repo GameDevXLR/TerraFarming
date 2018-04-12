@@ -83,8 +83,9 @@ public class IdlePlayerState : StateMachineBehaviour
     {
         if (Input.GetKeyDown(CustomInputManager.instance.jumpKey))
         {
-            moveDirection.y = controller.jumpSpeed;
-            controller.isGrounded = false;
+            //moveDirection.y = controller.jumpSpeed;
+            //controller.isGrounded = false;
+            SwitchAnime(AnimeParameters.isjumping, true);
             return true;
         }
         return false;
@@ -131,6 +132,11 @@ public class IdlePlayerState : StateMachineBehaviour
     public virtual void SwitchAnimeFlying(bool condition)
     {
         controller.anim.SetBool("isflying", condition);
+    }
+
+    public virtual void SwitchAnime(AnimeParameters anime, bool activate)
+    {
+        controller.anim.SetBool(anime.ToString(), activate);
     }
 
 #endregion

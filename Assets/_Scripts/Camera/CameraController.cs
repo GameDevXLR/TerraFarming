@@ -10,7 +10,6 @@ public class CameraController : MonoBehaviour
     public GameObject focus;
 
     public Vector3 offset;
-    public float distance = 1;
     public float stepZoom;
 
     public float minDistance;
@@ -26,6 +25,7 @@ public class CameraController : MonoBehaviour
 
     #region other variables
 
+    private float distance = 1;
     public static CameraController instance;
 
     private float targetAngle = 0;
@@ -50,8 +50,8 @@ public class CameraController : MonoBehaviour
     private void Start()
     {
 
-        offset = Quaternion.Euler(V, H, Z) * new Vector3(0, 0, 1);
-        transform.position = focus.transform.position - offset * distance;
+        offset = Quaternion.Euler(V, -H, Z) * new Vector3(0, 0, 1);
+        transform.position = focus.transform.position - offset * Distance;
         transform.LookAt(focus.transform);
     }
 
@@ -60,14 +60,14 @@ public class CameraController : MonoBehaviour
         
         if (Input.GetAxis("Mouse ScrollWheel") > 0) // forward
         {
-            distance -= stepZoom;
+            Distance -= stepZoom;
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0) // back
         {
-            distance += stepZoom;
+            Distance += stepZoom;
         }
 
-        distance = Mathf.Clamp(distance, minDistance, maxDistance);
+        Distance = Mathf.Clamp(Distance, minDistance, maxDistance);
 
         //transform.position = Vector3.Lerp(transform.position, focus.transform.position + offset * distance, smooth * Time.deltaTime );
        
@@ -88,35 +88,25 @@ public class CameraController : MonoBehaviour
         {
             V += rotationAmount;
         }
-        if (targetAngle != 0)
-        {
-            Rotate();
-        }
+
+        moveSmoothlyCam();
+       
+    }
+#endregion
+    public void moveSmoothlyCam()
+    {
         offset = Quaternion.Euler(V, -H, Z) * new Vector3(0, 0, 1);
-        transform.position = Vector3.Lerp(transform.position, focus.transform.position - offset * distance, smooth * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, focus.transform.position - offset * Distance, smooth * Time.deltaTime);
         //transform.LookAt(focus.transform);
         Vector3 lTargetDir = focus.transform.position - transform.position;
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(lTargetDir), Time.time * smooth);
     }
-#endregion
 
-    protected void Rotate()
+    public void moveCam()
     {
-
-        if (targetAngle > 0)
-        {
-            //transform.RotateAround(focus.transform.position, Vector3.up, -rotationAmount);
-            targetAngle -= rotationAmount;
-            H -= rotationAmount;
-
-        }
-        else if (targetAngle < 0)
-        {
-            //transform.RotateAround(focus.transform.position, Vector3.up, rotationAmount);
-            targetAngle += rotationAmount;
-            H += rotationAmount;
-        }
-        //transform.LookAt(focus.transform);
+        offset = Quaternion.Euler(V, -H, Z) * new Vector3(0, 0, 1);
+        transform.position = focus.transform.position - offset * Distance;
+        transform.LookAt(focus.transform);
     }
 
 
@@ -159,6 +149,19 @@ public class CameraController : MonoBehaviour
         set
         {
             z = value;
+        }
+    }
+
+    public float Distance
+    {
+        get
+        {
+            return distance;
+        }
+
+        set
+        {
+            distance = value;
         }
     }
 

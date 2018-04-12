@@ -33,3 +33,14 @@ public enum BiomeEnum
 	crater,
 	cave
 }
+
+
+public enum AnimeParameters
+{
+    iswalking,
+    isplanting,
+    ismining,
+    mininghit,
+    isjumping,
+    isflying
+}
