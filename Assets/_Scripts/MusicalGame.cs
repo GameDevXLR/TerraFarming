@@ -266,7 +266,9 @@ public class MusicalGame : MonoBehaviour
 		//décompte des fautes et longueur du combo.
 		if (change < 0) {
 			if (isPlaying) {
-				InGameManager.instance.playerController.GetComponent<Animator> ().SetBool ("mininghit", false);
+//				InGameManager.instance.playerController.GetComponent<Animator> ().SetBool ("mininghit", false);
+				InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("MiningFail", layer: -1, fixedTime: 2);
+
 				numberOfMistakes++;
 //				lastInputWasMistake = true;
 				if (currentCombo > longestCombo) 
@@ -281,7 +283,8 @@ public class MusicalGame : MonoBehaviour
 			if (isPlaying) 
 			{
 				
-				InGameManager.instance.playerController.GetComponent<Animator> ().SetBool ("mininghit", true);
+				InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("MiningHit", layer: -1, fixedTime: 2);
+				InGameManager.instance.miningHitParticle.GetComponent <ParticleSystem> ().Play();
 			if (currentCombo > 3) 
 			{
 				//faire ici des bonus de combo?
