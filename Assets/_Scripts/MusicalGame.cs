@@ -22,7 +22,7 @@ public class MusicalGame : MonoBehaviour
 
 	[Tooltip("Le jeu musical selectionné.")]
 	public MusicGameScriptableObject myMusicGame;
-
+	public OreVein currentVein;
 //	[Header("Gestion de la musique")]
 //	public AudioClip backgroundMusic;
 //	[Tooltip("Le son jouer en cas d'erreur.")]public AudioClip errorKey;
@@ -286,6 +286,8 @@ public class MusicalGame : MonoBehaviour
 //				InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("MiningHit", layer: -1, fixedTime: 2);
 				InGameManager.instance.miningHitParticle.GetComponent <ParticleSystem> ().Play();
 				InGameManager.instance.miningHitParticle2.GetComponent <ParticleSystem> ().Play();
+				InGameManager.instance.miningHitParticle.transform.LookAt (new Vector3 (currentVein.transform.position.x, 0f, currentVein.transform.position.z));
+				InGameManager.instance.miningHitParticle2.transform.LookAt (new Vector3 (currentVein.transform.position.x, 0f, currentVein.transform.position.z));
 			if (currentCombo > 3) 
 			{
 				//faire ici des bonus de combo?
