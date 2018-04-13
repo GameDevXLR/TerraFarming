@@ -23,6 +23,7 @@ public class MusicalGame : MonoBehaviour
 	[Tooltip("Le jeu musical selectionné.")]
 	public MusicGameScriptableObject myMusicGame;
 	public OreVein currentVein;
+	public GameObject mineHitEffect;
 //	[Header("Gestion de la musique")]
 //	public AudioClip backgroundMusic;
 //	[Tooltip("Le son jouer en cas d'erreur.")]public AudioClip errorKey;
@@ -59,6 +60,7 @@ public class MusicalGame : MonoBehaviour
 	int numberOfMistakes;
 	int currentCombo;
 	int longestCombo;
+	float tmpTime;
 
 	[Header("Attention! L'ordre de ces 2 array doivent être le meme!")]
 
@@ -176,6 +178,7 @@ public class MusicalGame : MonoBehaviour
 		currentCombo = 0;
 		longestCombo = 0;
 		numberOfMistakes = 0;
+
 //		lastInputWasMistake = true;
 	}
 
@@ -285,11 +288,8 @@ public class MusicalGame : MonoBehaviour
 			if (isPlaying) 
 			{
 				
-				InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("MiningHit", layer: -1, fixedTime: 2);
-				InGameManager.instance.miningHitParticle.GetComponent <ParticleSystem> ().Play();
-				InGameManager.instance.miningHitParticle2.GetComponent <ParticleSystem> ().Play();
-				InGameManager.instance.miningHitParticle.transform.LookAt (new Vector3 (currentVein.transform.position.x, 0f, currentVein.transform.position.z));
-				InGameManager.instance.miningHitParticle2.transform.LookAt (new Vector3 (currentVein.transform.position.x, 0f, currentVein.transform.position.z));
+				StartCoroutine (PlayPartEffect (1));
+
 			if (currentCombo > 3) 
 			{
 				//faire ici des bonus de combo?
@@ -332,6 +332,26 @@ public class MusicalGame : MonoBehaviour
 				mainMusicMixer.SetFloat ("MainMusic", i);
 				yield return new WaitForEndOfFrame ();
 			}
+		}
+	}
+
+	IEnumerator PlayPartEffect(float time)
+	{
+		tmpTime = 0;
+		InGameManager.instance.miningHitParticle.GetComponent <ParticleSystem> ().Play();
+		InGameManager.instance.miningHitParticle2.GetComponent <ParticleSystem> ().Play();
+		InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("MiningHit", layer: -1, fixedTime: 2);
+
+		mineHitEffect.GetComponent<ParticleSystem> ().Play ();
+		mineHitEffect.transform.position = currentVein.transform.position;
+		while (time > tmpTime) 
+		{
+			InGameManager.instance.miningHitParticle.transform.LookAt (new Vector3 (currentVein.transform.position.x, 0f, currentVein.transform.position.z));
+			InGameManager.instance.miningHitParticle2.transform.LookAt (new Vector3 (currentVein.transform.position.x, 0f, currentVein.transform.position.z));
+			yield return new WaitForEndOfFrame ();
+			yield return new WaitForEndOfFrame ();
+			yield return new WaitForEndOfFrame ();
+			tmpTime += Time.deltaTime;
 		}
 	}
 }
