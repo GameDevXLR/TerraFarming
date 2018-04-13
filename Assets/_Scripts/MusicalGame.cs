@@ -162,8 +162,9 @@ public class MusicalGame : MonoBehaviour
 		InGameManager.instance.playerController.enabled = false;
 		StartCoroutine(ChangeMainMusicVolume (false));
 
-		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().gameObject.SetActive (true);
+//		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().gameObject.SetActive (true);
 		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().Play ();
+		InGameManager.instance.miningCharge2Particle.GetComponent <ParticleSystem> ().Play ();
 		InGameManager.instance.playerController.GetComponent<Animator>().SetBool ("ismining", true);
 
 		isPlaying = true;
@@ -208,7 +209,8 @@ public class MusicalGame : MonoBehaviour
 	void ShowScoreMenu()
 	{
 		isPlaying = false;
-		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().gameObject.SetActive (false);
+		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().Stop ();
+		InGameManager.instance.miningCharge2Particle.GetComponent <ParticleSystem> ().Stop ();
 		InGameManager.instance.playerController.GetComponent<Animator>().SetBool ("ismining", false);
 		InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Victory", layer: -1, fixedTime: 2);
 		//on donne des points bonus pour le plus long combo?
@@ -283,7 +285,7 @@ public class MusicalGame : MonoBehaviour
 			if (isPlaying) 
 			{
 				
-//				InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("MiningHit", layer: -1, fixedTime: 2);
+				InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("MiningHit", layer: -1, fixedTime: 2);
 				InGameManager.instance.miningHitParticle.GetComponent <ParticleSystem> ().Play();
 				InGameManager.instance.miningHitParticle2.GetComponent <ParticleSystem> ().Play();
 				InGameManager.instance.miningHitParticle.transform.LookAt (new Vector3 (currentVein.transform.position.x, 0f, currentVein.transform.position.z));

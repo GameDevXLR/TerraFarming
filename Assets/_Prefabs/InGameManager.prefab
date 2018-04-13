@@ -1125,6 +1125,7 @@ MonoBehaviour:
   allMusicGame:
   - {fileID: 11400000, guid: 9831bb498bc2d704ea0dec27f4d0a741, type: 2}
   myMusicGame: {fileID: 11400000, guid: 9831bb498bc2d704ea0dec27f4d0a741, type: 2}
+  currentVein: {fileID: 0}
   audioSBackground: {fileID: 82061349721930248}
   audioSKeys: {fileID: 82328306850153216}
   mainMusicMixer: {fileID: 24100000, guid: 7b82724dccb674345bc8c180023bfb11, type: 2}
@@ -1170,6 +1171,7 @@ MonoBehaviour:
   cleanParticle: {fileID: 0}
   waterParticle: {fileID: 0}
   miningChargeParticle: {fileID: 0}
+  miningCharge2Particle: {fileID: 0}
   miningHitParticle: {fileID: 0}
   miningHitParticle2: {fileID: 0}
   machineAnimator: {fileID: 0}
