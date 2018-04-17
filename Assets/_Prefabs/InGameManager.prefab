@@ -540,7 +540,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -878,8 +878,8 @@ MonoBehaviour:
   backwardKey: 115
   rightKey: 113
   leftKey: 100
-  actionKey: 32
-  jumpKey: 106
+  actionKey: 102
+  jumpKey: 32
   actionButtonVisual: {fileID: 0}
   actionBtnAudioS: {fileID: 82838879163557720}
   showActionBtnSnd: {fileID: 0}
@@ -1126,6 +1126,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9831bb498bc2d704ea0dec27f4d0a741, type: 2}
   myMusicGame: {fileID: 11400000, guid: 9831bb498bc2d704ea0dec27f4d0a741, type: 2}
   currentVein: {fileID: 0}
+  mineHitEffect: {fileID: 0}
   audioSBackground: {fileID: 82061349721930248}
   audioSKeys: {fileID: 82328306850153216}
   mainMusicMixer: {fileID: 24100000, guid: 7b82724dccb674345bc8c180023bfb11, type: 2}
