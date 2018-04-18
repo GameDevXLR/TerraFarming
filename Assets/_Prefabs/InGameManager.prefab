@@ -879,6 +879,7 @@ MonoBehaviour:
   rightKey: 113
   leftKey: 100
   actionKey: 32
+  jumpKey: 106
   actionButtonVisual: {fileID: 0}
   actionBtnAudioS: {fileID: 82838879163557720}
   showActionBtnSnd: {fileID: 0}
@@ -953,7 +954,7 @@ MonoBehaviour:
   plainUIVisible: 1
   craterUIVisible: 1
   caveUIVisible: 1
-  collectionOpen: 0
+  collectionOpen: 1
   airFlower: {fileID: 11400000, guid: 1924daa7eeee63d489c15a87ed2bb539, type: 2}
   airBush: {fileID: 11400000, guid: 1ad49ffd6fd99b148b46cb61526c9e20, type: 2}
   airTree: {fileID: 11400000, guid: aa867a1ac36d205408968c91e7f68be7, type: 2}
@@ -1124,8 +1125,10 @@ MonoBehaviour:
   allMusicGame:
   - {fileID: 11400000, guid: 9831bb498bc2d704ea0dec27f4d0a741, type: 2}
   myMusicGame: {fileID: 11400000, guid: 9831bb498bc2d704ea0dec27f4d0a741, type: 2}
+  currentVein: {fileID: 0}
   audioSBackground: {fileID: 82061349721930248}
   audioSKeys: {fileID: 82328306850153216}
+  mainMusicMixer: {fileID: 24100000, guid: 7b82724dccb674345bc8c180023bfb11, type: 2}
   oreGameCanvas: {fileID: 0}
   keyStartPosition: {fileID: 0}
   keyPool:
@@ -1168,7 +1171,9 @@ MonoBehaviour:
   cleanParticle: {fileID: 0}
   waterParticle: {fileID: 0}
   miningChargeParticle: {fileID: 0}
+  miningCharge2Particle: {fileID: 0}
   miningHitParticle: {fileID: 0}
+  miningHitParticle2: {fileID: 0}
   machineAnimator: {fileID: 0}
   machineBushController: {fileID: 0}
   machineCanvas: {fileID: 0}

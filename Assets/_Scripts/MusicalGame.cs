@@ -22,7 +22,8 @@ public class MusicalGame : MonoBehaviour
 
 	[Tooltip("Le jeu musical selectionné.")]
 	public MusicGameScriptableObject myMusicGame;
-
+	public OreVein currentVein;
+	public GameObject mineHitEffect;
 //	[Header("Gestion de la musique")]
 //	public AudioClip backgroundMusic;
 //	[Tooltip("Le son jouer en cas d'erreur.")]public AudioClip errorKey;
@@ -59,6 +60,7 @@ public class MusicalGame : MonoBehaviour
 	int numberOfMistakes;
 	int currentCombo;
 	int longestCombo;
+	float tmpTime;
 
 	[Header("Attention! L'ordre de ces 2 array doivent être le meme!")]
 
@@ -162,8 +164,9 @@ public class MusicalGame : MonoBehaviour
 		InGameManager.instance.playerController.enabled = false;
 		StartCoroutine(ChangeMainMusicVolume (false));
 
-		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().gameObject.SetActive (true);
+//		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().gameObject.SetActive (true);
 		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().Play ();
+		InGameManager.instance.miningCharge2Particle.GetComponent <ParticleSystem> ().Play ();
 		InGameManager.instance.playerController.GetComponent<Animator>().SetBool ("ismining", true);
 
 		isPlaying = true;
@@ -175,6 +178,7 @@ public class MusicalGame : MonoBehaviour
 		currentCombo = 0;
 		longestCombo = 0;
 		numberOfMistakes = 0;
+
 //		lastInputWasMistake = true;
 	}
 
@@ -208,7 +212,8 @@ public class MusicalGame : MonoBehaviour
 	void ShowScoreMenu()
 	{
 		isPlaying = false;
-		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().gameObject.SetActive (false);
+		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().Stop ();
+		InGameManager.instance.miningCharge2Particle.GetComponent <ParticleSystem> ().Stop ();
 		InGameManager.instance.playerController.GetComponent<Animator>().SetBool ("ismining", false);
 		InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Victory", layer: -1, fixedTime: 2);
 		//on donne des points bonus pour le plus long combo?
@@ -266,7 +271,9 @@ public class MusicalGame : MonoBehaviour
 		//décompte des fautes et longueur du combo.
 		if (change < 0) {
 			if (isPlaying) {
-				InGameManager.instance.playerController.GetComponent<Animator> ().SetBool ("mininghit", false);
+
+//				InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("MiningFail", layer: -1, fixedTime: 2);
+
 				numberOfMistakes++;
 //				lastInputWasMistake = true;
 				if (currentCombo > longestCombo) 
@@ -281,7 +288,8 @@ public class MusicalGame : MonoBehaviour
 			if (isPlaying) 
 			{
 				
-				InGameManager.instance.playerController.GetComponent<Animator> ().SetBool ("mininghit", true);
+				StartCoroutine (PlayPartEffect (1));
+
 			if (currentCombo > 3) 
 			{
 				//faire ici des bonus de combo?
@@ -324,6 +332,26 @@ public class MusicalGame : MonoBehaviour
 				mainMusicMixer.SetFloat ("MainMusic", i);
 				yield return new WaitForEndOfFrame ();
 			}
+		}
+	}
+
+	IEnumerator PlayPartEffect(float time)
+	{
+		tmpTime = 0;
+		InGameManager.instance.miningHitParticle.GetComponent <ParticleSystem> ().Play();
+		InGameManager.instance.miningHitParticle2.GetComponent <ParticleSystem> ().Play();
+		InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("MiningHit", layer: -1, fixedTime: 2);
+
+		mineHitEffect.GetComponent<ParticleSystem> ().Play ();
+		mineHitEffect.transform.position = currentVein.transform.position;
+		while (time > tmpTime) 
+		{
+			InGameManager.instance.miningHitParticle.transform.LookAt (new Vector3 (currentVein.transform.position.x, 0f, currentVein.transform.position.z));
+			InGameManager.instance.miningHitParticle2.transform.LookAt (new Vector3 (currentVein.transform.position.x, 0f, currentVein.transform.position.z));
+			yield return new WaitForEndOfFrame ();
+			yield return new WaitForEndOfFrame ();
+			yield return new WaitForEndOfFrame ();
+			tmpTime += Time.deltaTime;
 		}
 	}
 }

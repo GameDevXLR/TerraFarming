@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 moveDirection = Vector3.zero;
 
     public CharacterController Cc;
-    private bool isGrounded;
+    public bool isGrounded;
     public Animator anim;
 
     [Header("Fly")]
@@ -61,8 +61,17 @@ public class PlayerController : MonoBehaviour
         {
             if(Cc.velocity.y <= 0)
             {
+                if(Cc.velocity.y <= 0.1)
+                {
+                    SwitchAnime(AnimeParameters.isfalling, true);
+                }
                 SwitchAnime(AnimeParameters.isjumping, false);
-                SwitchAnime(AnimeParameters.isfalling, true);
+                
+                if(transform.position.y < -1)
+                {
+                    SwitchAnime(AnimeParameters.isflying, true);
+                    SwitchAnime(AnimeParameters.isfalling, false);
+                }
             }
             if (Input.GetKeyDown(CustomInputManager.instance.jumpKey))
             {
@@ -116,6 +125,7 @@ public class PlayerController : MonoBehaviour
             enableMovement();
 
             SwitchAnime(AnimeParameters.islanding, IsGrounded);
+            SwitchAnime(AnimeParameters.isfalling, !IsGrounded);
 
         }
     }
