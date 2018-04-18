@@ -24,14 +24,16 @@ public class CameraController : MonoBehaviour
     #endregion
 
     #region other variables
-
-    private float distance = 1;
+    [SerializeField]
+    private float distance = 20;
     public static CameraController instance;
 
     private float targetAngle = 0;
     const float rotationAmount = 1.0f;
-    private float v;
-    private float h;
+    [SerializeField]
+    private float v = 45;
+    [SerializeField]
+    private float h = 45;
     private float z;
 
     #endregion
@@ -49,7 +51,6 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-
         offset = Quaternion.Euler(V, -H, Z) * new Vector3(0, 0, 1);
         transform.position = focus.transform.position - offset * Distance;
         transform.LookAt(focus.transform);
@@ -57,7 +58,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        
+
         if (Input.GetAxis("Mouse ScrollWheel") > 0) // forward
         {
             Distance -= stepZoom;

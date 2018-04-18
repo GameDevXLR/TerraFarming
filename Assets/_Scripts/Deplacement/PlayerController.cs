@@ -18,31 +18,61 @@ public class PlayerController : MonoBehaviour
     public Vector3 moveDirection = Vector3.zero;
 
     public CharacterController Cc;
-    public bool isGrounded = true;
+    private bool isGrounded;
     public Animator anim;
 
     [Header("Fly")]
     public GameObject limiteFlying;
     public bool inFlyingZone = true;
 
-    
+    public BehaviourController behaviour;
+
+    bool isJumping;
 
     #endregion
-
 
 
     private void Start()
     {
         Cc = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
-        
+        SwitchAnime(AnimeParameters.islanding,false);
     }
 
     private void Update()
     {
+        moveDirection = behaviour.moveDirection;
         if(moveDirection.x != 0 || moveDirection.z !=0)
         {
-            rotation(moveDirection);
+            SwitchAnime(AnimeParameters.iswalking, true);
+        }
+        else if (moveDirection.x == 0 && moveDirection.z == 0)
+        {
+            SwitchAnime(AnimeParameters.iswalking, false);
+        }
+
+        if (isGrounded)
+        {
+            if(Input.GetKeyDown(CustomInputManager.instance.jumpKey))
+                SwitchAnime(AnimeParameters.isjumping, true);
+            
+        }
+        else if(!isGrounded)
+        {
+            if(Cc.velocity.y <= 0)
+            {
+                SwitchAnime(AnimeParameters.isjumping, false);
+                SwitchAnime(AnimeParameters.isfalling, true);
+            }
+            if (Input.GetKeyDown(CustomInputManager.instance.jumpKey))
+            {
+                behaviour.Jump();
+                SwitchAnime(AnimeParameters.isflying, true);
+            }
+            else if (Input.GetKeyUp(CustomInputManager.instance.jumpKey))
+            {
+                SwitchAnime(AnimeParameters.isflying, false);
+            }
         }
     }
 
@@ -71,5 +101,47 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public bool IsGrounded
+    {
+        get
+        {
+            return isGrounded;
+        }
+
+        set
+        {
+            isGrounded = value;
+
+            disableMovement();
+            enableMovement();
+
+            SwitchAnime(AnimeParameters.islanding, IsGrounded);
+
+        }
+    }
+
+    public virtual void SwitchAnime(AnimeParameters anime, bool activate)
+    {
+        anim.SetBool(anime.ToString(), activate);
+    }
+
+
+    public void disableMovement()
+    {
+        behaviour.enabled = false;
+        //behaviourNotGrounded.enabled = false;
+    }
+
+    public void enableMovement()
+    {
+        if (isGrounded)
+        {
+            behaviour.enabled = true;
+        }
+        else
+        {
+            behaviour.enabled = true;
+        }
+    }
 
 }

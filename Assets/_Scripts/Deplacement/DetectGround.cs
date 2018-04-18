@@ -13,7 +13,7 @@ public class DetectGround : MonoBehaviour {
         if ((layer.value & 1 << other.gameObject.layer) != 0)
         {
             if (numberOfDetectObj == 0)
-                InGameManager.instance.playerController.isGrounded = true;
+                InGameManager.instance.playerController.IsGrounded = true;
             numberOfDetectObj++;
         }
     }
@@ -24,7 +24,7 @@ public class DetectGround : MonoBehaviour {
         {
             numberOfDetectObj--;
             if (numberOfDetectObj == 0)
-                InGameManager.instance.playerController.isGrounded = false;
+                InGameManager.instance.playerController.IsGrounded = false;
         }
     }
 }

@@ -42,5 +42,7 @@ public enum AnimeParameters
     ismining,
     mininghit,
     isjumping,
-    isflying
+    isflying,
+    isfalling,
+    islanding
 }

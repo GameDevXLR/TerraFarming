@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WalkingPlayerState : IdlePlayerState {
+public class WalkingPlayerState : MonoBehaviour {
 
-    public override void SwitchAnime()
-    {
-        if (moveDirection.x == 0 && moveDirection.z == 0)
-            controller.anim.SetBool("iswalking", false);
-    }
+	// Use this for initialization
+	void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
 }
