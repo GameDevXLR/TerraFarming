@@ -21,7 +21,8 @@ public class InGameManager : MonoBehaviour {
 	public ParticleSystem miningCharge2Particle;
 	public ParticleSystem miningHitParticle;
 	public ParticleSystem miningHitParticle2;
-
+	public ParticleSystem miningFailParticle;
+	public ParticleSystem miningFailParticle2;
 	public Animator machineAnimator;
 	public Animator machineBushController;
 
