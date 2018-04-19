@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
 
     bool isJumping;
 
+    float yRefFalling;
+
     #endregion
 
 
@@ -75,7 +77,6 @@ public class PlayerController : MonoBehaviour
             }
             if (Input.GetKeyDown(CustomInputManager.instance.jumpKey))
             {
-                behaviour.Jump();
                 SwitchAnime(AnimeParameters.isflying, true);
             }
             else if (Input.GetKeyUp(CustomInputManager.instance.jumpKey))
