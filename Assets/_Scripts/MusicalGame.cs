@@ -340,6 +340,8 @@ public class MusicalGame : MonoBehaviour
 	{
 		tmpTime = 0;
 		if (isPositive) {
+			InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().Play ();
+			InGameManager.instance.miningCharge2Particle.GetComponent <ParticleSystem> ().Play ();
 			InGameManager.instance.miningHitParticle.GetComponent <ParticleSystem> ().Play ();
 			InGameManager.instance.miningHitParticle2.GetComponent <ParticleSystem> ().Play ();
 			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("MiningHit", layer: -1, fixedTime: 2);
@@ -347,6 +349,8 @@ public class MusicalGame : MonoBehaviour
 			mineHitEffect.transform.position = currentVein.transform.position;
 		} else 
 		{
+			InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().Stop ();
+			InGameManager.instance.miningCharge2Particle.GetComponent <ParticleSystem> ().Stop ();
 			InGameManager.instance.miningFailParticle.GetComponent <ParticleSystem> ().Play ();
 			InGameManager.instance.miningFailParticle2.GetComponent <ParticleSystem> ().Play ();
 		}
