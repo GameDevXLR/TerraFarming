@@ -273,6 +273,7 @@ public class MusicalGame : MonoBehaviour
 			if (isPlaying) {
 
 //				InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("MiningFail", layer: -1, fixedTime: 2);
+				StartCoroutine (PlayPartEffect (1,false));
 
 				numberOfMistakes++;
 //				lastInputWasMistake = true;
@@ -288,7 +289,7 @@ public class MusicalGame : MonoBehaviour
 			if (isPlaying) 
 			{
 				
-				StartCoroutine (PlayPartEffect (1));
+				StartCoroutine (PlayPartEffect (1,true));
 
 			if (currentCombo > 3) 
 			{
@@ -335,19 +336,33 @@ public class MusicalGame : MonoBehaviour
 		}
 	}
 
-	IEnumerator PlayPartEffect(float time)
+	IEnumerator PlayPartEffect(float time, bool isPositive)
 	{
 		tmpTime = 0;
-		InGameManager.instance.miningHitParticle.GetComponent <ParticleSystem> ().Play();
-		InGameManager.instance.miningHitParticle2.GetComponent <ParticleSystem> ().Play();
-		InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime("MiningHit", layer: -1, fixedTime: 2);
-
-		mineHitEffect.GetComponent<ParticleSystem> ().Play ();
-		mineHitEffect.transform.position = currentVein.transform.position;
+		if (isPositive) {
+			InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().Play ();
+			InGameManager.instance.miningCharge2Particle.GetComponent <ParticleSystem> ().Play ();
+			InGameManager.instance.miningHitParticle.GetComponent <ParticleSystem> ().Play ();
+			InGameManager.instance.miningHitParticle2.GetComponent <ParticleSystem> ().Play ();
+			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("MiningHit", layer: -1, fixedTime: 2);
+			mineHitEffect.GetComponent<ParticleSystem> ().Play ();
+			mineHitEffect.transform.position = currentVein.transform.position;
+		} else 
+		{
+			InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().Stop ();
+			InGameManager.instance.miningCharge2Particle.GetComponent <ParticleSystem> ().Stop ();
+			InGameManager.instance.miningFailParticle.GetComponent <ParticleSystem> ().Play ();
+			InGameManager.instance.miningFailParticle2.GetComponent <ParticleSystem> ().Play ();
+		}
 		while (time > tmpTime) 
 		{
-			InGameManager.instance.miningHitParticle.transform.LookAt (new Vector3 (currentVein.transform.position.x, 0f, currentVein.transform.position.z));
-			InGameManager.instance.miningHitParticle2.transform.LookAt (new Vector3 (currentVein.transform.position.x, 0f, currentVein.transform.position.z));
+			if (isPositive) {
+				InGameManager.instance.miningHitParticle.transform.LookAt (new Vector3 (currentVein.transform.position.x, 0f, currentVein.transform.position.z));
+				InGameManager.instance.miningHitParticle2.transform.LookAt (new Vector3 (currentVein.transform.position.x, 0f, currentVein.transform.position.z));
+			} else {
+				InGameManager.instance.miningFailParticle.transform.LookAt (new Vector3 (currentVein.transform.position.x, 0f, currentVein.transform.position.z));
+				InGameManager.instance.miningFailParticle2.transform.LookAt (new Vector3 (currentVein.transform.position.x, 0f, currentVein.transform.position.z));
+			}
 			yield return new WaitForEndOfFrame ();
 			yield return new WaitForEndOfFrame ();
 			yield return new WaitForEndOfFrame ();
