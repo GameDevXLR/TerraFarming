@@ -26,10 +26,10 @@ public class CameraControllerEditor : Editor {
         
 
 
-        if (!Application.isPlaying)
-        {
-            cam.moveCam();
-        }
+        //if (!Application.isPlaying)
+        //{
+        //    cam.moveCam();
+        //}
         distanceProperty = serializedObject.FindProperty("distance");
         horizontalProperty = serializedObject.FindProperty("h");
         verticalProperty = serializedObject.FindProperty("v");
@@ -61,7 +61,7 @@ public class CameraControllerEditor : Editor {
 
         if (!Application.isPlaying)
         {
-            cam.moveSmoothlyCam();
+            //cam.moveSmoothlyCam();
         }
         
         serializedObject.ApplyModifiedProperties();

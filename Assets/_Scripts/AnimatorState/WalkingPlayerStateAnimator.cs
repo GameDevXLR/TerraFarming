@@ -4,9 +4,23 @@ using UnityEngine;
 
 public class WalkingPlayerStateAnimator : IdlePlayerStateAnimator {
 
-    public override void SwitchAnime()
+
+
+    public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        if (controller.behaviour.moveDirection.x == 0 && controller.behaviour.moveDirection.z == 0)
+        if (!isPlayerMoving())
+        {
             SwitchAnime(AnimeParameters.iswalking, false);
+        }
+
+        if (Input.GetKeyDown(CustomInputManager.instance.jumpKey))
+        {
+            SwitchAnime(AnimeParameters.isjumping, true);
+        }
+
+        if (!controller.IsGrounded && controller.Cc.velocity.y <= 0)
+        {
+            SwitchAnime(AnimeParameters.isfalling, true);
+        }
     }
 }

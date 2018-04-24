@@ -23,18 +23,6 @@ public class BehaviourNotGroundedController : BehaviourController {
         Cc.Move(moveDirection * Time.deltaTime);
     }
 
-    public bool IsFlying
-    {
-        get
-        {
-            return isFlying;
-        }
-
-        set
-        {
-            isFlying = value;
-        }
-    }
 
 
 }

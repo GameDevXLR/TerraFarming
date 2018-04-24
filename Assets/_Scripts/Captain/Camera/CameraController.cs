@@ -35,6 +35,7 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private float h = 45;
     private float z;
+    private bool isSettingAngle = false;
 
     #endregion
 #region unity methods
@@ -75,22 +76,31 @@ public class CameraController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             H -= rotationAmount;
+            isSettingAngle = true;
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
             H += rotationAmount;
+            isSettingAngle = true;
         }
 
         if (Input.GetKey(KeyCode.DownArrow))
         {
             V -= rotationAmount;
+            isSettingAngle = true;
         }
         else if (Input.GetKey(KeyCode.UpArrow))
         {
             V += rotationAmount;
+            isSettingAngle = true;
         }
 
         moveSmoothlyCam();
+        if (isSettingAngle)
+        {
+            RotateSmoothlyCam();
+            isSettingAngle = false;
+        }
        
     }
 #endregion
@@ -98,11 +108,15 @@ public class CameraController : MonoBehaviour
     {
         offset = Quaternion.Euler(V, -H, Z) * new Vector3(0, 0, 1);
         transform.position = Vector3.Lerp(transform.position, focus.transform.position - offset * Distance, smooth * Time.deltaTime);
-        //transform.LookAt(focus.transform);
+        
+    }
+
+
+    public void RotateSmoothlyCam()
+    {
         Vector3 lTargetDir = focus.transform.position - transform.position;
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(lTargetDir), Time.time * smooth);
     }
-
     public void moveCam()
     {
         offset = Quaternion.Euler(V, -H, Z) * new Vector3(0, 0, 1);

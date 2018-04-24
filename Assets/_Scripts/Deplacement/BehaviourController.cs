@@ -10,6 +10,13 @@ public class BehaviourController : MonoBehaviour {
     public float gravity = 20f;
     public float speedRotate;
     public float jumpSpeed = 8f;
+    public float multSpeedFly = 2;
+
+    [SerializeField]
+    private float maxHeightReference = 20;
+
+    private float maxHeight = 20;
+    private float minHeight = 0;
 
     [SerializeField]
     bool isFlying;
@@ -29,7 +36,6 @@ public class BehaviourController : MonoBehaviour {
         {
             Debug.Log("Where is your CharactereController?");
         }
-        
     }
 
 
@@ -51,7 +57,6 @@ public class BehaviourController : MonoBehaviour {
         }
         else
         {
-            
             Gravity();
         }
 
@@ -72,7 +77,6 @@ public class BehaviourController : MonoBehaviour {
     public Vector3 CalculateMoveDirection()
     {
         Vector3 vectDirection = CustomInputManager.instance.getDirection();
-
         return vectDirection.normalized * speed;
     }
 
@@ -108,12 +112,14 @@ public class BehaviourController : MonoBehaviour {
     {
         Vector3 rotation = new Vector3(direction.x, 0, direction.z);
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rotation.normalized), speedRotate * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rotation.normalized), speedRotate * Time.deltaTime);       
+
     }
 
     public void Jump()
     {
-        moveDirection.y = jumpSpeed;
+        if(transform.position.y < MaxHeight1)
+            moveDirection.y = jumpSpeed;
     }
 
     public bool IsFlying
@@ -125,8 +131,63 @@ public class BehaviourController : MonoBehaviour {
 
         set
         {
+            if(IsFlying != value)
+            {
+                speed = (value) ? speed * multSpeedFly : speed/multSpeedFly;
+            }
             isFlying = value;
-            referenceYFly = transform.position.y;
+            float yref = transform.position.y - calculateJumpHeight();
+            referenceYFly = (yref <= MinHeight)? MinHeight : (yref > MaxHeight1)?MaxHeight1 : yref ;
+            
         }
+    }
+
+    public float MinHeight
+    {
+        get
+        {
+            return minHeight;
+        }
+
+        set
+        {
+            minHeight = value;
+        }
+    }
+
+    public float MaxHeight
+    {
+        get
+        {
+            return MaxHeight1;
+        }
+
+        set
+        {
+            MaxHeight1 = value;
+        }
+    }
+
+    public void setMaxAltitudeWithRef(float altitude)
+    {
+        MaxHeight = maxHeightReference + altitude; 
+    }
+
+    public float MaxHeight1
+    {
+        get
+        {
+            return maxHeight;
+        }
+
+        set
+        {
+            maxHeight = value;
+        }
+    }
+
+    public float calculateJumpHeight()
+    {
+        return ((jumpSpeed * jumpSpeed) / (2 * gravity) + jumpSpeed * Time.deltaTime) / 2;
     }
 }

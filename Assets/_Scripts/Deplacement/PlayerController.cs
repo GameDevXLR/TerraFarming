@@ -26,10 +26,7 @@ public class PlayerController : MonoBehaviour
     public bool inFlyingZone = true;
 
     public BehaviourController behaviour;
-
-    bool isJumping;
-
-    float yRefFalling;
+    public ParticleSystem aterrisageParticle;
 
     #endregion
 
@@ -41,50 +38,6 @@ public class PlayerController : MonoBehaviour
         SwitchAnime(AnimeParameters.islanding,false);
     }
 
-    private void Update()
-    {
-        moveDirection = behaviour.moveDirection;
-        if(moveDirection.x != 0 || moveDirection.z !=0)
-        {
-            SwitchAnime(AnimeParameters.iswalking, true);
-        }
-        else if (moveDirection.x == 0 && moveDirection.z == 0)
-        {
-            SwitchAnime(AnimeParameters.iswalking, false);
-        }
-
-        if (isGrounded)
-        {
-            if(Input.GetKeyDown(CustomInputManager.instance.jumpKey))
-                SwitchAnime(AnimeParameters.isjumping, true);
-            
-        }
-        else if(!isGrounded)
-        {
-            if(Cc.velocity.y <= 0)
-            {
-                if(Cc.velocity.y <= 0.1)
-                {
-                    SwitchAnime(AnimeParameters.isfalling, true);
-                }
-                SwitchAnime(AnimeParameters.isjumping, false);
-                
-                if(transform.position.y < -1)
-                {
-                    SwitchAnime(AnimeParameters.isflying, true);
-                    SwitchAnime(AnimeParameters.isfalling, false);
-                }
-            }
-            if (Input.GetKeyDown(CustomInputManager.instance.jumpKey))
-            {
-                SwitchAnime(AnimeParameters.isflying, true);
-            }
-            else if (Input.GetKeyUp(CustomInputManager.instance.jumpKey))
-            {
-                SwitchAnime(AnimeParameters.isflying, false);
-            }
-        }
-    }
 
     private void OnDisable()
     {
@@ -97,19 +50,7 @@ public class PlayerController : MonoBehaviour
         
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rotation.normalized), speedRotate * Time.deltaTime);
     }
-
-    public bool InFlyingZone
-    {
-        get
-        {
-            return inFlyingZone;
-        }
-
-        set
-        {
-            inFlyingZone = value;
-        }
-    }
+    
 
     public bool IsGrounded
     {
@@ -120,13 +61,21 @@ public class PlayerController : MonoBehaviour
 
         set
         {
-            isGrounded = value;
+            if(isGrounded != value)
+            {
+                isGrounded = value;
+                
+                SwitchAnime(AnimeParameters.islanding, IsGrounded);
+                SwitchAnime(AnimeParameters.isfalling, !IsGrounded);
 
-            disableMovement();
-            enableMovement();
-
-            SwitchAnime(AnimeParameters.islanding, IsGrounded);
-            SwitchAnime(AnimeParameters.isfalling, !IsGrounded);
+                if (isGrounded)
+                {
+                    aterrisageParticle.Clear();
+                    aterrisageParticle.Play();
+                    SetAltitudeMaxFromGroundPos(0);
+                }
+            }
+            
 
         }
     }
@@ -139,20 +88,18 @@ public class PlayerController : MonoBehaviour
 
     public void disableMovement()
     {
-        behaviour.enabled = false;
+        behaviour.canMove = false;
         //behaviourNotGrounded.enabled = false;
     }
 
     public void enableMovement()
     {
-        if (isGrounded)
-        {
-            behaviour.enabled = true;
-        }
-        else
-        {
-            behaviour.enabled = true;
-        }
+        behaviour.canMove = true;
+    }
+
+    public void SetAltitudeMaxFromGroundPos(float altitudeGround)
+    {
+        behaviour.setMaxAltitudeWithRef(altitudeGround);
     }
 
 }
