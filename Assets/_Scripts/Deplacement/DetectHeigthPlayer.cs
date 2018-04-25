@@ -12,11 +12,13 @@ public class DetectHeigthPlayer : MonoBehaviour {
 
     public float distanceMax = 30;
 
+    public RaycastHit hit;
+
 
 	
 	// Update is called once per frame
 	void Update () {
-        RaycastHit hit;
+        
 
         Vector3 p1 =transform.position + Cc.center;
         p1.y = p1.y - Cc.height/2 + Cc.radius;
@@ -36,8 +38,13 @@ public class DetectHeigthPlayer : MonoBehaviour {
             }
             else
             {
+
+                controller.shadowObject.SetActive(true);
                 controller.IsGrounded = false;
                 controller.SetAltitudeMaxFromGroundPos(hit.point.y);
+                Vector3 vect = hit.point;
+                vect.y += 0.1f; 
+                controller.shadowObject.transform.position = vect;
                 
             }
         }
@@ -45,6 +52,7 @@ public class DetectHeigthPlayer : MonoBehaviour {
         {
             controller.IsGrounded = false;
             controller.SetAltitudeMaxFromGroundPos(0);
+            controller.shadowObject.SetActive(false);
         }
 
     }

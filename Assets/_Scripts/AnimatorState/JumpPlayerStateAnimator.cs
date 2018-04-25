@@ -5,7 +5,8 @@ public class JumpPlayerStateAnimator : PlayerStateAnimator {
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, animatorStateInfo, layerIndex);
-        InGameManager.instance.playerController.behaviour.Jump();
+        controller.Jump();
+        
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
@@ -14,7 +15,7 @@ public class JumpPlayerStateAnimator : PlayerStateAnimator {
         {
             if (Input.GetKeyDown(CustomInputManager.instance.jumpKey))
             {
-                InGameManager.instance.playerController.behaviour.Jump();
+                controller.Jump();
             }
             if (Input.GetKey(CustomInputManager.instance.jumpKey))
             {

@@ -27,6 +27,12 @@ public class PlayerController : MonoBehaviour
 
     public BehaviourController behaviour;
     public ParticleSystem aterrisageParticle;
+    public PropulseurParticleController propulseurParticle;
+
+    public float MinEmmissionPropulseur = 50;
+    public float MaxEmmissionPropulseur = 1000;
+
+    public GameObject shadowObject;
 
     #endregion
 
@@ -70,9 +76,15 @@ public class PlayerController : MonoBehaviour
 
                 if (isGrounded)
                 {
+                    aterrisageParticle.gameObject.transform.position = transform.position;
                     aterrisageParticle.Clear();
                     aterrisageParticle.Play();
                     SetAltitudeMaxFromGroundPos(0);
+                    shadowObject.SetActive(false);
+                }
+                else
+                {
+                    shadowObject.SetActive(true);
                 }
             }
             
@@ -102,4 +114,13 @@ public class PlayerController : MonoBehaviour
         behaviour.setMaxAltitudeWithRef(altitudeGround);
     }
 
+
+    public void Jump()
+    {
+        behaviour.Jump();
+        propulseurParticle.Burst();
+    }
+
 }
+
+
