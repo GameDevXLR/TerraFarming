@@ -10,10 +10,6 @@ public class JumpPlayerStateAnimator : PlayerStateAnimator {
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        if (controller.Cc.velocity.y  <= 0)
-        {
-            SwitchAnime(AnimeParameters.isjumping, false);
-        }
         if ( animatorStateInfo.normalizedTime > 0.1)
         {
             if (Input.GetKeyDown(CustomInputManager.instance.jumpKey))
@@ -30,6 +26,10 @@ public class JumpPlayerStateAnimator : PlayerStateAnimator {
             SwitchAnime(AnimeParameters.isflying, false);
         }
 
+        if (controller.Cc.velocity.y <= 0)
+        {
+            SwitchAnime(AnimeParameters.isjumping, false);
+        }
 
     }
 
