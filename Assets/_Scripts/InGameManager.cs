@@ -69,14 +69,15 @@ public class InGameManager : MonoBehaviour {
 	{
 		quitCanvas.SetActive (true);
 		EventSystem.current.SetSelectedGameObject(resumeBtn.gameObject);
-		playerController.isActive= false;
+		playerController.disableMovement();
 
 	}
 
 	public void HideQuitGameMenu()
 	{
 		quitCanvas.SetActive (false);
-		playerController.isActive= true;
+		playerController.enableMovement();
+
 
 	}
 

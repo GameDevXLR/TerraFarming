@@ -12,6 +12,8 @@ public class MainMenuManager : MonoBehaviour {
     public GameObject keyboardChoicePanel;
     public GameObject pressEnterObj;
 
+    public LoadingScreenControl loadingScreenControl;
+
     public Button continueButton;
 
 	public AudioSource audioS;
@@ -48,7 +50,9 @@ public class MainMenuManager : MonoBehaviour {
     {
         PlayerPrefs.SetString("Game", "new");
         audioS.PlayOneShot(startGameSnd);
-        SceneManager.LoadScene(1, LoadSceneMode.Single);
+        mainMenuPanel.SetActive(false);
+        loadingScreenControl.LoadScreen(1);
+        //SceneManager.LoadScene(1, LoadSceneMode.Single);
     }
 
 
@@ -57,8 +61,9 @@ public class MainMenuManager : MonoBehaviour {
 	{
         PlayerPrefs.SetString("Game", "continue");
         audioS.PlayOneShot (startGameSnd);
-
-		SceneManager.LoadScene (1, LoadSceneMode.Single);
+        mainMenuPanel.SetActive(false);
+        loadingScreenControl.LoadScreen(1);
+        //SceneManager.LoadScene (1, LoadSceneMode.Single);
 		
 	}
 

@@ -157,7 +157,6 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 			}
 			ListenForAction ();
 
-
 		}
 	}
 	void OnTriggerExit(Collider other)
@@ -603,7 +602,8 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 		//faire les changements d'apparence
 		CustomInputManager.instance.ShowHideActionButtonVisual (true);
 		outliner.enabled = true;
-
+        // stock le plantationSpot actuel
+        PlantationManager.instance.plantationSpot = this;
 	}
 	void StopListeningForAction()
 	{
@@ -612,7 +612,10 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 		CustomInputManager.instance.ShowHideActionButtonVisual (false);
 		outliner.enabled = false;
 
-	}
+        PlantationManager.instance.plantationSpot = null;
+
+
+    }
 
 	public void ShowPlantTypeMenu()
 	{

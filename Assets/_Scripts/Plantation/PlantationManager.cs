@@ -174,7 +174,7 @@ public class PlantationManager : MonoBehaviour {
 		}
 
 		InGameManager.instance.isPlanting = true;
-		InGameManager.instance.playerController.isActive = false;
+		InGameManager.instance.playerController.disableMovement();
 		isSeedMenuOpen = true;
 		ShowFlowerSeedContent ();
 	}
@@ -207,7 +207,7 @@ public class PlantationManager : MonoBehaviour {
 			plantationSpot = null;
 			plantSeedCanvas.enabled = false;
 			InGameManager.instance.isPlanting = false;
-			InGameManager.instance.playerController.isActive = true;
+			InGameManager.instance.playerController.enableMovement();
 			isSeedMenuOpen = false;
 		}
 		actualUIElements.Clear();

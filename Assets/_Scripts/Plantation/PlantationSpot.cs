@@ -259,7 +259,7 @@ public class PlantationSpot : MonoBehaviour {
             plantTypeCanvas.SetActive(true);
             isPlantTypeMenuOpened = true;
             InGameManager.instance.isPlanting = true;
-            InGameManager.instance.playerController.isActive = false;
+            InGameManager.instance.playerController.disableMovement();
         }
 	}
 
@@ -269,7 +269,7 @@ public class PlantationSpot : MonoBehaviour {
 		isPlantTypeMenuOpened = false;
 		InGameManager.instance.isPlanting = false;
 
-		InGameManager.instance.playerController.isActive = true;
+		InGameManager.instance.playerController.enableMovement();
 
 	}
 
