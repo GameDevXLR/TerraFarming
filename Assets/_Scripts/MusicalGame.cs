@@ -215,7 +215,8 @@ public class MusicalGame : MonoBehaviour
 		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().Stop ();
 		InGameManager.instance.miningCharge2Particle.GetComponent <ParticleSystem> ().Stop ();
 		InGameManager.instance.playerController.GetComponent<Animator>().SetBool ("ismining", false);
-		InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Victory", layer: -1, fixedTime: 2);
+		InGameManager.instance.playerController.GetComponent<Animator>().SetBool ("isvictory", true);
+        //InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Victory", layer: -1, fixedTime: 2);
 		//on donne des points bonus pour le plus long combo?
 		if (currentCombo > longestCombo) 
 		{
@@ -254,7 +255,7 @@ public class MusicalGame : MonoBehaviour
 	void CloseTheGame()
 	{
 		CancelInvoke ();
-		InGameManager.instance.playerController.GetComponent<Animator>().SetBool ("iswalking", true);
+		//InGameManager.instance.playerController.GetComponent<Animator>().SetBool ("iswalking", true);
 
 		scoreMenuOpen = false;
 		scorePanel.SetActive (false);

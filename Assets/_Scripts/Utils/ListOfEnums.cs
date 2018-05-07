@@ -44,5 +44,8 @@ public enum AnimeParameters
     isjumping,
     isflying,
     isfalling,
-    islanding
+    islanding,
+    isvictory,
+    iscleaning,
+    iswatering
 }
