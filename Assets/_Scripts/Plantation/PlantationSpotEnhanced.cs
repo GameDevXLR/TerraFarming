@@ -118,7 +118,10 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 	public void OnTriggerStay(Collider other)
 	{
 
-		if (Input.GetKeyDown (CustomInputManager.instance.actionKey) && other.tag == "Player" &&!PlantationManager.instance.isSeedMenuOpen) 
+		if (Input.GetKeyDown (CustomInputManager.instance.actionKey) 
+            && other.tag == "Player" 
+            &&!PlantationManager.instance.isSeedMenuOpen 
+            && InGameManager.instance.playerController.canDoAction            ) 
 		{
 			//si t'es pas encore une plante, fait ton taff normalement...
 			if (plantType == PlantTypeEnum.none ) 

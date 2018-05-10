@@ -23,4 +23,6 @@ public class WalkingPlayerStateAnimator : IdlePlayerStateAnimator {
             SwitchAnime(AnimeParameters.isfalling, true);
         }
     }
+
+    
 }

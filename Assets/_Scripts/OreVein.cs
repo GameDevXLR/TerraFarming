@@ -37,7 +37,7 @@ public class OreVein : MonoBehaviour
 	{
 		if(other.tag == "Player" && !InGameManager.instance.OreGame.enabled)
 		{
-			if (Input.GetKeyDown (CustomInputManager.instance.actionKey)) {
+			if (Input.GetKeyDown (CustomInputManager.instance.actionKey) && InGameManager.instance.playerController.canDoAction) {
 				if (gamesAvailable > 0) {
 					InGameManager.instance.OreGame.enabled = true;
 					InGameManager.instance.OreGame.currentVein = this;
