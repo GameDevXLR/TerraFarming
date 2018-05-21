@@ -9,21 +9,13 @@ public class PlayerController : MonoBehaviour
 {
 
 #region variables editor
-    public float speed = 6f;
-    public float jumpSpeed = 8f;
-    public float gravity = 20f;
-    public bool isActive = true;
-    public float speedRotate;
-
-    public Vector3 moveDirection = Vector3.zero;
 
     public CharacterController Cc;
     public bool isGrounded;
     public Animator anim;
 
-    [Header("Fly")]
-    public GameObject limiteFlying;
-    public bool inFlyingZone = true;
+    public bool canDoAction = true;
+
 
     public BehaviourController behaviour;
     public ParticleSystem aterrisageParticle;
@@ -44,18 +36,6 @@ public class PlayerController : MonoBehaviour
         SwitchAnime(AnimeParameters.islanding,false);
     }
 
-
-    private void OnDisable()
-    {
-        anim.SetBool("iswalking", false);
-    }
-
-    public void rotation(Vector3 direction)
-    {
-        Vector3 rotation = new Vector3(direction.x, 0, direction.z);
-        
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rotation.normalized), speedRotate * Time.deltaTime);
-    }
     
 
     public bool IsGrounded

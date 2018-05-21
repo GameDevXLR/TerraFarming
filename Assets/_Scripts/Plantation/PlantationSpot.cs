@@ -197,7 +197,8 @@ public class PlantationSpot : MonoBehaviour {
 			{
 				if (giveEssence) 
 				{
-					InGameManager.instance.playerController.GetComponent<Animator>().PlayInFixedTime("Cleaning", layer: -1, fixedTime: 1);
+                    InGameManager.instance.playerController.anim.SetBool(AnimeParameters.iscleaning.ToString(), true);
+                    //InGameManager.instance.playerController.GetComponent<Animator>().PlayInFixedTime("Cleaning", layer: -1, fixedTime: 1);
 					giveEssence = false;
 					plantAudioS.PlayOneShot(growUpSnd);
 					InGameManager.instance.cleanParticle.GetComponent<ParticleSystem> ().Play ();

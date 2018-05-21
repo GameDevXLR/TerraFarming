@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 
-public class DecollagePlayerStateAnimator : StateMachineBehaviour {
+public class DecollagePlayerStateAnimator : IdlePlayerStateAnimator {
 
-    PlayerController controller;
-
-    public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
+    public override void OnStateExit(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        controller = InGameManager.instance.playerController;
-        controller.disableMovement();
+        if (controller.canDoAction)
+        {
+            SwitchAnime(AnimeParameters.isjumping, false);
+        }
     }
 
 }

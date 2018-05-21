@@ -167,7 +167,7 @@ public class MusicalGame : MonoBehaviour
 //		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().gameObject.SetActive (true);
 		InGameManager.instance.miningChargeParticle.GetComponent <ParticleSystem> ().Play ();
 		InGameManager.instance.miningCharge2Particle.GetComponent <ParticleSystem> ().Play ();
-		InGameManager.instance.playerController.GetComponent<Animator>().SetBool ("ismining", true);
+		InGameManager.instance.playerController.GetComponent<Animator>().SetBool (AnimeParameters.ismining.ToString(), true);
 
 		isPlaying = true;
 		isAddingKeys = true;

@@ -1,6 +1,4 @@
-﻿
-
-public enum PlantTypeEnum
+﻿public enum PlantTypeEnum
 {
 	none,
 	flower,
@@ -8,7 +6,6 @@ public enum PlantTypeEnum
     tree
 
 }
-
 public enum ressourceEnum
 {
     bush,
@@ -33,8 +30,6 @@ public enum BiomeEnum
 	crater,
 	cave
 }
-
-
 public enum AnimeParameters
 {
     iswalking,
@@ -48,4 +43,9 @@ public enum AnimeParameters
     isvictory,
     iscleaning,
     iswatering
+}
+public enum DayStates
+{
+    Day,
+    Night
 }
