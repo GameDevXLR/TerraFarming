@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class DayManager : MonoBehaviour {
 
+	public static DayManager instance;
     private int _currentDay = 1;
-    private DayStates _dayStates;
-    public static DayManager instance;
+	public DayStates _dayStates;
     public Text DisplayNumberDay;
-
+	public  Text dayStateDisplay;
 
     private void Awake()
     {
@@ -52,6 +52,8 @@ public class DayManager : MonoBehaviour {
         set
         {
             _dayStates = value;
+			dayStateDisplay.text = _dayStates.ToString();
+
         }
     }
 
