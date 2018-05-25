@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Playables;
 public class OreVein : MonoBehaviour 
 {
 	public cakeslice.Outline outliner;
 	public int gamesAvailable = 2;
-
+	public PlayableAsset clip;
 	public OreVein nextVeinToActivate;
 	public GameObject isActiveParticules;
 	void Start()
@@ -41,6 +41,7 @@ public class OreVein : MonoBehaviour
 				if (gamesAvailable > 0) {
 					InGameManager.instance.OreGame.enabled = true;
 					InGameManager.instance.OreGame.currentVein = this;
+					TimelineManager.instance.director.Play (clip);
 					InGameManager.instance.playerController.transform.LookAt (new Vector3(this.transform.position.x,0f,this.transform.position.z));
 					//active le laser pour voir:
 					InGameManager.instance.playerController.transform.GetChild (0).gameObject.SetActive (true);
