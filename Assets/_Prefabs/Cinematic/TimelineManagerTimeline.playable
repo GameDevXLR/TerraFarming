@@ -14,7 +14,7 @@ MonoBehaviour:
   m_NextId: 0
   m_Tracks:
   - {fileID: 114763570409605462}
-  m_FixedDuration: 20
+  m_FixedDuration: 26.683333333333334
   m_EditorSettings:
     m_Framerate: 60
   m_DurationMode: 1
@@ -330,6 +330,12 @@ AnimationClip:
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
+      - serializedVersion: 2
+        time: 15.116667
+        value: {x: 358.8991, y: 4.59234, z: 356.0201}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -340,15 +346,15 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: {x: -0.024734497, y: -0.011836052, z: -0.013397217}
+        value: {x: -0.024734497, y: -2, z: -0.013397217}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
       - serializedVersion: 2
         time: 9.933333
         value: {x: 0.5407257, y: -1.785758, z: 4.3172846}
-        inSlope: {x: 0, y: 0, z: 0}
-        outSlope: {x: 0, y: 0, z: 0}
+        inSlope: {x: 0, y: 0.045462485, z: 0}
+        outSlope: {x: 0, y: 0.045462485, z: 0}
         tangentMode: 0
       - serializedVersion: 2
         time: 18.85
@@ -379,6 +385,13 @@ AnimationClip:
       isPPtrCurve: 0
     - serializedVersion: 2
       path: 0
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 4
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 0
       attribute: 0
       script: {fileID: 0}
       typeID: 95
@@ -397,13 +410,6 @@ AnimationClip:
       script: {fileID: 0}
       typeID: 95
       customType: 8
-      isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 0
-      attribute: 4
-      script: {fileID: 0}
-      typeID: 4
-      customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
       path: 0
@@ -488,15 +494,15 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: -0.011836052
+        value: -2
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
         time: 9.933333
         value: -1.785758
-        inSlope: 0
-        outSlope: 0
+        inSlope: 0.045462485
+        outSlope: 0.045462485
         tangentMode: 136
       - serializedVersion: 2
         time: 18.85
@@ -548,6 +554,12 @@ AnimationClip:
         inSlope: 0
         outSlope: 0
         tangentMode: 136
+      - serializedVersion: 2
+        time: 15.116667
+        value: 358.8991
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -564,6 +576,12 @@ AnimationClip:
         inSlope: 0
         outSlope: 0
         tangentMode: 136
+      - serializedVersion: 2
+        time: 15.116667
+        value: 4.59234
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -577,6 +595,12 @@ AnimationClip:
       - serializedVersion: 2
         time: 9.933333
         value: 355.7343
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 15.116667
+        value: 356.0201
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -668,11 +692,11 @@ MonoBehaviour:
   m_Parent: {fileID: 114763570409605462}
   m_Children: []
   m_Clips:
-  - m_Start: 0.9833333333333333
+  - m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 114054936583571116}
     m_UnderlyingAsset: {fileID: 114054936583571116}
-    m_Duration: 18.5
+    m_Duration: 25.816666666666666
     m_TimeScale: 1
     m_ParentTrack: {fileID: 114652368871133064}
     m_EaseInDuration: 0
@@ -745,11 +769,11 @@ MonoBehaviour:
   m_Parent: {fileID: 114763570409605462}
   m_Children: []
   m_Clips:
-  - m_Start: 1
+  - m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 114594011255107498}
     m_UnderlyingAsset: {fileID: 74865984950932020}
-    m_Duration: 18.483333333333334
+    m_Duration: 25.816666666666666
     m_TimeScale: 1
     m_ParentTrack: {fileID: 114735012694457000}
     m_EaseInDuration: 0
@@ -800,7 +824,7 @@ MonoBehaviour:
     m_PostExtrapolationMode: 1
     m_PreExtrapolationMode: 1
     m_PostExtrapolationTime: Infinity
-    m_PreExtrapolationTime: 1
+    m_PreExtrapolationTime: 0
     m_DisplayName: Recorded
     m_Version: 1
   m_OpenClipPreExtrapolation: 1
