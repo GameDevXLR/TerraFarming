@@ -256,6 +256,8 @@ public class MusicalGame : MonoBehaviour
 	{
 		CancelInvoke ();
 		//InGameManager.instance.playerController.GetComponent<Animator>().SetBool ("iswalking", true);
+		currentVein.faceTarg.gameObject.SetActive(false);
+		currentVein.faceTarg.enabled = false;
 
 		scoreMenuOpen = false;
 		scorePanel.SetActive (false);

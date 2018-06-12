@@ -9,6 +9,7 @@ public class OreVein : MonoBehaviour
 	public PlayableAsset clip;
 	public OreVein nextVeinToActivate;
 	public GameObject isActiveParticules;
+	public FaceTarget faceTarg;
 	void Start()
 	{
 		outliner.enabled = false;
@@ -39,6 +40,8 @@ public class OreVein : MonoBehaviour
 		{
 			if (Input.GetKeyDown (CustomInputManager.instance.actionKey) && InGameManager.instance.playerController.canDoAction) {
 				if (gamesAvailable > 0) {
+					faceTarg.gameObject.SetActive (true);
+					faceTarg.enabled = true;
 					InGameManager.instance.OreGame.enabled = true;
 					InGameManager.instance.OreGame.currentVein = this;
 					TimelineManager.instance.director.Play (clip);

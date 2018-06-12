@@ -195,7 +195,7 @@ Transform:
   m_LocalScale: {x: 231.66223, y: 231.66217, z: 231.66217}
   m_Children: []
   m_Father: {fileID: 4709042691976096}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4246651009076738
 Transform:
@@ -208,7 +208,7 @@ Transform:
   m_LocalScale: {x: 231.66223, y: 231.66217, z: 231.66217}
   m_Children: []
   m_Father: {fileID: 4709042691976096}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!4 &4300593837997602
 Transform:
@@ -218,10 +218,10 @@ Transform:
   m_GameObject: {fileID: 1230850514980338}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 400, y: 400, z: 231.66208}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 4709042691976096}
-  m_RootOrder: 1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4483203967095700
 Transform:
@@ -235,7 +235,7 @@ Transform:
   m_Children:
   - {fileID: 224508469398287500}
   m_Father: {fileID: 4709042691976096}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4535575511876728
 Transform:
@@ -248,7 +248,7 @@ Transform:
   m_LocalScale: {x: 231.66223, y: 231.66217, z: 231.66217}
   m_Children: []
   m_Father: {fileID: 4709042691976096}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4709042691976096
 Transform:
@@ -256,19 +256,19 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1765808072905784}
-  m_LocalRotation: {x: -0.706916, y: 0.016426787, z: -0.016426783, w: 0.706916}
-  m_LocalPosition: {x: -33.59053, y: 1.4158287, z: -21.290009}
+  m_LocalRotation: {x: -0.7071068, y: 0.00000002980233, z: 0.00000002980233, w: 0.7071068}
+  m_LocalPosition: {x: 3.75, y: 0, z: -9.899986}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4969992342209032}
-  - {fileID: 4300593837997602}
   - {fileID: 4246651009076738}
   - {fileID: 4117200544244994}
   - {fileID: 4535575511876728}
   - {fileID: 4483203967095700}
+  - {fileID: 4300593837997602}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -87.338005, y: 90.00001, z: -90.00001}
+  m_LocalEulerAnglesHint: {x: -90, y: 90.00001, z: -90.00001}
 --- !u!4 &4969992342209032
 Transform:
   m_ObjectHideFlags: 1
@@ -297,8 +297,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 5d256af894626c0489cee94fbe5e288f, type: 3}
-  - {fileID: 2100002, guid: 5d256af894626c0489cee94fbe5e288f, type: 3}
+  - {fileID: 2100000, guid: 5b27e8ed15db0394c8be8e5ebcc453c1, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -429,7 +428,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1230850514980338}
-  m_Mesh: {fileID: 4300000, guid: 5d256af894626c0489cee94fbe5e288f, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 5b27e8ed15db0394c8be8e5ebcc453c1, type: 3}
 --- !u!33 &33366933051889694
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -478,7 +477,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 5d256af894626c0489cee94fbe5e288f, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 5b27e8ed15db0394c8be8e5ebcc453c1, type: 3}
 --- !u!65 &65808037302399150
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -679,8 +678,8 @@ MonoBehaviour:
   persistentID: 0
   spotBiome: 1
   plantSO: {fileID: 0}
-  planterSnd: {fileID: 8300000, guid: 22266c342198a6744834d757e84f7252, type: 3}
-  growUpSnd: {fileID: 8300000, guid: ba843e1851461e94e9b50994a281dc15, type: 3}
+  planterSnd: {fileID: 8300000, guid: ba843e1851461e94e9b50994a281dc15, type: 3}
+  growUpSnd: {fileID: 8300000, guid: 22266c342198a6744834d757e84f7252, type: 3}
   plantAudioS: {fileID: 82370112961931448}
   outliner: {fileID: 114292812889242892}
   debrisObj: {fileID: 1290758871680096}
@@ -695,9 +694,13 @@ MonoBehaviour:
   nbrOfGivenEssence: 0
   recolteSnd: {fileID: 8300000, guid: ba843e1851461e94e9b50994a281dc15, type: 3}
   timeToGrow: 20
+  genome: {fileID: 0}
+  canMakeSeed: 0
+  canBeUsed: 1
+  growthBoosted: 0
   growthAnimator: {fileID: 95788826180486018}
   neighboursSpot: []
-  sphereRadius: 50
+  sphereRadius: 15
   sphereCastLayer:
     serializedVersion: 2
     m_Bits: 4096
