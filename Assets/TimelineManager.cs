@@ -12,6 +12,7 @@ public class TimelineManager : MonoBehaviour
 	public PlayableAsset cutscene1;
 
 	public Animator captainAnimator;
+	public Animator playAnimator;
 
 	void Awake()
 	{
