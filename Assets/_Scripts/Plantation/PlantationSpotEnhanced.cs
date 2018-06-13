@@ -204,11 +204,11 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 					canMakeSeed = false;
 					//ca fait un petit
 					GameObject go = GameObject.Instantiate (PlantCollection.instance.genericSeed);
-					go.transform.position = transform.position + new Vector3 (0, 3, 0);
+					go.transform.position = transform.position + new Vector3 (1, 3, 1);
 					go.GetComponent<DroppedSeed> ().daddy = plantSO;
 					go.GetComponent<DroppedSeed> ().mummy = neighboursSpot [i].plantSO;
 					go.GetComponent<DroppedSeed> ().plantType = plantType;
-
+					return;
 //					switch (plantType) 
 //					{
 //					case PlantTypeEnum.flower:
@@ -361,9 +361,12 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 			if (plantType == PlantTypeEnum.tree) {
 				giveEssence = true;
 			}
-			if (!canMakeSeed) {
-				canMakeSeed = true;
+			if (canMakeSeed) 
+			{
 				FindLover ();
+			} else 
+			{
+				canMakeSeed = true;
 			}
 			if (genome.isWateringAround) {
 				WaterTheSurroundingArea ();
