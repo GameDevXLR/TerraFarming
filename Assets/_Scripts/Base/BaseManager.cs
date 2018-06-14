@@ -1,15 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class BaseManager : MonoBehaviour {
+public class BaseManager : MonoBehaviour 
+{
 
-    public GameObject BaseCanvas;
+	public static BaseManager instance;
+	public Action<int> OnDayChange;
+
+    public GameObject baseCanvas;
+
+	void Awake()
+	{
+		if (instance == null) 
+		{
+			instance = this;
+		}
+	}
 
     public void ExitInDay(int day)
     {
-        BaseCanvas.SetActive(false);
+        baseCanvas.SetActive(false);
         DayManager.instance.CurrentDay += day;
         InGameManager.instance.playerController.enableMovement();
+
     }
+
+
 }
