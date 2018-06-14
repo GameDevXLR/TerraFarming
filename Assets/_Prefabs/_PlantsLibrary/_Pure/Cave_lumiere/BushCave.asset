@@ -16,11 +16,13 @@ MonoBehaviour:
   biome1: 3
   biome2: 0
   biome3: 0
-  babyModel: {fileID: 100000, guid: bc5fb497ef0092a4289b83dacf925abf, type: 3}
-  teenageModel: {fileID: 100000, guid: dbde9786c3acd1c4da1c4478d75a17af, type: 3}
-  grownupModel: {fileID: 100000, guid: 97b3e267208c5794894f8ffd122c01a3, type: 3}
+  babyModel: {fileID: 1076987704169424, guid: 9cb5d038e81c1024eb69403e57d79e26, type: 2}
+  teenageModel: {fileID: 1982334558433000, guid: 7f2c781a14c2d124d92a8efb6f4f71d8,
+    type: 2}
+  grownupModel: {fileID: 1902701199545660, guid: e1c079e1acdd7344397684150763b38a,
+    type: 2}
   plantIcon: {fileID: 21300000, guid: 516005830bed10d4e87fba5b115bd886, type: 3}
-  scale: 300
-  desiredGrowthTime: 60
+  scale: 1
+  desiredGrowthTime: 5
   maxGrowthTime: 120
   minGrowthTime: 15
