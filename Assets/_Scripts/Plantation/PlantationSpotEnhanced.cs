@@ -49,7 +49,10 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 	//gère ma croissance...Gère surtout l'arrosage pour le moment hein..Ne nous voilons pas la face XD
 	public PlantGrowthCycleManager plantGrowth;
 	public WaterIconManager waterIcon;
-
+	public ParticleSystem activateParticleS;
+	public ParticleSystem expansionParticleS;
+	public ParticleSystem wateringAroundParticleS;
+	public ParticleSystem speedGrowthParticleS;
 	//est ce que je donne des essences si on fait espace sur moi ? 
 	public bool giveEssence;
 	//combien d'essences je donne par récolte??
@@ -236,10 +239,12 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 	//rendre utilisable les spots a proximité : se produit quand on passe a l'age adulte
 	public void ActivateTheSurroundingSpots()
 	{
+		expansionParticleS.Play ();
 		for (int i = 0; i < neighboursSpot.Count; i++) {
 			//si t'es adulte et qu'un de tes voisins est pas "utilisable par le joueur" et que t'as la propriété "dome" ben rend le utilisable ^^
 			if (!neighboursSpot [i].canBeUsed ) {
 				neighboursSpot [i].canBeUsed = true;
+				neighboursSpot [i].activateParticleS.Play ();
 			}
 		}
 	}
@@ -247,6 +252,7 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 	//arrose les plantes environnante (mais pas toi, et ne marche que si t'es arroser.
 	public void WaterTheSurroundingArea()
 	{
+		wateringAroundParticleS.Play ();
 		for (int i = 0; i < neighboursSpot.Count; i++) 
 		{
 			if (!neighboursSpot [i].isGrowing && neighboursSpot [i].actualPlantState != PlantStateEnum.debris && neighboursSpot [i].actualPlantState != PlantStateEnum.lopin) 
@@ -260,6 +266,7 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 	//accelere la croissance des plantes environnantes : ne peut arriver qu'une fois par cycle pour une valeur temporel fixe de 10sec...
 	public void BoostSurroundingGrowth ()
 	{
+		speedGrowthParticleS.Play ();
 		for (int i = 0; i < neighboursSpot.Count; i++) 
 		{
 			if (!neighboursSpot [i].growthBoosted && neighboursSpot [i].actualPlantState != PlantStateEnum.debris && neighboursSpot [i].actualPlantState != PlantStateEnum.lopin) 

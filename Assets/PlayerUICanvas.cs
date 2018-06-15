@@ -11,9 +11,21 @@ public class PlayerUICanvas : MonoBehaviour
 	public Image showCave;
 	public Image showPlain;
 	public Image showCrater;
+	public Image showTree;
+	public Image showBush;
+	public Image showFlower;
 
 	public Color visibleBtnColor;
 	public Color hidenBtnColor;
+
+	public static PlayerUICanvas instance;
+	void Awake()
+	{
+		if (instance == null) 
+		{
+			instance = this;
+		}
+	}
 
 	public void ChangeCaveUIColor()
 	{
@@ -52,6 +64,52 @@ public class PlayerUICanvas : MonoBehaviour
 			showNotOwned.color = visibleBtnColor;
 		} else {
 			showNotOwned.color = hidenBtnColor;
+
+		}
+	}
+	public void ResetPlantsUIColor()
+	{
+			showFlower.color = visibleBtnColor;
+			showBush.color = hidenBtnColor;
+			showTree.color = hidenBtnColor;
+	}
+	public void ChangeFlowerUIColor()
+	{
+		if (showFlower.color == hidenBtnColor) 
+		{
+			showFlower.color = visibleBtnColor;
+			showBush.color = hidenBtnColor;
+			showTree.color = hidenBtnColor;
+
+		} else {
+//			showFlower.color = hidenBtnColor;
+
+		}
+	}
+	public void ChangeBushUIColor()
+	{
+		if (showBush.color == hidenBtnColor) 
+		{
+			showBush.color = visibleBtnColor;
+			showFlower.color = hidenBtnColor;
+			showTree.color = hidenBtnColor;
+
+		} else {
+//			showBush.color = hidenBtnColor;
+
+		}
+	}
+	public void ChangeTreeUIColor()
+	{
+		if (showTree.color == hidenBtnColor) 
+		{
+			showTree.color = visibleBtnColor;
+			showFlower.color = hidenBtnColor;
+			showBush.color = hidenBtnColor;
+
+
+		} else {
+//			showTree.color = hidenBtnColor;
 
 		}
 	}

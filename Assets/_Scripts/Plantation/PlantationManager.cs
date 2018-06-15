@@ -37,6 +37,12 @@ public class PlantationManager : MonoBehaviour {
             instance = this;
         }
     }
+
+	void Start()
+	{
+//		Invoke ("ShowNotAvailableItems", 1f);
+//		ShowNotAvailableItems (true);
+	}
 	void Update()
 	{
 		if (isSeedMenuOpen && plantationSpot) 
@@ -56,8 +62,11 @@ public class PlantationManager : MonoBehaviour {
 		{
 			PlantCollection.instance.ShowHideCollection ();
 		}
+		PlayerUICanvas.instance.ResetPlantsUIColor ();
+
 		plantSeedCanvas.enabled = true;
 		plantationSpot = spot;
+
 		switch (plantationSpot.spotBiome) 
 		{
 		case BiomeEnum.plain:

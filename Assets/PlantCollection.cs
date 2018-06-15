@@ -151,6 +151,7 @@ public class PlantCollection : MonoBehaviour
 		}
 	}
 
+
 	void Start()
 	{
 		PopulateCollection ();
@@ -188,6 +189,7 @@ public class PlantCollection : MonoBehaviour
 			plantDictionary.Add (PO, go.GetComponent<PlantItemUI> ());
 			notAvailableUIObjects.Add (go);
 		}
+		Invoke("ShowHideUnavailable",.5f);
 //		ShowHideCollection ();
 	}
 
