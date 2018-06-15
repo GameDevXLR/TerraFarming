@@ -19,7 +19,7 @@ public class LoadingScreenControl : MonoBehaviour {
     IEnumerator LoadingScreen(int scene)
     {
         loadingScreenObj.SetActive(true);
-        async = SceneManager.LoadSceneAsync(0);
+        async = SceneManager.LoadSceneAsync(1);
         async.allowSceneActivation = false;
 
         while(async.isDone == false)
