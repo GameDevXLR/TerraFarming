@@ -6,6 +6,8 @@ public class PropulseurParticleController : MonoBehaviour {
 
     public ParticleSystem rightPropulseur;
     public ParticleSystem leftPropulseur;
+    public GameObject rightPropulseurObj;
+    public GameObject leftPropulseurObj;
 
     public bool resetProp;
 	
@@ -34,7 +36,33 @@ public class PropulseurParticleController : MonoBehaviour {
 
     public void Burst()
     {
+        if (!rightPropulseurObj.activeInHierarchy)
+        {
+            rightPropulseurObj.SetActive(true);
+        }
+        if (!leftPropulseur.gameObject.activeInHierarchy)
+        {
+            leftPropulseurObj.SetActive(true);
+        }
         BurstAPropulseur(rightPropulseur);
+        BurstAPropulseur(leftPropulseur);
+    }
+
+    private void BurstPropulseurRight()
+    {
+        if (!rightPropulseurObj.activeInHierarchy)
+        {
+            rightPropulseurObj.SetActive(true);
+        }
+        BurstAPropulseur(rightPropulseur);
+    }
+
+    private void BurstPropulseurLeft()
+    {
+        if (!leftPropulseurObj.activeInHierarchy)
+        {
+            leftPropulseurObj.SetActive(true);
+        }
         BurstAPropulseur(leftPropulseur);
     }
 
@@ -45,5 +73,12 @@ public class PropulseurParticleController : MonoBehaviour {
         emissionPropulseur.enabled = true;
 
         emissionPropulseur.SetBursts(new ParticleSystem.Burst[] { new ParticleSystem.Burst(propulseur.time + 0.1f, 100, 200) });
+    }
+
+    public void StopPropulseur()
+    {
+        rightPropulseurObj.SetActive(false);
+        leftPropulseurObj.SetActive(false);
+
     }
 }

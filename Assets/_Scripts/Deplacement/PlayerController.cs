@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
                     aterrisageParticle.Clear();
                     aterrisageParticle.Play();
                     SetAltitudeMaxFromGroundPos(0);
+                    propulseurParticle.StopPropulseur();
                     shadowObject.SetActive(false);
                 }
                 else
