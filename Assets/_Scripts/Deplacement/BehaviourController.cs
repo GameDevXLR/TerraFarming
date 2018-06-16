@@ -118,7 +118,7 @@ public class BehaviourController : MonoBehaviour {
 
     public void Jump()
     {
-        if(transform.position.y < MaxHeight1)
+        if(transform.position.y < MaxHeight)
             moveDirection.y = jumpSpeed;
     }
 
@@ -137,7 +137,7 @@ public class BehaviourController : MonoBehaviour {
             }
             isFlying = value;
             float yref = transform.position.y - calculateJumpHeight();
-            referenceYFly = (yref <= MinHeight)? MinHeight : (yref > MaxHeight1)?MaxHeight1 : yref ;
+            referenceYFly = (yref <= MinHeight)? MinHeight : (yref > MaxHeight)?MaxHeight : yref ;
             
         }
     }
@@ -159,24 +159,6 @@ public class BehaviourController : MonoBehaviour {
     {
         get
         {
-            return MaxHeight1;
-        }
-
-        set
-        {
-            MaxHeight1 = value;
-        }
-    }
-
-    public void setMaxAltitudeWithRef(float altitude)
-    {
-        MaxHeight = maxHeightReference + altitude; 
-    }
-
-    public float MaxHeight1
-    {
-        get
-        {
             return maxHeight;
         }
 
@@ -185,6 +167,12 @@ public class BehaviourController : MonoBehaviour {
             maxHeight = value;
         }
     }
+
+    public void setMaxAltitudeWithRef(float altitude)
+    {
+        MaxHeight = maxHeightReference + altitude; 
+    }
+    
 
     public float calculateJumpHeight()
     {

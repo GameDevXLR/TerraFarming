@@ -398,7 +398,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 500
+  far clip plane: 2000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -1106,7 +1106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rawOre: 100
-  essence: 0
+  essence: 10
   flowerSeed: 0
   bushSeed: 0
   treeSeed: 0
@@ -1406,7 +1406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e17704a7a07ec24db498a29649f0b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseCanvas: {fileID: 0}
+  baseCanvas: {fileID: 0}
 --- !u!124 &124391861858737090
 Behaviour:
   m_ObjectHideFlags: 1
@@ -1505,6 +1505,10 @@ PlayableDirector:
   - key: {fileID: 114981557734331906, guid: ea3abc6a0fa4a2849a5d3da4da1018b1, type: 2}
     value: {fileID: 0}
   - key: {fileID: 114477120987543322, guid: ea3abc6a0fa4a2849a5d3da4da1018b1, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 114117978730687598, guid: ea3abc6a0fa4a2849a5d3da4da1018b1, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 114928045939849064, guid: ea3abc6a0fa4a2849a5d3da4da1018b1, type: 2}
     value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
