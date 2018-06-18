@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 114548914429170440}
   - component: {fileID: 114147715299072918}
   - component: {fileID: 114356575929281608}
+  - component: {fileID: 95220948724759454}
   m_Layer: 0
   m_Name: Main Camera 1
   m_TagString: MainCamera
@@ -54,8 +55,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1472765124881240}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.75, y: 1.22, z: -16.42}
+  m_LocalRotation: {x: 0.3826835, y: 0, z: 0, w: 0.9238795}
+  m_LocalPosition: {x: 2.4100003, y: 14.312137, z: -21.932133}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4348424022391302}
@@ -92,7 +93,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 500
+  far clip plane: 2000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -128,7 +129,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 500
+  far clip plane: 2000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -154,6 +155,23 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1472765124881240}
   m_Enabled: 1
+--- !u!95 &95220948724759454
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1472765124881240}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114147715299072918
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -180,9 +198,9 @@ MonoBehaviour:
   lineThickness: 1
   lineIntensity: 0.5
   fillAmount: 0.5
-  lineColor0: {r: 1, g: 0, b: 0, a: 1}
-  lineColor1: {r: 0, g: 0.36764705, b: 0, a: 1}
-  lineColor2: {r: 0, g: 0, b: 1, a: 1}
+  lineColor0: {r: 0.19607845, g: 0.5254902, b: 0.6627451, a: 1}
+  lineColor1: {r: 0.08627451, g: 0.49803925, b: 0.15294118, a: 1}
+  lineColor2: {r: 0.7686275, g: 0.43137258, b: 0.5294118, a: 1}
   additiveRendering: 0
   backfaceCulling: 1
   cornerOutlines: 0
@@ -207,14 +225,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   focus: {fileID: 0}
-  offset: {x: 0, y: 0, z: 0}
-  distance: 20
+  offset: {x: 0, y: -0.7071068, z: 0.7071067}
   stepZoom: 1
   minDistance: 5
   maxDistance: 25
   smooth: 5
   verticalText: {fileID: 0}
   horizontalText: {fileID: 0}
+  distance: 20
+  v: 45
+  h: 0
 --- !u!124 &124845607659940458
 Behaviour:
   m_ObjectHideFlags: 1
