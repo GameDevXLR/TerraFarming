@@ -14,11 +14,11 @@ public class FallingPlayerStateAnimator : PlayerStateAnimator {
             if (Input.GetKey(CustomInputManager.instance.jumpKey))
             {
                 SwitchAnime(AnimeParameters.isjumping, true);
-            }   
-            //else if (controller.transform.position.y <= -1)
-            //{
-            //    SwitchAnime(AnimeParameters.isflying, true);
-            //}
+            }
+            else if (controller.transform.position.y <= -1)
+            {
+                SwitchAnime(AnimeParameters.isflying, true);
+            }
         }
     }
 }
