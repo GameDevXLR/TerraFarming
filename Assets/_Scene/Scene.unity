@@ -12946,7 +12946,7 @@ Prefab:
         type: 2}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 1382495163}
+      objectReference: {fileID: 1127398179}
     - target: {fileID: 1472765124881240, guid: 004eb7da490485c4ca409a161b18d1fa, type: 2}
       propertyPath: m_Name
       value: Main Camera
@@ -18224,6 +18224,37 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 495961989}
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!84 &1127398179
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 434
+  m_Height: 244
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 1
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!114 &1128244879 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114877013608863076, guid: 3d8d5482dd934da45bb9e56177170ca8,
@@ -19744,6 +19775,37 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9bc9e95bd71533c47aa17e5d04f3b0a8, type: 2}
   m_IsPrefabParent: 0
+--- !u!84 &1228259658
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 434
+  m_Height: 244
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 1
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!114 &1229958024 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114280228269107886, guid: 3d8d5482dd934da45bb9e56177170ca8,
@@ -20673,6 +20735,11 @@ Prefab:
     - target: {fileID: 1290758871680096, guid: ae9b658703d05ac4e88d24ae0f64f261, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114292812889242892, guid: ae9b658703d05ac4e88d24ae0f64f261,
+        type: 2}
+      propertyPath: color
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ae9b658703d05ac4e88d24ae0f64f261, type: 2}

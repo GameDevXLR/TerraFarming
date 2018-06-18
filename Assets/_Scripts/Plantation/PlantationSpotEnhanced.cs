@@ -106,8 +106,9 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 
 	void Start()
 	{
-		outliner.enabled = false;
-		audioS = GetComponent<AudioSource> ();
+		if (!canBeUsed) {
+			outliner.enabled = false;
+		}audioS = GetComponent<AudioSource> ();
 		//fait un cast pour référencer tous les plantationSpot a proximité.
 		FindYourNeighbours ();
 	}
