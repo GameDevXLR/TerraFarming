@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(AudioSource))]
 public class PlantationSpotEnhanced : MonoBehaviour {
 
 	//refonte du plantation spot pour qu'il se réfère plus aux scriptable object et pour différencier "plantation spot" et "plantes"...
@@ -49,6 +50,13 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 	//gère ma croissance...Gère surtout l'arrosage pour le moment hein..Ne nous voilons pas la face XD
 	public PlantGrowthCycleManager plantGrowth;
 	public WaterIconManager waterIcon;
+
+	AudioSource audioS;
+	public AudioClip waterSound;
+	public AudioClip expansionSound;
+	public AudioClip growthSound;
+
+
 	public ParticleSystem activateParticleS;
 	public ParticleSystem expansionParticleS;
 	public ParticleSystem wateringAroundParticleS;
@@ -99,7 +107,7 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 	void Start()
 	{
 		outliner.enabled = false;
-
+		audioS = GetComponent<AudioSource> ();
 		//fait un cast pour référencer tous les plantationSpot a proximité.
 		FindYourNeighbours ();
 	}
@@ -239,11 +247,13 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 	//rendre utilisable les spots a proximité : se produit quand on passe a l'age adulte
 	public void ActivateTheSurroundingSpots()
 	{
+		audioS.PlayOneShot (expansionSound);
 		expansionParticleS.Play ();
 		for (int i = 0; i < neighboursSpot.Count; i++) {
 			//si t'es adulte et qu'un de tes voisins est pas "utilisable par le joueur" et que t'as la propriété "dome" ben rend le utilisable ^^
 			if (!neighboursSpot [i].canBeUsed ) {
 				neighboursSpot [i].canBeUsed = true;
+				neighboursSpot [i].outliner.enabled = true;
 				neighboursSpot [i].activateParticleS.Play ();
 			}
 		}
@@ -252,6 +262,8 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 	//arrose les plantes environnante (mais pas toi, et ne marche que si t'es arroser.
 	public void WaterTheSurroundingArea()
 	{
+		audioS.PlayOneShot (waterSound);
+
 		wateringAroundParticleS.Play ();
 		for (int i = 0; i < neighboursSpot.Count; i++) 
 		{
@@ -266,6 +278,8 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 	//accelere la croissance des plantes environnantes : ne peut arriver qu'une fois par cycle pour une valeur temporel fixe de 10sec...
 	public void BoostSurroundingGrowth ()
 	{
+		audioS.PlayOneShot (growthSound);
+
 		speedGrowthParticleS.Play ();
 		for (int i = 0; i < neighboursSpot.Count; i++) 
 		{
