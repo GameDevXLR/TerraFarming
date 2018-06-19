@@ -23,7 +23,7 @@ public class MachineUIManager : MonoBehaviour
 	public Text rewardTxt;
 
 
-	public void InitializeTheUI()
+	public void InitializeTheUI(PlantObject plant)
 	{
 		bigTimerZone.enabled = true;
 		mediumTimerZone.enabled = true;
