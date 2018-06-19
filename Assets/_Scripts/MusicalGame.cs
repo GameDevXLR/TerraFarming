@@ -45,7 +45,7 @@ public class MusicalGame : MonoBehaviour
 
 	[Header ("Gestion du minijeu lui-meme.")]
 	public AudioMixer mainMusicMixer;
-	public Canvas oreGameCanvas;
+	public GameObject oreGameCanvas;
 	public Transform keyStartPosition;
 	public List<GameObject> keyPool;
 	public int score;
@@ -102,7 +102,7 @@ public class MusicalGame : MonoBehaviour
 	}
 	public void OnDisable()
 	{
-		oreGameCanvas.enabled = false;
+		oreGameCanvas.SetActive(false);
 		score = 0;
 		scoreTxt.text = score.ToString();
 
@@ -159,7 +159,7 @@ public class MusicalGame : MonoBehaviour
 	{
 		musicLenght = myMusicGame.backgroundMusic.length;
 
-		oreGameCanvas.enabled = true;
+		oreGameCanvas.SetActive(true);
 
 		InGameManager.instance.playerController.enabled = false;
 		StartCoroutine(ChangeMainMusicVolume (false));

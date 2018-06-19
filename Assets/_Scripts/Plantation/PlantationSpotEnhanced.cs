@@ -333,11 +333,12 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 		{
 		case PlantStateEnum.debris:
 			actualPlantState = PlantStateEnum.lopin;
-			ResourcesManager.instance.ChangeRawOre(Random.Range(1, 6));
-			debrisObj.SetActive(false);
+			ResourcesManager.instance.ChangeRawOre (Random.Range (1, 6));
+			debrisObj.SetActive (false);
 			//			lopinNoSeedObj.SetActive (true);
-			InGameManager.instance.playerController.GetComponent<Animator>().PlayInFixedTime("Cleaning", layer: -1, fixedTime: 1);
-			plantAudioS.PlayOneShot(planterSnd);
+			InGameManager.instance.playerController.GetComponent<Animator> ().PlayInFixedTime ("Cleaning", layer: -1, fixedTime: 1);
+			plantAudioS.PlayOneShot (planterSnd);
+			InGameManager.instance.cleanParticle.transform.position = transform.position;
 			InGameManager.instance.cleanParticle.GetComponent<ParticleSystem>().Play();
 			break;
 		case PlantStateEnum.lopin:
