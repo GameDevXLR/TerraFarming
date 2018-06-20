@@ -7,16 +7,47 @@ using PhaethonGames.TerraFarming.OreToEssence;
 
 
 
-public class OreToEssenceUI : MonoBehaviour {
+public class OreToEssenceUI : MonoBehaviour 
+{
     public TextDisplay textDisplay;
     public PanelList panelList;
     public AlertMessages messages;
-    
+	public Text plantName;
+	public Text plantBiome;
+	public Text plantBiomeDesc;
+
+	public string plainBiomeDescription;
+	public string craterBiomeDescription;
+	public string caveBiomeDescription;
+
     public Canvas canvas;
 
     public bool isActive = false;
 
-	public void activate (int rawOre, int oreNeed, int essenceGot) {
+	public void InitializeTheGameUI(PlantObject createdPlant)
+	{
+		plantName.text = createdPlant.plantName;
+		plantBiome.text = createdPlant.biome1.ToString ();
+		switch (createdPlant.biome1) 
+		{
+		case BiomeEnum.plain:
+			plantBiomeDesc.text = plainBiomeDescription;
+			break;
+		case BiomeEnum.crater:
+			plantBiomeDesc.text = craterBiomeDescription;
+
+			break;
+		case BiomeEnum.cave:
+			plantBiomeDesc.text = caveBiomeDescription;
+
+			break;
+		default:
+			break;
+		}
+	}
+
+	public void activate (int rawOre, int oreNeed, int essenceGot) 
+	{
         textDisplay.oreDisplay.text = rawOre.ToString();
         textDisplay.oreNeddDisplay.text = oreNeed.ToString();
         textDisplay.EssenceGot.text = essenceGot.ToString();

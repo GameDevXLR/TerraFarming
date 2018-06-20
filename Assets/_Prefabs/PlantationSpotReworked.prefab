@@ -505,8 +505,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1765808072905784}
-  m_LocalRotation: {x: -0.6838048, y: 0.18003069, z: 0.18003069, w: 0.6838048}
-  m_LocalPosition: {x: -26.22, y: 0.2699983, z: 17.86}
+  m_LocalRotation: {x: -0.7071068, y: 0.00000002980233, z: 0.00000002980233, w: 0.7071068}
+  m_LocalPosition: {x: 28.070002, y: -0.99, z: -4.970002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4969992342209032}
@@ -820,10 +820,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 0
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 17
+  MaxDistance: 35
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -850,7 +850,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1001,6 +1001,9 @@ MonoBehaviour:
   needWaterParticules: {fileID: 1406184547760106}
   plantGrowth: {fileID: 114511173156228116}
   waterIcon: {fileID: 114355016332833558}
+  waterSound: {fileID: 8300000, guid: 49043f4a4760dd94db2e31d3d9f6772b, type: 3}
+  expansionSound: {fileID: 8300000, guid: 10a1990e26c3a7f4da9dc64ad4f0d1a0, type: 3}
+  growthSound: {fileID: 8300000, guid: 3ff03283937323d4aa585e9a347b22f2, type: 3}
   activateParticleS: {fileID: 198935979467052346}
   expansionParticleS: {fileID: 198121432848286432}
   wateringAroundParticleS: {fileID: 198564999016863924}

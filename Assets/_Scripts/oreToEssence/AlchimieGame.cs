@@ -59,7 +59,8 @@ public class AlchimieGame : MonoBehaviour {
 
     private void OnEnable()
     {
-		machineUI.InitializeTheUI ();
+		machineUI.InitializeTheUI (plantGiven);
+		interfaceMachine.InitializeTheGameUI (plantGiven);
         time = Time.time;
         count = 0;
         bonus = 0;
@@ -68,7 +69,7 @@ public class AlchimieGame : MonoBehaviour {
         resetJauge();
 
         interfaceMachine.setChrono(0);
-        interfaceMachine.setTimeBonus(timeBonus);
+		interfaceMachine.setTimeBonus(timeBonus);
         launchAnimation("GameEnabled", true);
 
         particleEffect(10);
@@ -77,34 +78,27 @@ public class AlchimieGame : MonoBehaviour {
     // Update is called once per frame
     protected void Update () {
 
-        if (Input.GetKeyDown(CustomInputManager.instance.actionKey) )
-        {
-            if (count < jaugeList.Count)
-            {
+		if (Input.GetKeyDown (CustomInputManager.instance.actionKey)) {
+			if (count < jaugeList.Count) {
+
 				machineUI.BlinkActionBarArrows ();
-                jaugeList[count].enabled = true;
+				jaugeList [count].enabled = true;
 				jaugeList [count].gameObject.GetComponent<AudioSource> ().Play ();
 				animator.Play ("MachineSeedSpace");
 
-                particleEffect(10);
-                interfaceMachine.setScore(++count);
-			}
-            else if (count == jaugeList.Count)
-            {
-				if (Time.time - time <= timeBonus && Random.value <= luckPercent)
-				{
+				particleEffect (10);
+				interfaceMachine.setScore (++count);
+			} else if (count == jaugeList.Count) {
+				if (Time.time - time <= timeBonus && Random.value <= luckPercent) {
 					bonus++;
-					playASOund(miniGameSuccess);
-                    harvestRessouce(true);
+					playASOund (miniGameSuccess);
+					harvestRessouce (true);
+				} else {
+					harvestRessouce (false);
 				}
-                else
-                {
-                    harvestRessouce(false);
-                }
 				harvest++;
 
-				if (bonus>previousBonusCount) 
-				{
+				if (bonus > previousBonusCount) {
 					previousBonusCount = bonus;
 					wonBonus = true;
 				}
@@ -113,60 +107,49 @@ public class AlchimieGame : MonoBehaviour {
 				count++;
 				
 
-			}
-			else if(count == jaugeList.Count+1)
-			{
-				resetJauge();
+			} else if (count == jaugeList.Count + 1) {
+				resetJauge ();
 				count = 0;
 				time = Time.time;
 				machineUI.bigTimerZone.enabled = true;
 				machineUI.mediumTimerZone.enabled = true;
 				machineUI.smallTimerZone.enabled = true;
 				machineUI.timerIcon.enabled = true;
-				if ((harvest * ressourceNeed) + ressourceNeed <= ressourceDispo)
-				{
-					interfaceMachine.synthetisationSucessFull(harvest + bonus, bonus);
-				}
-				else
-				{
-					interfaceMachine.endSynthetisation(harvest + bonus, bonus);
+				if ((harvest * ressourceNeed) + ressourceNeed <= ressourceDispo) {
+					interfaceMachine.synthetisationSucessFull (harvest + bonus, bonus);
+				} else {
+					interfaceMachine.endSynthetisation (harvest + bonus, bonus);
 					enabled = false;
 				}
 
 			}
             
-        }
+		}
 
-		if (count < jaugeList.Count)
+		if (count < jaugeList.Count) 
 			
-		if (Time.time - time > 1.5f) 
-		{
-			if (machineUI.bigTimerZone.enabled) 
-			{
-				machineUI.bigTimerZone.enabled = false;
-			}
-			if (Time.time - time > 2f) 
-			{
-				if (machineUI.mediumTimerZone.enabled) 
-				{
-					machineUI.mediumTimerZone.enabled = false;
+			if (Time.time - time > 1.5f) {
+				if (machineUI.bigTimerZone.enabled) {
+					machineUI.bigTimerZone.enabled = false;
 				}
-				if (Time.time - time > 2.5f) 
-				{
-					if (machineUI.smallTimerZone.enabled) 
-					{
-						machineUI.smallTimerZone.enabled = false;
-						machineUI.timerIcon.enabled = false;
+				if (Time.time - time > 2f) {
+					if (machineUI.mediumTimerZone.enabled) {
+						machineUI.mediumTimerZone.enabled = false;
+					}
+					if (Time.time - time > 2.5f) {
+						if (machineUI.smallTimerZone.enabled) {
+							machineUI.smallTimerZone.enabled = false;
+							machineUI.timerIcon.enabled = false;
+						}
 					}
 				}
 			}
+			interfaceMachine.setChrono (Time.time - time);
+			if (Input.GetKeyDown (KeyCode.Escape)) {
+				enabled = false;
+			}
 		}
-        interfaceMachine.setChrono(Time.time - time);
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            enabled = false;
-        }
-    }
+	
 
     private void OnDisable()
     {
