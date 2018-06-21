@@ -11,7 +11,9 @@ public class GameEventsManager : MonoBehaviour {
 	[Header("La cinématique d'intro:")]
 	public PlayableAsset introPA;
 	public Transform introStartPosTr;
-
+	[Header("Permet de lancé la cinematique tuto fin de premier minage:")]
+	public PlayableAsset miningPA;
+	public Transform introMiningStartPosTr;
 
 	void Awake()
 	{
@@ -25,5 +27,8 @@ public class GameEventsManager : MonoBehaviour {
 	{
 		TimelineManager.instance.LaunchCinematic (introPA, introStartPosTr);
 	}
-
+	public void StartIntroCinematicMining()
+	{
+		TimelineManager.instance.LaunchCinematic (miningPA, introMiningStartPosTr);
+	}
 }

@@ -48,6 +48,7 @@ public class InGameManager : MonoBehaviour {
 		}else
 		{
 			GameEventsManager.instance.StartIntroCinematic ();
+			MusicalGame.instance.willStartCinematic = true;
 		}
         //InvokeRepeating("SaveGame", 30.0f, 30f);
 

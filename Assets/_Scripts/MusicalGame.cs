@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEngine.Playables;
 public class MusicalGame : MonoBehaviour 
 {
 	//Il suffit d'activer le script pour lancer le jeu.
@@ -82,6 +83,9 @@ public class MusicalGame : MonoBehaviour
 	KeyCode expectedInput;
 	Sprite expectedSprite;
 	AudioClip expectedSnd;
+
+	[HideInInspector]
+	public bool willStartCinematic;
 
 	#region monoBehaviour
 	void Awake()
@@ -248,6 +252,8 @@ public class MusicalGame : MonoBehaviour
 			commentForPlayer.text = "Well done.";
 					return;
 				}
+		commentForPlayer.text = "Better give it another try...";
+
 		//on donne la récompense
 		
 	}
@@ -266,6 +272,11 @@ public class MusicalGame : MonoBehaviour
 		audioSBackground.Stop ();
 		StartCoroutine(ChangeMainMusicVolume (true));
 		this.enabled = false;
+		if (willStartCinematic) 
+		{
+			GameEventsManager.instance.StartIntroCinematicMining ();
+			willStartCinematic = false;
+		}
 	}
 
 	//changement du score.
@@ -289,7 +300,8 @@ public class MusicalGame : MonoBehaviour
 				score += change;
 
 			}
-		} else {
+		} else 
+		{
 			if (isPlaying) 
 			{
 				
