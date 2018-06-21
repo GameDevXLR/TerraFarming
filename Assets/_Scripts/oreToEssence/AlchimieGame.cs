@@ -30,6 +30,8 @@ public class AlchimieGame : MonoBehaviour {
     public int ressourceNeed;
 
     public List<Image> jaugeList;
+	[HideInInspector]
+	public bool willPlayIntroVideo = false;
 
     #endregion
 
@@ -246,7 +248,13 @@ public class AlchimieGame : MonoBehaviour {
         }
 
         ResourcesManager.instance.setRessourceQuantity(inputRessource, -ressourceNeed);
-        resetJauge();
+		resetJauge();
+		if (willPlayIntroVideo) 
+		{
+			GameEventsManager.instance.StartIntroCinematicSeedCreated ();
+			willPlayIntroVideo = false;
+			enabled = false;
+		}
 
     }
 

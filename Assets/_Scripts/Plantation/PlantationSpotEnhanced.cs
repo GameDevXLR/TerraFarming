@@ -100,6 +100,10 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 
 	//les layers avec lesquelles le spherecast interagit.
 	public LayerMask sphereCastLayer;
+
+	//Pour la quête:
+	[HideInInspector]
+	public bool willShowSeedPlantedCinematic = false;
 	#endregion
 
 	#region monoBehaviour Stuff

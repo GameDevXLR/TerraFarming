@@ -37,6 +37,11 @@ public class DayManager : MonoBehaviour {
 
         set
         {
+			//si c'est le deuxieme jour.
+			if (value == 2) 
+			{
+				GameEventsManager.instance.StartIntroCineNewDay ();
+			}
             _currentDay = value;
             DisplayNumberDay.text = _currentDay.ToString();
         }
