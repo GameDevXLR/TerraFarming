@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224070809347819316}
   - component: {fileID: 222798633431524080}
   - component: {fileID: 114889535063946930}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 224226532567785604}
   - component: {fileID: 222476140882674826}
   - component: {fileID: 114023412992884650}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: NameBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 222138353117693672}
   - component: {fileID: 114441242268301632}
   - component: {fileID: 114016585308935960}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 224792923665617980}
   - component: {fileID: 222150035171201070}
   - component: {fileID: 114129536435547192}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: SubtitlesGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 224471165707703074}
   - component: {fileID: 222722283387940218}
   - component: {fileID: 114847869650406616}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Portrait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 224919443750089056}
   - component: {fileID: 222285334290599230}
   - component: {fileID: 114207102994459806}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Speech
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 224210390241480692}
   - component: {fileID: 222134910118737894}
   - component: {fileID: 114517978564066516}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 224031141907285814}
   - component: {fileID: 222673693512579180}
   - component: {fileID: 114351500758690482}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: WaitInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 114487818344875766}
   - component: {fileID: 114386306069630014}
   - component: {fileID: 114441646043056394}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: DialogueCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 224381570952076938}
   - component: {fileID: 222288895975167088}
   - component: {fileID: 114406425110150630}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: DialogueOptionsGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,9 +203,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0.5019608}
-    m_HighlightedColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0.69803923}
-    m_PressedColor: {r: 0.34509805, g: 0.34509805, b: 0.34509805, a: 0.69803923}
+    m_NormalColor: {r: 0.3529412, g: 0.38431376, b: 0.5686275, a: 1}
+    m_HighlightedColor: {r: 0.25490198, g: 0.27058825, b: 0.3529412, a: 1}
+    m_PressedColor: {r: 0.19215688, g: 0.20392159, b: 0.27450982, a: 1}
     m_DisabledColor: {r: 0.2509804, g: 0.2509804, b: 0.2509804, a: 0.5019608}
     m_ColorMultiplier: 2
     m_FadeDuration: 0.1
@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.7607843}
+  m_Color: {r: 0.19215688, g: 0.20392159, b: 0.27450982, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -299,7 +299,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 4583535f5a7bbc04cb1984bece6cd477, type: 3}
     m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
@@ -358,8 +358,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a2b17e84c4df7d4c890f25c7c265c11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skipOnInput: 1
-  waitForInput: 1
+  skipOnInput: 0
+  waitForInput: 0
   subtitlesGroup: {fileID: 224792923665617980}
   actorSpeech: {fileID: 114207102994459806}
   actorName: {fileID: 114517978564066516}
@@ -378,7 +378,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1806869772771570}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
@@ -475,7 +475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8993915, g: 1, b: 0.5441177, a: 1}
+  m_Color: {r: 0.427451, g: 0.65882355, b: 0.7725491, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -483,7 +483,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: c0b5bd3d152972048bb1818f00b312a6, type: 3}
     m_FontSize: 18
     m_FontStyle: 1
     m_BestFit: 0
@@ -535,7 +535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.196, g: 0.196, b: 0.196, a: 1}
+  m_Color: {r: 0.8235295, g: 0.93725497, b: 0.89019614, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -543,9 +543,9 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: c0b5bd3d152972048bb1818f00b312a6, type: 3}
     m_FontSize: 14
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
@@ -626,9 +626,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!224 &224031141907285814
 RectTransform:
@@ -718,8 +718,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 6.5}
-  m_SizeDelta: {x: -167, y: 47}
+  m_AnchoredPosition: {x: 0, y: 83.670654}
+  m_SizeDelta: {x: -1146.1, y: 47}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!224 &224454893383009822
 RectTransform:
@@ -798,8 +798,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 6.5}
-  m_SizeDelta: {x: -167, y: 69}
+  m_AnchoredPosition: {x: 0, y: 83.67068}
+  m_SizeDelta: {x: -1146.1, y: 69}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!224 &224919443750089056
 RectTransform:

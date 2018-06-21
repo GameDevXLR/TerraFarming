@@ -79,7 +79,7 @@ public class MovingKeyForMusicalGame : MonoBehaviour {
 		}
 		else
 		{
-			MusicalGame.instance.ChangeMusicalGameScore (-1);
+			MusicalGame.instance.ChangeMusicalGameScore (0);
 
 		}
 		GetBackIntoTheList ();

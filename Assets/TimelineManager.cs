@@ -13,7 +13,9 @@ public class TimelineManager : MonoBehaviour
 	public GameObject canvasParentObj;
 
 	bool isPlayingClip;
-	public float clipDuration;
+	float clipDuration;
+
+	PlayableAsset clipToPlay;
 //	Vector3 pos;
 //	Quaternion rot;
 	void Awake()
@@ -30,14 +32,13 @@ public class TimelineManager : MonoBehaviour
 //	}
 	void Update()
 	{
+		//Permet de rejouer le dernier clip jouer ou le clip placé manuellement dans la hierarchy.
 		if (Input.GetKeyDown (KeyCode.Alpha1) && !isPlayingClip) 
 		{
-			PrepareForClip ();
-			//			captainAnimator.SetBool ("iswalking", true);
-			InGameManager.instance.playerController.transform.parent.GetComponent<Transform>().SetPositionAndRotation(StartPosTr.position,StartPosTr.rotation);
-			InGameManager.instance.playerController.transform.SetPositionAndRotation (Vector3.zero, Quaternion.identity);
-			director.Play (cutscene1);
+			LaunchCinematic (cutscene1, StartPosTr);
 		}
+
+		//Vérifie si un clip est en cours, si oui, s'assure de le finir quand il faut.
 		if(isPlayingClip)
 		{
 			if(clipDuration<0)
@@ -49,14 +50,31 @@ public class TimelineManager : MonoBehaviour
 			}
 		}
 	}
+	/// <summary>
+	/// Launchs the cinematic.
+	/// </summary>
+	/// <param name="clip">Clip to play.</param>
+	/// <param name="playerStartPos">Player start position and rotation based on a transform.</param>
+	public void LaunchCinematic( PlayableAsset clip, Transform playerStartPos)
+	{
+		clipToPlay = clip;
+		StartPosTr = playerStartPos;
+		director.playableAsset = clipToPlay;
+		PrepareAndStartClip ();
 
-	void PrepareForClip()
+	}
+
+	void PrepareAndStartClip()
 	{
 		isPlayingClip = true;
 		clipDuration =(float) director.duration;
 		InGameManager.instance.playerController.disableMovement();
 		InGameManager.instance.playerController.GetComponent<BehaviourController> ().enabled = false;
+
 		canvasParentObj.SetActive (false);
+		InGameManager.instance.playerController.transform.parent.GetComponent<Transform>().SetPositionAndRotation(StartPosTr.position,StartPosTr.rotation);
+		InGameManager.instance.playerController.transform.SetPositionAndRotation (Vector3.zero, Quaternion.identity);
+		director.Play (clipToPlay);
 
 	}
 	public void EndClip()
@@ -64,7 +82,6 @@ public class TimelineManager : MonoBehaviour
 		isPlayingClip = false;
 		InGameManager.instance.playerController.enableMovement();
 		InGameManager.instance.playerController.GetComponent<BehaviourController> ().enabled = true;
-
 		canvasParentObj.SetActive (true);
 
 	}
