@@ -55,6 +55,7 @@ public class TimelineManager : MonoBehaviour
 		isPlayingClip = true;
 		clipDuration =(float) director.duration;
 		InGameManager.instance.playerController.disableMovement();
+		InGameManager.instance.playerController.GetComponent<BehaviourController> ().enabled = false;
 		canvasParentObj.SetActive (false);
 
 	}
@@ -62,6 +63,8 @@ public class TimelineManager : MonoBehaviour
 	{
 		isPlayingClip = false;
 		InGameManager.instance.playerController.enableMovement();
+		InGameManager.instance.playerController.GetComponent<BehaviourController> ().enabled = true;
+
 		canvasParentObj.SetActive (true);
 
 	}
