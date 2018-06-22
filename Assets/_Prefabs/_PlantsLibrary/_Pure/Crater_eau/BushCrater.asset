@@ -11,18 +11,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f279b64462f61d48907325994d99642, type: 3}
   m_Name: BushCrater
   m_EditorClassIdentifier: 
-  plantName: sangmele
+  plantName: Papurousse
   plantType: 2
   biome1: 2
   biome2: 0
   biome3: 0
-  babyModel: {fileID: 1718664835972824, guid: 3b704de46b944874c91b92428939847b, type: 2}
-  teenageModel: {fileID: 1760545752344158, guid: ea7e85c94a323c145bd45f38e16f055e,
+  babyModel: {fileID: 1070637507558936, guid: 28cc912257663654cb1478eb1c33d62a, type: 2}
+  teenageModel: {fileID: 1512341154840326, guid: 6e7f4daf0653c4b42939c2034a965e1b,
     type: 2}
-  grownupModel: {fileID: 1487194015879356, guid: b9389acd210e35f4ebdcba1471b7c86e,
+  grownupModel: {fileID: 1398212195341644, guid: 133cf487b76a17e45b949f1cbe2238a9,
     type: 2}
   plantIcon: {fileID: 21300000, guid: 516005830bed10d4e87fba5b115bd886, type: 3}
-  scale: 0.7
-  desiredGrowthTime: 45
+  scale: 115
+  desiredGrowthTime: 300
   maxGrowthTime: 600
   minGrowthTime: 50

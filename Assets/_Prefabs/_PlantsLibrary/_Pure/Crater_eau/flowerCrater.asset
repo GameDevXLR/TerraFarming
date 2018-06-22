@@ -11,18 +11,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f279b64462f61d48907325994d99642, type: 3}
   m_Name: flowerCrater
   m_EditorClassIdentifier: 
-  plantName: sangpur
+  plantName: Nenoufar
   plantType: 1
   biome1: 2
   biome2: 0
   biome3: 0
-  babyModel: {fileID: 1669308211781086, guid: 27899413509c8164c9c5ebfb55a1be56, type: 2}
-  teenageModel: {fileID: 1514181565381418, guid: 0fec02de1ed95074d8516d25a3fd4c61,
+  babyModel: {fileID: 1135258529381566, guid: 3e1007e4cba64e942b17cefabc89b760, type: 2}
+  teenageModel: {fileID: 1391024306911296, guid: 08fda40c806fd3a44b9757d50524ac1a,
     type: 2}
-  grownupModel: {fileID: 1928317034272532, guid: 6962bab6e16f5fb4dbdf0cbede7845e4,
+  grownupModel: {fileID: 1634157855467174, guid: e9d27165ef3622044b0700bf4755af58,
     type: 2}
   plantIcon: {fileID: 21300000, guid: 03ef4b8f2d876c24386823bb86d8080c, type: 3}
-  scale: 0.7
-  desiredGrowthTime: 38
+  scale: 100
+  desiredGrowthTime: 300
   maxGrowthTime: 600
   minGrowthTime: 50
