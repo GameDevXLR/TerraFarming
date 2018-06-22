@@ -51,6 +51,12 @@ public class DroppedSeed : MonoBehaviour
 	//détermine mes biomes / la graine que je serais une fois looté quoi ^^ : pas top...Refonte en cours.
 	public void FigureOutMe()
 	{
+		if (!GameEventsManager.instance.hasShownDropSeedCinematic) 
+		{
+
+			me = GameEventsManager.instance.firstSeedReceivedPO;
+			return;
+		}
 		if (daddy.biome1 == BiomeEnum.plain || mummy.biome1 == BiomeEnum.plain) {
 			biome1 = BiomeEnum.plain;
 			if (daddy.biome1 != mummy.biome1) {
@@ -141,6 +147,10 @@ public class DroppedSeed : MonoBehaviour
 	{
 		//si t'as un PO utilise le nouveau systeme, else l'ancien systeme.
 		if (me != null) {
+			if (!GameEventsManager.instance.hasShownDropSeedCinematic) {
+				GameEventsManager.instance.StartIntroCineFirstSeed ();
+				GameEventsManager.instance.hasShownDropSeedCinematic = true;
+			}
 			ResourcesManager.instance.setRessourceQuantity (me, 1);
 			Destroy (gameObject);
 

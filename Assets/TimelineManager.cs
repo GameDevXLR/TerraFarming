@@ -74,7 +74,7 @@ public class TimelineManager : MonoBehaviour
 //		Camera.main.GetComponent<OutlineEffect> ().outlineCamera = questcam;
 		InGameManager.instance.playerController.disableMovement();
 		InGameManager.instance.playerController.GetComponent<BehaviourController> ().enabled = false;
-		InGameManager.instance.playerController.shadowObject.SetActive(false);
+//		InGameManager.instance.playerController.shadowObject.SetActive(false);
 
 		canvasParentObj.SetActive (false);
 		InGameManager.instance.playerController.transform.parent.GetComponent<Transform>().SetPositionAndRotation(StartPosTr.position,StartPosTr.rotation);
@@ -89,7 +89,7 @@ public class TimelineManager : MonoBehaviour
 		isPlayingClip = false;
 		InGameManager.instance.playerController.enableMovement();
 		InGameManager.instance.playerController.GetComponent<BehaviourController> ().enabled = true;
-		InGameManager.instance.playerController.shadowObject.SetActive(true);
+//		InGameManager.instance.playerController.shadowObject.SetActive(true);
 
 		canvasParentObj.SetActive (true);
 

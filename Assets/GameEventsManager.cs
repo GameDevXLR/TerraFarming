@@ -30,11 +30,12 @@ public class GameEventsManager : MonoBehaviour {
 	[Header("cinematique tuto graine planter:")]
 	public PlayableAsset plantedPA;
 	public Transform introSeedPlantedStartPosTr;
-//	[Header("cinematique tuto nouvelle machine jour2:")]
-//	public PlayableAsset newDayPA;
-//	public Transform introNewDayStartPosTr;
-//	public GameObject machineToActivate2;
-
+	[Header("cinematique tuto graine obtenue")]
+	public PlayableAsset firstSeedPA;
+	public Transform introFirstSeedStartPosTr;
+	public PlantObject firstSeedReceivedPO;
+	[HideInInspector]
+	public bool hasShownDropSeedCinematic;
 	void Awake()
 	{
 		if (instance == null) 
@@ -68,8 +69,8 @@ public class GameEventsManager : MonoBehaviour {
 			TimelineManager.instance.LaunchCinematic (miningPA, introMiningStartPosTr);
 			machineToActivate.SetActive (true);
 			//si on a pas gagné de minerai, on nous en donne 1 XD
-			if (ResourcesManager.instance.rawOre < 1) {
-				ResourcesManager.instance.ChangeRawOre (1);
+			if (ResourcesManager.instance.rawOre < 10) {
+				ResourcesManager.instance.ChangeRawOre (10);
 			}
 		}
 	}
@@ -91,15 +92,11 @@ public class GameEventsManager : MonoBehaviour {
 		}
 	}
 
-//	//aprés avoir dodo dans la base, une nouvelle machine est dispo.
-//	public void StartIntroCineNewDay()
-//	{
-//		if (playIntroNewDay) {
-//			//activer la deuxieme machine a graine (cratere)
-//			machineToActivate2.SetActive (true);
-//			TimelineManager.instance.LaunchCinematic (newDayPA, introNewDayStartPosTr);
-//		}
-//	}
+	//aprés avoir loot ta premiere graine...
+	public void StartIntroCineFirstSeed()
+	{
+		TimelineManager.instance.LaunchCinematic (firstSeedPA, introFirstSeedStartPosTr);
+	}
 
 	//lancé quand la premiere plante devient adulte.
 	public void StartCineFirstFlowerHasGrown()

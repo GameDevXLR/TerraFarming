@@ -161,6 +161,7 @@ public class MusicalGame : MonoBehaviour
 	//lancer une partie:
 	void StartPlayingTheGame ()
 	{
+		myMusicGame = allMusicGame [Random.Range (0, 2)];
 		musicLenght = myMusicGame.backgroundMusic.length;
 
 		oreGameCanvas.SetActive(true);
