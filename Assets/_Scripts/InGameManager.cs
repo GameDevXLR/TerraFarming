@@ -59,7 +59,7 @@ public class InGameManager : MonoBehaviour {
 			//Invoke("LoadGame", 0.1f);
 		}else
 		{
-			Invoke ("InitializeCinematic", 1f);
+			Invoke ("InitializeCinematic", .21f);
 		}
 	}
 

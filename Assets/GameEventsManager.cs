@@ -89,6 +89,7 @@ public class GameEventsManager : MonoBehaviour {
 		if (playIntroSeedPlantedCinematic) {
 			TimelineManager.instance.LaunchCinematic (plantedPA, introSeedPlantedStartPosTr);
 			plantationSpotToActivate.WaterThePlant ();
+			plantationSpotToActivate.timeToGrow /= 2;
 		}
 	}
 
