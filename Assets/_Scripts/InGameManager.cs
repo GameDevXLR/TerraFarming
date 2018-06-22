@@ -41,18 +41,28 @@ public class InGameManager : MonoBehaviour {
 		{
 			Destroy (gameObject);
 		}
-		//si tu continue une game:
-        if (PlayerPrefs.GetString("Game") == "continue")
-        {
-            //Invoke("LoadGame", 0.1f);
+		//		//si tu continue une game:
+		//        if (PlayerPrefs.GetString("Game") == "continue")
+		//        {
+		//            //Invoke("LoadGame", 0.1f);
+		//		}else
+		//		{
+		//			GameEventsManager.instance.StartIntroCinematic ();
+		//			MusicalGame.instance.willStartCinematic = true;
+		//		}
+		//        //InvokeRepeating("SaveGame", 30.0f, 30f);
+	}
+	void Start()
+	{
+		if (PlayerPrefs.GetString("Game") == "continue")
+		{
+			//Invoke("LoadGame", 0.1f);
 		}else
 		{
 			GameEventsManager.instance.StartIntroCinematic ();
 			MusicalGame.instance.willStartCinematic = true;
 		}
-        //InvokeRepeating("SaveGame", 30.0f, 30f);
-
-    }
+	}
 
 	void Update()
 	{

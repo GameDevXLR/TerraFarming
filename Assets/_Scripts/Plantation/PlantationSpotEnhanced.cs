@@ -597,6 +597,11 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 		nbrOfGivenEssence = 3;
 		growthAnimator.SetFloat ("growthspeed", 3.3f);
 		HidePlantTypeMenu ();
+		if (willShowSeedPlantedCinematic) 
+		{
+			GameEventsManager.instance.StartIntroCinematicSeedPlanted ();
+			willShowSeedPlantedCinematic = false;
+		}
 	}
 
 	void SpawnThenHidePlants()
