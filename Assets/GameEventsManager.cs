@@ -30,10 +30,10 @@ public class GameEventsManager : MonoBehaviour {
 	[Header("cinematique tuto graine planter:")]
 	public PlayableAsset plantedPA;
 	public Transform introSeedPlantedStartPosTr;
-	[Header("cinematique tuto nouvelle machine jour2:")]
-	public PlayableAsset newDayPA;
-	public Transform introNewDayStartPosTr;
-	public GameObject machineToActivate2;
+//	[Header("cinematique tuto nouvelle machine jour2:")]
+//	public PlayableAsset newDayPA;
+//	public Transform introNewDayStartPosTr;
+//	public GameObject machineToActivate2;
 
 	void Awake()
 	{
@@ -87,18 +87,19 @@ public class GameEventsManager : MonoBehaviour {
 	{
 		if (playIntroSeedPlantedCinematic) {
 			TimelineManager.instance.LaunchCinematic (plantedPA, introSeedPlantedStartPosTr);
+			plantationSpotToActivate.WaterThePlant ();
 		}
 	}
 
-	//aprés avoir dodo dans la base, une nouvelle machine est dispo.
-	public void StartIntroCineNewDay()
-	{
-		if (playIntroNewDay) {
-			//activer la deuxieme machine a graine (cratere)
-			machineToActivate2.SetActive (true);
-			TimelineManager.instance.LaunchCinematic (newDayPA, introNewDayStartPosTr);
-		}
-	}
+//	//aprés avoir dodo dans la base, une nouvelle machine est dispo.
+//	public void StartIntroCineNewDay()
+//	{
+//		if (playIntroNewDay) {
+//			//activer la deuxieme machine a graine (cratere)
+//			machineToActivate2.SetActive (true);
+//			TimelineManager.instance.LaunchCinematic (newDayPA, introNewDayStartPosTr);
+//		}
+//	}
 
 	//lancé quand la premiere plante devient adulte.
 	public void StartCineFirstFlowerHasGrown()

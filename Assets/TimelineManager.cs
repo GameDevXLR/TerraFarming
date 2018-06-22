@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using cakeslice;
 public class TimelineManager : MonoBehaviour 
 {
 	public static TimelineManager instance;
@@ -11,6 +12,7 @@ public class TimelineManager : MonoBehaviour
 	public Animator playAnimator;
 	public Transform StartPosTr;
 	public GameObject canvasParentObj;
+//	public Camera questcam;
 
 	bool isPlayingClip;
 	float clipDuration;
@@ -57,6 +59,7 @@ public class TimelineManager : MonoBehaviour
 	/// <param name="playerStartPos">Player start position and rotation based on a transform.</param>
 	public void LaunchCinematic( PlayableAsset clip, Transform playerStartPos)
 	{
+		
 		clipToPlay = clip;
 		StartPosTr = playerStartPos;
 		director.playableAsset = clipToPlay;
@@ -68,8 +71,10 @@ public class TimelineManager : MonoBehaviour
 	{
 		isPlayingClip = true;
 		clipDuration =(float) director.duration;
+//		Camera.main.GetComponent<OutlineEffect> ().outlineCamera = questcam;
 		InGameManager.instance.playerController.disableMovement();
 		InGameManager.instance.playerController.GetComponent<BehaviourController> ().enabled = false;
+		InGameManager.instance.playerController.shadowObject.SetActive(false);
 
 		canvasParentObj.SetActive (false);
 		InGameManager.instance.playerController.transform.parent.GetComponent<Transform>().SetPositionAndRotation(StartPosTr.position,StartPosTr.rotation);
@@ -79,9 +84,13 @@ public class TimelineManager : MonoBehaviour
 	}
 	public void EndClip()
 	{
+//		Camera.main.GetComponent<OutlineEffect> ().outlineCamera = Camera.main;
+
 		isPlayingClip = false;
 		InGameManager.instance.playerController.enableMovement();
 		InGameManager.instance.playerController.GetComponent<BehaviourController> ().enabled = true;
+		InGameManager.instance.playerController.shadowObject.SetActive(true);
+
 		canvasParentObj.SetActive (true);
 
 	}

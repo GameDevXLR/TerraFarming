@@ -59,8 +59,7 @@ public class InGameManager : MonoBehaviour {
 			//Invoke("LoadGame", 0.1f);
 		}else
 		{
-			GameEventsManager.instance.StartIntroCinematic ();
-			MusicalGame.instance.willStartCinematic = true;
+			Invoke ("InitializeCinematic", 1f);
 		}
 	}
 
@@ -80,6 +79,11 @@ public class InGameManager : MonoBehaviour {
 		}
 	}
 
+	void InitializeCinematic()
+	{
+		GameEventsManager.instance.StartIntroCinematic ();
+		MusicalGame.instance.willStartCinematic = true;
+	}
 	public void ShowQuitGameMenu()
 	{
 		quitCanvas.SetActive (true);

@@ -1456,7 +1456,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c3f478ef69fbe04fa9ed3664a8a443e, type: 3}
-  m_Name: Dialoguequest2FirstMiningDone
+  m_Name: Dialoguequest2FirstMiningDone(SubAsset)
   m_EditorClassIdentifier: 
   _serializedGraph: '{"version":2.6,"type":"NodeCanvas.DialogueTrees.DialogueTree","name":"DialogueTree","translation":{"x":-5279.0,"y":-5280.0},"nodes":[{"statement":{"_text":"Well
     done Pipon. I''ve created a machine that will use that ore to obtain a specific
@@ -1497,7 +1497,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c3f478ef69fbe04fa9ed3664a8a443e, type: 3}
-  m_Name: Dialoguequest2FirstSeedCreated
+  m_Name: Dialoguequest2FirstSeedCreated(SubAsset)
   m_EditorClassIdentifier: 
   _serializedGraph: '{"version":2.6,"type":"NodeCanvas.DialogueTrees.DialogueTree","name":"DialogueTree","translation":{"x":-5279.0,"y":-5280.0},"nodes":[{"statement":{"_text":"Plant
     it on your right, the soil is just perfect for it."},"_actorName":"Captain Zen","_actorParameterID":"9158461d-c427-4d7f-8cfd-b64ca807b56c","_position":{"x":5844.0,"y":5350.0},"$type":"NodeCanvas.DialogueTrees.StatementNode","$id":"2"},{"_action":{"waitTime":{"_value":1.0},"$type":"NodeCanvas.Tasks.Actions.Wait"},"_position":{"x":6024.188,"y":5437.862},"$type":"NodeCanvas.DialogueTrees.ActionNode","$id":"4"},{"statement":{"_text":"Once
@@ -1541,9 +1541,6 @@ MonoBehaviour:
   plantationSpotToActivate: {fileID: 0}
   plantedPA: {fileID: 11400000, guid: 832494be3c3dc5b4b9e0725eb5542694, type: 2}
   introSeedPlantedStartPosTr: {fileID: 4581774536271670}
-  newDayPA: {fileID: 11400000, guid: 832494be3c3dc5b4b9e0725eb5542694, type: 2}
-  introNewDayStartPosTr: {fileID: 4581774536271670}
-  machineToActivate2: {fileID: 0}
 --- !u!114 &114259098038122916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1553,7 +1550,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c3f478ef69fbe04fa9ed3664a8a443e, type: 3}
-  m_Name: Dialoguequest2NewdayMachine2
+  m_Name: Dialoguequest2NewdayMachine2(SubAsset)
   m_EditorClassIdentifier: 
   _serializedGraph: '{"version":2.6,"type":"NodeCanvas.DialogueTrees.DialogueTree","name":"DialogueTree","translation":{"x":-5279.0,"y":-5280.0},"nodes":[{"statement":{"_text":"I''m
     made a new machine for you Pipon."},"_actorName":"Captain Zen","_actorParameterID":"9158461d-c427-4d7f-8cfd-b64ca807b56c","_position":{"x":5744.0,"y":5337.0},"$type":"NodeCanvas.DialogueTrees.StatementNode","$id":"2"},{"_action":{"waitTime":{"_value":1.0},"$type":"NodeCanvas.Tasks.Actions.Wait"},"_position":{"x":5978.188,"y":5439.862},"$type":"NodeCanvas.DialogueTrees.ActionNode","$id":"4"},{"statement":{"_text":"Plant
@@ -1679,7 +1676,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c3f478ef69fbe04fa9ed3664a8a443e, type: 3}
-  m_Name: Dialoguequest2FirstSeedPlanted
+  m_Name: Dialoguequest2FirstSeedPlanted(SubAsset)
   m_EditorClassIdentifier: 
   _serializedGraph: '{"version":2.6,"type":"NodeCanvas.DialogueTrees.DialogueTree","name":"DialogueTree","translation":{"x":-5279.0,"y":-5280.0},"nodes":[{"statement":{"_text":"It
     recquires water and love to grow and transform this new world of ours !"},"_actorName":"Captain
@@ -2045,7 +2042,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c3f478ef69fbe04fa9ed3664a8a443e, type: 3}
-  m_Name: Dialoguequest1
+  m_Name: Dialoguequest1(SubAsset)
   m_EditorClassIdentifier: 
   _serializedGraph: '{"version":2.6,"type":"NodeCanvas.DialogueTrees.DialogueTree","name":"DialogueTree","translation":{"x":-5279.0,"y":-5280.0},"nodes":[{"statement":{"_text":"You''re
     finaly here Pipon ! Let''s terraform this moon shall we?\n"},"_actorName":"Captain
