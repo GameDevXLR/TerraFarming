@@ -24,6 +24,7 @@ public class BaseManager : MonoBehaviour
         baseCanvas.SetActive(false);
         DayManager.instance.CurrentDay += day;
         InGameManager.instance.playerController.enableMovement();
+		PlantationManager.instance.SpeedUpAllGrowth ();
 
     }
 

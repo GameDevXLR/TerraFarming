@@ -8,7 +8,7 @@ public class PlantationManager : MonoBehaviour {
 
 	public static PlantationManager instance;
     
-	public List<PlantationSpot> plantationList;
+	public List<PlantationSpotEnhanced> plantationList = new List<PlantationSpotEnhanced>();
 	[Header("gestion du menu de plantage de graine")]
 
 	//nouveau canvas remplacant tous les autres.
@@ -52,6 +52,16 @@ public class PlantationManager : MonoBehaviour {
 				{
 					HidePlantTypeMenu();
 				}
+		}
+	}
+
+	public void SpeedUpAllGrowth()
+	{
+		foreach (var p in plantationList) {
+			if (p.plantSO != null) 
+			{
+				p.growthStartTime -= 20;
+			}
 		}
 	}
 	#region SeedsMenus
@@ -273,7 +283,7 @@ public class PlantationManager : MonoBehaviour {
 			if (save.plantType != PlantTypeEnum.none)
             {
 
-                plantationList[save.index].SelectPlantType(save.plantType);
+//                plantationList[save.index].SelectPlantType(save.plantType);
                 plantationList[save.index].RecquireWater();
             }
 

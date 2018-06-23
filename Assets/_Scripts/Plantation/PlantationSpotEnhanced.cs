@@ -70,7 +70,7 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 
 	//gestion des timers de pousse.
 	public float timeToGrow;
-	float growthStartTime;
+	[HideInInspector]public float growthStartTime; // a augmenter pour speedé le dév d'une plante.
 	float timeSpentGrowing;
 	bool isGrowing;
 
@@ -115,6 +115,10 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 		}audioS = GetComponent<AudioSource> ();
 		//fait un cast pour référencer tous les plantationSpot a proximité.
 		FindYourNeighbours ();
+		if (!PlantationManager.instance.plantationList.Contains (this)) 
+		{
+			PlantationManager.instance.plantationList.Add (this);
+		}
 	}
 
 	void Update()
