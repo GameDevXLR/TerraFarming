@@ -17,10 +17,12 @@ public class CaptainDialogue : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player" && Input.GetKeyDown(CustomInputManager.instance.actionKey))
+		if (other.tag == "Player" && Input.GetKeyDown(CustomInputManager.instance.actionKey) && GameEventsManager.instance.introIsOver)
         {
             dialogueUI.StartDialogue(DialogueCallback);
             unactivate();
+			StopListeningForAction();
+
         }
     }
 

@@ -64,7 +64,7 @@ public class PlantationManager : MonoBehaviour
         {
             if (p.plantSO != null)
             {
-                p.growthStartTime -= 20;
+                p.growthStartTime -= 55f;
             }
         }
     }

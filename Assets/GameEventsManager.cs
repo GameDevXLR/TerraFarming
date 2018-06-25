@@ -11,7 +11,7 @@ public class GameEventsManager : MonoBehaviour
     public bool playIntroSeedCinematic = true;
     public bool playIntroSeedPlantedCinematic = true;
     public bool playIntroNewDay = true;
-
+	[HideInInspector]public bool introIsOver;
     [Header("La cinématique d'intro arrivé de pipon:")]
     public PlayableAsset introPA;
 
@@ -108,6 +108,7 @@ public class GameEventsManager : MonoBehaviour
             TimelineManager.instance.LaunchCinematic(plantedPA, introSeedPlantedStartPosTr);
             plantationSpotToActivate.WaterThePlant();
             plantationSpotToActivate.timeToGrow /= 2;
+			introIsOver = true;
         }
     }
 
