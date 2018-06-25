@@ -13,7 +13,7 @@ public class InGameManager : MonoBehaviour {
 	public static InGameManager instance;
 
 	public PlayerController playerController;
-	public Animator InterfaceAnimator;
+    public Animator InterfaceAnimator;
 
 	public ParticleSystem cleanParticle;
 	public ParticleSystem waterParticle;
@@ -43,9 +43,9 @@ public class InGameManager : MonoBehaviour {
 		}
         if (PlayerPrefs.GetString("Game") == "continue")
         {
-            //Invoke("LoadGame", 0.1f);
+            Invoke("LoadGame", 0.1f);
         }
-        //InvokeRepeating("SaveGame", 30.0f, 30f);
+        InvokeRepeating("SaveGame", 30.0f, 30f);
 
     }
 
@@ -95,9 +95,10 @@ public class InGameManager : MonoBehaviour {
         save.bushSeed = ResourcesManager.instance.bushSeed;
         save.treeSeed = ResourcesManager.instance.treeSeed;
         save.flowerSeed = ResourcesManager.instance.flowerSeed;
+        save.day = DayManager.instance.CurrentDay;
 
-		//désactiver temporairement le temps de mettre ca au propre.
-//        save.plantList = PlantationManager.instance.savePlantation();
+        //désactiver temporairement le temps de mettre ca au propre.
+        save.plantList = PlantationManager.instance.savePlantation();
 
         return save;
     }
@@ -134,6 +135,7 @@ public class InGameManager : MonoBehaviour {
             ResourcesManager.instance.setBushSeed(save.bushSeed);
             ResourcesManager.instance.setTreeSeed(save.treeSeed);
             ResourcesManager.instance.setFlowerSeed(save.flowerSeed);
+            DayManager.instance.CurrentDay = save.day;
 
             PlantationManager.instance.loadPlantation(save.plantList);
             

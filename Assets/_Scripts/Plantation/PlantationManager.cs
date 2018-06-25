@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +8,7 @@ public class PlantationManager : MonoBehaviour {
 
 	public static PlantationManager instance;
     
-	public List<PlantationSpot> plantationList;
+	public List<PlantationSpotEnhanced> plantationList;
 	[Header("gestion du menu de plantage de graine")]
 
 	//nouveau canvas remplacant tous les autres.
@@ -256,7 +256,8 @@ public class PlantationManager : MonoBehaviour {
             PlanteSave save = new PlanteSave {
                 index = i,
                 plantType = plantationList[i].plantType,
-                plantState = plantationList[i].actualPlantState
+                plantState = plantationList[i].actualPlantState,
+                plantSOindex = Array.IndexOf(PlantCollection.instance.allPlantObjects, plantationList[i].plantSO)
             };
             planteSave.Add(save);
         }
@@ -266,19 +267,26 @@ public class PlantationManager : MonoBehaviour {
 
     public void loadPlantation(List<PlanteSave> planteSave)
     {
-        foreach(PlanteSave save in planteSave)
+        if(planteSave != null)
         {
-            
-            
-			if (save.plantType != PlantTypeEnum.none)
+            foreach (PlanteSave save in planteSave)
             {
+                PlantObject plantSO = PlantCollection.instance.allPlantObjects[save.plantSOindex];
 
-                plantationList[save.index].SelectPlantType(save.plantType);
-                plantationList[save.index].RecquireWater();
+                if (save.plantType != PlantTypeEnum.none)
+                {
+
+                    plantationList[save.index].LoadSeed(plantSO);
+                    plantationList[save.index].RecquireWater();
+                }
+
+                plantationList[save.index].LoadPlantState(save.plantState);
+
             }
-
-            plantationList[save.index].loadPlantState(save.plantState);
-
+        }
+        else
+        {
+            Debug.Log("PlantationManager : Pas de plante sauvegarder");
         }
     }
 	#endregion

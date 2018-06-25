@@ -7,7 +7,8 @@ using UnityEngine;
 public struct PlanteSave
 {
     public int index;
-	public PlantTypeEnum plantType;
+    public int plantSOindex;
+    public PlantTypeEnum plantType;
     public PlantStateEnum plantState;
 }
 
@@ -18,6 +19,7 @@ public class Save  {
     public int flowerSeed = 0;
     public int bushSeed = 0;
     public int treeSeed = 0;
+    public int day = 0;
 
     public List<PlanteSave> plantList;
 }

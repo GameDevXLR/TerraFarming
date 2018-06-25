@@ -6,8 +6,8 @@ public class CustomInputManager : MonoBehaviour {
 
     public KeyCode forwardkey = KeyCode.Z;
     public KeyCode backwardKey = KeyCode.S;
-    public KeyCode rightKey = KeyCode.Q;
-    public KeyCode leftKey = KeyCode.D;
+    public KeyCode leftKey = KeyCode.Q;
+    public KeyCode rightKey = KeyCode.D;
 	public KeyCode actionKey = KeyCode.Space;
     public KeyCode jumpKey = KeyCode.J;
 
@@ -25,7 +25,7 @@ public class CustomInputManager : MonoBehaviour {
             if(PlayerPrefs.GetString("Keyboard") != "azerty")
             {
                 forwardkey = KeyCode.W;
-                rightKey = KeyCode.A;
+                leftKey = KeyCode.A;
             }
         }
     }
@@ -54,11 +54,11 @@ public class CustomInputManager : MonoBehaviour {
             direction -= CameraController.instance.transform.forward;
 
         }
-        if (Input.GetKey(leftKey))
+        if (Input.GetKey(rightKey))
         {
             direction += CameraController.instance.transform.right;
         }
-        if (Input.GetKey(rightKey))
+        if (Input.GetKey(leftKey))
         {
             direction -= CameraController.instance.transform.right;
         }

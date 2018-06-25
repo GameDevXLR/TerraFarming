@@ -2,6 +2,7 @@
 using System.Collections;
 
 [CreateAssetMenu(fileName = "PlantSO", menuName = "Plant", order = 1)]
+[System.Serializable]
 public class PlantObject : ScriptableObject 
 {
 	[Header("Ma chère DA. Configure ici ta plante. Met lui les visuels associés. Dit moi c'est pour quel biome, si c'est une fleur, un arbre? Un hybride?")]
