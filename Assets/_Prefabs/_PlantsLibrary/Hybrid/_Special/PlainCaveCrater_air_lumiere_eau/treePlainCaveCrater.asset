@@ -11,18 +11,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f279b64462f61d48907325994d99642, type: 3}
   m_Name: treePlainCaveCrater
   m_EditorClassIdentifier: 
-  plantName: Sucre
+  plantName: Paletuvier sacree
   plantType: 3
   biome1: 1
   biome2: 2
   biome3: 3
-  babyModel: {fileID: 1014462280345196, guid: 08a8ea876146d89478b466a3ffaae71e, type: 2}
-  teenageModel: {fileID: 1914561227364922, guid: f64dcf7aee031664c8d995ccc4e3cd4c,
+  babyModel: {fileID: 1104749366745716, guid: dfa112ef6bfb413458969bf0198f0c65, type: 2}
+  teenageModel: {fileID: 1961955607422936, guid: f112445234cbd7c4d8331cc758986c88,
     type: 2}
-  grownupModel: {fileID: 1014016014324282, guid: 375a6265810edc64695169c34f788dc9,
+  grownupModel: {fileID: 1782159429897464, guid: 55d288b79da3c1d4db6e4cf8d24ebce0,
     type: 2}
   plantIcon: {fileID: 21300000, guid: 8ce3991effa793544a456e73d60e8df0, type: 3}
-  scale: 1.5
-  desiredGrowthTime: 121
+  scale: 1
+  desiredGrowthTime: 60
   maxGrowthTime: 120
   minGrowthTime: 15

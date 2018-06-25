@@ -11,18 +11,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f279b64462f61d48907325994d99642, type: 3}
   m_Name: BushCave
   m_EditorClassIdentifier: 
-  plantName: patenrond
+  plantName: "M\xFBrier"
   plantType: 2
   biome1: 3
   biome2: 0
   biome3: 0
-  babyModel: {fileID: 1076987704169424, guid: 9cb5d038e81c1024eb69403e57d79e26, type: 2}
-  teenageModel: {fileID: 1982334558433000, guid: 7f2c781a14c2d124d92a8efb6f4f71d8,
+  babyModel: {fileID: 1317835649557052, guid: 90afe141a779c334ab51de4ea68708b8, type: 2}
+  teenageModel: {fileID: 1617382885999780, guid: b1830ef08c9f35a4eaf166130eae8341,
     type: 2}
-  grownupModel: {fileID: 1902701199545660, guid: e1c079e1acdd7344397684150763b38a,
+  grownupModel: {fileID: 1764959341556036, guid: f2db1f30b363a4b44b700fa7b270ab59,
     type: 2}
   plantIcon: {fileID: 21300000, guid: 516005830bed10d4e87fba5b115bd886, type: 3}
-  scale: 0.7
-  desiredGrowthTime: 47
+  scale: 1
+  desiredGrowthTime: 60
   maxGrowthTime: 120
   minGrowthTime: 15
