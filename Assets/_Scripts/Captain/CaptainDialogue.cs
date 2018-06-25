@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NodeCanvas.DialogueTrees;
 
 public class CaptainDialogue : MonoBehaviour {
 
-    public CaptainDialogueUI dialogueUI;
+	public DialogueTreeController dialogueUI;
 
     public Collider collide;
 
@@ -22,8 +23,9 @@ public class CaptainDialogue : MonoBehaviour {
     {
         if (other.tag == "Player" && Input.GetKeyDown(CustomInputManager.instance.actionKey))
         {
-            dialogueUI.nextStep();
-        }
+			dialogueUI.StartDialogue (DialogueCallback);
+			unactivate ();
+		}
     }
 
 
@@ -34,7 +36,14 @@ public class CaptainDialogue : MonoBehaviour {
             StopListeningForAction();
         }
     }
-
+	public void DialogueCallback(bool dialogueOver)
+	{
+		if (dialogueOver) 
+		{
+			Debug.Log ("test");
+			activate ();
+		}
+	}
     public void activate()
     {
         collide.enabled = true;

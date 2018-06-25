@@ -11,18 +11,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f279b64462f61d48907325994d99642, type: 3}
   m_Name: flowerPlain
   m_EditorClassIdentifier: 
-  plantName: dumbledore
+  plantName: Fleur de Paon
   plantType: 1
   biome1: 1
   biome2: 0
   biome3: 0
-  babyModel: {fileID: 1184795755922612, guid: 1a22c06cd4d184a4aa505bdc4c3a3c74, type: 2}
-  teenageModel: {fileID: 1664245304403076, guid: 41bf5f4ea03cfc64090d59f2f91ae3bb,
+  babyModel: {fileID: 1000676411783842, guid: cb6511452df2dd74785ac73892ab4fce, type: 2}
+  teenageModel: {fileID: 1826508644171508, guid: 584c7018de2393d418e078e2b86a9c4c,
     type: 2}
-  grownupModel: {fileID: 1300383469697280, guid: 959312d22bccdb748920749ad7f31cbe,
+  grownupModel: {fileID: 1471044039295734, guid: a2e667a6953edbf47b8c31e09783a4bf,
     type: 2}
   plantIcon: {fileID: 21300000, guid: 03ef4b8f2d876c24386823bb86d8080c, type: 3}
   scale: 1
-  desiredGrowthTime: 5
+  desiredGrowthTime: 60
   maxGrowthTime: 100
   minGrowthTime: 10

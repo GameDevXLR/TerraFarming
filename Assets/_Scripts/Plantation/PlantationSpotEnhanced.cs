@@ -90,7 +90,7 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 
 	[Header("Gestion du voisinnage")]
 	//un array des voisins peuplé par un spherecast. Limite le nombre max de détections, ne fait pas de "garbage".
-	Collider[] hits = new Collider[15];
+	Collider[] hits = new Collider[12];
 
 	//une liste de nos voisins(gameobjects).
 	public List<PlantationSpotEnhanced> neighboursSpot = new List<PlantationSpotEnhanced>();
@@ -152,7 +152,7 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 
         if (Input.GetKeyDown(CustomInputManager.instance.actionKey)
             && other.tag == "Player"
-            && !PlantationManager.instance.isSeedMenuOpen
+			&& !PlantationManager.instance.isSeedMenuOpen
             && InGameManager.instance.playerController.canDoAction)
         {
             //si t'es pas encore une plante, fait ton taff normalement...
@@ -188,7 +188,7 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 			StopListeningForAction ();
 			InGameManager.instance.cleanParticle.GetComponent<ParticleSystem> ().Stop ();
 			InGameManager.instance.waterParticle.GetComponent<ParticleSystem> ().Stop ();
-
+			if(PlantationManager.instance.isSeedMenuOpen)PlantationManager.instance.HidePlantTypeMenu();
 		}
 
 	}
@@ -211,6 +211,7 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 	//permet de trouver un arbre avec qui s'accoupler xD lol
 	public void FindLover()
 	{
+		timeToGrow *= 1.5f;
 		for (int i = 0; i < neighboursSpot.Count; i++) 
 		{
 			//si le voisin contient une plante adulte
@@ -296,8 +297,10 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 			{
 				//on change le début de la phase de croissance xD ca accelere la croissance.
 				//peut arriver qu'une fois par cycle de croissance a une plante donnée.
-				neighboursSpot [i].growthStartTime -= 25;
+				neighboursSpot [i].growthStartTime -= 20;
 				neighboursSpot [i].growthBoosted = true;
+				neighboursSpot [i].speedGrowthParticleS.Play ();
+
 			}
 		}
 	}
@@ -390,10 +393,12 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 		case PlantStateEnum.grownup:
 			//si t'es pas une fleur tu donnes des essences.
 			if (plantType == PlantTypeEnum.tree) {
+				timeToGrow += Random.Range (-1.5f, 1.5f);
 				giveEssence = true;
 			}
-			if (canMakeSeed) 
+			if (canMakeSeed && isGrowing) 
 			{
+				if(Random.Range(0,2) == 0)
 				FindLover ();
 			} else 
 			{
@@ -611,19 +616,19 @@ public class PlantationSpotEnhanced : MonoBehaviour {
 	void SpawnThenHidePlants()
 	{
 		GameObject GObaby = Instantiate (plantSO.babyModel);
-		GObaby.transform.localScale = new Vector3 (plantSO.scale, plantSO.scale, plantSO.scale);
+		GObaby.transform.localScale = new Vector3 (plantSO.scale, plantSO.scale, plantSO.scale)*Random.Range(.7f,1.3f);
 		GObaby.transform.parent = transform;
 		GObaby.transform.localPosition = Vector3.zero;
 		babyVisual = GObaby;
 
 		GameObject GOteen = Instantiate (plantSO.teenageModel);
-		GOteen.transform.localScale = new Vector3 (plantSO.scale, plantSO.scale, plantSO.scale);
+		GOteen.transform.localScale = new Vector3 (plantSO.scale, plantSO.scale, plantSO.scale)*Random.Range(.7f,1.3f);
 		GOteen.transform.parent = transform;
 		GOteen.transform.localPosition = Vector3.zero;
 		teenageVisual = GOteen;
 
 		GameObject GOgrown = Instantiate (plantSO.grownupModel);
-		GOgrown.transform.localScale = new Vector3 (plantSO.scale, plantSO.scale, plantSO.scale);
+		GOgrown.transform.localScale = new Vector3 (plantSO.scale, plantSO.scale, plantSO.scale)*Random.Range(.7f,1.3f);
 		GOgrown.transform.parent = transform;
 		GOgrown.transform.localPosition = Vector3.zero;
 		grownupVisual = GOgrown;

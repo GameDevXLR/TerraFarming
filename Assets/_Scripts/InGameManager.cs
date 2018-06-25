@@ -61,6 +61,7 @@ public class InGameManager : MonoBehaviour {
 		{
 			Invoke ("InitializeCinematic", .21f);
 		}
+		miningCanvas.SetActive (false);
 	}
 
 	void Update()
