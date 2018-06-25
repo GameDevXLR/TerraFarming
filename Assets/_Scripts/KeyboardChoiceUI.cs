@@ -1,20 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class KeyboardChoiceUI : MonoBehaviour {
-
-    
+public class KeyboardChoiceUI : MonoBehaviour
+{
     public GameObject qwertyKeyboard;
     public GameObject azertyKeyboard;
 
-
-    bool p_isAxisInUse;
-    bool isQwerty;
+    private bool p_isAxisInUse;
+    private bool isQwerty;
 
     private void OnEnable()
     {
-        if(PlayerPrefs.GetString("Keyboard") == "azerty")
+        if (PlayerPrefs.GetString("Keyboard") == "azerty")
         {
             azertyKeyboard.SetActive(true);
             qwertyKeyboard.SetActive(false);
@@ -26,12 +22,11 @@ public class KeyboardChoiceUI : MonoBehaviour {
             qwertyKeyboard.SetActive(true);
             isQwerty = true;
         }
-        
     }
 
     // Update is called once per frame
-    void Update () {
-
+    private void Update()
+    {
         if (azertyHorizontal() || qwertyHorizontal())
         {
             if (!p_isAxisInUse)
@@ -39,7 +34,6 @@ public class KeyboardChoiceUI : MonoBehaviour {
                 switchKeyboard();
                 p_isAxisInUse = true;
             }
-
         }
         else
             p_isAxisInUse = false;

@@ -7,7 +7,7 @@ public class ActionPlayerState : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        if (isInterruptWhenMove && CustomInputManager.instance.getDirection() != Vector3.zero)
+        if (isInterruptWhenMove && CustomInputManager.instance.GetDirection() != Vector3.zero)
         {
             InGameManager.instance.playerController.anim.SetBool(AnimeParameters.iswalking.ToString(), true);
         }

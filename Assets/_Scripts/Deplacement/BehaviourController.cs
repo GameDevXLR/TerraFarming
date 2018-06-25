@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class BehaviourController : MonoBehaviour {
-    
+public class BehaviourController : MonoBehaviour
+{
     public Vector3 moveDirection = Vector3.zero;
 
     public float speed = 6f;
@@ -19,8 +17,9 @@ public class BehaviourController : MonoBehaviour {
     private float minHeight = 0;
 
     [SerializeField]
-    bool isFlying;
-    float referenceYFly;
+    private bool isFlying;
+
+    private float referenceYFly;
 
     public bool canMove = true;
 
@@ -32,17 +31,16 @@ public class BehaviourController : MonoBehaviour {
         {
             Debug.Log("You don't have a CustomInputManager");
         }
-        if(Cc == null)
+        if (Cc == null)
         {
             Debug.Log("Where is your CharactereController?");
         }
     }
 
-
     private void Update()
     {
         float y = moveDirection.y;
-        if(canMove)
+        if (canMove)
             moveDirection = CalculateMoveDirection();
         else
         {
@@ -51,16 +49,14 @@ public class BehaviourController : MonoBehaviour {
         moveDirection.y = y;
         if (isFlying)
         {
-            if(transform.position.y <= referenceYFly)
+            if (transform.position.y <= referenceYFly)
                 Jump();
-            Gravity(gravity/2);
+            Gravity(gravity / 2);
         }
         else
         {
             Gravity();
         }
-
-        
 
         if (moveDirection.x != 0 || moveDirection.z != 0)
         {
@@ -69,17 +65,15 @@ public class BehaviourController : MonoBehaviour {
         Cc.Move(moveDirection * Time.deltaTime);
     }
 
-
     /// <summary>
     /// Calcule le vecteur directionnel
     /// </summary>
     /// <returns></returns>
     public Vector3 CalculateMoveDirection()
     {
-        Vector3 vectDirection = CustomInputManager.instance.getDirection();
+        Vector3 vectDirection = CustomInputManager.instance.GetDirection();
         return vectDirection.normalized * speed;
     }
-
 
     /// <summary>
     /// exerce la gravité sur le personnage
@@ -112,13 +106,12 @@ public class BehaviourController : MonoBehaviour {
     {
         Vector3 rotation = new Vector3(direction.x, 0, direction.z);
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rotation.normalized), speedRotate * Time.deltaTime);       
-
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rotation.normalized), speedRotate * Time.deltaTime);
     }
 
     public void Jump()
     {
-        if(transform.position.y < MaxHeight)
+        if (transform.position.y < MaxHeight)
             moveDirection.y = jumpSpeed;
     }
 
@@ -131,14 +124,13 @@ public class BehaviourController : MonoBehaviour {
 
         set
         {
-            if(IsFlying != value)
+            if (IsFlying != value)
             {
-                speed = (value) ? speed * multSpeedFly : speed/multSpeedFly;
+                speed = (value) ? speed * multSpeedFly : speed / multSpeedFly;
             }
             isFlying = value;
             float yref = transform.position.y - calculateJumpHeight();
-            referenceYFly = (yref <= MinHeight)? MinHeight : (yref > MaxHeight)?MaxHeight : yref ;
-            
+            referenceYFly = (yref <= MinHeight) ? MinHeight : (yref > MaxHeight) ? MaxHeight : yref;
         }
     }
 
@@ -170,9 +162,8 @@ public class BehaviourController : MonoBehaviour {
 
     public void setMaxAltitudeWithRef(float altitude)
     {
-        MaxHeight = maxHeightReference + altitude; 
+        MaxHeight = maxHeightReference + altitude;
     }
-    
 
     public float calculateJumpHeight()
     {

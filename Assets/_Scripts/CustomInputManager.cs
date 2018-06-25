@@ -1,28 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CustomInputManager : MonoBehaviour {
-
+public class CustomInputManager : MonoBehaviour
+{
     public KeyCode forwardkey = KeyCode.Z;
     public KeyCode backwardKey = KeyCode.S;
     public KeyCode rightKey = KeyCode.Q;
     public KeyCode leftKey = KeyCode.D;
-	public KeyCode actionKey = KeyCode.Space;
+    public KeyCode actionKey = KeyCode.Space;
     public KeyCode jumpKey = KeyCode.J;
 
     public static CustomInputManager instance;
-	public GameObject actionButtonVisual;
-	public AudioSource actionBtnAudioS;
-	public AudioClip showActionBtnSnd;
-	public AudioClip hideActionBtnSnd;
+    public GameObject actionButtonVisual;
+    public AudioSource actionBtnAudioS;
+    public AudioClip showActionBtnSnd;
+    public AudioClip hideActionBtnSnd;
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
-            if(PlayerPrefs.GetString("Keyboard") != "azerty")
+            if (PlayerPrefs.GetString("Keyboard") != "azerty")
             {
                 forwardkey = KeyCode.W;
                 rightKey = KeyCode.A;
@@ -30,17 +28,16 @@ public class CustomInputManager : MonoBehaviour {
         }
     }
 
-	public void ShowHideActionButtonVisual(bool show)
-	{
+    public void ShowHideActionButtonVisual(bool show)
+    {
+        actionButtonVisual.SetActive(show);
+        if (show)
+        {
+            actionBtnAudioS.PlayOneShot(hideActionBtnSnd);
+        }
+    }
 
-		actionButtonVisual.SetActive (show);
-		if (show) 
-		{
-			actionBtnAudioS.PlayOneShot (hideActionBtnSnd);
-		} 
-	}
-
-    public Vector3 getDirection()
+    public Vector3 GetDirection()
     {
         Vector3 direction = new Vector3();
 
@@ -52,7 +49,6 @@ public class CustomInputManager : MonoBehaviour {
         if (Input.GetKey(backwardKey))
         {
             direction -= CameraController.instance.transform.forward;
-
         }
         if (Input.GetKey(leftKey))
         {
@@ -66,5 +62,10 @@ public class CustomInputManager : MonoBehaviour {
         direction.y = 0;
 
         return direction;
+    }
+
+    public bool IsMoving()
+    {
+        return Input.GetKey(forwardkey) || Input.GetKey(backwardKey) || Input.GetKey(leftKey) || Input.GetKey(rightKey);
     }
 }

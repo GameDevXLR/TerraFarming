@@ -1,17 +1,16 @@
-﻿using System.Collections;
+﻿using cakeslice;
 using System.Collections.Generic;
 using UnityEngine;
-using cakeslice;
 
-public class MachineAlchimieController : MonoBehaviour {
-
+public class MachineAlchimieController : MonoBehaviour
+{
     public List<Outline> outlinerList;
     public OreToEssenceUI interfaceMachine;
     public AlchimieGame game;
-	public ressourceEnum machineResource;
-	public int minimumResourcesRecquired;
-	public GameObject neededResourcesCanvas;
-	public bool isListening;
+    public ressourceEnum machineResource;
+    public int minimumResourcesRecquired;
+    public GameObject neededResourcesCanvas;
+    public bool isListening;
 
     private void Start()
     {
@@ -23,35 +22,35 @@ public class MachineAlchimieController : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
-			neededResourcesCanvas.SetActive (true);
-			switch (machineResource) 
-			{
+            neededResourcesCanvas.SetActive(true);
+            switch (machineResource)
+            {
+                case ressourceEnum.ore:
+                    if (ResourcesManager.instance.rawOre >= minimumResourcesRecquired)
+                    {
+                        ListenForAction();
+                    }
+                    break;
 
-			case ressourceEnum.ore:
-				if (ResourcesManager.instance.rawOre >= minimumResourcesRecquired) 
-				{
-					ListenForAction ();
-				}
-				break;
-			case ressourceEnum.essence:
-				if (ResourcesManager.instance.essence >= minimumResourcesRecquired) 
-				{
-					ListenForAction ();
-				}
-				break;
+                case ressourceEnum.essence:
+                    if (ResourcesManager.instance.essence >= minimumResourcesRecquired)
+                    {
+                        ListenForAction();
+                    }
+                    break;
 
-			default:
-				Debug.Log ("planage sur les resources ici");
-				break;
-			}
+                default:
+                    Debug.Log("planage sur les resources ici");
+                    break;
+            }
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Player" && Input.GetKeyDown(CustomInputManager.instance.actionKey) )
+        if (other.tag == "Player" && Input.GetKeyDown(CustomInputManager.instance.actionKey))
         {
-			if (!interfaceMachine.isActive && isListening )
+            if (!interfaceMachine.isActive && isListening)
             {
                 game.activate();
             }
@@ -62,37 +61,35 @@ public class MachineAlchimieController : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
-			neededResourcesCanvas.SetActive (false);
+            neededResourcesCanvas.SetActive(false);
 
             StopListeningForAction();
             game.enabled = false;
         }
     }
 
-    void ListenForAction()
+    private void ListenForAction()
     {
         //faire les changements d'apparence de la caillasse;
         CustomInputManager.instance.ShowHideActionButtonVisual(true);
         setActivationOutline(true);
-		isListening = true;
+        isListening = true;
     }
-    void StopListeningForAction()
+
+    private void StopListeningForAction()
     {
         //arreter les effets visuels
         CustomInputManager.instance.ShowHideActionButtonVisual(false);
         setActivationOutline(false);
         interfaceMachine.unactivate();
-		isListening = false;
+        isListening = false;
     }
 
-
-    void setActivationOutline(bool isActivate)
+    private void setActivationOutline(bool isActivate)
     {
         foreach (Outline outliner in outlinerList)
         {
             outliner.enabled = isActivate;
         }
     }
-    
-
 }

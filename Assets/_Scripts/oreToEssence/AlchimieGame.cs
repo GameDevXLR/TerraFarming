@@ -1,18 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AlchimieGame : MonoBehaviour {
-
-
+public class AlchimieGame : MonoBehaviour
+{
     #region editor variables
 
-	//A compléter : le type de graine donnée.
-	public PlantObject plantGiven;
+    //A compléter : le type de graine donnée.
+    public PlantObject plantGiven;
 
     public OreToEssenceUI interfaceMachine;
-	public MachineUIManager machineUI;
+    public MachineUIManager machineUI;
 
     public float timeBonus;
     public float luckPercent;
@@ -25,15 +23,16 @@ public class AlchimieGame : MonoBehaviour {
 
     public ressourceEnum inputRessource;
     public ressourceEnum outputRessource;
-	public BiomeEnum outputBiome;
+    public BiomeEnum outputBiome;
 
     public int ressourceNeed;
 
     public List<Image> jaugeList;
-	[HideInInspector]
-	public bool willPlayIntroVideo = false;
 
-    #endregion
+    [HideInInspector]
+    public bool willPlayIntroVideo = false;
+
+    #endregion editor variables
 
     #region other variables
 
@@ -44,15 +43,12 @@ public class AlchimieGame : MonoBehaviour {
     protected bool lucky;
     protected int ressourceDispo;
 
-	bool wonBonus;
-	int previousBonusCount;
+    private bool wonBonus;
+    private int previousBonusCount;
 
-    #endregion
-
-
+    #endregion other variables
 
     #region monobehaviour methods
-
 
     private void Awake()
     {
@@ -61,8 +57,8 @@ public class AlchimieGame : MonoBehaviour {
 
     private void OnEnable()
     {
-		machineUI.InitializeTheUI (plantGiven);
-		interfaceMachine.InitializeTheGameUI (plantGiven);
+        machineUI.InitializeTheUI(plantGiven);
+        interfaceMachine.InitializeTheGameUI(plantGiven);
         time = Time.time;
         count = 0;
         bonus = 0;
@@ -71,104 +67,118 @@ public class AlchimieGame : MonoBehaviour {
         resetJauge();
 
         interfaceMachine.setChrono(0);
-		interfaceMachine.setTimeBonus(timeBonus);
+        interfaceMachine.setTimeBonus(timeBonus);
         launchAnimation("GameEnabled", true);
 
         particleEffect(10);
     }
 
     // Update is called once per frame
-    protected void Update () {
+    protected void Update()
+    {
+        if (Input.GetKeyDown(CustomInputManager.instance.actionKey))
+        {
+            if (count < jaugeList.Count)
+            {
+                machineUI.BlinkActionBarArrows();
+                jaugeList[count].enabled = true;
+                jaugeList[count].gameObject.GetComponent<AudioSource>().Play();
+                animator.Play("MachineSeedSpace");
 
-		if (Input.GetKeyDown (CustomInputManager.instance.actionKey)) {
-			if (count < jaugeList.Count) {
+                particleEffect(10);
+                interfaceMachine.setScore(++count);
+            }
+            else if (count == jaugeList.Count)
+            {
+                if (Time.time - time <= timeBonus && Random.value <= luckPercent)
+                {
+                    bonus++;
+                    playASOund(miniGameSuccess);
+                    harvestRessouce(true);
+                }
+                else
+                {
+                    harvestRessouce(false);
+                }
+                harvest++;
 
-				machineUI.BlinkActionBarArrows ();
-				jaugeList [count].enabled = true;
-				jaugeList [count].gameObject.GetComponent<AudioSource> ().Play ();
-				animator.Play ("MachineSeedSpace");
+                if (bonus > previousBonusCount)
+                {
+                    previousBonusCount = bonus;
+                    wonBonus = true;
+                }
+                machineUI.ShowRewardImg(wonBonus);
+                wonBonus = false;
+                count++;
+            }
+            else if (count == jaugeList.Count + 1)
+            {
+                resetJauge();
+                count = 0;
+                time = Time.time;
+                machineUI.bigTimerZone.enabled = true;
+                machineUI.mediumTimerZone.enabled = true;
+                machineUI.smallTimerZone.enabled = true;
+                machineUI.timerIcon.enabled = true;
+                if ((harvest * ressourceNeed) + ressourceNeed <= ressourceDispo)
+                {
+                    interfaceMachine.synthetisationSucessFull(harvest + bonus, bonus);
+                }
+                else
+                {
+                    interfaceMachine.endSynthetisation(harvest + bonus, bonus);
+                    enabled = false;
+                }
+            }
+        }
 
-				particleEffect (10);
-				interfaceMachine.setScore (++count);
-			} else if (count == jaugeList.Count) {
-				if (Time.time - time <= timeBonus && Random.value <= luckPercent) {
-					bonus++;
-					playASOund (miniGameSuccess);
-					harvestRessouce (true);
-				} else {
-					harvestRessouce (false);
-				}
-				harvest++;
+        if (count < jaugeList.Count)
 
-				if (bonus > previousBonusCount) {
-					previousBonusCount = bonus;
-					wonBonus = true;
-				}
-				machineUI.ShowRewardImg (wonBonus);
-				wonBonus = false;
-				count++;
-				
-
-			} else if (count == jaugeList.Count + 1) {
-				resetJauge ();
-				count = 0;
-				time = Time.time;
-				machineUI.bigTimerZone.enabled = true;
-				machineUI.mediumTimerZone.enabled = true;
-				machineUI.smallTimerZone.enabled = true;
-				machineUI.timerIcon.enabled = true;
-				if ((harvest * ressourceNeed) + ressourceNeed <= ressourceDispo) {
-					interfaceMachine.synthetisationSucessFull (harvest + bonus, bonus);
-				} else {
-					interfaceMachine.endSynthetisation (harvest + bonus, bonus);
-					enabled = false;
-				}
-
-			}
-            
-		}
-
-		if (count < jaugeList.Count) 
-			
-			if (Time.time - time > 1.5f) {
-				if (machineUI.bigTimerZone.enabled) {
-					machineUI.bigTimerZone.enabled = false;
-				}
-				if (Time.time - time > 2f) {
-					if (machineUI.mediumTimerZone.enabled) {
-						machineUI.mediumTimerZone.enabled = false;
-					}
-					if (Time.time - time > 2.5f) {
-						if (machineUI.smallTimerZone.enabled) {
-							machineUI.smallTimerZone.enabled = false;
-							machineUI.timerIcon.enabled = false;
-						}
-					}
-				}
-			}
-			interfaceMachine.setChrono (Time.time - time);
-			if (Input.GetKeyDown (KeyCode.Escape)) {
-				enabled = false;
-			}
-		}
-	
+            if (Time.time - time > 1.5f)
+            {
+                if (machineUI.bigTimerZone.enabled)
+                {
+                    machineUI.bigTimerZone.enabled = false;
+                }
+                if (Time.time - time > 2f)
+                {
+                    if (machineUI.mediumTimerZone.enabled)
+                    {
+                        machineUI.mediumTimerZone.enabled = false;
+                    }
+                    if (Time.time - time > 2.5f)
+                    {
+                        if (machineUI.smallTimerZone.enabled)
+                        {
+                            machineUI.smallTimerZone.enabled = false;
+                            machineUI.timerIcon.enabled = false;
+                        }
+                    }
+                }
+            }
+        interfaceMachine.setChrono(Time.time - time);
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            enabled = false;
+        }
+    }
 
     private void OnDisable()
     {
         //harvestRessouce();
-		launchAnimation("GameEnabled", false);
+        launchAnimation("GameEnabled", false);
 
-		machineUI.ShowHideActionArrows ();
+        machineUI.ShowHideActionArrows();
 
         interfaceMachine.unactivate();
     }
 
-    #endregion
-#region other methods
+    #endregion monobehaviour methods
+
+    #region other methods
 
     public void resetJauge()
     {
-
         foreach (Image img in jaugeList)
         {
             img.enabled = false;
@@ -184,11 +194,10 @@ public class AlchimieGame : MonoBehaviour {
     public bool activate()
     {
         ressourceDispo = ResourcesManager.instance.GetRessourceQuantity(inputRessource);
-        if(ressourceDispo >= ressourceNeed)
+        if (ressourceDispo >= ressourceNeed)
         {
             enabled = true;
             interfaceMachine.activate(ressourceDispo, ressourceNeed, SimuleSynthetize());
-
         }
         else
         {
@@ -205,24 +214,23 @@ public class AlchimieGame : MonoBehaviour {
 
     protected void particleEffect(int emission)
     {
-        if(BurstPtc)
+        if (BurstPtc)
             BurstPtc.GetComponent<ParticleSystem>().Emit(emission);
         else
         {
             Debug.Log("Particle pas encore défini : " + gameObject.name + ", OreToEssenceGame");
         }
-    } 
+    }
 
     protected void launchAnimation(string animation, bool etat)
     {
         if (animator)
         {
-
             animator.SetBool(animation, etat);
         }
         else
         {
-            Debug.Log("l'animator n'est pas encore défini : " + gameObject.name + ", OreToEssenceGame" );
+            Debug.Log("l'animator n'est pas encore défini : " + gameObject.name + ", OreToEssenceGame");
         }
     }
 
@@ -230,37 +238,37 @@ public class AlchimieGame : MonoBehaviour {
     {
         if (harvest > 0)
         {
-			ResourcesManager.instance.setRessourceQuantity(plantGiven, harvest + bonus);
+            ResourcesManager.instance.setRessourceQuantity(plantGiven, harvest + bonus);
             ResourcesManager.instance.setRessourceQuantity(inputRessource, -harvest * ressourceNeed);
         }
         resetJauge();
-
     }
+
     public virtual void harvestRessouce(bool bonus)
     {
         if (bonus)
         {
-			ResourcesManager.instance.setRessourceQuantity(plantGiven, 2);
+            ResourcesManager.instance.setRessourceQuantity(plantGiven, 2);
         }
         else
         {
-			ResourcesManager.instance.setRessourceQuantity(plantGiven, 1);
+            ResourcesManager.instance.setRessourceQuantity(plantGiven, 1);
         }
 
         ResourcesManager.instance.setRessourceQuantity(inputRessource, -ressourceNeed);
-		resetJauge();
-		if (willPlayIntroVideo) 
-		{
-			GameEventsManager.instance.StartIntroCinematicSeedCreated ();
-			willPlayIntroVideo = false;
-			enabled = false;
-		}
-
+        resetJauge();
+        if (willPlayIntroVideo)
+        {
+            GameEventsManager.instance.StartIntroCinematicSeedCreated();
+            willPlayIntroVideo = false;
+            enabled = false;
+        }
     }
 
     public int SimuleSynthetize()
     {
         return ressourceDispo / ressourceNeed;
     }
-    #endregion
+
+    #endregion other methods
 }

@@ -2,12 +2,11 @@
 
 public class PlayerStateAnimator : StateMachineBehaviour
 {
-
-
     #region variables
+
     protected PlayerController controller;
 
-    #endregion
+    #endregion variables
 
     #region Unity methods
 
@@ -15,9 +14,8 @@ public class PlayerStateAnimator : StateMachineBehaviour
     {
         controller = InGameManager.instance.playerController;
     }
-    #endregion
 
-
+    #endregion Unity methods
 
     #region animation
 
@@ -26,11 +24,11 @@ public class PlayerStateAnimator : StateMachineBehaviour
         controller.anim.SetBool(anime.ToString(), activate);
     }
 
-
     public bool isPlayerMoving()
     {
         Vector3 mouvement = controller.behaviour.moveDirection;
         return mouvement.x != 0 | mouvement.z != 0;
     }
-    #endregion
+
+    #endregion animation
 }

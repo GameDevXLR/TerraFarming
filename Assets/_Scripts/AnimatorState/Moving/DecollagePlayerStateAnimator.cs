@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-public class DecollagePlayerStateAnimator : IdlePlayerStateAnimator {
-
+public class DecollagePlayerStateAnimator : IdlePlayerStateAnimator
+{
     public override void OnStateExit(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
         if (controller.canDoAction)
@@ -9,5 +9,4 @@ public class DecollagePlayerStateAnimator : IdlePlayerStateAnimator {
             SwitchAnime(AnimeParameters.isjumping, false);
         }
     }
-
 }

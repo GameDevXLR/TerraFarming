@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class DetectHeigthPlayer : MonoBehaviour {
-
+public class DetectHeigthPlayer : MonoBehaviour
+{
     public CharacterController Cc;
 
     public PlayerController controller;
@@ -14,14 +12,11 @@ public class DetectHeigthPlayer : MonoBehaviour {
 
     public RaycastHit hit;
 
-
-	
-	// Update is called once per frame
-	void Update () {
-        
-
-        Vector3 p1 =transform.position + Cc.center;
-        p1.y = p1.y - Cc.height/2 + Cc.radius;
+    // Update is called once per frame
+    private void Update()
+    {
+        Vector3 p1 = transform.position + Cc.center;
+        p1.y = p1.y - Cc.height / 2 + Cc.radius;
         float distanceToObstacle = 0;
 
         // Cast a sphere wrapping character controller 10 meters forward
@@ -38,14 +33,12 @@ public class DetectHeigthPlayer : MonoBehaviour {
             }
             else
             {
-
                 controller.shadowObject.SetActive(true);
                 controller.IsGrounded = false;
                 controller.SetAltitudeMaxFromGroundPos(hit.point.y);
                 Vector3 vect = hit.point;
-                vect.y += 0.1f; 
+                vect.y += 0.1f;
                 controller.shadowObject.transform.position = vect;
-                
             }
         }
         else
@@ -54,7 +47,5 @@ public class DetectHeigthPlayer : MonoBehaviour {
             controller.SetAltitudeMaxFromGroundPos(0);
             controller.shadowObject.SetActive(false);
         }
-
     }
-
 }

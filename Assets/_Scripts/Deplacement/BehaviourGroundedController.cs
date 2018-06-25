@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-public class BehaviourGroundedController : BehaviourController {
-
-	void Update () {
-        
+public class BehaviourGroundedController : BehaviourController
+{
+    private void Update()
+    {
         float y = moveDirection.y;
         moveDirection = CalculateMoveDirection();
         moveDirection.y = y;

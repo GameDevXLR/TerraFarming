@@ -4,17 +4,17 @@
 //  Copyright (c) 2015 José Guerreiro. All rights reserved.
 //
 //  MIT license, see http://www.opensource.org/licenses/mit-license.php
-//  
+//
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
 //  in the Software without restriction, including without limitation the rights
 //  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 //  copies of the Software, and to permit persons to whom the Software is
 //  furnished to do so, subject to the following conditions:
-//  
+//
 //  The above copyright notice and this permission notice shall be included in
 //  all copies or substantial portions of the Software.
-//  
+//
 //  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,14 +24,13 @@
 //  THE SOFTWARE.
 */
 
-Shader "Hidden/OutlineEffect" 
+Shader "Hidden/OutlineEffect"
 {
-	Properties 
+	Properties
 	{
-		_MainTex ("Base (RGB)", 2D) = "white" {}
-		
+		_MainTex("Base (RGB)", 2D) = "white" {}
 	}
-	SubShader 
+		SubShader
 	{
 		Pass
 		{
@@ -95,7 +94,7 @@ Shader "Hidden/OutlineEffect"
 				bool red = sample1.r > h || sample2.r > h || sample3.r > h || sample4.r > h;
 				bool green = sample1.g > h || sample2.g > h || sample3.g > h || sample4.g > h;
 				bool blue = sample1.b > h || sample2.b > h || sample3.b > h || sample4.b > h;
-				 
+
 				if ((red && blue) || (green && blue) || (red && green))
 					return float4(0,0,0,0);
 				else
@@ -107,12 +106,12 @@ Shader "Hidden/OutlineEffect"
 
 		Pass
 		{
-			Tags { "RenderType"="Opaque" }
+			Tags { "RenderType" = "Opaque" }
 			LOD 200
 			ZTest Always
 			ZWrite Off
 			Cull Off
-			
+
 			CGPROGRAM
 
 			#pragma vertex vert
@@ -128,14 +127,14 @@ Shader "Hidden/OutlineEffect"
 			   float4 position : SV_POSITION;
 			   float2 uv : TEXCOORD0;
 			};
-			
+
 			v2f vert(appdata_img v)
 			{
-			   	v2f o;
+				v2f o;
 				o.position = UnityObjectToClipPos(v.vertex);
 				o.uv = v.texcoord;
-				
-			   	return o;
+
+				return o;
 			}
 
 			float _LineThicknessX;
@@ -150,8 +149,8 @@ Shader "Hidden/OutlineEffect"
 			int _CornerOutlines;
 			uniform float4 _MainTex_TexelSize;
 
-			half4 frag (v2f input) : COLOR
-			{	
+			half4 frag(v2f input) : COLOR
+			{
 				float2 uv = input.uv;
 				if (_FlipY == 1)
 					uv.y = 1 - uv.y;
@@ -162,7 +161,7 @@ Shader "Hidden/OutlineEffect"
 
 				half4 originalPixel = tex2D(_MainTex, UnityStereoScreenSpaceUVAdjust(input.uv, _MainTex_ST));
 				half4 outlineSource = tex2D(_OutlineSource, UnityStereoScreenSpaceUVAdjust(uv, _MainTex_ST));
-								
+
 				const float h = .95f;
 				half4 outline = 0;
 				bool hasOutline = false;
@@ -171,7 +170,7 @@ Shader "Hidden/OutlineEffect"
 				half4 sample2 = tex2D(_OutlineSource, uv + float2(-_LineThicknessX,0.0));
 				half4 sample3 = tex2D(_OutlineSource, uv + float2(.0,_LineThicknessY));
 				half4 sample4 = tex2D(_OutlineSource, uv + float2(.0,-_LineThicknessY));
-				
+
 				bool outside = outlineSource.a < h;
 				bool outsideDark = outside && _Dark;
 
@@ -237,18 +236,18 @@ Shader "Hidden/OutlineEffect"
 
 					if (!outside)
 						outline *= _FillAmount;
-				}					
-					
-				//return outlineSource;		
+				}
+
+				//return outlineSource;
 				if (hasOutline)
 					return lerp(originalPixel + outline, outline, _FillAmount);
 				else
 					return originalPixel;
 			}
-			
+
 			ENDCG
 		}
-	} 
+	}
 
-	FallBack "Diffuse"
+		FallBack "Diffuse"
 }

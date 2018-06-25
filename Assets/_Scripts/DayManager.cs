@@ -1,19 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class DayManager : MonoBehaviour {
-
-	public static DayManager instance;
+public class DayManager : MonoBehaviour
+{
+    public static DayManager instance;
     private int _currentDay = 1;
-	public DayStates _dayStates;
+    public DayStates _dayStates;
     public Text DisplayNumberDay;
-	public  Text dayStateDisplay;
+    public Text dayStateDisplay;
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -37,11 +35,11 @@ public class DayManager : MonoBehaviour {
 
         set
         {
-//			//si c'est le deuxieme jour.
-//			if (value == 2) 
-//			{
-//				GameEventsManager.instance.StartIntroCineNewDay ();
-//			}
+            //			//si c'est le deuxieme jour.
+            //			if (value == 2)
+            //			{
+            //				GameEventsManager.instance.StartIntroCineNewDay ();
+            //			}
             _currentDay = value;
             DisplayNumberDay.text = _currentDay.ToString();
         }
@@ -57,12 +55,7 @@ public class DayManager : MonoBehaviour {
         set
         {
             _dayStates = value;
-			dayStateDisplay.text = _dayStates.ToString();
-
+            dayStateDisplay.text = _dayStates.ToString();
         }
     }
-
-
-
-    
 }

@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class CameraController : MonoBehaviour
 {
+    #region editor variables
 
-#region editor variables
     public GameObject focus;
 
     public Vector3 offset;
@@ -20,29 +18,34 @@ public class CameraController : MonoBehaviour
     public Text verticalText;
     public Text horizontalText;
 
-
-    #endregion
+    #endregion editor variables
 
     #region other variables
+
     [SerializeField]
     private float distance = 20;
+
     public static CameraController instance;
 
     private float targetAngle = 0;
-    const float rotationAmount = 1.0f;
+    private const float rotationAmount = 1.0f;
+
     [SerializeField]
     private float v = 45;
+
     [SerializeField]
     private float h = 45;
+
     private float z;
     private bool isSettingAngle = false;
 
-    #endregion
-#region unity methods
+    #endregion other variables
+
+    #region unity methods
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
             setVerticalUI(v);
@@ -59,7 +62,6 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-
         if (Input.GetAxis("Mouse ScrollWheel") > 0) // forward
         {
             Distance -= stepZoom;
@@ -72,7 +74,7 @@ public class CameraController : MonoBehaviour
         Distance = Mathf.Clamp(Distance, minDistance, maxDistance);
 
         //transform.position = Vector3.Lerp(transform.position, focus.transform.position + offset * distance, smooth * Time.deltaTime );
-       
+
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             H -= rotationAmount;
@@ -101,22 +103,22 @@ public class CameraController : MonoBehaviour
             RotateSmoothlyCam();
             isSettingAngle = false;
         }
-       
     }
-#endregion
+
+    #endregion unity methods
+
     public void moveSmoothlyCam()
     {
         offset = Quaternion.Euler(V, -H, Z) * new Vector3(0, 0, 1);
         transform.position = Vector3.Lerp(transform.position, focus.transform.position - offset * Distance, smooth * Time.deltaTime);
-        
     }
-
 
     public void RotateSmoothlyCam()
     {
         Vector3 lTargetDir = focus.transform.position - transform.position;
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(lTargetDir), Time.time * smooth);
     }
+
     public void moveCam()
     {
         offset = Quaternion.Euler(V, -H, Z) * new Vector3(0, 0, 1);
@@ -124,8 +126,8 @@ public class CameraController : MonoBehaviour
         transform.LookAt(focus.transform);
     }
 
+    #region getter/setter
 
-#region getter/setter
     public float V
     {
         get
@@ -180,9 +182,10 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    #endregion
+    #endregion getter/setter
 
     #region UI
+
     public void setHorizontalUI(float value)
     {
         if (horizontalText != null)
@@ -190,6 +193,7 @@ public class CameraController : MonoBehaviour
             horizontalText.text = value.ToString();
         }
     }
+
     public void setVerticalUI(float value)
     {
         if (verticalText != null)
@@ -197,6 +201,6 @@ public class CameraController : MonoBehaviour
             verticalText.text = value.ToString();
         }
     }
-    #endregion
 
+    #endregion UI
 }

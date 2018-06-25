@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class BehaviourNotGroundedController : BehaviourController {
-    bool isFlying;
-    float referenceYFly;
-
+public class BehaviourNotGroundedController : BehaviourController
+{
+    private bool isFlying;
+    private float referenceYFly;
 
     private void Update()
     {
@@ -22,7 +20,4 @@ public class BehaviourNotGroundedController : BehaviourController {
         }
         Cc.Move(moveDirection * Time.deltaTime);
     }
-
-
-
 }

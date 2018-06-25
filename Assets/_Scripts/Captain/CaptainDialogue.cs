@@ -1,19 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using NodeCanvas.DialogueTrees;
 using UnityEngine;
-using NodeCanvas.DialogueTrees;
 
-public class CaptainDialogue : MonoBehaviour {
-
-	public DialogueTreeController dialogueUI;
+public class CaptainDialogue : MonoBehaviour
+{
+    public DialogueTreeController dialogueUI;
 
     public Collider collide;
 
-    
-
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             ListenForAction();
         }
@@ -23,11 +19,10 @@ public class CaptainDialogue : MonoBehaviour {
     {
         if (other.tag == "Player" && Input.GetKeyDown(CustomInputManager.instance.actionKey))
         {
-			dialogueUI.StartDialogue (DialogueCallback);
-			unactivate ();
-		}
+            dialogueUI.StartDialogue(DialogueCallback);
+            unactivate();
+        }
     }
-
 
     private void OnTriggerExit(Collider other)
     {
@@ -36,29 +31,33 @@ public class CaptainDialogue : MonoBehaviour {
             StopListeningForAction();
         }
     }
-	public void DialogueCallback(bool dialogueOver)
-	{
-		if (dialogueOver) 
-		{
-			Debug.Log ("test");
-			activate ();
-		}
-	}
+
+    public void DialogueCallback(bool dialogueOver)
+    {
+        if (dialogueOver)
+        {
+            Debug.Log("test");
+            activate();
+        }
+    }
+
     public void activate()
     {
         collide.enabled = true;
     }
+
     public void unactivate()
     {
         collide.enabled = false;
     }
 
-    void ListenForAction()
+    private void ListenForAction()
     {
         //faire les changements d'apparence de la caillasse;
         CustomInputManager.instance.ShowHideActionButtonVisual(true);
     }
-    void StopListeningForAction()
+
+    private void StopListeningForAction()
     {
         //arreter les effets visuels
         CustomInputManager.instance.ShowHideActionButtonVisual(false);

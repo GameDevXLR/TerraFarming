@@ -1,110 +1,109 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityStandardAssets.Characters.ThirdPerson;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
+﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class InGameManager : MonoBehaviour {
+public class InGameManager : MonoBehaviour
+{
+    public MusicalGame OreGame;
+    public static InGameManager instance;
 
-	public MusicalGame OreGame;
-	public static InGameManager instance;
+    public PlayerController playerController;
+    public Animator InterfaceAnimator;
 
-	public PlayerController playerController;
-	public Animator InterfaceAnimator;
+    public ParticleSystem cleanParticle;
+    public ParticleSystem waterParticle;
+    public ParticleSystem miningChargeParticle;
+    public ParticleSystem miningCharge2Particle;
+    public ParticleSystem miningHitParticle;
+    public ParticleSystem miningHitParticle2;
+    public ParticleSystem miningFailParticle;
+    public ParticleSystem miningFailParticle2;
+    public Animator machineAnimator;
+    public Animator machineBushController;
 
-	public ParticleSystem cleanParticle;
-	public ParticleSystem waterParticle;
-	public ParticleSystem miningChargeParticle;
-	public ParticleSystem miningCharge2Particle;
-	public ParticleSystem miningHitParticle;
-	public ParticleSystem miningHitParticle2;
-	public ParticleSystem miningFailParticle;
-	public ParticleSystem miningFailParticle2;
-	public Animator machineAnimator;
-	public Animator machineBushController;
+    public GameObject machineCanvas;
+    public GameObject miningCanvas;
+    public GameObject quitCanvas;
+    public Button resumeBtn;
+    public Button quitBtn;
+    public bool isPlanting;
 
-	public GameObject machineCanvas;
-	public GameObject miningCanvas;
-	public GameObject quitCanvas;
-	public Button resumeBtn;
-	public Button quitBtn;
-	public bool isPlanting;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        //		//si tu continue une game:
+        //        if (PlayerPrefs.GetString("Game") == "continue")
+        //        {
+        //            //Invoke("LoadGame", 0.1f);
+        //		}else
+        //		{
+        //			GameEventsManager.instance.StartIntroCinematic ();
+        //			MusicalGame.instance.willStartCinematic = true;
+        //		}
+        //        //InvokeRepeating("SaveGame", 30.0f, 30f);
+    }
 
-	void Awake()
-	{
-		if (instance == null) {
-			instance = this;
-		} else 
-		{
-			Destroy (gameObject);
-		}
-		//		//si tu continue une game:
-		//        if (PlayerPrefs.GetString("Game") == "continue")
-		//        {
-		//            //Invoke("LoadGame", 0.1f);
-		//		}else
-		//		{
-		//			GameEventsManager.instance.StartIntroCinematic ();
-		//			MusicalGame.instance.willStartCinematic = true;
-		//		}
-		//        //InvokeRepeating("SaveGame", 30.0f, 30f);
-	}
-	void Start()
-	{
-		if (PlayerPrefs.GetString("Game") == "continue")
-		{
-			//Invoke("LoadGame", 0.1f);
-		}else
-		{
-			Invoke ("InitializeCinematic", .21f);
-		}
-		miningCanvas.SetActive (false);
-	}
+    private void Start()
+    {
+        if (PlayerPrefs.GetString("Game") == "continue")
+        {
+            //Invoke("LoadGame", 0.1f);
+        }
+        else
+        {
+            Invoke("InitializeCinematic", .21f);
+        }
+        miningCanvas.SetActive(false);
+    }
 
-	void Update()
-	{
-		if (Input.GetKeyDown (KeyCode.Escape)) 
-		{
-			if (quitCanvas.activeSelf) 
-			{
-				HideQuitGameMenu ();
-				return;
-			}
-			if (!machineCanvas.activeSelf && !miningCanvas.activeSelf && !isPlanting) 
-			{
-				ShowQuitGameMenu ();
-			}
-		}
-	}
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (quitCanvas.activeSelf)
+            {
+                HideQuitGameMenu();
+                return;
+            }
+            if (!machineCanvas.activeSelf && !miningCanvas.activeSelf && !isPlanting)
+            {
+                ShowQuitGameMenu();
+            }
+        }
+    }
 
-	void InitializeCinematic()
-	{
-		GameEventsManager.instance.StartIntroCinematic ();
-		MusicalGame.instance.willStartCinematic = true;
-	}
-	public void ShowQuitGameMenu()
-	{
-		quitCanvas.SetActive (true);
-		EventSystem.current.SetSelectedGameObject(resumeBtn.gameObject);
-		playerController.disableMovement();
+    private void InitializeCinematic()
+    {
+        GameEventsManager.instance.StartIntroCinematic();
+        MusicalGame.instance.willStartCinematic = true;
+    }
 
-	}
+    public void ShowQuitGameMenu()
+    {
+        quitCanvas.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(resumeBtn.gameObject);
+        playerController.disableMovement();
+    }
 
-	public void HideQuitGameMenu()
-	{
-		quitCanvas.SetActive (false);
-		playerController.enableMovement();
+    public void HideQuitGameMenu()
+    {
+        quitCanvas.SetActive(false);
+        playerController.enableMovement();
+    }
 
-
-	}
-
-	public void QuitTheGame()
-	{
-		Application.Quit();
-	}
+    public void QuitTheGame()
+    {
+        Application.Quit();
+    }
 
     private Save CreateSaveGameObject()
     {
@@ -116,8 +115,8 @@ public class InGameManager : MonoBehaviour {
         save.treeSeed = ResourcesManager.instance.treeSeed;
         save.flowerSeed = ResourcesManager.instance.flowerSeed;
 
-		//désactiver temporairement le temps de mettre ca au propre.
-//        save.plantList = PlantationManager.instance.savePlantation();
+        //désactiver temporairement le temps de mettre ca au propre.
+        //        save.plantList = PlantationManager.instance.savePlantation();
 
         return save;
     }
@@ -132,7 +131,6 @@ public class InGameManager : MonoBehaviour {
         FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
         bf.Serialize(file, save);
         file.Close();
-        
     }
 
     public void LoadGame()
@@ -140,7 +138,6 @@ public class InGameManager : MonoBehaviour {
         // 1
         if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
         {
-
             // 2
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/gamesave.save", FileMode.Open);
@@ -156,7 +153,6 @@ public class InGameManager : MonoBehaviour {
             ResourcesManager.instance.setFlowerSeed(save.flowerSeed);
 
             PlantationManager.instance.loadPlantation(save.plantList);
-            
         }
         else
         {

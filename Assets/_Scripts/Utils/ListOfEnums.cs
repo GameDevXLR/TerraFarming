@@ -1,11 +1,11 @@
 ﻿public enum PlantTypeEnum
 {
-	none,
-	flower,
+    none,
+    flower,
     bush,
     tree
-
 }
+
 public enum ressourceEnum
 {
     bush,
@@ -14,22 +14,25 @@ public enum ressourceEnum
     ore,
     essence
 }
+
 public enum PlantStateEnum
 {
-	debris,
-	lopin,
-	seed,
-	baby,
-	teenage,
-	grownup
+    debris,
+    lopin,
+    seed,
+    baby,
+    teenage,
+    grownup
 }
+
 public enum BiomeEnum
 {
-	none,
-	plain,
-	crater,
-	cave
+    none,
+    plain,
+    crater,
+    cave
 }
+
 public enum AnimeParameters
 {
     iswalking,
@@ -44,6 +47,7 @@ public enum AnimeParameters
     iscleaning,
     iswatering
 }
+
 public enum DayStates
 {
     Day,

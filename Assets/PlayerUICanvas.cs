@@ -1,116 +1,126 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerUICanvas : MonoBehaviour 
+public class PlayerUICanvas : MonoBehaviour
 {
-	[Header("Les variables lié a la collection:")]
-	public Transform collectionPanel;
-	public Image showNotOwned;
-	public Image showCave;
-	public Image showPlain;
-	public Image showCrater;
-	public Image showTree;
-	public Image showBush;
-	public Image showFlower;
+    [Header("Les variables lié a la collection:")]
+    public Transform collectionPanel;
 
-	public Color visibleBtnColor;
-	public Color hidenBtnColor;
+    public Image showNotOwned;
+    public Image showCave;
+    public Image showPlain;
+    public Image showCrater;
+    public Image showTree;
+    public Image showBush;
+    public Image showFlower;
 
-	public static PlayerUICanvas instance;
-	void Awake()
-	{
-		if (instance == null) 
-		{
-			instance = this;
-		}
-	}
+    public Color visibleBtnColor;
+    public Color hidenBtnColor;
 
-	public void ChangeCaveUIColor()
-	{
-		if (showCave.color == hidenBtnColor) 
-		{
-			showCave.color = visibleBtnColor;
-		} else {
-			showCave.color = hidenBtnColor;
+    public static PlayerUICanvas instance;
 
-		}
-	}
-	public void ChangePlainUIColor()
-	{
-		if (showPlain.color == hidenBtnColor) 
-		{
-			showPlain.color = visibleBtnColor;
-		} else {
-			showPlain.color = hidenBtnColor;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
 
-		}
-	}
-	public void ChangeCraterUIColor()
-	{
-		if (showCrater.color == hidenBtnColor) 
-		{
-			showCrater.color = visibleBtnColor;
-		} else {
-			showCrater.color = hidenBtnColor;
+    public void ChangeCaveUIColor()
+    {
+        if (showCave.color == hidenBtnColor)
+        {
+            showCave.color = visibleBtnColor;
+        }
+        else
+        {
+            showCave.color = hidenBtnColor;
+        }
+    }
 
-		}
-	}
-	public void ChangeNotOwnedUIColor()
-	{
-		if (showNotOwned.color == hidenBtnColor) 
-		{
-			showNotOwned.color = visibleBtnColor;
-		} else {
-			showNotOwned.color = hidenBtnColor;
+    public void ChangePlainUIColor()
+    {
+        if (showPlain.color == hidenBtnColor)
+        {
+            showPlain.color = visibleBtnColor;
+        }
+        else
+        {
+            showPlain.color = hidenBtnColor;
+        }
+    }
 
-		}
-	}
-	public void ResetPlantsUIColor()
-	{
-			showFlower.color = visibleBtnColor;
-			showBush.color = hidenBtnColor;
-			showTree.color = hidenBtnColor;
-	}
-	public void ChangeFlowerUIColor()
-	{
-		if (showFlower.color == hidenBtnColor) 
-		{
-			showFlower.color = visibleBtnColor;
-			showBush.color = hidenBtnColor;
-			showTree.color = hidenBtnColor;
+    public void ChangeCraterUIColor()
+    {
+        if (showCrater.color == hidenBtnColor)
+        {
+            showCrater.color = visibleBtnColor;
+        }
+        else
+        {
+            showCrater.color = hidenBtnColor;
+        }
+    }
 
-		} else {
-//			showFlower.color = hidenBtnColor;
+    public void ChangeNotOwnedUIColor()
+    {
+        if (showNotOwned.color == hidenBtnColor)
+        {
+            showNotOwned.color = visibleBtnColor;
+        }
+        else
+        {
+            showNotOwned.color = hidenBtnColor;
+        }
+    }
 
-		}
-	}
-	public void ChangeBushUIColor()
-	{
-		if (showBush.color == hidenBtnColor) 
-		{
-			showBush.color = visibleBtnColor;
-			showFlower.color = hidenBtnColor;
-			showTree.color = hidenBtnColor;
+    public void ResetPlantsUIColor()
+    {
+        showFlower.color = visibleBtnColor;
+        showBush.color = hidenBtnColor;
+        showTree.color = hidenBtnColor;
+    }
 
-		} else {
-//			showBush.color = hidenBtnColor;
+    public void ChangeFlowerUIColor()
+    {
+        if (showFlower.color == hidenBtnColor)
+        {
+            showFlower.color = visibleBtnColor;
+            showBush.color = hidenBtnColor;
+            showTree.color = hidenBtnColor;
+        }
+        else
+        {
+            //			showFlower.color = hidenBtnColor;
+        }
+    }
 
-		}
-	}
-	public void ChangeTreeUIColor()
-	{
-		if (showTree.color == hidenBtnColor) 
-		{
-			showTree.color = visibleBtnColor;
-			showFlower.color = hidenBtnColor;
-			showBush.color = hidenBtnColor;
+    public void ChangeBushUIColor()
+    {
+        if (showBush.color == hidenBtnColor)
+        {
+            showBush.color = visibleBtnColor;
+            showFlower.color = hidenBtnColor;
+            showTree.color = hidenBtnColor;
+        }
+        else
+        {
+            //			showBush.color = hidenBtnColor;
+        }
+    }
 
-
-		} else {
-//			showTree.color = hidenBtnColor;
-
-		}
-	}
+    public void ChangeTreeUIColor()
+    {
+        if (showTree.color == hidenBtnColor)
+        {
+            showTree.color = visibleBtnColor;
+            showFlower.color = hidenBtnColor;
+            showBush.color = hidenBtnColor;
+        }
+        else
+        {
+            //			showTree.color = hidenBtnColor;
+        }
+    }
 }

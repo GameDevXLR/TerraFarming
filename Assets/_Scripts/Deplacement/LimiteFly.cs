@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class LimiteFly : MonoBehaviour {
-
+public class LimiteFly : MonoBehaviour
+{
     //private void OnTriggerExit(Collider other)
     //{
     //    if(other.gameObject.tag == "Player")
@@ -20,12 +18,10 @@ public class LimiteFly : MonoBehaviour {
     //    }
     //}
 
-
     private float limiteNord;
     private float limiteSud;
     private float limiteEst;
     private float limiteOuest;
-
 
     public GameObject WardNO;
     public GameObject WardSE;
@@ -36,7 +32,6 @@ public class LimiteFly : MonoBehaviour {
         {
             return WardNO.transform.position.x;
         }
-
     }
 
     public float LimiteEst
@@ -45,7 +40,6 @@ public class LimiteFly : MonoBehaviour {
         {
             return WardSE.transform.position.x;
         }
-
     }
 
     public float LimiteSud
@@ -54,7 +48,6 @@ public class LimiteFly : MonoBehaviour {
         {
             return WardSE.transform.position.z;
         }
-
     }
 
     public float LimiteNord
@@ -63,6 +56,5 @@ public class LimiteFly : MonoBehaviour {
         {
             return WardNO.transform.position.z;
         }
-
     }
 }

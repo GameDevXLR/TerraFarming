@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-public class StopMvtPlayerStateAnimator : PlayerStateAnimator {
-
+public class StopMvtPlayerStateAnimator : PlayerStateAnimator
+{
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, animatorStateInfo, layerIndex);

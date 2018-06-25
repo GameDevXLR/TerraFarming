@@ -1,50 +1,46 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class TerrainManager : MonoBehaviour {
+public class TerrainManager : MonoBehaviour
+{
+    //pas le temps pour ca pour le moment : a gérer plus tard.
 
+    public static TerrainManager instance;
+    public GameObject[] terrainAreaPrefabs; //les différents prefabs de terrain qu'on peut faire spawn.
 
-	//pas le temps pour ca pour le moment : a gérer plus tard.
+    [Header("A compléter manuellement, les distances entre chaque terrain.")]
+    public Vector3 northDistance;
 
+    public Vector3 SouthDistance;
+    public Vector3 northWestDistance;
+    public Vector3 northEastDistance;
+    public Vector3 southWestDistance;
+    public Vector3 southEastDistance;
 
-	public static TerrainManager instance;
-	public GameObject[] terrainAreaPrefabs; //les différents prefabs de terrain qu'on peut faire spawn.
+    [Tooltip("Combien de cases de terrain tu veux ti pd ? ")]
+    public int numberOfTerrainToSpawn = 6;
 
-	[Header("A compléter manuellement, les distances entre chaque terrain.")]
-	public Vector3 northDistance;
-	public Vector3 SouthDistance;
-	public Vector3 northWestDistance;
-	public Vector3 northEastDistance;
-	public Vector3 southWestDistance;
-	public Vector3 southEastDistance;
+    private int terrainExpansionFactor = 1; // en gros au début c'est fois 1 la distance, puis fois2 etc ... Donc ca c'est le facteur de distance.
+    private bool isSpawningATerrain; // est ce qu'on est déja en train de faire spawn  un terrain, si non : fait en spawn un nouveau jusqu'a atteindre numberOfTerrainToSpawn : a faire en update donc jpense. avec un callb pour ce bool.
 
-	[Tooltip("Combien de cases de terrain tu veux ti pd ? ")]
-	public int numberOfTerrainToSpawn = 6;
+    // Use this for initialization
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
 
-	int terrainExpansionFactor = 1; // en gros au début c'est fois 1 la distance, puis fois2 etc ... Donc ca c'est le facteur de distance.
-	bool isSpawningATerrain; // est ce qu'on est déja en train de faire spawn  un terrain, si non : fait en spawn un nouveau jusqu'a atteindre numberOfTerrainToSpawn : a faire en update donc jpense. avec un callb pour ce bool.
-	// Use this for initialization
-	void Awake()
-	{
-		if (instance == null) 
-		{
-			instance = this;
-		}
-	}
+    //de la merde :
+    public void BuildTheTerrain()
+    {
+        for (int i = 0; i < numberOfTerrainToSpawn; i++)
+        {
+        }
+    }
 
-	//de la merde : 
-	public void BuildTheTerrain()
-	{
-		for (int i = 0; i < numberOfTerrainToSpawn; i++) 
-		{
-			
-		}
-	}
-
-	//une ptite crotte:
-	void SpawnSpecificTerrain(Vector3 terrainPos)
-	{
-		
-	}
+    //une ptite crotte:
+    private void SpawnSpecificTerrain(Vector3 terrainPos)
+    {
+    }
 }

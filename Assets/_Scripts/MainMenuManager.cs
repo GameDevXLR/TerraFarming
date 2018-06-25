@@ -1,14 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using System.IO;
 
-public class MainMenuManager : MonoBehaviour {
-
-	bool hasPressedEnter;
-	public GameObject mainMenuPanel;
+public class MainMenuManager : MonoBehaviour
+{
+    private bool hasPressedEnter;
+    public GameObject mainMenuPanel;
     public GameObject keyboardChoicePanel;
     public GameObject pressEnterObj;
 
@@ -16,11 +13,9 @@ public class MainMenuManager : MonoBehaviour {
 
     public Button continueButton;
 
-	public AudioSource audioS;
-	public AudioClip mouseOverSnd;
-	public AudioClip startGameSnd;
-
-
+    public AudioSource audioS;
+    public AudioClip mouseOverSnd;
+    public AudioClip startGameSnd;
 
     private void Awake()
     {
@@ -33,18 +28,18 @@ public class MainMenuManager : MonoBehaviour {
             keyboardChoicePanel.SetActive(false);
         }
 
-        if(File.Exists(Application.persistentDataPath + "/gamesave.save"))
+        if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
         {
             continueButton.interactable = true;
         }
     }
 
     public void QuitGame()
-	{
-//		GetComponent<AudioSource> ().PlayOneShot (clic1Snd);
+    {
+        //		GetComponent<AudioSource> ().PlayOneShot (clic1Snd);
 
-		Application.Quit ();
-	}
+        Application.Quit();
+    }
 
     public void StartNewGame()
     {
@@ -55,42 +50,38 @@ public class MainMenuManager : MonoBehaviour {
         //SceneManager.LoadScene(1, LoadSceneMode.Single);
     }
 
-
-
     public void ContinueGame()
-	{
+    {
         PlayerPrefs.SetString("Game", "continue");
-        audioS.PlayOneShot (startGameSnd);
+        audioS.PlayOneShot(startGameSnd);
         mainMenuPanel.SetActive(false);
         loadingScreenControl.LoadScreen(1);
         //SceneManager.LoadScene (1, LoadSceneMode.Single);
-		
-	}
+    }
 
-	public void Update ()
-	{
-		if (!hasPressedEnter) 
-		{
-			if (Input.GetKeyDown (KeyCode.Space) || Input.GetKeyDown (KeyCode.Return) || Input.GetMouseButtonDown(0)) 
-			{
-				ShowMainMenu ();
-			}
-            
-		}
-	}
-	public void ShowMainMenu()
-	{
-		hasPressedEnter = true;
-		mainMenuPanel.SetActive (true);
-		pressEnterObj.SetActive (false);
+    public void Update()
+    {
+        if (!hasPressedEnter)
+        {
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || Input.GetMouseButtonDown(0))
+            {
+                ShowMainMenu();
+            }
+        }
+    }
+
+    public void ShowMainMenu()
+    {
+        hasPressedEnter = true;
+        mainMenuPanel.SetActive(true);
+        pressEnterObj.SetActive(false);
         keyboardChoicePanel.SetActive(false);
-	}
+    }
 
-	public void PlayerMouseOverSnd()
-	{
-		audioS.PlayOneShot (mouseOverSnd);
-
-	}
+    public void PlayerMouseOverSnd()
+    {
+        audioS.PlayOneShot(mouseOverSnd);
+    }
 
     public void showOption()
     {
@@ -104,8 +95,4 @@ public class MainMenuManager : MonoBehaviour {
     {
         hasPressedEnter = false;
     }
-
-
-    
-
 }

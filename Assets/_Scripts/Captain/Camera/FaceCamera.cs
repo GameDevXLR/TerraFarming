@@ -1,22 +1,22 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+public class FaceCamera : MonoBehaviour
+{
+    public bool rotationActivated = true;
+    public Transform cam;
+    private Vector3 standardPos = new Vector3(0, 180, 0);
 
-public class FaceCamera : MonoBehaviour {
+    private void Start()
+    {
+        cam = Camera.main.transform;
+    }
 
-	public bool rotationActivated = true;
-	public Transform cam;
-	Vector3 standardPos = new Vector3 (0, 180, 0);
-
-	void Start()
-	{
-		cam = Camera.main.transform;
-		}
-	void LateUpdate() {
-
-			this.transform.LookAt (cam.position);
-		if(rotationActivated){
-			this.transform.Rotate (standardPos);
-		}
-	}
+    private void LateUpdate()
+    {
+        this.transform.LookAt(cam.position);
+        if (rotationActivated)
+        {
+            this.transform.Rotate(standardPos);
+        }
+    }
 }

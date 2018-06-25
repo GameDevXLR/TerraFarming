@@ -1,34 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class EntrerBase : MonoBehaviour {
-
+public class EntrerBase : MonoBehaviour
+{
     public GameObject BaseCanvas;
 
-
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
             ListenForAction();
-
-
         }
     }
-    void OnTriggerExit(Collider other)
+
+    private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
         {
             StopListeningForAction();
-
         }
-
     }
 
-    void OnTriggerStay(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player" )
+        if (other.tag == "Player")
         {
             if (Input.GetKeyDown(CustomInputManager.instance.actionKey) && InGameManager.instance.playerController.canDoAction)
             {
@@ -38,16 +32,14 @@ public class EntrerBase : MonoBehaviour {
         }
     }
 
-    void ListenForAction()
+    private void ListenForAction()
     {
         CustomInputManager.instance.ShowHideActionButtonVisual(true);
     }
-    void StopListeningForAction()
-    {
 
+    private void StopListeningForAction()
+    {
         //arreter les effets visuels
         CustomInputManager.instance.ShowHideActionButtonVisual(false);
-
-
     }
 }

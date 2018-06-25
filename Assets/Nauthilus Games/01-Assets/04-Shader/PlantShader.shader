@@ -1,25 +1,25 @@
 // Made with Amplify Shader Editor
-// Available at the Unity Asset Store - http://u3d.as/y3X 
+// Available at the Unity Asset Store - http://u3d.as/y3X
 Shader "PlantShader"
 {
 	Properties
 	{
-		[HideInInspector] __dirty( "", Int ) = 1
+		[HideInInspector] __dirty("", Int) = 1
 		_Plantcolor01("Plant color 01", Color) = (0,0,0,0)
 		_Plantcolor02("Plant color 02", Color) = (0,0,0,0)
 		_Flower_color_01("Flower_color_01", Color) = (0,0,0,0)
 		_Flower_color_02("Flower_color_02", Color) = (0,0,0,0)
 		_Emissivecolor("Emissive color", Color) = (0,0,0,0)
-		_EmissivePower("Emissive Power", Range( 0 , 2)) = 0
+		_EmissivePower("Emissive Power", Range(0 , 2)) = 0
 		[Toggle]_Outline("Outline ", Int) = 1
 		_Outlinecolor("Outline color", Color) = (0,0,0,0)
 		_Texturemask01("Texture mask 01", 2D) = "white" {}
 		_Texturemask02("Texture mask 02", 2D) = "white" {}
-		_MaskClipValue( "Mask Clip Value", Float ) = 0.5
-		[HideInInspector] _texcoord( "", 2D ) = "white" {}
+		_MaskClipValue("Mask Clip Value", Float) = 0.5
+		[HideInInspector] _texcoord("", 2D) = "white" {}
 	}
 
-	SubShader
+		SubShader
 	{
 		Tags{ "RenderType" = "Transparent"  "Queue" = "Geometry+0" "IsEmissive" = "true"  }
 		Cull Off
@@ -28,7 +28,7 @@ Shader "PlantShader"
 		CGPROGRAM
 		#pragma target 3.0
 		#pragma shader_feature _OUTLINE_ON
-		#pragma surface surf Standard keepalpha addshadow fullforwardshadows 
+		#pragma surface surf Standard keepalpha addshadow fullforwardshadows
 		struct Input
 		{
 			float2 uv_texcoord;
@@ -47,32 +47,32 @@ Shader "PlantShader"
 		uniform float4 _Emissivecolor;
 		uniform float _MaskClipValue = 0.5;
 
-		void surf( Input i , inout SurfaceOutputStandard o )
+		void surf(Input i , inout SurfaceOutputStandard o)
 		{
 			float2 uv_Texturemask01 = i.uv_texcoord * _Texturemask01_ST.xy + _Texturemask01_ST.zw;
-			float4 tex2DNode36 = tex2D( _Texturemask01, uv_Texturemask01 );
-			float4 lerpResult16 = lerp( _Plantcolor01 , _Plantcolor02 , tex2DNode36.b);
-			float4 lerpResult14 = lerp( float4(0,0,0,0) , lerpResult16 , tex2DNode36.r);
-			float4 lerpResult32 = lerp( _Flower_color_01 , _Flower_color_02 , tex2DNode36.r);
+			float4 tex2DNode36 = tex2D(_Texturemask01, uv_Texturemask01);
+			float4 lerpResult16 = lerp(_Plantcolor01 , _Plantcolor02 , tex2DNode36.b);
+			float4 lerpResult14 = lerp(float4(0,0,0,0) , lerpResult16 , tex2DNode36.r);
+			float4 lerpResult32 = lerp(_Flower_color_01 , _Flower_color_02 , tex2DNode36.r);
 			float2 uv_Texturemask02 = i.uv_texcoord * _Texturemask02_ST.xy + _Texturemask02_ST.zw;
-			float4 tex2DNode37 = tex2D( _Texturemask02, uv_Texturemask02 );
-			float4 lerpResult28 = lerp( lerpResult14 , lerpResult32 , tex2DNode37.b);
-			float4 lerpResult19 = lerp( lerpResult28 , _Outlinecolor , tex2DNode37.g);
+			float4 tex2DNode37 = tex2D(_Texturemask02, uv_Texturemask02);
+			float4 lerpResult28 = lerp(lerpResult14 , lerpResult32 , tex2DNode37.b);
+			float4 lerpResult19 = lerp(lerpResult28 , _Outlinecolor , tex2DNode37.g);
 			#ifdef _OUTLINE_ON
 			float4 staticSwitch35 = lerpResult19;
 			#else
 			float4 staticSwitch35 = lerpResult28;
 			#endif
 			o.Albedo = staticSwitch35.rgb;
-			o.Emission = ( ( _EmissivePower * _Emissivecolor ) * tex2DNode37.r ).rgb;
+			o.Emission = ((_EmissivePower * _Emissivecolor) * tex2DNode37.r).rgb;
 			o.Alpha = 1;
-			clip( tex2DNode36.g - _MaskClipValue );
+			clip(tex2DNode36.g - _MaskClipValue);
 		}
 
 		ENDCG
 	}
-	Fallback "Diffuse"
-	CustomEditor "ASEMaterialInspector"
+		Fallback "Diffuse"
+			CustomEditor "ASEMaterialInspector"
 }
 /*ASEBEGIN
 Version=13101

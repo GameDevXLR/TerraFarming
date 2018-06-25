@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace PhaethonGames.TerraFarming.OreToEssence
@@ -9,12 +7,16 @@ namespace PhaethonGames.TerraFarming.OreToEssence
     public struct TextDisplay
     {
         public Text alertDisplay;
+
         [Header("Result")]
         public Text oreDisplay;
+
         public Text oreNeddDisplay;
         public Text EssenceGot;
+
         [Header("Game")]
         public Text chrono;
+
         public Text timeBonus;
         public Text score;
     }
@@ -33,11 +35,5 @@ namespace PhaethonGames.TerraFarming.OreToEssence
         public string warning;
         public string success;
         public string end;
-
     }
-
-
-
 }
-
-

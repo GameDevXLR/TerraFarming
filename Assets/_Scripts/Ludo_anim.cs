@@ -1,11 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
 
-public class Ludo_anim : MonoBehaviour {
-
-    Animator anim;
+public class Ludo_anim : MonoBehaviour
+{
+    private Animator anim;
     public float Speed;
     public float TurnSpeed;
     public int forceConst = 20;
@@ -14,11 +11,11 @@ public class Ludo_anim : MonoBehaviour {
     private bool canJump;
     public Rigidbody selfRigidbody;
 
-
-    int jumpHash = Animator.StringToHash("Jump");
+    private int jumpHash = Animator.StringToHash("Jump");
 
     // Use this for initialization
-    void Start () {
+    private void Start()
+    {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
         anim = GetComponent<Animator>();
         selfRigidbody = GetComponent<Rigidbody>();
@@ -32,8 +29,7 @@ public class Ludo_anim : MonoBehaviour {
         }
     }
 
-
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (canJump)
         {
@@ -43,7 +39,8 @@ public class Ludo_anim : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    private void Update()
+    {
         float move = Input.GetAxis("Vertical");
         float rotation = Input.GetAxis("Horizontal");
         anim.SetFloat("TurnSpeed", rotation);
@@ -74,7 +71,7 @@ public class Ludo_anim : MonoBehaviour {
         //TOURNER A GAUCHE
         if (rotation < -0.5) //Input.GetKey(KeyCode.LeftArrow)
         {
-            transform.Rotate(0, -(anim.speed * Time.deltaTime)*70, 0 );
+            transform.Rotate(0, -(anim.speed * Time.deltaTime) * 70, 0);
         }
 
         //TOURNER A DROITE
@@ -90,10 +87,7 @@ public class Ludo_anim : MonoBehaviour {
             {
                 canJump = true;
                 anim.SetTrigger(jumpHash);
-            }   
+            }
         }
-
-        
     }
-
 }

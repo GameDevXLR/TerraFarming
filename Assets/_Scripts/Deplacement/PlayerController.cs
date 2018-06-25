@@ -1,21 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.AI;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-
-#region variables editor
+    #region variables editor
 
     public CharacterController Cc;
     public bool isGrounded;
     public Animator anim;
 
     public bool canDoAction = true;
-
 
     public BehaviourController behaviour;
     public ParticleSystem aterrisageParticle;
@@ -26,17 +21,14 @@ public class PlayerController : MonoBehaviour
 
     public GameObject shadowObject;
 
-    #endregion
-
+    #endregion variables editor
 
     private void Start()
     {
         Cc = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
-        SwitchAnime(AnimeParameters.islanding,false);
+        SwitchAnime(AnimeParameters.islanding, false);
     }
-
-    
 
     public bool IsGrounded
     {
@@ -47,10 +39,10 @@ public class PlayerController : MonoBehaviour
 
         set
         {
-            if(isGrounded != value)
+            if (isGrounded != value)
             {
                 isGrounded = value;
-                
+
                 SwitchAnime(AnimeParameters.islanding, IsGrounded);
                 SwitchAnime(AnimeParameters.isfalling, !IsGrounded);
 
@@ -68,8 +60,6 @@ public class PlayerController : MonoBehaviour
                     shadowObject.SetActive(true);
                 }
             }
-            
-
         }
     }
 
@@ -77,7 +67,6 @@ public class PlayerController : MonoBehaviour
     {
         anim.SetBool(anime.ToString(), activate);
     }
-
 
     public void disableMovement()
     {
@@ -95,13 +84,9 @@ public class PlayerController : MonoBehaviour
         behaviour.setMaxAltitudeWithRef(altitudeGround);
     }
 
-
     public void Jump()
     {
         behaviour.Jump();
         propulseurParticle.Burst();
     }
-
 }
-
-

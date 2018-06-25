@@ -1,11 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class WalkingPlayerStateAnimator : IdlePlayerStateAnimator {
-
-
-
+public class WalkingPlayerStateAnimator : IdlePlayerStateAnimator
+{
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
         if (!isPlayerMoving())
@@ -23,6 +19,4 @@ public class WalkingPlayerStateAnimator : IdlePlayerStateAnimator {
             SwitchAnime(AnimeParameters.isfalling, true);
         }
     }
-
-    
 }

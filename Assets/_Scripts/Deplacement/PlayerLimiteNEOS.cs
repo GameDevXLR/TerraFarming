@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerLimiteNEOS : MonoBehaviour {
+public class PlayerLimiteNEOS : MonoBehaviour
+{
     public LimiteFly limiteFly;
-
 
     private void Update()
     {
@@ -26,12 +24,10 @@ public class PlayerLimiteNEOS : MonoBehaviour {
             pos.z = limiteFly.LimiteNord;
         }
 
-        if(transform.position != pos)
+        if (transform.position != pos)
         {
             transform.position = pos;
             CameraController.instance.moveCam();
         }
-        
-       
     }
 }

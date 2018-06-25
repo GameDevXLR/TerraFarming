@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
 
 public class IdlePlayerStateAnimator : PlayerStateAnimator
 {
@@ -35,5 +31,4 @@ public class IdlePlayerStateAnimator : PlayerStateAnimator
             controller.canDoAction = false;
         }
     }
-
 }

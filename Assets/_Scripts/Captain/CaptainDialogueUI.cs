@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using cakeslice;
 
-
-public class CaptainDialogueUI : MonoBehaviour {
-
+public class CaptainDialogueUI : MonoBehaviour
+{
     public string step1;
     public int oreNeed = 10;
     public string step2;
@@ -22,12 +19,12 @@ public class CaptainDialogueUI : MonoBehaviour {
     public cakeslice.Outline essenceOutline;
     public List<cakeslice.Outline> seedOutlineList;
 
-    int step;
-    int maxStep = 4;
+    private int step;
+    private int maxStep = 4;
 
-    int previousSeedFlower;
-    int previousSeedBush;
-    int previousSeedTree;
+    private int previousSeedFlower;
+    private int previousSeedBush;
+    private int previousSeedTree;
 
     private void Start()
     {
@@ -40,7 +37,7 @@ public class CaptainDialogueUI : MonoBehaviour {
             step = 0;
             PlayerPrefs.SetInt("stepGame", 0);
         }
-        if(PlayerPrefs.GetString("Game") == "new")
+        if (PlayerPrefs.GetString("Game") == "new")
         {
             step = 0;
         }
@@ -60,7 +57,7 @@ public class CaptainDialogueUI : MonoBehaviour {
 
     private void Update()
     {
-        if(step < maxStep)
+        if (step < maxStep)
         {
             getNextStepAction(step);
         }
@@ -79,16 +76,20 @@ public class CaptainDialogueUI : MonoBehaviour {
         {
             case 0:
                 return step1;
+
             case 1:
                 essenceOutline.enabled = true;
                 return step2;
+
             case 2:
                 essenceOutline.enabled = false;
                 outlineActivate(true);
                 return step3;
+
             case 3:
                 outlineActivate(false);
                 return step4;
+
             default:
                 return " ";
         }
@@ -101,20 +102,23 @@ public class CaptainDialogueUI : MonoBehaviour {
             case 0:
                 step1Action();
                 break;
+
             case 1:
                 step2Action();
                 break;
+
             case 2:
                 step3Action();
                 break;
+
             case 3:
                 step4Action();
                 break;
+
             default:
                 break;
         }
     }
-
 
     private void step1Action()
     {
@@ -149,7 +153,7 @@ public class CaptainDialogueUI : MonoBehaviour {
 
     private void step4Action()
     {
-        if(!compareSeed(PlantTypeEnum.bush, previousSeedBush) || !compareSeed(PlantTypeEnum.flower, previousSeedFlower) || !compareSeed(PlantTypeEnum.tree, previousSeedTree))
+        if (!compareSeed(PlantTypeEnum.bush, previousSeedBush) || !compareSeed(PlantTypeEnum.flower, previousSeedFlower) || !compareSeed(PlantTypeEnum.tree, previousSeedTree))
         {
             step++;
             dialogueText.text = getStep(step);
@@ -170,7 +174,6 @@ public class CaptainDialogueUI : MonoBehaviour {
         return ResourcesManager.instance.GetSeedQuantity(seed) >= seedPrevious;
     }
 
-
     public void nextStep()
     {
         step++;
@@ -181,7 +184,7 @@ public class CaptainDialogueUI : MonoBehaviour {
 
     public void outlineActivate(bool activate)
     {
-        foreach(cakeslice.Outline outline in seedOutlineList)
+        foreach (cakeslice.Outline outline in seedOutlineList)
         {
             outline.enabled = activate;
         }
