@@ -3,7 +3,9 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
+/// <summary>
+/// 
+/// </summary>
 public class InGameManager : MonoBehaviour
 {
     public MusicalGame OreGame;
