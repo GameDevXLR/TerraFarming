@@ -45,7 +45,7 @@ public class AlchimieGame : MonoBehaviour
 
     private bool wonBonus;
     private int previousBonusCount;
-
+    bool isCreating;
     #endregion other variables
 
     #region monobehaviour methods
@@ -76,9 +76,13 @@ public class AlchimieGame : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-        if (Input.GetKeyDown(CustomInputManager.instance.actionKey))
+        if (Input.GetKeyDown(CustomInputManager.instance.actionKey) && !isCreating)
         {
-            if (count < jaugeList.Count)
+            isCreating = true;
+        }
+        if(isCreating)
+        {
+        if (count < jaugeList.Count)
             {
                 machineUI.BlinkActionBarArrows();
                 jaugeList[count].enabled = true;
@@ -113,6 +117,7 @@ public class AlchimieGame : MonoBehaviour
             }
             else if (count == jaugeList.Count + 1)
             {
+                isCreating = false;
                 resetJauge();
                 count = 0;
                 time = Time.time;
@@ -130,7 +135,6 @@ public class AlchimieGame : MonoBehaviour
                     enabled = false;
                 }
             }
-        }
 
         if (count < jaugeList.Count)
 
@@ -156,7 +160,9 @@ public class AlchimieGame : MonoBehaviour
                     }
                 }
             }
+
         interfaceMachine.setChrono(Time.time - time);
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             enabled = false;
@@ -176,7 +182,7 @@ public class AlchimieGame : MonoBehaviour
     #endregion monobehaviour methods
 
     #region other methods
-
+ 
     public void resetJauge()
     {
         foreach (Image img in jaugeList)
