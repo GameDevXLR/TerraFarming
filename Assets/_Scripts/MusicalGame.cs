@@ -88,7 +88,7 @@ public class MusicalGame : MonoBehaviour
     private KeyCode expectedInput;
     private Sprite expectedSprite;
     private AudioClip expectedSnd;
-
+    private int indexKey;
     [HideInInspector]
     public bool willStartCinematic;
 
@@ -174,7 +174,9 @@ public class MusicalGame : MonoBehaviour
     //lancer une partie:
     private void StartPlayingTheGame()
     {
-        myMusicGame = allMusicGame[Random.Range(0, 2)];
+        indexKey++;
+        if (indexKey >= allMusicGame.Length) indexKey = 0;
+        myMusicGame = allMusicGame[indexKey];
         musicLenght = myMusicGame.backgroundMusic.length;
 
         oreGameCanvas.SetActive(true);

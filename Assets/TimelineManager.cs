@@ -34,11 +34,11 @@ public class TimelineManager : MonoBehaviour
     //	}
     private void Update()
     {
-        //Permet de rejouer le dernier clip jouer ou le clip placé manuellement dans la hierarchy.
-        if (Input.GetKeyDown(KeyCode.Alpha1) && !isPlayingClip)
-        {
-            LaunchCinematic(cutscene1, StartPosTr);
-        }
+        ////Permet de rejouer le dernier clip jouer ou le clip placé manuellement dans la hierarchy.
+        //if (Input.GetKeyDown(KeyCode.Alpha1) && !isPlayingClip)
+        //{
+        //    LaunchCinematic(cutscene1, StartPosTr);
+        //}
 
         //Vérifie si un clip est en cours, si oui, s'assure de le finir quand il faut.
         if (isPlayingClip)
